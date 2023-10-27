@@ -24,6 +24,9 @@ Client/[Uu]ser[Ss]ettings/
 /[Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
+.vs/
+
+# Visual Studio Code cache directory
 .vscode/
 
 # Gradle cache directory
