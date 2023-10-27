@@ -1,5 +1,5 @@
 ---
-name: 이슈 템플릿
+name: default_issue_template
 about: 기본 이슈 템플릿
 title: ''
 labels: ''
