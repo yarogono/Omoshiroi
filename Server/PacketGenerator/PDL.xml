@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PDL>
+	<packet name="C_Chat">
+		<string name="accountName"/>
+		<string name="chatMessage"/>
+	</packet>
+	<packet name="S_Chat">
+		<string name="accountName"/>
+		<string name="chatMessage"/>
+	</packet>
+</PDL>
