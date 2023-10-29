@@ -18,15 +18,6 @@ namespace DummyClient
 
             while (true)
             {
-                try
-                {
-                    SessionManager.Instance.SendForEach();
-                }
-                catch
-                (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
                 Thread.Sleep(1000);
             }
         }
