@@ -1,5 +1,5 @@
 ﻿using Server.Data;
-using Server.Session;
+using Server.Game.Room;
 using ServerCore;
 using System.Net;
 
@@ -9,19 +9,12 @@ namespace Server
     {
         static Listener _listener = new Listener();
         static List<System.Timers.Timer> _timers = new List<System.Timers.Timer>();
-        public static GameRoom Room = new GameRoom();
-
-        //static void FlushRoom()
-        //{
-        //    Room.Push(() => Room.Flush());
-        //    JobTimer.Instance.Push(FlushRoom, 250);
-        //}
 
         static void TickRoom(GameRoom room, int tick = 1000)
         {
             var timer = new System.Timers.Timer();
             timer.Interval = tick;
-            timer.Elapsed += ((s, e) => { room.Flush(); });
+            timer.Elapsed += ((s, e) => { room.Update(); });
             timer.AutoReset = true;
             timer.Enabled = true;
 
