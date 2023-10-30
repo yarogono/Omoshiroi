@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseSkin : MonoBehaviour
+[CreateAssetMenu(fileName = "BaseSkinSO", menuName = "Item/BaseSkinSO")]
+public class BaseSkin : BaseItem, IEquipable
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Equip()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Dequip()
     {
-        
+
     }
 }

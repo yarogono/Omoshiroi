@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseRune : MonoBehaviour
+
+[CreateAssetMenu(fileName = "BaseRuneSO", menuName = "Item/BaseRuneSO")]
+public class BaseRune : BaseItem, IDroppable, IEquipable
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Drop()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Equip()
     {
-        
+
+    }
+
+    public void Dequip()
+    {
+
     }
 }

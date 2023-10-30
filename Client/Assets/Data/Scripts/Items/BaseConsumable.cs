@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseConsumable : MonoBehaviour
+[CreateAssetMenu(fileName = "BaseSkinSO", menuName = "Item/BaseSkinSO")]
+public class BaseConsumable : BaseItem, IDroppable, IConsumable
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Drop()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Consume()
     {
-        
+
     }
 }
