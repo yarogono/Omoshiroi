@@ -27,5 +27,8 @@ public enum eLuxuryType
 
 public enum eItemType
 {
-
+    Weapon,
+    Magic,
+    Rune,
+    Consumable,
 }
