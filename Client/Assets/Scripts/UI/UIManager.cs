@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static Google.Protobuf.Reflection.FeatureSet.Types;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class UIManager
@@ -24,9 +25,11 @@ public class UIManager
     private LinkedList<UIBase> OpenList;
     private LinkedList<UIBase> HideList;
 
-    public float UISize;// { get => GameManager.Data.UISize; }
-    public float FontSize;// { get => GameManager.Data.FontSizeMultiplier; }
-    public float UIRemainTime;// { get => GameManager.Data.UIRemainTime; }
+    //TODO
+    //Data랑 연결하기
+    public float UISize = 1.0f;// { get => GameManager.Data.UISize; }
+    public float FontSize = 1.0f;// { get => GameManager.Data.FontSizeMultiplier; }
+    public float UIRemainTime = 30.0f;// { get => GameManager.Data.UIRemainTime; }
 
     private string _prefabPath = "Prefabs/UI/";
 
@@ -55,6 +58,7 @@ public class UIManager
         HideList = new LinkedList<UIBase>();
         //LoadUIPrefabs();
     }
+
     /// <summary>
     /// Open 리스트의 첫번째에 위치한 UI를 Hide하며, 이미 Hide된 경우에는 아무것도 하지 않음
     /// </summary>
@@ -65,6 +69,7 @@ public class UIManager
             HideUI(Instance.OpenList.First.Value);
         }
     }
+
     /// <summary>
     /// 해당 스크립트가 붙여진 프리펩을 불러옴, Hide된 게임오브젝트가 있는 경우에는 해당 게임오브젝트를 리턴함
     /// </summary>
@@ -83,6 +88,9 @@ public class UIManager
                 open.transform.SetParent(root);
 
             open.gameObject.SetActive(true);
+
+            open.AddActAtHide(() => Instance.AddtoHideList(open));
+            open.AddActAtClose(() => Instance.DeleteInList(open));
             return open;
         }
 
@@ -100,43 +108,52 @@ public class UIManager
             var uiClass = obj.GetComponent<UIBase>();
 
             Instance.OpenList.AddFirst(uiClass);
-
             obj.SetActive(true);
+
+            uiClass.AddActAtHide(() => Instance.AddtoHideList(uiClass));
+            uiClass.AddActAtClose(() => Instance.DeleteInList(uiClass));
             return uiClass as T;
         }
         else
             return null;
     }
+
+    private void AddtoHideList<T>(T ui) where T : UIBase
+    {
+        HideList.AddLast(ui);
+        OpenList.Remove(ui);
+        OpenList.AddLast(ui);
+    }
+
+    private void DeleteInList<T>(T ui) where T : UIBase
+    {
+        if (IsHide(ui))
+        {
+            OpenList.Remove(ui);
+            HideList.Remove(ui);
+        }
+        else
+        {
+            OpenList.Remove(ui);
+        }
+    }
+
     /// <summary>
     /// 게임 오브젝트를 삭제
     /// </summary>
     public static void CloseUI<T>(T target) where T : UIBase
     {
-        if (IsHide(target))
-        {
-            target.CloseUI();
-            Instance.OpenList.Remove(target);
-            Instance.HideList.Remove(target);
-        }
-        else
-        {
-            target.CloseUI();
-            Instance.OpenList.Remove(target);
-        }
+        target.CloseUI();
     }
+
     /// <summary>
     /// 게임 오브젝트를 비활성화
     /// </summary>
     public static void HideUI<T>(T target) where T : UIBase
     {
-        if (!IsHide(target))
-        {
-            target.HideUI();
-            Instance.HideList.AddLast(target);
-            Instance.OpenList.Remove(target);
-            Instance.OpenList.AddLast(target);
-        }
+        target.HideUI();
     }
+
     /// <summary>
     /// 해당 UI가 Open List에 있는지 확인하는 메소드로, Hide 유무는 알려주지 않는다.
     /// 활성화 상태는 activeInHierarchy를 보면 알 수 있고, 사용하기 위해서는 ShowUI(eUIType type)를 부르면 된다.
@@ -151,6 +168,7 @@ public class UIManager
         }
         return null;
     }
+
     /// <summary>
     /// 열린 해당 UI Type이 Open List에 있는지 확인하는 메소드로, Hide 유무는 알려주지 않는다.
     /// 활성화 상태는 activeInHierarchy를 보면 알 수 있고, 사용하기 위해서는 ShowUI(eUIType type)를 부르면 된다.
@@ -167,6 +185,7 @@ public class UIManager
         }
         return null;
     }
+
     /// <summary>
     /// 해당 UI가 Hide List에 있는지 확인하는 메소드
     /// </summary>
@@ -180,6 +199,7 @@ public class UIManager
         }
         return null;
     }
+
     /// <summary>
     /// Hide된 해당 UI Type이 Hide 리스트에 있는지 확인하는 메소드
     /// </summary>
@@ -195,6 +215,7 @@ public class UIManager
         }
         return null;
     }
+
     /// <summary>
     /// Open List에 있는 모든 UI 게임오브젝트를 삭제한다.
     /// </summary>
@@ -207,6 +228,7 @@ public class UIManager
         Instance.OpenList.Clear();
         Instance.HideList.Clear();
     }
+
     /// <summary>
     /// Hide List에 있는 모든 UI 게임오브젝트를 삭제한다.
     /// </summary>
@@ -219,6 +241,7 @@ public class UIManager
         }
         Instance.HideList.Clear();
     }
+
     /// <summary>
     /// 해당 UI type이 Open List에 포함되어 있나 확인한다. IsHide가 경우에 따라 더 유용하다.
     /// </summary>
@@ -231,6 +254,7 @@ public class UIManager
         }
         return false;
     }
+
     /// <summary>
     /// 해당 UI가 Open List에 포함되어 있나 확인한다.
     /// </summary>
@@ -243,6 +267,7 @@ public class UIManager
         }
         return false;
     }
+
     /// <summary>
     /// 해당 UI type이 Hide List에 포함되어 있나 확인한다.
     /// </summary>
@@ -255,6 +280,7 @@ public class UIManager
         }
         return false;
     }
+
     /// <summary>
     /// Hide List에 포함되어 있나 확인한다.
     /// </summary>
