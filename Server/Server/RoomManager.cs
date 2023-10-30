@@ -1,4 +1,6 @@
-﻿namespace Server
+﻿using Server.Game.Room;
+
+namespace Server
 {
     public class RoomManager
     {
