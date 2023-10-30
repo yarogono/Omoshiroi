@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BaseMagic : BaseItem, IEquipable
 {
+    [SerializeField] private GameObject magicObject;
+    [SerializeField] private float range;
+    [SerializeField] private Animation anime;
+
     public void Equip()
     {
 
