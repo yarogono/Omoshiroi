@@ -22,7 +22,7 @@ public class UIBase : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        Invoke(nameof(CloseUI), UIManager.Instance.UIRemainTime);
+        //Invoke(nameof(CloseUI), UIManager.Instance.UIRemainTime);
     }
 
     protected virtual void OnEnable()
@@ -55,7 +55,7 @@ public class UIBase : MonoBehaviour
     /// </summary>
     public virtual void HideUI()
     {
-        if (!UIManager.IsHide(this))
+        if (!UIManager.Instance.IsHide(this))
         {
             ActAtHide?.Invoke();
             if (gameObject != null)

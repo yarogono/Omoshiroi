@@ -1,26 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static Google.Protobuf.Reflection.FeatureSet.Types;
-using static UnityEngine.GraphicsBuffer;
 
-
-public class UIManager
+public class UIManager : PlainSingleton<UIManager>
 {
-    private static UIManager _instance;
-    /// <summary>
-    /// null체크를 하고 없으면 생성하여 리턴함
-    /// </summary>
-    public static UIManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-                _instance = new UIManager();
-            return _instance;
-        }
-    }
-
     private Dictionary<Type, GameObject> _prefabs;
     private LinkedList<UIBase> OpenList;
     private LinkedList<UIBase> HideList;
@@ -62,11 +45,11 @@ public class UIManager
     /// <summary>
     /// Open 리스트의 첫번째에 위치한 UI를 Hide하며, 이미 Hide된 경우에는 아무것도 하지 않음
     /// </summary>
-    public static void HideTopUI()
+    public void HideTopUI()
     {
-        if (Instance.OpenList.Count > 0)
+        if (OpenList.Count > 0)
         {
-            HideUI(Instance.OpenList.First.Value);
+            HideUI(OpenList.First.Value);
         }
     }
 
@@ -76,42 +59,42 @@ public class UIManager
     /// <typeparam name="T">프리펩에 붙어있는 클래스</typeparam>
     /// <param name="root">부모 canvas/UI를 의미함</param>
     /// <returns>해당 프리펩이 없으면 null을 리턴함</returns>
-    public static T ShowUI<T>(RectTransform root = null) where T : UIBase
+    public T ShowUI<T>(RectTransform root = null) where T : UIBase
     {
         var open = GetHideUI<T>();
         if (open != null)
         {
-            Instance.HideList.Remove(open);
+            HideList.Remove(open);
             if (root == null)
-                open.transform.SetParent(Instance.UIRoot.transform);
+                open.transform.SetParent(UIRoot.transform);
             else
                 open.transform.SetParent(root);
 
             open.gameObject.SetActive(true);
 
-            open.AddActAtHide(() => Instance.AddtoHideList(open));
-            open.AddActAtClose(() => Instance.DeleteInList(open));
+            open.AddActAtHide(() => AddtoHideList(open));
+            open.AddActAtClose(() => DeleteInList(open));
             return open;
         }
 
-        if (!Instance._prefabs.ContainsKey(typeof(T)))
-            Instance.LoadUIPrefab(typeof(T).Name);
+        if (!_prefabs.ContainsKey(typeof(T)))
+            LoadUIPrefab(typeof(T).Name);
 
-        var prefab = Instance._prefabs[typeof(T)];
+        var prefab = _prefabs[typeof(T)];
         if (prefab != null)
         {
             GameObject obj;
             if (root == null)
-                obj = GameObject.Instantiate(prefab, Instance.UIRoot.transform);
+                obj = GameObject.Instantiate(prefab, UIRoot.transform);
             else
                 obj = GameObject.Instantiate(prefab, root);
             var uiClass = obj.GetComponent<UIBase>();
 
-            Instance.OpenList.AddFirst(uiClass);
+            OpenList.AddFirst(uiClass);
             obj.SetActive(true);
 
-            uiClass.AddActAtHide(() => Instance.AddtoHideList(uiClass));
-            uiClass.AddActAtClose(() => Instance.DeleteInList(uiClass));
+            uiClass.AddActAtHide(() => AddtoHideList(uiClass));
+            uiClass.AddActAtClose(() => DeleteInList(uiClass));
             return uiClass as T;
         }
         else
@@ -141,7 +124,7 @@ public class UIManager
     /// <summary>
     /// 게임 오브젝트를 삭제
     /// </summary>
-    public static void CloseUI<T>(T target) where T : UIBase
+    public void CloseUI<T>(T target) where T : UIBase
     {
         target.CloseUI();
     }
@@ -149,7 +132,7 @@ public class UIManager
     /// <summary>
     /// 게임 오브젝트를 비활성화
     /// </summary>
-    public static void HideUI<T>(T target) where T : UIBase
+    public void HideUI<T>(T target) where T : UIBase
     {
         target.HideUI();
     }
@@ -159,9 +142,9 @@ public class UIManager
     /// 활성화 상태는 activeInHierarchy를 보면 알 수 있고, 사용하기 위해서는 ShowUI(eUIType type)를 부르면 된다.
     /// </summary>
     /// <returns>찾을 수 없으면 null을 리턴함</returns>
-    public static T GetOpenUI<T>(T search) where T : UIBase
+    public T GetOpenUI<T>(T search) where T : UIBase
     {
-        foreach (var ui in Instance.OpenList)
+        foreach (var ui in OpenList)
         {
             if (ui == search)
                 return ui as T;
@@ -174,9 +157,9 @@ public class UIManager
     /// 활성화 상태는 activeInHierarchy를 보면 알 수 있고, 사용하기 위해서는 ShowUI(eUIType type)를 부르면 된다.
     /// </summary>
     /// <returns>찾을 수 없으면 null을 리턴함</returns>
-    public static T GetOpenUI<T>() where T : UIBase
+    public T GetOpenUI<T>() where T : UIBase
     {
-        LinkedListNode<UIBase> ui = Instance.OpenList.First;
+        LinkedListNode<UIBase> ui = OpenList.First;
         while (ui != null)
         {
             if (ui.Value is T)
@@ -190,9 +173,9 @@ public class UIManager
     /// 해당 UI가 Hide List에 있는지 확인하는 메소드
     /// </summary>
     /// <returns>찾을 수 없으면 null을 리턴함</returns>
-    public static T GetHideUI<T>(T search) where T : UIBase
+    public T GetHideUI<T>(T search) where T : UIBase
     {
-        foreach (var ui in Instance.HideList)
+        foreach (var ui in HideList)
         {
             if (ui == search)
                 return ui as T;
@@ -204,9 +187,9 @@ public class UIManager
     /// Hide된 해당 UI Type이 Hide 리스트에 있는지 확인하는 메소드
     /// </summary>
     /// <returns>찾을 수 없으면 null을 리턴함</returns>
-    public static T GetHideUI<T>() where T : UIBase
+    public T GetHideUI<T>() where T : UIBase
     {
-        LinkedListNode<UIBase> ui = Instance.HideList.First;
+        LinkedListNode<UIBase> ui = HideList.First;
         while (ui != null)
         {
             if (ui.Value is T)
@@ -219,35 +202,35 @@ public class UIManager
     /// <summary>
     /// Open List에 있는 모든 UI 게임오브젝트를 삭제한다.
     /// </summary>
-    public static void CloseAllOpenUI()
+    public void CloseAllOpenUI()
     {
-        foreach (var ui in Instance.OpenList)
+        foreach (var ui in OpenList)
         {
             ui.CloseUI();
         }
-        Instance.OpenList.Clear();
-        Instance.HideList.Clear();
+        OpenList.Clear();
+        HideList.Clear();
     }
 
     /// <summary>
     /// Hide List에 있는 모든 UI 게임오브젝트를 삭제한다.
     /// </summary>
-    public static void CloseAllHideUI()
+    public void CloseAllHideUI()
     {
-        foreach (var ui in Instance.HideList)
+        foreach (var ui in HideList)
         {
             ui.CloseUI();
-            Instance.OpenList.Remove(ui);
+            OpenList.Remove(ui);
         }
-        Instance.HideList.Clear();
+        HideList.Clear();
     }
 
     /// <summary>
     /// 해당 UI type이 Open List에 포함되어 있나 확인한다. IsHide가 경우에 따라 더 유용하다.
     /// </summary>
-    public static bool IsOpen<T>() where T : UIBase
+    public bool IsOpen<T>() where T : UIBase
     {
-        foreach (var ui in Instance.OpenList)
+        foreach (var ui in OpenList)
         {
             if (ui is T)
                 return true;
@@ -258,9 +241,9 @@ public class UIManager
     /// <summary>
     /// 해당 UI가 Open List에 포함되어 있나 확인한다.
     /// </summary>
-    public static bool IsOpen<T>(T target) where T : UIBase
+    public bool IsOpen<T>(T target) where T : UIBase
     {
-        foreach (var ui in Instance.OpenList)
+        foreach (var ui in OpenList)
         {
             if (ui == target)
                 return true;
@@ -271,9 +254,9 @@ public class UIManager
     /// <summary>
     /// 해당 UI type이 Hide List에 포함되어 있나 확인한다.
     /// </summary>
-    public static bool IsHide<T>() where T : UIBase
+    public bool IsHide<T>() where T : UIBase
     {
-        foreach (var ui in Instance.HideList)
+        foreach (var ui in HideList)
         {
             if (ui is T)
                 return true;
@@ -284,9 +267,9 @@ public class UIManager
     /// <summary>
     /// Hide List에 포함되어 있나 확인한다.
     /// </summary>
-    public static bool IsHide<T>(T target) where T : UIBase
+    public bool IsHide<T>(T target) where T : UIBase
     {
-        foreach (var ui in Instance.HideList)
+        foreach (var ui in HideList)
         {
             if (ui == target)
                 return true;
