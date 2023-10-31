@@ -28,7 +28,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
             ""id"": ""3cad0c7a-c95f-4f13-9588-f5aaf7729ddf"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""Touch"",
                     ""type"": ""Value"",
                     ""id"": ""32b20964-3d5b-4e4a-a5f5-1c23c9b1710d"",
                     ""expectedControlType"": ""Touch"",
@@ -37,31 +37,95 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""AimFire"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""c97855d4-aaf4-494e-86e6-10dc72dbde3d"",
-                    ""expectedControlType"": ""Touch"",
+                    ""id"": ""c7f1639b-76fd-40d4-bf0a-43105b03010d"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AimFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""04e5db8a-037f-4814-ba20-ba0bbc11b5fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""95b1234e-87d1-4d51-8deb-fb15e3495261"",
-                    ""path"": ""<Touchscreen>/touch0"",
+                    ""id"": ""12cf45b4-50c7-4dda-ac86-22e50fafd3ae"",
+                    ""path"": ""<Touchscreen>"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PointerControl"",
-                    ""action"": ""Move"",
+                    ""action"": ""Touch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""54d5e776-5ce4-402a-9b68-8d169f8b177b"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d59137d5-7bfb-47a7-bab0-ffe103a08496"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d1df7c3b-f9e9-4202-826b-b85b6c83daef"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6a8e3b5a-3ce7-46f1-ae5c-f2481ebd39b6"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4f8c519b-e30d-4347-ae8d-145dc1598120"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
-                    ""id"": ""f6075e82-95c8-494c-b0fa-e7ad1bc35a1f"",
-                    ""path"": ""<Touchscreen>/touch1"",
+                    ""id"": ""abf0d028-9313-45b7-8972-764027d818d0"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PointerControl"",
@@ -88,6 +152,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Touch = m_Player.FindAction("Touch", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_AimFire = m_Player.FindAction("AimFire", throwIfNotFound: true);
     }
@@ -151,12 +216,14 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_Touch;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_AimFire;
     public struct PlayerActions
     {
         private @ThirdPersonController m_Wrapper;
         public PlayerActions(@ThirdPersonController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Touch => m_Wrapper.m_Player_Touch;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @AimFire => m_Wrapper.m_Player_AimFire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -168,6 +235,9 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @Touch.started += instance.OnTouch;
+            @Touch.performed += instance.OnTouch;
+            @Touch.canceled += instance.OnTouch;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -178,6 +248,9 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
+            @Touch.started -= instance.OnTouch;
+            @Touch.performed -= instance.OnTouch;
+            @Touch.canceled -= instance.OnTouch;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
@@ -212,6 +285,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
     }
     public interface IPlayerActions
     {
+        void OnTouch(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnAimFire(InputAction.CallbackContext context);
     }
