@@ -1,25 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseInput : MonoBehaviour
 {
-    public Event Move;
-    public Event Run;
-    public Event Dodge;
-    public Event Aim;
-    public Event Attack;
-    public Event OpenInventory;
-    public Event CloseInventory;
+    public event Action<Vector3> OnMoveEvent;
+    public event Action<Vector3> OnRunEvent;
+    public event Action<Vector3> OnDodgeEvent;
+    public event Action<Vector3> OnAimEvent;
+    public event Action<Vector3> OnAttackEvent;
+    public event Action OpenInventory;
+    public event Action CloseInventory;
     
-    void Start()
+    public void CallMoveEvent(Vector3 input)
     {
-        
+        OnMoveEvent?.Invoke(input);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CallRunEvent(Vector3 input)
     {
-        
+        OnRunEvent?.Invoke(input);
+    }
+
+    public void CallDodgeEvent(Vector3 input)
+    {
+        OnDodgeEvent?.Invoke(input);
+    }
+
+    public void CallAimEvent(Vector3 input)
+    {
+        OnAimEvent?.Invoke(input);
+    }
+
+    public void CallAttackEvent(Vector3 input)
+    {
+        OnAttackEvent?.Invoke(input);
+    }
+
+    public void CallOpenInven()
+    {
+        OpenInventory?.Invoke();
+    }
+
+    public void CallCloseInven()
+    {
+        CloseInventory?.Invoke();
     }
 }
