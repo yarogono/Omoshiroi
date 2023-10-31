@@ -1,47 +1,81 @@
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class t_PlayerController : t_ClonePlayerController
+public class t_PlayerController : MonoBehaviour
 {
-    public Vector3 inputVec;
-    public float speed;
+    public int Id { get; set; }
 
-    private Rigidbody rigid;
-
-    private void Start()
+    StatInfo _stat = new StatInfo();
+    public virtual StatInfo Stat
     {
-        rigid = GetComponent<Rigidbody>();
+        get { return _stat; }
+        set
+        {
+            if (_stat.Equals(value))
+                return;
 
-        C_EnterGame enterGamePacket = new C_EnterGame { Player = new ObjectInfo() };
-        enterGamePacket.Player.Name = "test";
-        enterGamePacket.Player.PosInfo = new PositionInfo() { PosX = 0, PosY = 0 };
-        enterGamePacket.Player.StatInfo = null;
-
-        NetworkManager.Instance.Send(enterGamePacket);
+            _stat.Speed = value.Speed;
+        }
     }
 
-    private void FixedUpdate()
+    public float Speed
     {
-        Vector3 nextVec = speed * Time.deltaTime * inputVec.normalized;
-        rigid.MovePosition(rigid.position + nextVec);
-
-        // TODO
-        C_Move movePacket = new C_Move();
-        movePacket.PosInfo = PosInfo;
-        NetworkManager.Instance.Send(movePacket);
+        get { return Stat.Speed; }
+        set { Stat.Speed = value; }
     }
 
-    private void OnMove(InputValue value)
+    protected bool _updated = false;
+
+    PositionInfo _positionInfo = new PositionInfo();
+    public PositionInfo PosInfo
     {
-        inputVec = new Vector3(value.Get<Vector2>().x, 0, value.Get<Vector2>().y);
+        get { return _positionInfo; }
+        set
+        {
+            if (_positionInfo.Equals(value))
+                return;
+
+            position = new Vector3(value.PosX, 0, value.PosY);
+            State = value.State;
+        }
     }
 
-    protected override void Init()
+    public Vector3 position
     {
-        base.Init();
+        get { return new Vector3(PosInfo.PosX, 0, PosInfo.PosY); }
+        set
+        {
+            if (PosInfo.PosX == value.x && PosInfo.PosY == value.y)
+                return;
+
+            PosInfo.PosX = (int)value.x;
+            PosInfo.PosY = (int)value.y;
+            _updated = true;
+        }
+    }
+
+    public virtual CreatureState State
+    {
+        get { return PosInfo.State; }
+        set
+        {
+            if (PosInfo.State == value)
+                return;
+
+            PosInfo.State = value;
+            _updated = true;
+        }
+    }
+
+    void Start()
+    {
+        Init();
+    }
+
+    protected virtual void Init()
+    {
+        transform.position = Vector3.zero;
     }
 }

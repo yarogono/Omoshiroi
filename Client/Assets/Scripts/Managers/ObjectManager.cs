@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectManager : CustomSingleton<ObjectManager>
 {
-    public t_PlayerController playerController { get; set; }
+    public t_PilotPlayerController pilotPlayerController { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 
     public static GameObjectType GetObjectTypeById(int id)
@@ -13,36 +13,35 @@ public class ObjectManager : CustomSingleton<ObjectManager>
         return (GameObjectType)type;
     }
 
-    public void Add(ObjectInfo info)
+    public void Add(ObjectInfo info, bool pilotPlayer = false)
     {
         GameObjectType objectType = GetObjectTypeById(info.ObjectId);
 
         if (objectType == GameObjectType.Player)
         {
-            if (playerController)
+            if (pilotPlayer)
             {
-                GameObject gameObject = Resources.Load<GameObject>("Player");
+                GameObject gameObject = Resources.Load<GameObject>("t_PilotPlayer");
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
-
-                playerController = GetComponent<t_PlayerController>();
-                playerController.Id = info.ObjectId;
-                playerController.PosInfo = info.PosInfo;
-                playerController.Stat = info.StatInfo;
-                playerController.SyncPos();
+                Instantiate(gameObject);
+                pilotPlayerController = gameObject.GetComponent<t_PilotPlayerController>();
+                pilotPlayerController.Id = info.ObjectId;
+                pilotPlayerController.PosInfo = info.PosInfo;
+                pilotPlayerController.Stat = info.StatInfo;
             }
             else
             {
-                GameObject gameObject = Resources.Load<GameObject>("Creature/Player");
+                GameObject gameObject = Resources.Load<GameObject>("t_ClonePlayer");
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
-
+                Instantiate(gameObject);
                 t_ClonePlayerController clonePlayerController =
                     gameObject.GetComponent<t_ClonePlayerController>();
                 clonePlayerController.Id = info.ObjectId;
                 clonePlayerController.PosInfo = info.PosInfo;
                 clonePlayerController.Stat = info.StatInfo;
-                playerController.SyncPos();
+                clonePlayerController.SyncPos();
             }
         }
     }

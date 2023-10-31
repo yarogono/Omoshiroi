@@ -1,16 +1,16 @@
 {
-  "folders": [
-	{
-		"path": "../.."
-	},
-	{
-		"path": "../../../Common"
-	},
-	{
-		"path": "../../../Server"
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Common"
+		},
+		{
+			"path": "../../../Server"
+		}
+	],
+	"settings": {
+		"dotnet.defaultSolution": "Client.sln"
 	}
-],
-  "settings": {
-    "dotnet.defaultSolution": "Client.sln"
-  }
 }

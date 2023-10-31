@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class PacketHandler
 {
-    public static void S_EnterGameHandler(PacketSession session, IMessage packet) { }
+    public static void S_EnterGameHandler(PacketSession session, IMessage packet)
+    {
+        S_EnterGame enterGamePacket = packet as S_EnterGame;
+
+        ObjectManager.Instance.Add(enterGamePacket.Player, pilotPlayer: true);
+    }
 
     public static void S_LeaveGameHandler(PacketSession session, IMessage packet) { }
 
@@ -30,14 +35,14 @@ public class PacketHandler
         if (gameObject == null)
             return;
 
-        if (ObjectManager.Instance.playerController.Id == movePacket.ObjectId)
+        if (ObjectManager.Instance.pilotPlayerController.Id == movePacket.ObjectId)
             return;
 
-        t_BaseController baseController = gameObject.GetComponent<t_BaseController>();
-        if (baseController == null)
+        t_PlayerController playerController = gameObject.GetComponent<t_PlayerController>();
+        if (playerController == null)
             return;
 
-        baseController.PosInfo = movePacket.PosInfo;
+        playerController.PosInfo = movePacket.PosInfo;
     }
 
     public static void S_ChangeHpHandler(PacketSession session, IMessage packet) { }

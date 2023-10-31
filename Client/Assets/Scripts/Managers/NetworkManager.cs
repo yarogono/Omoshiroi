@@ -1,4 +1,5 @@
 using Google.Protobuf;
+using Google.Protobuf.Protocol;
 using ServerCore;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,13 @@ public class NetworkManager : CustomSingleton<NetworkManager>
             },
             1
         );
+
+        C_EnterGame enterGamePacket = new C_EnterGame { Player = new ObjectInfo() };
+        enterGamePacket.Player.Name = "test";
+        enterGamePacket.Player.PosInfo = new PositionInfo() { PosX = 0, PosY = 0 };
+        enterGamePacket.Player.StatInfo = null;
+
+        NetworkManager.Instance.Send(enterGamePacket);
     }
 
     void Update()
