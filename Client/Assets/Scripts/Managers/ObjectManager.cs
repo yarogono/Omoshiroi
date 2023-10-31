@@ -16,15 +16,15 @@ public class ObjectManager : CustomSingleton<ObjectManager>
     public void Add(ObjectInfo info)
     {
         GameObjectType objectType = GetObjectTypeById(info.ObjectId);
+
         if (objectType == GameObjectType.Player)
         {
-            
             GameObject go = Resources.Load<GameObject>("TestPlayer");
             go.name = info.Name;
             _objects.Add(info.ObjectId, go);
 
             Debug.Log($"{info.Name} Crated");
-            t_PlayerController pc = go.GetComponent<t_PlayerController>();
+            t_ClonePlayerController pc = go.GetComponent<t_ClonePlayerController>();
             go.transform.position = new Vector3(info.PosInfo.PosX, info.PosInfo.PosY, 0);
             Instantiate(go);
             //pc.Id = info.ObjectId;

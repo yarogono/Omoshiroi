@@ -12,7 +12,11 @@ namespace ServerCore
         {
             for (int i = 0; i < count; i++)
             {
-                Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                Socket socket = new Socket(
+                    endPoint.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 _sessionFactory = sessionFactory;
 
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();

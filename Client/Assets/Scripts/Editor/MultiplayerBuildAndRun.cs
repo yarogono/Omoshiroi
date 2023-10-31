@@ -31,19 +31,29 @@ public class MultiplayerBuildAndRun
         // 유니티 빌드세팅 API를 사용
         // 빌드 타겟 설정 => 윈도우, 맥, 안드로이드, IOS 중 어떤걸로 설정할 지
         EditorUserBuildSettings.SwitchActiveBuildTarget(
-            BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows);
+            BuildTargetGroup.Standalone,
+            BuildTarget.StandaloneWindows
+        );
 
         // 실행할 클라이언트(플레이어) 갯수 만큼 반복문 실행
         for (int i = 1; i <= playerCount; i++)
         {
             // 씬의 경로를 추가
             // 프로젝트 이름과 플레이어 번호를 사용해서 빌드 경로와 파일 설정
-            BuildPipeline.BuildPlayer(GetScenePaths(),
-                "Builds/Win64/" + GetProjectName() + i.ToString() + "/" +
-                GetProjectName() + i.ToString() + ".exe",
-
+            BuildPipeline.BuildPlayer(
+                GetScenePaths(),
+                "Builds/Win64/"
+                    + GetProjectName()
+                    + i.ToString()
+                    + "/"
+                    + GetProjectName()
+                    + i.ToString()
+                    + ".app",
                 // 빌드 후 자동 실행하도록 설정
-                BuildTarget.StandaloneWindows64, BuildOptions.AutoRunPlayer);
+                // BuildTarget.StandaloneWindows64, BuildOptions.AutoRunPlayer);
+                BuildTarget.StandaloneOSX,
+                BuildOptions.AutoRunPlayer
+            );
         }
     }
 
