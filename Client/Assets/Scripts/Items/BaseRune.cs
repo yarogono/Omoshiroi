@@ -4,20 +4,20 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "BaseRuneSO", menuName = "Item/BaseRuneSO")]
-public class BaseRune : BaseItem, IDroppable, IEquipable
+public class BaseRune : BaseItem, IDroppable, IEquippable
 {
     public void Drop()
     {
 
     }
 
-    public void Equip()
+    public void Equip(CharacterDataContainer cdc)
     {
-
+        cdc.Equipments.Rune = this;
     }
 
-    public void Dequip()
+    public void Dequip(CharacterDataContainer cdc)
     {
-
+        cdc.Equipments.Rune = null;
     }
 }
