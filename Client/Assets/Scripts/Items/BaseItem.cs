@@ -10,8 +10,8 @@ public class BaseItem : ScriptableObject
     [SerializeField] private string description;
     [SerializeField] private eItemType itemType;
 
-    public int ItemID { get;}
-    public string ItemName { get; }
-    public string Description { get; }
-    public eItemType ItemType { get; }
+    public int ItemID { get { return itemID; } }
+    public string ItemName { get { return itemName; } }
+    public string Description { get { return description; } }
+    public eItemType ItemType { get { return itemType; } }
 }
