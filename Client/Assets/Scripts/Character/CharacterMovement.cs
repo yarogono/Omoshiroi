@@ -9,20 +9,24 @@ public class CharacterMovement : MonoBehaviour
 {
     private CharacterController _controller;
 
-    [Header("움직임에 관한 설정")]
-    [SerializeField][Tooltip("질량.\n 높을수록 impulse에 움직이는 거리가 작다.")] private float mass = 1.0f;
-    [SerializeField][Tooltip("충격시간.\n 높을수록 impulse가 느리게 감소한다.\n = impulse에 의해 더 멀리 날라간다.")] private float DampingTime = 0.3f;
-    [SerializeField][Tooltip("떨어지는 최대 속도")] private const float MinVerticalSpeed = -3.0f;
-    [SerializeField][Tooltip("상승하는 최대 속도")] private const float MaxVerticalSpeed = 3.0f;
+    [Header("충격에 관한 설정")]
+    [SerializeField][Tooltip("질량.\n 높을수록 충격에 움직이는 거리가 작다.")][Range(0.5f, 2f)] private float _mass = 1.0f;
+    [SerializeField][Tooltip("충격시간.\n 높을수록 충격이 오래 지속된다.\n = 충격에 의해 더 멀리 날라간다.")] private float ImpactDampingTime = 0.2f;
+    [Header("조작에 관한 설정")]
+    [SerializeField][Tooltip("조작 반응성.\n 높을수록 조작이 느리게 반영된다.")] private float ControlDampingTime = 0.2f;
+    [SerializeField][Tooltip("조작으로 인한 최대 속도")] private float MaxSpeed = 0.5f;
+    [Header("중력에 관한 설정")]
+    [SerializeField][Tooltip("중력으로 인한 추락 최대 속도")] private float MinFallSpeed = -3.0f;
 
-    private Vector3 _currentImpulse;
-    private float verticalVelocity;
+    private Vector3 _controlDirection;
+    private Vector3 _dampingVelocity;
+    private Vector3 _controlDamping;
+
+    private Vector3 _currentPhysics;
+    private Vector3 _currentControl;
+    private float _currentGravity;
 
     private float _knockoutTime;
-
-    public Vector3 Velocity { get => CalculateVelocity(); }
-    public Vector3 DeltaVByImpulse { get; private set; }
-    public Vector3 ControlVelocity { get; private set; }
 
     private void Awake()
     {
@@ -31,82 +35,90 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        // 속도 변화를 부드럽게 낮춘다.
-        if (DeltaVByImpulse.magnitude > 0.1f)
-            DeltaVByImpulse = Vector3.SmoothDamp(DeltaVByImpulse, Vector3.zero, ref _currentImpulse, DampingTime);
-        else if (DeltaVByImpulse.magnitude > 0f)
-        {
-            DeltaVByImpulse = Vector3.zero;
-            _currentImpulse = Vector3.zero;
-        }
-
-        // 중력 계산 => g 가속도
-        // 너무 빨라지지 않도록 clamping 하였음.
-        if (!_controller.isGrounded)
-        {
-            verticalVelocity = Mathf.Clamp(verticalVelocity + Physics.gravity.y * Time.deltaTime, MinVerticalSpeed, MaxVerticalSpeed);
-        }
-
         // 조작 불가 시간
         if (_knockoutTime > 0)
             _knockoutTime -= Time.deltaTime;
 
-        // 캐릭터 위치 변화량 이동
-        _controller.Move(Velocity * Time.deltaTime);
+        // 중력 계산 => g 가속도. 너무 빨라지지 않도록 clamping 하였음.
+        if (!_controller.isGrounded)
+            _currentGravity = Mathf.Max(_currentGravity + Physics.gravity.y * Time.deltaTime, MinFallSpeed);
+        else
+            _currentGravity = .0f;
+
+        // 캐릭터 이동
+        CalControl();
+        CalPhysics();
+        _controller.Move((_currentPhysics + _currentControl + _currentGravity * Vector3.up) * Time.deltaTime);
     }
 
     public void Reset()
     {
-        DeltaVByImpulse = Vector3.zero;
-        verticalVelocity = 0f;
-        ControlVelocity = Vector3.zero;
+        _controlDirection = Vector3.zero;
+        _dampingVelocity = Vector3.zero;
+        _currentControl = Vector3.zero;
+        _currentPhysics = Vector3.zero;
+        _currentGravity = 0;
+        _knockoutTime = 0;
     }
 
     /// <summary>
-    /// 충격력 impulse = mass * delta velocity.<br/>
-    /// 속도변화량 delta velocity = impulse / mass
+    /// 해당 방향으로 충격/속도을 받는다. 속도 변화에 제한이 없다.
     /// </summary>
-    /// <param name="impulse">적용 충격량 impulse</param>
+    /// <param name="impact">적용 충격/속도</param>
     /// <param name="knockoutDuration">조작 불가능 시간</param>
-    public void AddImpulse(Vector3 impulse, float knockoutDuration = 0.3f)
+    public void AddImpact(Vector3 impact, float knockoutDuration = 0.3f)
     {
-        DeltaVByImpulse += impulse / mass;
-        ApplyKnockOut(knockoutDuration);
+        _currentPhysics += impact / _mass;
+        ApplyKnockOutTime(knockoutDuration);
     }
 
     /// <summary>
     /// 조작 불가능 시간을 업데이트하나, 최대값만 적용
     /// </summary>
     /// <param name="knockoutTime">조작 불가능 시간</param>
-    private void ApplyKnockOut(float knockoutTime)
+    private void ApplyKnockOutTime(float knockoutTime)
     {
         _knockoutTime = Mathf.Max(_knockoutTime, knockoutTime);
     }
 
     /// <summary>
-    /// 조작하려는 속도
+    /// 조작 속도로 최대 제한이 있다.
     /// </summary>
-    /// <param name="velocity">속도</param>
-    public void ControlMove(Vector3 velocity)
+    /// <param name="direction">속도</param>
+    public void ControlMove(Vector3 direction)
     {
-        ControlVelocity = velocity;
+        _controlDirection = direction;
     }
 
     /// <summary>
-    /// 조작 여부에 따라서 속도를 계산
+    /// 주어진 값만큼 위치를 변경시키나, Collider가 있으면 막힌다.
     /// </summary>
-    /// <returns>계산된 속도</returns>
-    private Vector3 CalculateVelocity()
+    /// <param name="deltaPosition">이동하는 벡터값</param>
+    public void DeltaMovement(Vector3 deltaPosition)
     {
-        Vector3 ret;
-        if (_knockoutTime > 0 || !_controller.isGrounded)
-        {
-            ret = Vector3.up * verticalVelocity + DeltaVByImpulse;
-        }
+        _controller.Move(deltaPosition);
+    }
+
+    /// <summary>
+    /// 주어진 위치로 무조건 위치를 변경시킨다. Collider가 있으면 대참사.
+    /// </summary>
+    /// <param name="position">world position</param>
+    public void SetPosition(Vector3 position)
+    {
+        gameObject.transform.position = position;
+    }
+
+    private void CalControl()
+    {
+        if (_controlDirection == Vector3.zero)
+            _currentControl = Vector3.SmoothDamp(_currentControl, Vector3.zero, ref _controlDamping, ControlDampingTime);
         else
-        {
-            ret = ControlVelocity + Vector3.up * verticalVelocity + DeltaVByImpulse;
-        }
-        return ret;
+            _currentControl = Vector3.SmoothDamp(_currentControl, _controlDirection * MaxSpeed, ref _controlDamping, ControlDampingTime);
+    }
+
+    private void CalPhysics()
+    {
+        // 충격을 부드럽게 줄인다.
+        _currentPhysics = Vector3.SmoothDamp(_currentPhysics, Vector3.zero, ref _dampingVelocity, ImpactDampingTime);
     }
 }
