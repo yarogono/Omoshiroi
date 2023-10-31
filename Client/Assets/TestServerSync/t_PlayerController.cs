@@ -31,6 +31,8 @@ public class t_PlayerController : t_ClonePlayerController
 
         // TODO
         C_Move movePacket = new C_Move();
+        movePacket.PosInfo = PosInfo;
+        NetworkManager.Instance.Send(movePacket);
     }
 
     private void OnMove(InputValue value)
