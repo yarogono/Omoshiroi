@@ -10,19 +10,20 @@ public class CharacterMovement : MonoBehaviour
     private CharacterController _controller;
 
     [Header("움직임에 관한 설정")]
-    [SerializeField][Tooltip("질량.\n 높을수록 impulse에 움직이는 거리가 작다.")] private float mass = 1.0f;
-    [SerializeField][Tooltip("충격시간.\n 높을수록 impulse가 느리게 감소한다.\n = impulse에 의해 더 멀리 날라간다.")] private float DampingTime = 0.3f;
-    [SerializeField][Tooltip("떨어지는 최대 속도")] private const float MinVerticalSpeed = -3.0f;
-    [SerializeField][Tooltip("상승하는 최대 속도")] private const float MaxVerticalSpeed = 3.0f;
+    [SerializeField][Tooltip("질량.\n 높을수록 충격에 움직이는 거리가 작다.")][Range(0.5f, 2f)] private float _mass = 1.0f;
+    [SerializeField][Tooltip("충격시간.\n 높을수록 충격이 오래 지속된다.\n = 충격에 의해 더 멀리 날라간다.")] private float DampingTime = 0.2f;
+    [SerializeField][Tooltip("중력으로 인한 추락 최대 속도")] private const float MinVerticalSpeed = -3.0f;
+    [SerializeField][Tooltip("조작으로 인한 최대 속도")] private const float MaxSpeed = 0.5f;
 
-    private Vector3 _currentImpulse;
-    private float verticalVelocity;
+    private Vector3 _impactForce;
+    private Vector3 _controlForce;
+    private Vector3 _dampingVelocity;
+
+    private Vector3 _physicsVelocity;
+    private Vector3 _controlVelocity;
+    private float _verticalVelocity;
 
     private float _knockoutTime;
-
-    public Vector3 Velocity { get => CalculateVelocity(); }
-    public Vector3 DeltaVByImpulse { get; private set; }
-    public Vector3 ControlVelocity { get; private set; }
 
     private void Awake()
     {
@@ -31,82 +32,111 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        // 속도 변화를 부드럽게 낮춘다.
-        if (DeltaVByImpulse.magnitude > 0.1f)
-            DeltaVByImpulse = Vector3.SmoothDamp(DeltaVByImpulse, Vector3.zero, ref _currentImpulse, DampingTime);
-        else if (DeltaVByImpulse.magnitude > 0f)
-        {
-            DeltaVByImpulse = Vector3.zero;
-            _currentImpulse = Vector3.zero;
-        }
+        // 조작 불가 시간
+        if (_knockoutTime > 0)
+            _knockoutTime -= Time.deltaTime;
 
         // 중력 계산 => g 가속도
         // 너무 빨라지지 않도록 clamping 하였음.
         if (!_controller.isGrounded)
         {
-            verticalVelocity = Mathf.Clamp(verticalVelocity + Physics.gravity.y * Time.deltaTime, MinVerticalSpeed, MaxVerticalSpeed);
+            _verticalVelocity = Mathf.Max(_verticalVelocity + Physics.gravity.y * Time.deltaTime, MinVerticalSpeed);
         }
 
-        // 조작 불가 시간
-        if (_knockoutTime > 0)
-            _knockoutTime -= Time.deltaTime;
+        // 충격을 부드럽게 줄인다.
+        _impactForce = Vector3.SmoothDamp(_impactForce, Vector3.zero, ref _dampingVelocity, DampingTime);
 
-        // 캐릭터 위치 변화량 이동
-        _controller.Move(Velocity * Time.deltaTime);
+        // 캐릭터 이동
+        _physicsVelocity = PhysicsVelocity(_physicsVelocity);
+        if (_knockoutTime > 0 || !_controller.isGrounded)
+            _controlVelocity = Vector3.zero;
+        else
+            _controlVelocity = ControlVelocity(_controlVelocity);
+        _controller.Move((_physicsVelocity + _controlVelocity) * Time.deltaTime);
     }
 
     public void Reset()
     {
-        DeltaVByImpulse = Vector3.zero;
-        verticalVelocity = 0f;
-        ControlVelocity = Vector3.zero;
+        _impactForce = Vector3.zero;
+        _controlForce = Vector3.zero;
+        _dampingVelocity = Vector3.zero;
+        _controlVelocity = Vector3.zero;
+        _physicsVelocity = Vector3.zero;
+        _verticalVelocity = 0;
+        _knockoutTime = 0;
     }
 
     /// <summary>
-    /// 충격력 impulse = mass * delta velocity.<br/>
-    /// 속도변화량 delta velocity = impulse / mass
+    /// 해당 방향으로 충격/힘을 받는다. 속도 변화에 제한이 없다.
     /// </summary>
-    /// <param name="impulse">적용 충격량 impulse</param>
+    /// <param name="impact">적용 충격/힘</param>
     /// <param name="knockoutDuration">조작 불가능 시간</param>
-    public void AddImpulse(Vector3 impulse, float knockoutDuration = 0.3f)
+    public void AddImpact(Vector3 impact, float knockoutDuration = 0.3f)
     {
-        DeltaVByImpulse += impulse / mass;
-        ApplyKnockOut(knockoutDuration);
+        _impactForce += impact;
+        ApplyKnockOutTime(knockoutDuration);
     }
 
     /// <summary>
     /// 조작 불가능 시간을 업데이트하나, 최대값만 적용
     /// </summary>
     /// <param name="knockoutTime">조작 불가능 시간</param>
-    private void ApplyKnockOut(float knockoutTime)
+    private void ApplyKnockOutTime(float knockoutTime)
     {
         _knockoutTime = Mathf.Max(_knockoutTime, knockoutTime);
     }
 
     /// <summary>
-    /// 조작하려는 속도
+    /// 조작하려는 힘으로 최대 속도가 제한되어 있다.
     /// </summary>
-    /// <param name="velocity">속도</param>
-    public void ControlMove(Vector3 velocity)
+    /// <param name="force">힘</param>
+    public void ControlMove(Vector3 force)
     {
-        ControlVelocity = velocity;
+        _controlForce = force;
     }
 
     /// <summary>
-    /// 조작 여부에 따라서 속도를 계산
+    /// 주어진 값만큼 위치를 변경시키나, 중간에 Collider가 있으면 막힌다.
     /// </summary>
-    /// <returns>계산된 속도</returns>
-    private Vector3 CalculateVelocity()
+    /// <param name="deltaPosition">이동하는 벡터값</param>
+    public void DeltaMovement(Vector3 deltaPosition)
     {
-        Vector3 ret;
-        if (_knockoutTime > 0 || !_controller.isGrounded)
-        {
-            ret = Vector3.up * verticalVelocity + DeltaVByImpulse;
-        }
-        else
-        {
-            ret = ControlVelocity + Vector3.up * verticalVelocity + DeltaVByImpulse;
-        }
-        return ret;
+        _controller.Move(deltaPosition);
+    }
+
+    /// <summary>
+    /// 주어진 위치로 무조건 위치를 변경시킨다.
+    /// </summary>
+    /// <param name="position">world position</param>
+    public void SetPosition(Vector3 position)
+    {
+        gameObject.transform.position = position;
+    }
+
+    /// <summary>
+    /// 조작 힘으로 인한 속도를 변화시킨다.
+    /// </summary>
+    /// <param name="currentVelocity">조작으로 인한 현재 속도</param>
+    /// <returns>조작으로 변한 속도</returns>
+    private Vector3 ControlVelocity(Vector3 currentVelocity)
+    {
+        currentVelocity += _controlForce * Time.deltaTime;
+        float speed = currentVelocity.magnitude;
+        // 최대속도 제한
+        if (speed > MaxSpeed)
+            currentVelocity = currentVelocity.normalized * Mathf.Clamp(speed, -MaxSpeed, MaxSpeed);
+
+        return currentVelocity;
+    }
+
+    /// <summary>
+    /// 충격/낙하로 인한 속도를 변화시킨다.
+    /// </summary>
+    /// <param name="currentVelocity"></param>
+    /// <returns>충격/낙하로 변한 속도</returns>
+    private Vector3 PhysicsVelocity(Vector3 currentVelocity)
+    {
+        currentVelocity += _impactForce * Time.deltaTime + _verticalVelocity * Vector3.up;
+        return currentVelocity;
     }
 }
