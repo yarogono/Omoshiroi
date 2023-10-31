@@ -22,6 +22,8 @@ public class PlayerInput : BaseInput, ThirdPersonController.IPlayerActions
 
         // TouchScreen
         _touchscreen = InputSystem.GetDevice<Touchscreen>();
+        if (_touchscreen == null)
+            InputSystem.AddDevice<Touchscreen>();
     }
 
     private void OnEnable()
