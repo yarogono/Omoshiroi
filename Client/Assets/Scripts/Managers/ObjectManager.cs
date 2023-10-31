@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectManager : CustomSingleton<ObjectManager>
 {
-    //public MyPlayerController MyPlayer { get; set; }
+    public t_PlayerController playerController { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 
     public static GameObjectType GetObjectTypeById(int id)
@@ -19,17 +19,37 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
         if (objectType == GameObjectType.Player)
         {
-            GameObject go = Resources.Load<GameObject>("TestPlayer");
-            go.name = info.Name;
-            _objects.Add(info.ObjectId, go);
+            if (playerController)
+            {
+                GameObject gameObject = Resources.Load<GameObject>("Player");
+                gameObject.name = info.Name;
+                _objects.Add(info.ObjectId, gameObject);
 
-            Debug.Log($"{info.Name} Crated");
-            t_ClonePlayerController pc = go.GetComponent<t_ClonePlayerController>();
-            go.transform.position = new Vector3(info.PosInfo.PosX, info.PosInfo.PosY, 0);
-            Instantiate(go);
-            //pc.Id = info.ObjectId;
-            //pc.PosInfo = info.PosInfo;
-            //pc.Stat = info.StatInfo;
+                playerController = GetComponent<t_PlayerController>();
+                playerController.Id = info.ObjectId;
+                playerController.PosInfo = info.PosInfo;
+                playerController.Stat = info.StatInfo;
+                playerController.SyncPos();
+            }
+            else
+            {
+                GameObject gameObject = Resources.Load<GameObject>("Creature/Player");
+                gameObject.name = info.Name;
+                _objects.Add(info.ObjectId, gameObject);
+
+                t_ClonePlayerController clonePlayerController =
+                    gameObject.GetComponent<t_ClonePlayerController>();
+                clonePlayerController.Id = info.ObjectId;
+                clonePlayerController.PosInfo = info.PosInfo;
+                clonePlayerController.Stat = info.StatInfo;
+                playerController.SyncPos();
+            }
         }
+    }
+
+    public GameObject FindById(int id)
+    {
+        _objects.TryGetValue(id, out GameObject gameObject);
+        return gameObject;
     }
 }
