@@ -16,32 +16,33 @@ public class InventoryContrller : MonoBehaviour
 
     UIInventoryPage _inventorypage;
 
-    private void Awake()
-    {
-        inventoryUI.InitializeinventoryUI(inventorySize);
-    }
 
     private void Start()
     {
 
-        //inventoryUI.InitializeinventoryUI(inventorySize);
+        inventoryUI.InitializeinventoryUI(inventorySize);
+    
+  
 
 
-        BtnInventory.onClick.AddListener(() =>
+    BtnInventory.onClick.AddListener(() =>
         {
-           if(inventoryUI.isActiveAndEnabled==false)
+
+     
+            if (inventoryUI.isActiveAndEnabled == false)
             {
-                _inventorypage = UIManager.Instance.ShowUI<UIInventoryPage>();
+                //_inventorypage = UIManager.Instance.ShowUI<UIInventoryPage>();
+              inventoryUI.Show();
             }
-           else
+            else
             {
-                UIManager.Instance.GetOpenUI<UIInventoryPage>().HideUI();
+              inventoryUI.Hide();
             }
         });
 
         BtnCancel.onClick.AddListener(() =>
         {
-            UIManager.Instance.GetOpenUI<UIInventoryPage>().HideUI();
+            inventoryUI.Hide();
         });
     }
 

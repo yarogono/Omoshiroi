@@ -15,6 +15,9 @@ public class UIInventoryPage : UIBase
     [SerializeField]
     private UIInventoryDiscription itemDescription;
 
+    [SerializeField]
+    private MouseFollower mouseFollwer;
+
     List<UIInventoryItem> listOfUIitems = new List<UIInventoryItem>();
 
     public Sprite image;
@@ -25,6 +28,7 @@ public class UIInventoryPage : UIBase
     private void Awake()
     {
         Hide();
+        mouseFollwer.Toggle(false);
         itemDescription.ResetDescription();
     }
     public void InitializeinventoryUI(int inventorysize)
@@ -51,7 +55,7 @@ public class UIInventoryPage : UIBase
 
     private void HandleEndDrag(UIInventoryItem obj)
     {
-        
+        mouseFollwer.Toggle(false);
     }
 
     private void HandleSwap(UIInventoryItem obj)
@@ -61,12 +65,14 @@ public class UIInventoryPage : UIBase
 
     private void HandleBeginDrag(UIInventoryItem obj)
     {
-       
+        mouseFollwer.Toggle(true);
+        mouseFollwer.SetData(image, quantity);
     }
 
     private void HandleItemSelection(UIInventoryItem obj)
     {
         itemDescription.SetDescription(image, title, description);
+        listOfUIitems[0].Select();
     }
 
     public void Show()
@@ -79,5 +85,6 @@ public class UIInventoryPage : UIBase
     public void Hide()
     {
         gameObject.SetActive(false);
+        listOfUIitems[0].Deselect();
     }
 }
