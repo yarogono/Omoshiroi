@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerInput : BaseInput, ThirdPersonController.IPlayerActions
 {
     public ThirdPersonController InputActions {  get; private set; }
     public ThirdPersonController.PlayerActions PlayerActions { get; private set; }
     private CharacterMovement _movement;
-    private Touchscreen _touchscreen;
+
+    [SerializeField] private TMP_Text PrimaryTouchTestTxt;
+    [SerializeField] private TMP_Text SecondTouchTestTxt;
+    [SerializeField] private TMP_Text ThirdTouchTestTxt;
 
     private void Awake()
     {
@@ -18,12 +20,6 @@ public class PlayerInput : BaseInput, ThirdPersonController.IPlayerActions
         PlayerActions = InputActions.Player;
 
         PlayerActions.AddCallbacks(this);
-
-
-        // TouchScreen
-        _touchscreen = InputSystem.GetDevice<Touchscreen>();
-        if (_touchscreen == null)
-            InputSystem.AddDevice<Touchscreen>();
     }
 
     private void OnEnable()
@@ -34,12 +30,6 @@ public class PlayerInput : BaseInput, ThirdPersonController.IPlayerActions
     private void OnDisable()
     {
         InputActions.Disable();
-    }
-
-    public void OnTouch(InputAction.CallbackContext context)
-    {
-        var item = context.ReadValue<Touch>();
-        Debug.Log($"{item.fingerId} => {item.position}, {item.deltaPosition}, {item.deltaTime}");
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -68,5 +58,38 @@ public class PlayerInput : BaseInput, ThirdPersonController.IPlayerActions
     public void OnAimFire(InputAction.CallbackContext context)
     {
         
+    }
+
+    public void OnPrimaryTouch(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            var touch = context.ReadValue<TouchState>();
+            PrimaryTouchTestTxt.text = $"{touch.touchId} {touch.startPosition} {touch.delta} {touch.position}";
+        }
+    }
+
+    public void OnSecondTouch(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            var touch = context.ReadValue<TouchState>();
+            SecondTouchTestTxt.text = $"{touch.touchId} {touch.startPosition} {touch.delta} {touch.position}";
+        }
+    }
+
+    public void OnThirdTouch(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            var touch = context.ReadValue<TouchState>();
+            ThirdTouchTestTxt.text = $"{touch.touchId} {touch.startPosition} {touch.delta} {touch.position}";
+        }
+    }
+
+    public void OnCancelTouch(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            Application.Quit();
     }
 }
