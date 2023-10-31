@@ -1,0 +1,130 @@
+{
+    "name": "ThirdPersonController",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "3cad0c7a-c95f-4f13-9588-f5aaf7729ddf",
+            "actions": [
+                {
+                    "name": "Touch",
+                    "type": "Value",
+                    "id": "32b20964-3d5b-4e4a-a5f5-1c23c9b1710d",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "c7f1639b-76fd-40d4-bf0a-43105b03010d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "AimFire",
+                    "type": "Button",
+                    "id": "04e5db8a-037f-4814-ba20-ba0bbc11b5fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "12cf45b4-50c7-4dda-ac86-22e50fafd3ae",
+                    "path": "<Touchscreen>",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PointerControl",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "54d5e776-5ce4-402a-9b68-8d169f8b177b",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "d59137d5-7bfb-47a7-bab0-ffe103a08496",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d1df7c3b-f9e9-4202-826b-b85b6c83daef",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "6a8e3b5a-3ce7-46f1-ae5c-f2481ebd39b6",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "4f8c519b-e30d-4347-ae8d-145dc1598120",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "abf0d028-9313-45b7-8972-764027d818d0",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PointerControl",
+                    "action": "AimFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PointerControl",
+            "bindingGroup": "PointerControl",
+            "devices": [
+                {
+                    "devicePath": "<Pointer>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

@@ -2,27 +2,28 @@
 
 public interface IInteractable
 {
-
+    public void Interact();
 }
 
 public interface ILootable
 {
-
+    public void Loot();
 }
 
 public interface IDroppable
 {
-
+    public void Drop();
 }
 
 public interface IEquipable
 {
-
+    public void Equip();
+    public void Dequip();
 }
 
 public interface IConsumable
 {
-
+    public void Consume();
 }
 
 public interface IState
