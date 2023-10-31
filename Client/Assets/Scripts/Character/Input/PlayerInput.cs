@@ -54,12 +54,12 @@ public class PlayerInput : BaseInput, ThirdPersonController.IPlayerActions
             Vector2 dir = context.ReadValue<Vector2>();
 
             _movement.ControlMove(forward * dir.y + right * dir.x);
-            Debug.Log(forward * dir.y + right * dir.x);
+            //Debug.Log($"Move {forward * dir.y + right * dir.x}");
         }
         else
         {
             _movement.ControlMove(Vector3.zero);
-            Debug.Log(Vector3.zero);
+            //Debug.Log($"Stop {Vector3.zero}");
         }
     }
 
