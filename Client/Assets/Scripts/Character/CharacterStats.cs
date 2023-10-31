@@ -12,11 +12,10 @@ public class CharacterStats : ScriptableObject
     [SerializeField] private int criticalRate;
     [SerializeField] private float criticalPower;
 
-
-    public int BaseHP { get { return baseHP; } }
-    public int BaseDEF { get { return baseDEF; } }
-    public float AttackSpeed { get { return attackSpeed; } }
-    public int AttackPoint { get { return attackPoint; } }
-    public int CriticalRate { get { return criticalRate; } }
-    public float CriticalPower { get { return criticalPower; } }
+    public int BaseHP { get { return baseHP; } set { baseHP = value; } }
+    public int BaseDEF { get { return baseDEF; } set { baseDEF = value; } }
+    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+    public int AttackPoint { get { return attackPoint; } set { attackPoint = value; } }
+    public int CriticalRate { get { return criticalRate; } set { criticalRate = value; } }
+    public float CriticalPower { get { return criticalPower; } set { criticalPower = value; } }
 }

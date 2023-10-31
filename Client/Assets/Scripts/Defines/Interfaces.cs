@@ -15,15 +15,20 @@ public interface IDroppable
     public void Drop();
 }
 
-public interface IEquipable
+public interface IEquippable
 {
-    public void Equip();
-    public void Dequip();
+    public void Equip(CharacterDataContainer cdc);
+    public void Dequip(CharacterDataContainer cdc);
 }
 
 public interface IConsumable
 {
     public void Consume();
+}
+
+public interface IStackable
+{
+    public void StackItem();
 }
 
 public interface IState
