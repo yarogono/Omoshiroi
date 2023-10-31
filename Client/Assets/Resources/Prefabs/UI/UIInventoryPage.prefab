@@ -616,10 +616,10 @@ RectTransform:
   m_Father: {fileID: 4099934001812700150}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 88.5625, y: -89.856575}
-  m_SizeDelta: {x: 137.125, y: 139.71315}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8771666047763916829
 CanvasRenderer:
@@ -994,8 +994,8 @@ MonoBehaviour:
   m_IgnoreLayout: 0
   m_MinWidth: -1
   m_MinHeight: -1
-  m_PreferredWidth: 1
-  m_PreferredHeight: -1
+  m_PreferredWidth: 100
+  m_PreferredHeight: 100
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -1061,8 +1061,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.86, y: -184.28}
-  m_SizeDelta: {x: 365.71, y: 368.57}
+  m_AnchoredPosition: {x: 165.63, y: -176.31}
+  m_SizeDelta: {x: 331.25, y: 352.63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2505863101919110766
 CanvasRenderer:
@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: -1
+  m_MinHeight: 100
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -1629,8 +1629,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2159,7 +2159,7 @@ GameObject:
   - component: {fileID: 1260775753309442169}
   - component: {fileID: 4418948431587474569}
   m_Layer: 5
-  m_Name: UIIngameMenu
+  m_Name: UIInventoryPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2237,9 +2237,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22d640b5c83fba40b84fca5f1d5e607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _baseFontSize: []
   itemPrefab: {fileID: 1226340929728962863, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
   contentPanel: {fileID: 4891553396175741024}
   itemDescription: {fileID: 2045356822922767980}
+  image: {fileID: 616442665, guid: b216e219fe97ed9479e9b76889837dfc, type: 3}
+  quantity: 1
+  title: Bag
+  description: dddd
 --- !u!1 &8882292428921094514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,8 +2459,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2630,7 +2635,6 @@ GameObject:
   - component: {fileID: 7335407531939432565}
   - component: {fileID: 4987358586663000991}
   - component: {fileID: 2232404031260623451}
-  - component: {fileID: 2243582281974087115}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -2724,18 +2728,3 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2243582281974087115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9120283700243940914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22d640b5c83fba40b84fca5f1d5e607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemPrefab: {fileID: 1226340929728962863, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
-  contentPanel: {fileID: 4891553396175741024}
-  itemDescription: {fileID: 0}

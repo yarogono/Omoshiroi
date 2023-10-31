@@ -14,27 +14,34 @@ public class InventoryContrller : MonoBehaviour
     [SerializeField]
     private Button BtnCancel;
 
+    UIInventoryPage _inventorypage;
+
+    private void Awake()
+    {
+        inventoryUI.InitializeinventoryUI(inventorySize);
+    }
+
     private void Start()
     {
 
-        inventoryUI.InitializeinventoryUI(inventorySize);
+        //inventoryUI.InitializeinventoryUI(inventorySize);
 
 
         BtnInventory.onClick.AddListener(() =>
         {
            if(inventoryUI.isActiveAndEnabled==false)
             {
-                inventoryUI.Show();
+                _inventorypage = UIManager.Instance.ShowUI<UIInventoryPage>();
             }
            else
             {
-                inventoryUI.Hide();
+                UIManager.Instance.GetOpenUI<UIInventoryPage>().HideUI();
             }
         });
 
         BtnCancel.onClick.AddListener(() =>
-        {    
-          inventoryUI.Hide();          
+        {
+            UIManager.Instance.GetOpenUI<UIInventoryPage>().HideUI();
         });
     }
 
