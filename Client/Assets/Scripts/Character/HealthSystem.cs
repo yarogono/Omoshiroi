@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    private Inventory inven;
-    private CharacterStats stats;
+    public CharacterStats stats;
+ 
     // Start is called before the first frame update
     void Start()
     {
