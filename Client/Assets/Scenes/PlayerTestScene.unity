@@ -353,7 +353,6 @@ GameObject:
   - component: {fileID: 1813061504}
   - component: {fileID: 1813061503}
   - component: {fileID: 1813061502}
-  - component: {fileID: 1813061501}
   - component: {fileID: 1813061500}
   - component: {fileID: 1813061508}
   - component: {fileID: 1813061506}
@@ -391,33 +390,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1813061501
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813061499}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!136 &1813061502
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -562,7 +534,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mass: 1
-  DampingTime: 0.2
+  ImpactDampingTime: 0.2
+  ControlDampingTime: 0.2
+  MaxSpeed: 2
+  MinFallSpeed: -3
 --- !u!1 &2006885808
 GameObject:
   m_ObjectHideFlags: 0

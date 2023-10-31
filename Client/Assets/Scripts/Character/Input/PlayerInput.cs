@@ -45,15 +45,21 @@ public class PlayerInput : BaseInput, ThirdPersonController.IPlayerActions
         if (context.phase == InputActionPhase.Performed)
         {
             Vector3 forward = Camera.main.transform.forward;
+            forward.y = 0;
+            forward.Normalize();
             Vector3 right = Camera.main.transform.right;
+            right.y = 0;
+            right.Normalize();
 
             Vector2 dir = context.ReadValue<Vector2>();
 
             _movement.ControlMove(forward * dir.y + right * dir.x);
+            Debug.Log(forward * dir.y + right * dir.x);
         }
-        else if (context.phase == InputActionPhase.Canceled)
+        else
         {
             _movement.ControlMove(Vector3.zero);
+            Debug.Log(Vector3.zero);
         }
     }
 
