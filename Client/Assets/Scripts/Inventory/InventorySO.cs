@@ -38,6 +38,7 @@ public class InventorySO : ScriptableObject
                     item = item,
                     quantity = quantity
                 };
+                return;
             }       
         }
      
@@ -61,6 +62,24 @@ public class InventorySO : ScriptableObject
   public InventoryItem GetItemAt(int itemIndex)
     {
         return inventoryItems[itemIndex];
+    }
+
+   public void AddItem(InventoryItem item)
+    {
+        AddItem(item.item, item.quantity);
+    }
+
+    public void SwapItems(int itemIndex_1, int itemIndex_2)
+    {
+        InventoryItem item1 = inventoryItems[itemIndex_1];
+        inventoryItems[itemIndex_1] = inventoryItems[itemIndex_2];
+        inventoryItems[itemIndex_2] = item1;
+        InformAboutChange();
+    }
+
+    private void InformAboutChange() // 현재 가저온 인벤토리에이터  인벤토리컨트롤러에 전달 
+    {
+        OnInventoryUpdated?.Invoke(GetCurrentInventoryState());
     }
 }
 
