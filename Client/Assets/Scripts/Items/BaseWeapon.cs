@@ -6,6 +6,7 @@ using UnityEngine;
 public class BaseWeapon : BaseItem, IEquippable, IDroppable
 {
     [Header("WeaponData")]
+
     [SerializeField] [Tooltip("체력")] private int weaponHP;
     [SerializeField] [Tooltip("방어력")] private int weaponDEF;
     [SerializeField] [Tooltip("공격 속도")] private float weaponAS;
@@ -15,10 +16,12 @@ public class BaseWeapon : BaseItem, IEquippable, IDroppable
 
     public void Equip(CharacterDataContainer cdc)
     {
+
         cdc.Stats.maxHp += weaponHP; cdc.Stats.hp += weaponHP;
         cdc.Stats.def += weaponDEF; cdc.Stats.atkSpeed += weaponAS;
         cdc.Stats.atkPower += weaponAP; cdc.Stats.critRate += weaponCR;
         cdc.Stats.critPower += weaponCP;
+
     }
 
     public void Dequip(CharacterDataContainer cdc)

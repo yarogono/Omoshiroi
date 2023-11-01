@@ -19,4 +19,14 @@ public class CharacterDataContainer : MonoBehaviour
     {
         
     }
+
+    public void SetCharcterStats(CharacterStats cs)
+    {
+        stats.AttackSpeed += cs.AttackSpeed;
+        stats.AttackPoint += cs.AttackPoint;
+        stats.CriticalRate += cs.CriticalRate;
+        stats.CriticalPower += cs.CriticalPower;
+        stats.BaseHP += cs.BaseHP;
+        stats.BaseDEF += cs.BaseDEF;
+    }
 }

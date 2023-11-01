@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class EquipSystem
 {
+
     private List<BaseItem> equippedItems = new List<BaseItem>();
 
     [SerializeField] private CharacterDataContainer cdc;
 
     public void Equip(BaseItem item)
     {
-        //µ¿ÀÏÇÑ Å¸ÀÔÀÇ Àåºñ¸¦ ÀåÂø ÁßÀÌ¶ó¸é ±âÁ¸ Àåºñ¸¦ ÇØÁ¦ÇÏ°í ÀåÂøÇÑ´Ù.
+        //ë™ì¼í•œ íƒ€ì…ì˜ ì¥ë¹„ë¥¼ ì¥ì°© ì¤‘ì´ë¼ë©´ ê¸°ì¡´ ì¥ë¹„ë¥¼ í•´ì œí•˜ê³  ì¥ì°©í•œë‹¤.
         if (item is IEquippable equipment)
         {
             for (int i = 0; i < equippedItems.Count; i++)
@@ -22,6 +23,7 @@ public class EquipSystem
             }
 
             equippedItems.Add(item);
+
             equipment.Equip(cdc);
         }
         else { return; }
@@ -31,6 +33,7 @@ public class EquipSystem
     {
         if (item is IEquippable equipment)
         {
+
             equippedItems.Remove(item);
             equipment.Dequip(cdc);
         }
@@ -38,16 +41,17 @@ public class EquipSystem
     }
 
     /// <summary>
-    /// ÀåÂøÇÑ Àåºñ ¾ÆÀÌÅÛÀ» Á¦°ÅÇÑ´Ù. Ä³¸¯ÅÍ »ç¸Á ½Ã »ç¿ëµÉ °Í °°À½.
+    /// ì¥ì°©í•œ ì¥ë¹„ ì•„ì´í…œì„ ì œê±°í•œë‹¤. ìºë¦­í„° ì‚¬ë§ ì‹œ ì‚¬ìš©ë  ê²ƒ ê°™ìŒ.
     /// </summary>
     public void RemoveEquipments()
     {
-        //Ä³¸¯ÅÍ »ç¸Á ½Ã ½ÃÃ¼ ÀÎº¥Åä¸®¿¡ µé¾î°¥ Àåºñ·ù¸¦ Ã³¸®ÇÏ´Â ³»¿ë
+        //ìºë¦­í„° ì‚¬ë§ ì‹œ ì‹œì²´ ì¸ë²¤í† ë¦¬ì— ë“¤ì–´ê°ˆ ì¥ë¹„ë¥˜ë¥¼ ì²˜ë¦¬í•˜ëŠ” ë‚´ìš©
 
-        //ÀåÂøÇÑ Àåºñ ¾ÆÀÌÅÛ ¸ğµÎ Á¦°Å
+        //ì¥ì°©í•œ ì¥ë¹„ ì•„ì´í…œ ëª¨ë‘ ì œê±°
         while(equippedItems.Count <= 0)
         {
             Dequip(equippedItems[0]);
         }
+
     }
 }
