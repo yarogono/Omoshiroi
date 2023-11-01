@@ -14,6 +14,8 @@ public class CharacterStats : MonoBehaviour
     public int atkPower;
     public int critRate;
     public float critPower;
+    public float moveSpeed;
+    public float runMultiplier;
 
     // Start is called before the first frame update
     private void Start()
