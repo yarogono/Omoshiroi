@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class EquipSystem
 {
-    [SerializeField] private BaseWeapon weapon;
-    [SerializeField] private BaseMagic magic;
-    [SerializeField] private BaseRune rune;
-    [SerializeField] private BaseSkin skin;
-    private CharacterDataContainer cdc;
+    [SerializeField] public BaseWeapon Weapon { get; set; }
+    [SerializeField] public BaseMagic Magic { get; set; }
+    [SerializeField] public BaseRune Rune { get; set; }
+    [SerializeField] public BaseSkin Skin { get; set; }
 
-    public EquipSystem(CharacterDataContainer characterDataContainer)
-    {
-        cdc = characterDataContainer;
-    }
-
-    public BaseWeapon Weapon { get; set; }
-    public BaseMagic Magic { get; set; }
-    public BaseRune Rune { get; set; }
-    public BaseSkin Skin { get; set; }
+    [SerializeField] private CharacterDataContainer cdc;
 
     public void Equip(BaseItem item)
     {
