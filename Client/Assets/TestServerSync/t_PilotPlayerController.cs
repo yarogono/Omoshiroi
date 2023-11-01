@@ -21,6 +21,9 @@ public class t_PilotPlayerController : t_PlayerController
 
     private void Update()
     {
+        checkIdTest.text = "P_ID : " + Id;
+        Debug.Log($"Pilot ID : {Id}");
+
         if (State == CreatureState.Moving)
         {
             C_Move movePacket = new C_Move();

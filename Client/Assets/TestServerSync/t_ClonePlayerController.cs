@@ -6,6 +6,9 @@ public class t_ClonePlayerController : t_PlayerController
 {
     void Update()
     {
+        checkIdTest.text = "C_ID : " + Id;
+        Debug.Log($"Clone ID : {Id}");
+
         UpdateController();
         Debug.Log($"Clone State : {State}");
         Debug.Log($"Clone position : {position}");

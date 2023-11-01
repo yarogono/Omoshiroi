@@ -70,7 +70,7 @@ public class t_PlayerController : MonoBehaviour
         }
     }
 
-    public TextMeshPro Text;
+    public TextMeshPro checkIdTest;
 
     void Start()
     {
@@ -80,7 +80,5 @@ public class t_PlayerController : MonoBehaviour
     protected virtual void Init()
     {
         transform.position = Vector3.zero;
-
-        Text.text = "ID" + Id;
     }
 }
