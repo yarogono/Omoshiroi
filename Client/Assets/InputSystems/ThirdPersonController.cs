@@ -28,8 +28,8 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
             ""id"": ""3cad0c7a-c95f-4f13-9588-f5aaf7729ddf"",
             ""actions"": [
                 {
-                    ""name"": ""Touch"",
-                    ""type"": ""Value"",
+                    ""name"": ""HoldTouch"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""32b20964-3d5b-4e4a-a5f5-1c23c9b1710d"",
                     ""expectedControlType"": ""Touch"",
                     ""processors"": """",
@@ -37,18 +37,163 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""CancelTouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""263862a3-0b7c-4ec7-a3f6-b24ad4846267"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TapTouch"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b7f632e4-0b9c-4965-b0df-234a7f96c5b6"",
+                    ""expectedControlType"": ""Touch"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""12cf45b4-50c7-4dda-ac86-22e50fafd3ae"",
+                    ""path"": ""<Touchscreen>/touch0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""HoldTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""376630e4-e0b5-4b43-8b19-2db7af6f83d4"",
+                    ""path"": ""<Touchscreen>/touch1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""HoldTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edf6361a-85b6-4a18-a4b6-fd8686c091bb"",
+                    ""path"": ""*/{Back}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""CancelTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91372eb2-1fcf-4f6c-b340-bfc7460c66a7"",
+                    ""path"": ""*/{Cancel}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""CancelTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4113c09d-ba55-49f4-8369-0bd8208af95f"",
+                    ""path"": ""<Touchscreen>/touch2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""HoldTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59324a93-4952-42fd-b194-c60e41b2cffa"",
+                    ""path"": ""<Touchscreen>/touch3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""HoldTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9c12fe6-c249-4a78-8557-a274ef393475"",
+                    ""path"": ""<Touchscreen>/touch0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""TapTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f14097b5-e136-4719-b99a-bcbccf6eb7d3"",
+                    ""path"": ""<Touchscreen>/touch1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""TapTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e727349-8976-4dd4-a55c-b337191d8450"",
+                    ""path"": ""<Touchscreen>/touch2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""TapTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e36e307a-41ad-46fc-aed6-0ead9a50ef10"",
+                    ""path"": ""<Touchscreen>/touch3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""TapTouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Test"",
+            ""id"": ""1ecabac7-fe69-4ff5-a664-f58c62eadfe8"",
+            ""actions"": [
+                {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""c7f1639b-76fd-40d4-bf0a-43105b03010d"",
+                    ""id"": ""5d8b87e1-c016-479e-9f14-af5a57ef3a93"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""AimFire"",
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""44a6a43b-ff49-41d9-8efe-300143afc679"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
                     ""type"": ""Button"",
-                    ""id"": ""04e5db8a-037f-4814-ba20-ba0bbc11b5fe"",
+                    ""id"": ""0114cb3d-7e55-4cab-84fa-250bd24b4005"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -57,19 +202,8 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""12cf45b4-50c7-4dda-ac86-22e50fafd3ae"",
-                    ""path"": ""<Touchscreen>"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PointerControl"",
-                    ""action"": ""Touch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""2D Vector"",
-                    ""id"": ""54d5e776-5ce4-402a-9b68-8d169f8b177b"",
+                    ""id"": ""fb91a612-5017-4017-8a57-071f277eb989"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -80,7 +214,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""d59137d5-7bfb-47a7-bab0-ffe103a08496"",
+                    ""id"": ""fa7b4626-daba-43c5-95a3-02339d1e46af"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -91,7 +225,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""d1df7c3b-f9e9-4202-826b-b85b6c83daef"",
+                    ""id"": ""c193f537-bf41-4147-9d64-6adfd6fc0c60"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -102,7 +236,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""6a8e3b5a-3ce7-46f1-ae5c-f2481ebd39b6"",
+                    ""id"": ""df8fcc04-62f2-44b2-9ead-5914de3c75fe"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -113,7 +247,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""4f8c519b-e30d-4347-ae8d-145dc1598120"",
+                    ""id"": ""67b2be1c-bef3-4a22-90ae-7b7e311bb143"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -124,12 +258,23 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": """",
-                    ""id"": ""abf0d028-9313-45b7-8972-764027d818d0"",
+                    ""id"": ""4ce61d0d-8d80-4cb6-8cac-6eab40d6909a"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""779fac83-c4bc-47c3-a305-fa3ca368d82c"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PointerControl"",
-                    ""action"": ""AimFire"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -152,9 +297,14 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Touch = m_Player.FindAction("Touch", throwIfNotFound: true);
-        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_AimFire = m_Player.FindAction("AimFire", throwIfNotFound: true);
+        m_Player_HoldTouch = m_Player.FindAction("HoldTouch", throwIfNotFound: true);
+        m_Player_CancelTouch = m_Player.FindAction("CancelTouch", throwIfNotFound: true);
+        m_Player_TapTouch = m_Player.FindAction("TapTouch", throwIfNotFound: true);
+        // Test
+        m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
+        m_Test_Move = m_Test.FindAction("Move", throwIfNotFound: true);
+        m_Test_Aim = m_Test.FindAction("Aim", throwIfNotFound: true);
+        m_Test_Fire = m_Test.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,16 +366,16 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Touch;
-    private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_AimFire;
+    private readonly InputAction m_Player_HoldTouch;
+    private readonly InputAction m_Player_CancelTouch;
+    private readonly InputAction m_Player_TapTouch;
     public struct PlayerActions
     {
         private @ThirdPersonController m_Wrapper;
         public PlayerActions(@ThirdPersonController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Touch => m_Wrapper.m_Player_Touch;
-        public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @AimFire => m_Wrapper.m_Player_AimFire;
+        public InputAction @HoldTouch => m_Wrapper.m_Player_HoldTouch;
+        public InputAction @CancelTouch => m_Wrapper.m_Player_CancelTouch;
+        public InputAction @TapTouch => m_Wrapper.m_Player_TapTouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -235,28 +385,28 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Touch.started += instance.OnTouch;
-            @Touch.performed += instance.OnTouch;
-            @Touch.canceled += instance.OnTouch;
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
-            @AimFire.started += instance.OnAimFire;
-            @AimFire.performed += instance.OnAimFire;
-            @AimFire.canceled += instance.OnAimFire;
+            @HoldTouch.started += instance.OnHoldTouch;
+            @HoldTouch.performed += instance.OnHoldTouch;
+            @HoldTouch.canceled += instance.OnHoldTouch;
+            @CancelTouch.started += instance.OnCancelTouch;
+            @CancelTouch.performed += instance.OnCancelTouch;
+            @CancelTouch.canceled += instance.OnCancelTouch;
+            @TapTouch.started += instance.OnTapTouch;
+            @TapTouch.performed += instance.OnTapTouch;
+            @TapTouch.canceled += instance.OnTapTouch;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Touch.started -= instance.OnTouch;
-            @Touch.performed -= instance.OnTouch;
-            @Touch.canceled -= instance.OnTouch;
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
-            @AimFire.started -= instance.OnAimFire;
-            @AimFire.performed -= instance.OnAimFire;
-            @AimFire.canceled -= instance.OnAimFire;
+            @HoldTouch.started -= instance.OnHoldTouch;
+            @HoldTouch.performed -= instance.OnHoldTouch;
+            @HoldTouch.canceled -= instance.OnHoldTouch;
+            @CancelTouch.started -= instance.OnCancelTouch;
+            @CancelTouch.performed -= instance.OnCancelTouch;
+            @CancelTouch.canceled -= instance.OnCancelTouch;
+            @TapTouch.started -= instance.OnTapTouch;
+            @TapTouch.performed -= instance.OnTapTouch;
+            @TapTouch.canceled -= instance.OnTapTouch;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -274,6 +424,68 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Test
+    private readonly InputActionMap m_Test;
+    private List<ITestActions> m_TestActionsCallbackInterfaces = new List<ITestActions>();
+    private readonly InputAction m_Test_Move;
+    private readonly InputAction m_Test_Aim;
+    private readonly InputAction m_Test_Fire;
+    public struct TestActions
+    {
+        private @ThirdPersonController m_Wrapper;
+        public TestActions(@ThirdPersonController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Test_Move;
+        public InputAction @Aim => m_Wrapper.m_Test_Aim;
+        public InputAction @Fire => m_Wrapper.m_Test_Fire;
+        public InputActionMap Get() { return m_Wrapper.m_Test; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
+        public void AddCallbacks(ITestActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TestActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TestActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
+        }
+
+        private void UnregisterCallbacks(ITestActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
+        }
+
+        public void RemoveCallbacks(ITestActions instance)
+        {
+            if (m_Wrapper.m_TestActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITestActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TestActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TestActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TestActions @Test => new TestActions(this);
     private int m_PointerControlSchemeIndex = -1;
     public InputControlScheme PointerControlScheme
     {
@@ -285,8 +497,14 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
     }
     public interface IPlayerActions
     {
-        void OnTouch(InputAction.CallbackContext context);
+        void OnHoldTouch(InputAction.CallbackContext context);
+        void OnCancelTouch(InputAction.CallbackContext context);
+        void OnTapTouch(InputAction.CallbackContext context);
+    }
+    public interface ITestActions
+    {
         void OnMove(InputAction.CallbackContext context);
-        void OnAimFire(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

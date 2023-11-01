@@ -34,3 +34,11 @@ public enum eItemType
     Consumable,
     Skin,
 }
+
+public enum eTouchAreaType
+{
+    None,
+    Move,
+    AimFire,
+    DodgeRun,
+}
