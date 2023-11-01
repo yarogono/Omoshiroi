@@ -12,21 +12,12 @@ public class CharacterDataContainer : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void SetCharcterStats(CharacterStats cs)
-    {
-        stats.AttackSpeed += cs.AttackSpeed;
-        stats.AttackPoint += cs.AttackPoint;
-        stats.CriticalRate += cs.CriticalRate;
-        stats.CriticalPower += cs.CriticalPower;
-        stats.BaseHP += cs.BaseHP;
-        stats.BaseDEF += cs.BaseDEF;
     }
 }
