@@ -16,19 +16,25 @@ public class UIInventoryPage : UIBase
     private UIInventoryDiscription itemDescription;
 
     [SerializeField]
-    private MouseFollower mouseFollwer;
+    private MouseFollower mouseFollower;
 
-    List<UIInventoryItem> listOfUIitems = new List<UIInventoryItem>();
+    List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
 
-    public Sprite image;
-    public int quantity;
-    public string title;
-    public string description;
+    private int currentlyDraggedItemIndex = -1; // 드래그해서 놓을때  어떤 인덱스와 바꿔줘야할지 알기위해  하나의 개인변수에 저장 
+
+
+    public event Action<int> OnDescriptionRequested,
+            OnItemActionRequested,
+            OnStartDragging;
+
+    public event Action<int, int> OnSwapItems; // 두아이템 스왑 
+
+
 
     private void Awake()
     {
         Hide();
-        mouseFollwer.Toggle(false);
+        mouseFollower.Toggle(false);
         itemDescription.ResetDescription();
     }
     public void InitializeinventoryUI(int inventorysize)
@@ -39,7 +45,7 @@ public class UIInventoryPage : UIBase
            
             UIInventoryItem uiItem = Instantiate(itemPrefab,Vector3.zero,Quaternion.identity);      
             uiItem.transform.SetParent(contentPanel);
-            listOfUIitems.Add(uiItem);
+            listOfUIItems.Add(uiItem);
             uiItem.OnItemClicked += HandleItemSelection;
             uiItem.OnItemBeginDrag += HandleBeginDrag;
             uiItem.OnItemDroppedOn += HandleSwap;
@@ -48,43 +54,95 @@ public class UIInventoryPage : UIBase
         }
     }
 
-    private void HandleShowItemActions(UIInventoryItem obj)
+    public void UpdateData(int itemIndex,Sprite itemImage, int itemQuantity)
+    {
+        if (listOfUIItems.Count > itemIndex)
+        {
+            listOfUIItems[itemIndex].SetData(itemImage, itemQuantity);
+        }
+    }
+
+    private void HandleShowItemActions(UIInventoryItem inventoryItemUI)
     {
      
     }
 
-    private void HandleEndDrag(UIInventoryItem obj)
+    private void HandleEndDrag(UIInventoryItem inventoryItemUI)
     {
-        mouseFollwer.Toggle(false);
+        ResetDraggtedItem();
     }
 
-    private void HandleSwap(UIInventoryItem obj)
+    private void HandleSwap(UIInventoryItem inventoryItemUI)
     {
-       
+        int index = listOfUIItems.IndexOf(inventoryItemUI);
+        if (index == -1)
+        {
+            ResetDraggtedItem();
+            return;
+        }
+        OnSwapItems?.Invoke(currentlyDraggedItemIndex, index);
+
     }
 
-    private void HandleBeginDrag(UIInventoryItem obj)
+    private void ResetDraggtedItem()
     {
-        mouseFollwer.Toggle(true);
-        mouseFollwer.SetData(image, quantity);
+        mouseFollower.Toggle(false);
+        currentlyDraggedItemIndex = -1;
     }
 
-    private void HandleItemSelection(UIInventoryItem obj)
+    private void HandleBeginDrag(UIInventoryItem inventoryItemUI)
     {
-        itemDescription.SetDescription(image, title, description);
-        listOfUIitems[0].Select();
+        int index = listOfUIItems.IndexOf(inventoryItemUI);
+        if (index == -1)
+        {
+            return;
+        }
+        currentlyDraggedItemIndex = index;
+        HandleItemSelection(inventoryItemUI);
+        OnStartDragging?.Invoke(index);
+           
+        
+    }
+    public void CreateDraggedItem(Sprite sprite, int quantity)//  mouseFollower 호출
+    {
+        mouseFollower.Toggle(true);
+        mouseFollower.SetData(sprite, quantity);
+    }
+    private void HandleItemSelection(UIInventoryItem inventoryItemUI)
+    {
+        int index = listOfUIItems.IndexOf(inventoryItemUI);
+        if (index == -1)
+            return;
+        OnDescriptionRequested?.Invoke(index);
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
         itemDescription.ResetDescription();
-
-        listOfUIitems[0].SetData(image, quantity);
+        ResetSelection();
     }
+    public void ResetSelection()
+    {
+        itemDescription.ResetDescription();
+        DeselectAllItems();
+    }
+
+
+    private void DeselectAllItems()
+    {
+        foreach (UIInventoryItem item in listOfUIItems)
+        {
+            item.Deselect();
+        }
+
+    }
+
+
     public void Hide()
     {
         gameObject.SetActive(false);
-        listOfUIitems[0].Deselect();
+        listOfUIItems[0].Deselect();
+        listOfUIItems[1].Deselect();
     }
 }
