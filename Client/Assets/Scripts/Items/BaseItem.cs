@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseItem : ScriptableObject
 {
-    [Header("BaseData")]
+    [Header("BaseItemData")]
+    [SerializeField] private Sprite itemIcon;
+    [SerializeField] private GameObject objectPrefab;
     [SerializeField] private int itemID;
     [SerializeField] private string itemName;
     [SerializeField] private string description;
