@@ -42,7 +42,13 @@ public class PacketHandler
         if (playerController == null)
             return;
 
+        Debug.Log(
+            $"{movePacket.ObjectId} => x: {movePacket.PosInfo.PosX} y: {movePacket.PosInfo.PosY} state : {movePacket.PosInfo.State}"
+        );
         playerController.PosInfo = movePacket.PosInfo;
+        Debug.Log(
+            $"{playerController.Id} => x: {playerController.PosInfo.PosX} y: {playerController.PosInfo.PosY} state: {playerController.PosInfo.State}"
+        );
     }
 
     public static void S_ChangeHpHandler(PacketSession session, IMessage packet) { }

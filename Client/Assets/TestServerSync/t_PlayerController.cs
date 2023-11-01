@@ -1,6 +1,7 @@
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class t_PlayerController : MonoBehaviour
@@ -69,6 +70,8 @@ public class t_PlayerController : MonoBehaviour
         }
     }
 
+    public TextMeshPro Text;
+
     void Start()
     {
         Init();
@@ -77,5 +80,7 @@ public class t_PlayerController : MonoBehaviour
     protected virtual void Init()
     {
         transform.position = Vector3.zero;
+
+        Text.text = "ID" + Id;
     }
 }

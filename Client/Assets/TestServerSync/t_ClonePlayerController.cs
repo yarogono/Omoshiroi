@@ -17,7 +17,7 @@ public class t_ClonePlayerController : t_PlayerController
         switch (State)
         {
             case CreatureState.Moving:
-                UpdateMoving();
+                SyncPos();
                 break;
             // case CreatureState.Skill:
             //     UpdateSkill();

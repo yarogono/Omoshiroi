@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using UnityEngine;
 
 namespace ServerCore
 {
@@ -49,7 +50,7 @@ namespace ServerCore
             }
             else
             {
-                //Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
+                Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
             }
         }
     }
