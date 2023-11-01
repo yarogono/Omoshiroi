@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class CharacterDataContainer : MonoBehaviour
 {
-    [SerializeField] private Inventory inven;
-    [SerializeField] private CharacterStats stats;
-    [SerializeField] private EquipSystem equipments;
+    [SerializeField] public Inventory Inven { get;}
+    [SerializeField] public CharacterStats Stats { get;}
+    [SerializeField] public EquipSystem Equipments { get; private set; }
 
-    public Inventory Inven { get; set; }
-    public CharacterStats Stats { get; set; }
-    public EquipSystem Equipments { get; set; }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
