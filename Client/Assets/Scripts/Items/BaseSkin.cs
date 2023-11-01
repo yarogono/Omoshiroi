@@ -7,11 +7,9 @@ public class BaseSkin : BaseItem, IEquippable
 {
     public void Equip(CharacterDataContainer cdc)
     {
-        cdc.Equipments.Skin = this;
     }
 
     public void Dequip(CharacterDataContainer cdc)
     {
-        cdc.Equipments.Skin = null;
     }
 }
