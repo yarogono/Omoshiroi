@@ -40,11 +40,14 @@ public class EquipSystem
     /// <summary>
     /// 장착한 장비 아이템을 제거한다. 캐릭터 사망 시 사용될 것 같음.
     /// </summary>
-    public void DestroyItem()
+    public void RemoveEquipments()
     {
         //캐릭터 사망 시 시체 인벤토리에 들어갈 장비류를 처리하는 내용
 
-        //장착한 장비 아이템 제거
-        equippedItems.Clear();
+        //장착한 장비 아이템 모두 제거
+        while(equippedItems.Count <= 0)
+        {
+            Dequip(equippedItems[0]);
+        }
     }
 }
