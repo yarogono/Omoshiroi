@@ -71,7 +71,7 @@ public class UIInventoryItem : MonoBehaviour ,IPointerUpHandler, IPointerDownHan
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+      
     }
 
     public void OnPointerUp(PointerEventData eventData)

@@ -23,9 +23,7 @@ public class UIInventoryPage : UIBase
     private int currentlyDraggedItemIndex = -1; // 드래그해서 놓을때  어떤 인덱스와 바꿔줘야할지 알기위해  하나의 개인변수에 저장 
 
 
-    public event Action<int> OnDescriptionRequested,
-            OnItemActionRequested,
-            OnStartDragging;
+    public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
 
     public event Action<int, int> OnSwapItems; // 두아이템 스왑 
 
@@ -82,6 +80,13 @@ public class UIInventoryPage : UIBase
         }
         OnSwapItems?.Invoke(currentlyDraggedItemIndex, index);
 
+    }
+
+    internal void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
+    {
+        itemDescription.SetDescription(itemImage,name,description);
+        DeselectAllItems();
+        listOfUIItems[itemIndex].Select();
     }
 
     private void ResetDraggtedItem()
@@ -142,7 +147,6 @@ public class UIInventoryPage : UIBase
     public void Hide()
     {
         gameObject.SetActive(false);
-        listOfUIItems[0].Deselect();
-        listOfUIItems[1].Deselect();
+
     }
 }
