@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 847294723}
   - component: {fileID: 847294722}
   m_Layer: 0
-  m_Name: InvenToryController
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 4418948433236451501}
-  inventorySize: 10
+  inventoryData: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
   BtnInventory: {fileID: 1805003509}
   BtnCancel: {fileID: 775397407619416167}
 --- !u!135 &847294723
@@ -2221,11 +2221,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 1226340929728962863, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
   contentPanel: {fileID: 4891553396675361860}
   itemDescription: {fileID: 2045356824569459272}
-  mouseFollwer: {fileID: 3079022767787360022}
-  image: {fileID: 616442665, guid: b216e219fe97ed9479e9b76889837dfc, type: 3}
-  quantity: 1
-  title: Bag
-  description: dddd
+  mouseFollower: {fileID: 3079022767787360022}
 --- !u!114 &4440279499137035158
 MonoBehaviour:
   m_ObjectHideFlags: 0

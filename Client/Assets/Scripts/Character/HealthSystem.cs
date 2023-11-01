@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+
     [SerializeField] private CharacterStats stats;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,5 +36,6 @@ public class HealthSystem : MonoBehaviour
         {
             //최대 체력을 초과한 치유 시 처리 부분
         }
+
     }
 }

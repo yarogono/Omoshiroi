@@ -6,6 +6,7 @@ public class CharacterStats : MonoBehaviour
 {
     [SerializeField] CharacterBaseStats cbs;
 
+
     public int maxHp;
     public int hp;
     public int def;
@@ -24,4 +25,5 @@ public class CharacterStats : MonoBehaviour
         critRate = cbs.BaseCriticalRate;
         critPower = cbs.BaseCriticalPower;
     }
+
 }
