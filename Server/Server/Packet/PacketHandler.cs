@@ -24,7 +24,7 @@ class PacketHandler
         Console.WriteLine($"{packetPlayer.Name} plyer");
         player = ObjectManager.Instance.Add<Player>();
         {
-            player.Info.Name = packetPlayer.Name;
+            player.Info.Name = $"Player_{player.Id}";
             player.Info.PosInfo.State = CreatureState.Idle;
             player.Info.PosInfo.MoveDir = MoveDir.Down;
             player.Info.PosInfo.PosX = packetPlayer.PosInfo.PosX;
@@ -47,7 +47,7 @@ class PacketHandler
         C_Move movePacket = packet as C_Move;
         ClientSession clientSession = session as ClientSession;
 
-        //Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
+        Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
 
         Player player = clientSession.MyPlayer;
         if (player == null)

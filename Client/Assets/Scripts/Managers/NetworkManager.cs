@@ -21,7 +21,6 @@ public class NetworkManager : CustomSingleton<NetworkManager>
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
         IPAddress ipAddr = IPAddress.Parse("127.0.0.1");
-
         IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
         Connector connector = new Connector();
@@ -40,7 +39,7 @@ public class NetworkManager : CustomSingleton<NetworkManager>
         enterGamePacket.Player.PosInfo = new PositionInfo() { PosX = 0, PosY = 0 };
         enterGamePacket.Player.StatInfo = null;
 
-        NetworkManager.Instance.Send(enterGamePacket);
+        Send(enterGamePacket);
     }
 
     void Update()
