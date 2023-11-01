@@ -13,11 +13,9 @@ public class BaseRune : BaseItem, IDroppable, IEquippable
 
     public void Equip(CharacterDataContainer cdc)
     {
-        cdc.Equipments.Rune = this;
     }
 
     public void Dequip(CharacterDataContainer cdc)
     {
-        cdc.Equipments.Rune = null;
     }
 }

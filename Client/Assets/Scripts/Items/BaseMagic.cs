@@ -12,12 +12,10 @@ public class BaseMagic : BaseItem, IEquippable
 
     public void Equip(CharacterDataContainer cdc)
     {
-        cdc.Equipments.Magic = this;
     }
 
     public void Dequip(CharacterDataContainer cdc)
     {
-        cdc.Equipments.Magic = null;
     }
 
     public GameObject MagicObject { get { return magicObject; } }
