@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStats : ScriptableObject
+public class CharacterStats : MonoBehaviour
 {
-    [Header("Character's Stat")]
-    [SerializeField] private int baseHP;
-    [SerializeField] private int baseDEF;
-    [SerializeField] private float attackSpeed;
-    [SerializeField] private int attackPoint;
-    [SerializeField] private int criticalRate;
-    [SerializeField] private float criticalPower;
+    [SerializeField] CharacterBaseStats cbs;
 
 
-    public int BaseHP { get { return baseHP; } }
-    public int BaseDEF { get { return baseDEF; } }
-    public float AttackSpeed { get { return attackSpeed; } }
-    public int AttackPoint { get { return attackPoint; } }
-    public int CriticalRate { get { return criticalRate; } }
-    public float CriticalPower { get { return criticalPower; } }
+    public int maxHp;
+    public int hp;
+    public int def;
+    public float atkSpeed;
+    public int atkPower;
+    public int critRate;
+    public float critPower;
+
+    // Start is called before the first frame update
+    private void Start()
+    {
+        maxHp = cbs.BaseHP; hp = maxHp;
+        def = cbs.BaseDEF;
+        atkSpeed = cbs.BaseAttackSpeed;
+        atkPower = cbs.BaseAttackPower;
+        critRate = cbs.BaseCriticalRate;
+        critPower = cbs.BaseCriticalPower;
+    }
+
 }
