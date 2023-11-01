@@ -8,9 +8,9 @@ public class CharacterDataContainer : MonoBehaviour
     [SerializeField] private CharacterStats stats;
     [SerializeField] private EquipSystem equipments;
 
-    public Inventory Inven { get; set; }
-    public CharacterStats Stats { get; set; }
-    public EquipSystem Equipments { get; set; }
+    public Inventory Inven { get; }
+    public CharacterStats Stats { get; }
+    public EquipSystem Equipments { get; }
 
     // Start is called before the first frame update
     void Start()
@@ -22,15 +22,5 @@ public class CharacterDataContainer : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void SetCharcterStats(CharacterStats cs)
-    {
-        stats.AttackSpeed += cs.AttackSpeed;
-        stats.AttackPoint += cs.AttackPoint;
-        stats.CriticalRate += cs.CriticalRate;
-        stats.CriticalPower += cs.CriticalPower;
-        stats.BaseHP += cs.BaseHP;
-        stats.BaseDEF += cs.BaseDEF;
     }
 }
