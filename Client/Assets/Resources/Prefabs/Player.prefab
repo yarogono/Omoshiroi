@@ -129,7 +129,7 @@ Transform:
   m_Children:
   - {fileID: 2715773736815614352}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6840468212488612352
 MeshFilter:
@@ -259,6 +259,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c11da280e41887499db788e00d085b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _TouchArea:
+  - AreaType: 1
+    CenterPoint: {x: 200, y: 200}
+    Radius: 150
+  - AreaType: 2
+    CenterPoint: {x: 1620, y: 200}
+    Radius: 150
+  - AreaType: 3
+    CenterPoint: {x: 1720, y: 400}
+    Radius: 100
+  _aimThresholdTime: 0.4
+  _dodgeThresholdTime: 0.2
+  MoveTestTxt: {fileID: 0}
+  AimTestTxt: {fileID: 0}
+  DodgeTestTxt: {fileID: 0}
 --- !u!114 &884507993187292007
 MonoBehaviour:
   m_ObjectHideFlags: 0

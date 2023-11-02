@@ -28,6 +28,10 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
     [Header("컨트롤 범위 설정")]
     [SerializeField] private List<TouchAreaData> _TouchArea;
+    [Header("수동 조준 공격을 위한 최저 누름 시간")]
+    [SerializeField] private float _aimThresholdTime;
+    [Header("회피를 위한 최대 누름 시간")]
+    [SerializeField] private float _dodgeThresholdTime;
 
     [SerializeField] private TMP_Text MoveTestTxt;
     [SerializeField] private TMP_Text AimTestTxt;
@@ -55,10 +59,12 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         PlayerActions = InputActions.Player;
         PlayerActions.AddCallbacks(this);
 #endif
-#if DEVELOPMENT_BUILD
-        OnMoveEvent += (t) => { MoveTestTxt.text = $"{t}"; };
-        OnAimEvent += (t) => { AimTestTxt.text = $"{t}"; };
-        OnDodgeEvent += (t) => { DodgeTestTxt.text = $"{t}"; };
+#if DEVELOPMENT_BUILD || UNITY_EDITOR
+        OnMoveEvent += (t) => { MoveTestTxt.text = $"Move\n{t}"; };
+        OnAimEvent += (t) => { AimTestTxt.text = $"Aim\n{t}"; };
+        OnAttackEvent += (t) => { AimTestTxt.text = $"Attack\n{t}"; };
+        OnDodgeEvent += () => { DodgeTestTxt.text = $"Dodge\nCalled"; };
+        OnRunEvent += (t) => { DodgeTestTxt.text = $"Run\n{t}"; };
 #endif
         OnMoveEvent += (t) => { MoveCharacter(t); };
     }
@@ -89,10 +95,14 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         }
     }
 
-    public void OnHoldTouch(InputAction.CallbackContext context)
+    public void OnMainTouch(InputAction.CallbackContext context)
     {
         var touch = context.ReadValue<TouchState>();
+        TouchToAction(touch);
+    }
 
+    private void TouchToAction(TouchState touch)
+    {
         if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
         {
             // 터치 영역을 확인
@@ -101,6 +111,7 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
             if (!CheckAreaOccupied(area))
             {
                 ConnectToAreaAction(area, touch);
+                CallConnectAction(touch.touchId, touch);
             }
         }
         else if (touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
@@ -142,10 +153,10 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
                 action = MoveAction;
                 break;
             case eTouchAreaType.AimFire:
-                action = AimEvent;
+                action = AimFireAction;
                 break;
             case eTouchAreaType.DodgeRun:
-                action = DodgeRunEvent;
+                action = DodgeRunAction;
                 break;
             default:
                 action = null;
@@ -162,24 +173,49 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
             CallMoveEvent(touch.position - touch.startPosition);
     }
 
-    private void AimEvent(TouchState touch)
+    private void AimFireAction(TouchState touch)
     {
-        CallAimEvent(touch.position - touch.startPosition);
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began || touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
+            CallAimEvent(touch.position - touch.startPosition);
+        else if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+        {
+            if (Time.realtimeSinceStartup - touch.startTime > _aimThresholdTime)
+                CallAttackEvent(touch.position - touch.startPosition);
+            else
+                CallAttackEvent(AutoTargeting());
+        }
     }
 
-    private void DodgeRunEvent(TouchState touch)
+    private Vector3 AutoTargeting()
     {
-        CallDodgeEvent(touch.position - touch.startPosition);
+        Vector3 target = Vector3.zero;
+
+        // 가장 가까운 적의 위치를 가지고 온다.
+
+        return target;
+    }
+
+    private void DodgeRunAction(TouchState touch)
+    {
+        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
+        {
+            CallRunEvent(false);
+            if (Time.realtimeSinceStartup - touch.startTime < _dodgeThresholdTime)
+            {
+                var area = _TouchArea.Find((x) => x.AreaType == eTouchAreaType.DodgeRun);
+                if ((touch.position - area.CenterPoint).magnitude < area.Radius)
+                    CallDodgeEvent();
+            }
+        }
+        else
+        {
+            CallRunEvent(true);
+        }
     }
 
     private bool CheckAreaOccupied(eTouchAreaType area)
     {
         return _touchAreaOccupied[(int)area];
-    }
-
-    public void OnTapTouch(InputAction.CallbackContext context)
-    {
-
     }
 
     private eTouchAreaType CheckTouchArea(Vector2 position)
@@ -196,7 +232,7 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         return touchArea;
     }
 
-    private void CheckTouchID(int id)
+    public void OnTapTouch(InputAction.CallbackContext context)
     {
 
     }
@@ -238,4 +274,6 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
         _movement.ControlMove(forward * direction.y + right * direction.x);
     }
+
+    
 }
