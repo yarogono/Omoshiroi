@@ -11,7 +11,7 @@ public class InventorySO : ScriptableObject
 {
     [SerializeField]
     private List<InventoryItem> inventoryItems;
-
+    BaseItem item;
     [field: SerializeField]
     public int Size { get; private set; } = 10;
 
@@ -27,8 +27,26 @@ public class InventorySO : ScriptableObject
     }
 
 
-    private void AddItem(ItemSO item, int quantity)
+    private void AddItem(BaseWeapon item, int quantity)
     {
+        if (item is IStackable stackableItem == false )
+        {
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {
+                if (inventoryItems[i].IsEmpty)
+                {
+                    inventoryItems[i] = new InventoryItem
+                    {
+                        item = item,
+                        quantity = quantity
+                    };
+                    return;
+                }
+            }
+        }
+        quantity = AddStackableItem(item, quantity);
+            
+
         for (int i = 0; i < inventoryItems.Count; i++)
         {
             if (inventoryItems[i].IsEmpty)
@@ -38,9 +56,15 @@ public class InventorySO : ScriptableObject
                     item = item,
                     quantity = quantity
                 };
+                return;
             }       
         }
      
+    }
+
+    private int AddStackableItem(BaseWeapon item, int quantity)
+    {
+        throw new NotImplementedException();
     }
 
     public Dictionary<int, InventoryItem> GetCurrentInventoryState()
@@ -62,13 +86,31 @@ public class InventorySO : ScriptableObject
     {
         return inventoryItems[itemIndex];
     }
+
+   public void AddItem(InventoryItem item)
+    {
+        AddItem(item.item, item.quantity);
+    }
+
+    public void SwapItems(int itemIndex_1, int itemIndex_2)
+    {
+        InventoryItem item1 = inventoryItems[itemIndex_1];
+        inventoryItems[itemIndex_1] = inventoryItems[itemIndex_2];
+        inventoryItems[itemIndex_2] = item1;
+        InformAboutChange();
+    }
+
+    private void InformAboutChange() // 현재 가저온 인벤토리에이터  인벤토리컨트롤러에 전달 
+    {
+        OnInventoryUpdated?.Invoke(GetCurrentInventoryState());
+    }
 }
 
 [Serializable]
 public struct InventoryItem
 {
     public int quantity;
-    public ItemSO item;
+    public BaseWeapon item;
 
     public bool IsEmpty => item == null;
 
