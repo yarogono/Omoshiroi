@@ -39,4 +39,9 @@ public class CharacterStats : MonoBehaviour
         MoveSpeed = moveSpeed;
         RunMultipiler = runMulipiler;
     }
+
+    public void SetHP(int hp)
+    {
+        Hp = hp;
+    }
 }
