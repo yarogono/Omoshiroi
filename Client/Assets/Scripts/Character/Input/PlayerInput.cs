@@ -80,15 +80,6 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         PlayerActions = InputActions.Player;
         PlayerActions.AddCallbacks(this);
 #endif
-        //#if DEVELOPMENT_BUILD || UNITY_EDITOR
-        //        OnMoveEvent += (t) => { MoveTestTxt.text = $"Move\n{t}"; };
-        //        OnAimEvent += (t) => { AimTestTxt.text = $"Aim\n{t}"; };
-        //        OnAttackEvent += (t) => { AimTestTxt.text = $"Attack\n{t}"; };
-        //        OnDodgeEvent += () => { DodgeTestTxt.text = $"Dodge\nCalled"; };
-        //        OnRunEvent += (t) => { DodgeTestTxt.text = $"Run\n{t}"; };
-        //#endif
-        // 테스트용으로 추후에 제거하여 FSM으로 옮길 예정.
-        OnMoveEvent += (t) => { MoveCharacter(t); };
     }
 
     private void Reset()
@@ -287,20 +278,4 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
             CallMoveEvent(Vector3.zero);
         }
     }
-
-    private void MoveCharacter(Vector2 direction)
-    {
-        Vector3 forward = Camera.main.transform.forward;
-        forward.y = 0;
-        forward.Normalize();
-        Vector3 right = Camera.main.transform.right;
-        right.y = 0;
-        right.Normalize();
-
-        direction.Normalize();
-
-        _movement.ControlMove(forward * direction.y + right * direction.x);
-    }
-
-    
 }
