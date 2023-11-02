@@ -75,3 +75,8 @@ crashlytics-build.properties
 /lfs
 /hooks
 .vsconfig
+
+
+# Config
+/assets/Resources/Config
+/assets/Resources/Config.meta

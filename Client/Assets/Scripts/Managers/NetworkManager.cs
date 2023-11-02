@@ -20,9 +20,8 @@ public class NetworkManager : CustomSingleton<NetworkManager>
         // DNS (Domain Name System)
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
-        IPAddress ipAddr = IPAddress.Parse("127.0.0.1");
-        // IPAddress ipAddr = IPAddress.Parse("116.43.139.10");
-        IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+        IPAddress ipAddr = IPAddress.Parse(ConfigManager.Config.gameServerIpAddr);
+        IPEndPoint endPoint = new IPEndPoint(ipAddr, ConfigManager.Config.gameServerPort);
 
         Connector connector = new Connector();
 
