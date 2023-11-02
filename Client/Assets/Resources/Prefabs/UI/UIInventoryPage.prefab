@@ -2309,10 +2309,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 1226340929728962863, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
   contentPanel: {fileID: 4891553396175741024}
   itemDescription: {fileID: 2045356822922767980}
-  image: {fileID: 616442665, guid: b216e219fe97ed9479e9b76889837dfc, type: 3}
-  quantity: 1
-  title: Bag
-  description: dddd
+  mouseFollower: {fileID: 0}
 --- !u!1 &8882292428921094514
 GameObject:
   m_ObjectHideFlags: 0

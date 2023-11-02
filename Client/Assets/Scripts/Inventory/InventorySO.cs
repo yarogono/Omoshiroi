@@ -27,7 +27,7 @@ public class InventorySO : ScriptableObject
     }
 
 
-    private int AddItem(BaseWeapon item, int quantity)
+    public int AddItem(BaseItem item, int quantity)
     {
         if (item.IsStackable == false)
         {
@@ -48,7 +48,7 @@ public class InventorySO : ScriptableObject
         return quantity;                
     }
 
-    private int AddItemToFirstFreeSlot(BaseWeapon item, int quantity)
+    private int AddItemToFirstFreeSlot( BaseItem item, int quantity)
 
     {
         InventoryItem newItem = new InventoryItem
@@ -70,7 +70,7 @@ public class InventorySO : ScriptableObject
 
     private bool IsInventoryFull() => inventoryItems.Where(item => item.IsEmpty).Any() == false;
 
-    private int AddStackableItem(BaseWeapon item, int quantity)
+    private int AddStackableItem(BaseItem item, int quantity)
     {
         for (int i = 0; i < inventoryItems.Count; i++)
         {
@@ -148,7 +148,7 @@ public class InventorySO : ScriptableObject
 public struct InventoryItem
 {
     public int quantity;
-    public BaseWeapon item;
+    public BaseItem item;
 
     public bool IsEmpty => item == null;
 

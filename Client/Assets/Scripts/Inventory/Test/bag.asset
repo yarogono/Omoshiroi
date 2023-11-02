@@ -18,9 +18,11 @@ MonoBehaviour:
   itemName: Bag
   description: BAGBAG
   itemType: 0
+  maxStack: 50
+  isStackable: 1
   weaponHP: 0
   weaponDEF: 0
   weaponAS: 0
   weaponAP: 0
   weaponCR: 0
-  weaponCP: 0
+  weaponCP: -0.03
