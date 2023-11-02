@@ -16,7 +16,6 @@ public class BaseWeapon : BaseItem, IEquippable, IDroppable
 
     public void Equip(CharacterDataContainer cdc)
     {
-
         cdc.Stats.maxHp += weaponHP; cdc.Stats.hp += weaponHP;
         cdc.Stats.def += weaponDEF; cdc.Stats.atkSpeed += weaponAS;
         cdc.Stats.atkPower += weaponAP; cdc.Stats.critRate += weaponCR;
