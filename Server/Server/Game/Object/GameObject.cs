@@ -1,8 +1,5 @@
 ﻿using Google.Protobuf.Protocol;
 using Server.Game.Room;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Server.Game.Object
 {
@@ -51,65 +48,6 @@ namespace Server.Game.Object
             Info.StatInfo = Stat;
         }
 
-        public virtual void Update()
-        {
-
-        }
-
-        public Vector2Int CellPos
-        {
-            get
-            {
-                return new Vector2Int(PosInfo.PosX, PosInfo.PosY);
-            }
-
-            set
-            {
-                PosInfo.PosX = value.x;
-                PosInfo.PosY = value.y;
-            }
-        }
-
-        public Vector2Int  GetFrontCellPos()
-        {
-            return GetFrontCellPos(PosInfo.MoveDir);
-        }
-
-        public Vector2Int GetFrontCellPos(MoveDir dir)
-        {
-            Vector2Int cellPos = CellPos;
-
-            switch (dir)
-            {
-                case MoveDir.Up:
-                    cellPos += Vector2Int.up;
-                    break;
-                case MoveDir.Down:
-                    cellPos += Vector2Int.down;
-                    break;
-                case MoveDir.Left:
-                    cellPos += Vector2Int.left;
-                    break;
-                case MoveDir.Right:
-                    cellPos += Vector2Int.right;
-                    break;
-            }
-
-            return cellPos;
-        }
-
-        public static MoveDir GetDirFromVec(Vector2Int dir)
-        {
-            if (dir.x > 0)
-                return MoveDir.Right;
-            else if (dir.x < 0)
-                return MoveDir.Left;
-            else if (dir.y > 0)
-                return MoveDir.Up;
-            else
-                return MoveDir.Down;
-        }
-
         public virtual void OnDamaged(GameObject attacker, int damage)
         {
             if (Room == null)
@@ -143,7 +81,6 @@ namespace Server.Game.Object
 
             Stat.Hp = Stat.MaxHp;
             PosInfo.State = CreatureState.Idle;
-            PosInfo.MoveDir = MoveDir.Down;
             PosInfo.PosX = 0;
             PosInfo.PosY = 0;
 

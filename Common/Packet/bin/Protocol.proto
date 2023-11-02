@@ -22,13 +22,6 @@ enum CreatureState {
     DEAD = 2;
 }
 
-enum MoveDir {
-	UP = 0;
-	DOWN = 1;
-	LEFT = 2;
-	RIGHT = 3;
-}
-
 enum GameObjectType {
 	NONE = 0;
 	PLAYER = 1;
@@ -85,8 +78,15 @@ message ObjectInfo {
 message PositionInfo {
 	CreatureState state = 1;
 	MoveDir moveDir = 2;
-	int32 posX = 3;
-	int32 posY = 4;
+	float posX = 3;
+	float posY = 4;
+	float posZ = 5;
+}
+
+message MoveDir {
+	float dirX = 1;
+	float dirY = 2;
+	float dirZ = 3;
 }
 
 message StatInfo {

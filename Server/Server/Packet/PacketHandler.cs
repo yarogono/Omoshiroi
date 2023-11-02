@@ -26,7 +26,6 @@ class PacketHandler
         {
             player.Info.Name = $"Player_{player.Id}";
             player.Info.PosInfo.State = CreatureState.Idle;
-            player.Info.PosInfo.MoveDir = MoveDir.Down;
             player.Info.PosInfo.PosX = packetPlayer.PosInfo.PosX;
             player.Info.PosInfo.PosY = packetPlayer.PosInfo.PosY;
 
