@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BaseConsumableSO", menuName = "Item/BaseConsumableSO")]
-public class BaseConsumable : BaseItem, IDroppable, IConsumable, IStackable
+public class BaseConsumable : BaseItem, IDroppable, IConsumable
 {
    public void Drop()
     {
@@ -11,11 +11,6 @@ public class BaseConsumable : BaseItem, IDroppable, IConsumable, IStackable
     }
 
     public void Consume()
-    {
-
-    }
-
-    public void StackItem()
     {
 
     }

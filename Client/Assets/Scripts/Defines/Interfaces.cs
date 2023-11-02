@@ -26,11 +26,6 @@ public interface IConsumable
     public void Consume();
 }
 
-public interface IStackable
-{
-    public void StackItem();
-}
-
 public interface IState
 {
     public void Enter();
