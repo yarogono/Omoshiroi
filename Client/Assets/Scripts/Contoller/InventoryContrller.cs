@@ -125,8 +125,7 @@ namespace Inventory
             }
             else
             {
-                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);
-               
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);           
             }
             
         }

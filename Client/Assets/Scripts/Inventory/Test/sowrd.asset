@@ -17,7 +17,7 @@ MonoBehaviour:
   itemID: 0
   itemName: Sowrd
   description: goodSowrd
-  itemType: 0
+  itemType: 1
   weaponHP: 12
   weaponDEF: 4
   weaponAS: 12
