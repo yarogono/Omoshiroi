@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BaseResourceSO", menuName = "Item/BaseResourceSO")]
-public class BaseResource : BaseItem, IDroppable
+public class BaseResource : BaseItem, IDroppable, IStackable
 {
-    [SerializeField] private int maxStack;
-
-    public int MaxStack { get; }
-
     public void Drop()
     {
 

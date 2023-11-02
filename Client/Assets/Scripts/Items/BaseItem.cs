@@ -12,6 +12,8 @@ public class BaseItem : ScriptableObject
     [SerializeField] private string itemName;
     [SerializeField] private string description;
     [SerializeField] private eItemType itemType;
+    [SerializeField] private int maxStack;
+    [SerializeField] private bool isStackable;
 
     public Sprite ItemIcon { get { return itemIcon; } }
     public GameObject ObjectPrefab { get { return objectPrefab; } }
@@ -19,4 +21,6 @@ public class BaseItem : ScriptableObject
     public string ItemName { get { return itemName; } }
     public string Description { get { return description; } }
     public eItemType ItemType { get { return itemType; } }
+    public int MaxStack { get { return maxStack; } }
+    public bool IsStackable { get { return isStackable; } }
 }
