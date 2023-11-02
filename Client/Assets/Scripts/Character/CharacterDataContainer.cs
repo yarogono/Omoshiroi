@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterDataContainer : MonoBehaviour
 {
-    [SerializeField] public Inventory Inven { get;}
+    [SerializeField] public Inventory1 Inven { get;}
     [SerializeField] public CharacterStats Stats { get;}
     [SerializeField] public EquipSystem Equipments { get; private set; }
 
