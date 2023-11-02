@@ -66,7 +66,7 @@ namespace Inventory
             {
                 if (item.IsEmpty)
                     continue;
-                inventoryData.AddItem(item);
+                //inventoryData.AddItem(item);
             }
         }
         private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
