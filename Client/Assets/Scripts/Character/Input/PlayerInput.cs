@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.LowLevel;
 
 [Serializable]
@@ -82,13 +80,14 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         PlayerActions = InputActions.Player;
         PlayerActions.AddCallbacks(this);
 #endif
-#if DEVELOPMENT_BUILD || UNITY_EDITOR
-        OnMoveEvent += (t) => { MoveTestTxt.text = $"Move\n{t}"; };
-        OnAimEvent += (t) => { AimTestTxt.text = $"Aim\n{t}"; };
-        OnAttackEvent += (t) => { AimTestTxt.text = $"Attack\n{t}"; };
-        OnDodgeEvent += () => { DodgeTestTxt.text = $"Dodge\nCalled"; };
-        OnRunEvent += (t) => { DodgeTestTxt.text = $"Run\n{t}"; };
-#endif
+        //#if DEVELOPMENT_BUILD || UNITY_EDITOR
+        //        OnMoveEvent += (t) => { MoveTestTxt.text = $"Move\n{t}"; };
+        //        OnAimEvent += (t) => { AimTestTxt.text = $"Aim\n{t}"; };
+        //        OnAttackEvent += (t) => { AimTestTxt.text = $"Attack\n{t}"; };
+        //        OnDodgeEvent += () => { DodgeTestTxt.text = $"Dodge\nCalled"; };
+        //        OnRunEvent += (t) => { DodgeTestTxt.text = $"Run\n{t}"; };
+        //#endif
+        // 테스트용으로 추후에 제거하여 FSM으로 옮길 예정.
         OnMoveEvent += (t) => { MoveCharacter(t); };
     }
 
