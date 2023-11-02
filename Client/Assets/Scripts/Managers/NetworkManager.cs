@@ -61,4 +61,17 @@ public class NetworkManager : CustomSingleton<NetworkManager>
     {
         _session.Send(packet);
     }
+
+    public void LeaveGame()
+    {
+        t_PilotPlayerController pilotPlayerController = ObjectManager.Instance.pilotPlayerController;
+        if (pilotPlayerController == null)
+            return;
+
+        int id = pilotPlayerController.Id;
+
+        C_LeaveGame leaveGamePacket = new C_LeaveGame();
+        leaveGamePacket.PlayerId = id;
+        Send(leaveGamePacket);
+    }
 }
