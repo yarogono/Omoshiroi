@@ -4,37 +4,34 @@ using UnityEngine;
 
 public class t_ClonePlayerController : t_PlayerController
 {
-    void Update()
+    protected override void Update()
     {
-        checkIdTest.text = "C_ID : " + Id;
+        base.Update();
 
         UpdateController();
     }
 
     protected virtual void UpdateController()
     {
-        Debug.Log($"Clone State : {State}");
-        switch (State)
-        {
-            case CreatureState.Idle:
-                InitPos();
-                break;
-            case CreatureState.Moving:
-                SyncPos();
-                break;
-            // case CreatureState.Skill:
-            //     UpdateSkill();
-            //     break;
-            // case CreatureState.Dead:
-            //     UpdateDead();
-            //     break;
-        }
-    }
+        // switch (State)
+        // {
+        //     case CreatureState.Moving:
+        //         SyncPos();
+        //         break;
+        //     // case CreatureState.Skill:
+        //     //     UpdateSkill();
+        //     //     break;
+        //     // case CreatureState.Dead:
+        //     //     UpdateDead();
+        //     //     break;
+        // }
 
-    public void InitPos() { }
+        SyncPos();
+    }
 
     public void SyncPos()
     {
-        transform.position = position;
+        Debug.Log($"S_r {Id} => {PosInfo}");
+        gameObject.transform.position = new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
     }
 }

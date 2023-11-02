@@ -20,15 +20,15 @@ public class t_PilotPlayerController : t_PlayerController
         transform.position = Vector3.zero;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        checkIdTest.text = "P_ID : " + Id;
+        base.Update();
 
-        if (State == CreatureState.Moving)
-        {
-            C_Move movePacket = new C_Move { PosInfo = PosInfo };
-            NetworkManager.Instance.Send(movePacket);
-        }
+        position = transform.position;
+
+        C_Move movePacket = new C_Move { PosInfo = PosInfo };
+        Debug.Log($"C_ {Id} => {movePacket.PosInfo}");
+        NetworkManager.Instance.Send(movePacket);
     }
 
     private void FixedUpdate()
@@ -45,7 +45,6 @@ public class t_PilotPlayerController : t_PlayerController
         State = CreatureState.Moving;
 
         rigid.MovePosition(destination);
-        position = transform.TransformPoint(destination);
     }
 
     private void OnMove(InputValue value)

@@ -47,9 +47,7 @@ public class PacketHandler
         if (playerController == null)
             return;
 
-        Debug.Log(
-            $"{movePacket.ObjectId} => x: {movePacket.PosInfo.PosX} y: {movePacket.PosInfo.PosY} state : {movePacket.PosInfo.State}"
-        );
+        Debug.Log($"S_s {movePacket.ObjectId} => {movePacket.PosInfo}");
         playerController.PosInfo = movePacket.PosInfo;
     }
 

@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 
@@ -9,6 +8,7 @@ public class ServerConfig
     public string gameServerIpAddr;
     public int gameServerPort;
 }
+
 public class ConfigManager
 {
     public static ServerConfig Config { get; private set; }
