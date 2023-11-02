@@ -27,44 +27,82 @@ public class InventorySO : ScriptableObject
     }
 
 
-    private void AddItem(BaseWeapon item, int quantity)
+    private int AddItem(BaseWeapon item, int quantity)
     {
-        if (item is IStackable stackableItem == false )
+        if (item.IsStackable == false)
         {
             for (int i = 0; i < inventoryItems.Count; i++)
             {
-                if (inventoryItems[i].IsEmpty)
+
+                while (quantity > 0 && IsInventoryFull() == false)
                 {
-                    inventoryItems[i] = new InventoryItem
-                    {
-                        item = item,
-                        quantity = quantity
-                    };
-                    return;
+                   quantity -= AddItemToFirstFreeSlot(item, 1);
+
                 }
+                InformAboutChange();
+                return quantity;
             }
         }
         quantity = AddStackableItem(item, quantity);
-            
+        InformAboutChange();
+        return quantity;                
+    }
+
+    private int AddItemToFirstFreeSlot(BaseWeapon item, int quantity)
+
+    {
+        InventoryItem newItem = new InventoryItem
+        {
+            item = item,
+            quantity = quantity,      
+        };
 
         for (int i = 0; i < inventoryItems.Count; i++)
         {
             if (inventoryItems[i].IsEmpty)
             {
-                inventoryItems[i] = new InventoryItem
-                {
-                    item = item,
-                    quantity = quantity
-                };
-                return;
-            }       
+                inventoryItems[i] = newItem;
+                return quantity;
+            }
         }
-     
+        return 0;
     }
+
+    private bool IsInventoryFull() => inventoryItems.Where(item => item.IsEmpty).Any() == false;
 
     private int AddStackableItem(BaseWeapon item, int quantity)
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < inventoryItems.Count; i++)
+        {
+            if (inventoryItems[i].IsEmpty)
+                continue;
+            if (inventoryItems[i].item.ItemID == item.ItemID)
+            {
+                int amountPossibleToTake =
+                       inventoryItems[i].item.MaxStack - inventoryItems[i].quantity;
+
+                if (quantity > amountPossibleToTake)
+                {
+                    inventoryItems[i] = inventoryItems[i]
+                        .ChangeQuantity(inventoryItems[i].item.MaxStack);
+                    quantity -= amountPossibleToTake;
+                }
+                else
+                {
+                    inventoryItems[i] = inventoryItems[i]
+                        .ChangeQuantity(inventoryItems[i].quantity + quantity);
+                    InformAboutChange();
+                    return 0;
+                }
+            }
+        }
+        while (quantity > 0 && IsInventoryFull() == false)// 갇득 찼거나  수량이 0보다 작으면 
+        {
+            int newQuantity = Mathf.Clamp(quantity, 0, item.MaxStack);
+            quantity -= newQuantity;
+            AddItemToFirstFreeSlot(item, newQuantity);
+        }
+        return quantity;
     }
 
     public Dictionary<int, InventoryItem> GetCurrentInventoryState()
