@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EquipSystem
 {
-
     private List<BaseItem> equippedItems = new List<BaseItem>();
 
     [SerializeField] private CharacterDataContainer cdc;
