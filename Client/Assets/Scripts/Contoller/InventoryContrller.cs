@@ -42,7 +42,7 @@ namespace Inventory
                     inventoryUI.Show();
                     foreach (var item in inventoryData.GetCurrentInventoryState())
                     {
-                        inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
+                        inventoryUI.UpdateData(item.Key, item.Value.item.ItemIcon, item.Value.quantity);
                     }
                 }
                 else
@@ -74,7 +74,7 @@ namespace Inventory
             inventoryUI.ResetAllItems();//인벤토리데이터 업데이트 할때 한번초기화 
             foreach (var item in inventoryState)
             {
-                inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage,item.Value.quantity);
+                inventoryUI.UpdateData(item.Key, item.Value.item.ItemIcon,item.Value.quantity);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Inventory
                 return;
             }
                 
-            inventoryUI.CreateDraggedItem(inventoryItem.item.ItemImage, inventoryItem.quantity);
+            inventoryUI.CreateDraggedItem(inventoryItem.item.ItemIcon, inventoryItem.quantity);
         }
 
         private void HandleSwapItems(int itemIndex_1, int itemIndex_2)
@@ -116,12 +116,22 @@ namespace Inventory
                 inventoryUI.ResetSelection();
                 return;
             }
-            ItemSO item = inventoryItem.item;
-
-            inventoryUI.UpdateDescription(itemIndex, item.ItemImage, item.name, item.Description);
+            BaseWeapon item = inventoryItem.item;
+            
+            if(item.ItemType == eItemType.Weapon)
+            {
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.Description}",
+                $"AP:{item.WeaponAP}\nAS:{item.WeaponAS}\nCP:{item.WeaponCP}\nCR:{item.WeaponCR}\nCR:{item.WeaponDEF}\nHP:{item.WeaponHP}\n");
+            }
+            else
+            {
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);
+               
+            }
+            
         }
 
-
+    
 
     }
 }

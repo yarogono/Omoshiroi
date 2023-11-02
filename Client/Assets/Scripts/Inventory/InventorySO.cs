@@ -27,7 +27,7 @@ public class InventorySO : ScriptableObject
     }
 
 
-    private void AddItem(ItemSO item, int quantity)
+    private void AddItem(BaseWeapon item, int quantity)
     {
         for (int i = 0; i < inventoryItems.Count; i++)
         {
@@ -87,7 +87,7 @@ public class InventorySO : ScriptableObject
 public struct InventoryItem
 {
     public int quantity;
-    public ItemSO item;
+    public BaseWeapon item;
 
     public bool IsEmpty => item == null;
 

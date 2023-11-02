@@ -90,6 +90,7 @@ using Inventory;
                 return;
             }
             OnSwapItems?.Invoke(currentlyDraggedItemIndex, index);
+            HandleItemSelection(inventoryItemUI);
 
         }
 
