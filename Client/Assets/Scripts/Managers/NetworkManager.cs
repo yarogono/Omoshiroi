@@ -17,6 +17,8 @@ public class NetworkManager : CustomSingleton<NetworkManager>
 
     private void Init()
     {
+        ConfigManager.LoadConfig();
+
         // DNS (Domain Name System)
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
