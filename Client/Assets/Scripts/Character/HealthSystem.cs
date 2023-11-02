@@ -26,15 +26,20 @@ public class HealthSystem : MonoBehaviour
     /// <param name="damege"></param>
     public void TakeDamege(int damege)
     {
-        
-        if(stats.Hp - damege <= 0)
+        int remain = stats.Hp - damege;
+
+        if(remain <= 0)
         {
             stats.SetHP(0);
             //플레이어 사망 또는 무언가를 처리하는 부분
         }
-        else if (stats.MaxHp < stats.Hp)
+        else if (stats.MaxHp < remain)
         {
             //최대 체력을 초과한 치유 시 처리 부분
+        }
+        else
+        {
+            stats.SetHP(remain);
         }
 
     }
