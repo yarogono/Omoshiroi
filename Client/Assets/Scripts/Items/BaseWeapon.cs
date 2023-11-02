@@ -16,19 +16,16 @@ public class BaseWeapon : BaseItem, IEquippable, IDroppable
 
     public void Equip(CharacterDataContainer cdc)
     {
-        cdc.Stats.maxHp += weaponHP; cdc.Stats.hp += weaponHP;
-        cdc.Stats.def += weaponDEF; cdc.Stats.atkSpeed += weaponAS;
-        cdc.Stats.atkPower += weaponAP; cdc.Stats.critRate += weaponCR;
-        cdc.Stats.critPower += weaponCP;
-
+        CharacterStats cs = cdc.Stats;
+        cs.SetCharacterStats(cs.MaxHp + weaponHP, cs.Hp + weaponHP, cs.Def + weaponDEF, cs.AtkSpeed + weaponAS, cs.AtkPower + weaponAP,
+            cs.CritRate + weaponCR, cs.CritPower + weaponCP, cs.MoveSpeed, cs.RunMultipiler);
     }
 
     public void Dequip(CharacterDataContainer cdc)
     {
-        cdc.Stats.maxHp -= weaponHP; cdc.Stats.hp -= weaponHP;
-        cdc.Stats.def -= weaponDEF; cdc.Stats.atkSpeed -= weaponAS;
-        cdc.Stats.atkPower -= weaponAP; cdc.Stats.critRate -= weaponCR;
-        cdc.Stats.critPower -= weaponCP;
+        CharacterStats cs = cdc.Stats;
+        cs.SetCharacterStats(cs.MaxHp - weaponHP, cs.Hp - weaponHP, cs.Def - weaponDEF, cs.AtkSpeed - weaponAS, cs.AtkPower - weaponAP,
+            cs.CritRate - weaponCR, cs.CritPower - weaponCP, cs.MoveSpeed, cs.RunMultipiler);
     }
 
     public void Drop()
