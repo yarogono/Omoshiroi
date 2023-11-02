@@ -48,12 +48,15 @@ public class t_PlayerController : MonoBehaviour
         get { return new Vector3(PosInfo.PosX, 0, PosInfo.PosY); }
         set
         {
-            if (PosInfo.PosX == value.x && PosInfo.PosY == value.y)
+            if (PosInfo.PosX == value.x && PosInfo.PosY == value.y && PosInfo.PosZ == value.z)
                 return;
 
-            PosInfo.PosX = (int)value.x;
-            PosInfo.PosY = (int)value.y;
+            PosInfo.PosX = value.x;
+            PosInfo.PosY = value.y;
+            PosInfo.PosZ = value.z;
             _updated = true;
+
+            Debug.Log($"{Id} => {PosInfo}");
         }
     }
 
@@ -71,14 +74,4 @@ public class t_PlayerController : MonoBehaviour
     }
 
     public TextMeshPro checkIdTest;
-
-    void Start()
-    {
-        Init();
-    }
-
-    protected virtual void Init()
-    {
-        transform.position = Vector3.zero;
-    }
 }

@@ -7,11 +7,8 @@ public class t_ClonePlayerController : t_PlayerController
     void Update()
     {
         checkIdTest.text = "C_ID : " + Id;
-        Debug.Log($"Clone ID : {Id}");
 
         UpdateController();
-        Debug.Log($"Clone State : {State}");
-        Debug.Log($"Clone position : {position}");
     }
 
     protected virtual void UpdateController()
@@ -19,6 +16,9 @@ public class t_ClonePlayerController : t_PlayerController
         Debug.Log($"Clone State : {State}");
         switch (State)
         {
+            case CreatureState.Idle:
+                InitPos();
+                break;
             case CreatureState.Moving:
                 SyncPos();
                 break;
@@ -31,7 +31,7 @@ public class t_ClonePlayerController : t_PlayerController
         }
     }
 
-    protected virtual void UpdateMoving() { }
+    public void InitPos() { }
 
     public void SyncPos()
     {

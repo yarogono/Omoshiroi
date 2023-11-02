@@ -12,7 +12,11 @@ public class PacketHandler
         ObjectManager.Instance.Add(enterGamePacket.Player, pilotPlayer: true);
     }
 
-    public static void S_LeaveGameHandler(PacketSession session, IMessage packet) { }
+    public static void S_LeaveGameHandler(PacketSession session, IMessage packet)
+    {
+        S_LeaveGame leaveGamePacket = packet as S_LeaveGame;
+        ObjectManager.Instance.Clear();
+    }
 
     public static void S_SpawnHandler(PacketSession session, IMessage packet)
     {
@@ -33,36 +37,20 @@ public class PacketHandler
 
         GameObject gameObject = ObjectManager.Instance.FindById(movePacket.ObjectId);
 
-        Debug.Log("check1");
-
         if (gameObject == null)
-        {
-            Debug.Log("check2");
             return;
-        }
 
         if (ObjectManager.Instance.pilotPlayerController.Id == movePacket.ObjectId)
-        {
-            Debug.Log("check3");
             return;
-        }
 
         t_PlayerController playerController = gameObject.GetComponent<t_PlayerController>();
         if (playerController == null)
-        {
-            Debug.Log("check3");
             return;
-        }
-
-        Debug.Log("check4");
 
         Debug.Log(
             $"{movePacket.ObjectId} => x: {movePacket.PosInfo.PosX} y: {movePacket.PosInfo.PosY} state : {movePacket.PosInfo.State}"
         );
         playerController.PosInfo = movePacket.PosInfo;
-        // Debug.Log(
-        //     $"{playerController.Id} => x: {playerController.PosInfo.PosX} y: {playerController.PosInfo.PosY} state: {playerController.PosInfo.State}"
-        // );
     }
 
     public static void S_ChangeHpHandler(PacketSession session, IMessage packet) { }

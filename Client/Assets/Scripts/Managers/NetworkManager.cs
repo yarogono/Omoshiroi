@@ -21,6 +21,7 @@ public class NetworkManager : CustomSingleton<NetworkManager>
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
         IPAddress ipAddr = IPAddress.Parse("127.0.0.1");
+        // IPAddress ipAddr = IPAddress.Parse("116.43.139.10");
         IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
         Connector connector = new Connector();

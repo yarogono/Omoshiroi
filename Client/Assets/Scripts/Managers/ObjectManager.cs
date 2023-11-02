@@ -32,40 +32,60 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 pilotPlayerController = gameObject.GetComponent<t_PilotPlayerController>();
                 pilotPlayerController.Id = info.ObjectId;
-                Debug.Log($"info.Name : {info.Name}\n");
-                Debug.Log($"info.ObjectId : {info.ObjectId}\n");
-                Debug.Log($"pilotPlayerController.Id : {pilotPlayerController.Id}\n");
-                Debug.Log(
-                    $"gameObject.Id : {gameObject.GetComponent<t_PilotPlayerController>().Id}"
-                );
                 pilotPlayerController.PosInfo = info.PosInfo;
                 pilotPlayerController.Stat = info.StatInfo;
             }
             else
             {
-                GameObject original = Resources.Load<GameObject>("t_ClonePlayer");
+                Vector3 SpawnPos = new Vector3(
+                    info.PosInfo.PosX,
+                    info.PosInfo.PosY,
+                    info.PosInfo.PosZ
+                );
 
-                GameObject gameObject = Instantiate(original, null);
-                gameObject.name = original.name;
+                GameObject gameObject = Instantiate(
+                    Resources.Load<GameObject>("t_ClonePlayer"),
+                    SpawnPos,
+                    Quaternion.identity
+                );
+
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
                 t_ClonePlayerController clonePlayerController =
                     gameObject.GetComponent<t_ClonePlayerController>();
                 clonePlayerController.Id = info.ObjectId;
-                Debug.Log($"clonePlayerController.Id : {clonePlayerController.Id}");
                 clonePlayerController.PosInfo = info.PosInfo;
                 clonePlayerController.Stat = info.StatInfo;
                 clonePlayerController.SyncPos();
-
-                Instantiate(gameObject);
             }
         }
+    }
+
+    public void Remove(int id)
+    {
+        GameObject gameObject = FindById(id);
+        if (gameObject == null)
+            return;
+
+        _objects.Remove(id);
+        Destroy(gameObject);
     }
 
     public GameObject FindById(int id)
     {
         _objects.TryGetValue(id, out GameObject gameObject);
         return gameObject;
+    }
+
+    public void Clear()
+    {
+        foreach (GameObject gameObject in _objects.Values)
+        {
+            Destroy(gameObject);
+        }
+
+        _objects.Clear();
+        pilotPlayerController = null;
     }
 }

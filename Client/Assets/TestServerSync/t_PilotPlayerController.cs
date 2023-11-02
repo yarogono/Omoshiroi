@@ -17,20 +17,17 @@ public class t_PilotPlayerController : t_PlayerController
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        transform.position = Vector3.zero;
     }
 
     private void Update()
     {
         checkIdTest.text = "P_ID : " + Id;
-        Debug.Log($"Pilot ID : {Id}");
 
         if (State == CreatureState.Moving)
         {
-            C_Move movePacket = new C_Move();
-            movePacket.PosInfo = PosInfo;
+            C_Move movePacket = new C_Move { PosInfo = PosInfo };
             NetworkManager.Instance.Send(movePacket);
-
-            Debug.Log($"C / S / D -> {position}, {State}");
         }
     }
 
@@ -43,14 +40,12 @@ public class t_PilotPlayerController : t_PlayerController
             State = CreatureState.Idle;
             return;
         }
-        else
-        {
-            Vector3 destination = rigid.position + nextVec;
-            State = CreatureState.Moving;
 
-            position = Vector3Int.FloorToInt(destination);
-            rigid.MovePosition(destination);
-        }
+        Vector3 destination = rigid.position + nextVec;
+        State = CreatureState.Moving;
+
+        rigid.MovePosition(destination);
+        position = transform.TransformPoint(destination);
     }
 
     private void OnMove(InputValue value)
