@@ -32,6 +32,29 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
     [SerializeField] private float _aimThresholdTime;
     [Header("회피를 위한 최대 누름 시간")]
     [SerializeField] private float _dodgeThresholdTime;
+    private bool _isCanControl;
+    public bool CanControl
+    {
+        get => _isCanControl;
+        set
+        {
+            _isCanControl = value;
+            if (!value)
+            {
+                TouchState endTouch = new TouchState() {
+                    phase = UnityEngine.InputSystem.TouchPhase.Ended,
+                    startPosition = Vector3.zero,
+                    startTime = Time.realtimeSinceStartup,
+                    position = Vector3.zero,
+                };
+                foreach (var act in _touchAction)
+                {
+                    CallConnectAction(act.Key, endTouch);
+                }
+                _touchAction.Clear();
+            }
+        }
+    }
 
     [SerializeField] private TMP_Text MoveTestTxt;
     [SerializeField] private TMP_Text AimTestTxt;
@@ -79,11 +102,13 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
     private void OnEnable()
     {
         InputActions.Enable();
+        CanControl = true;
     }
 
     private void OnDisable()
     {
         InputActions.Disable();
+        CanControl = false;
     }
 
     // 터치 조작
@@ -97,8 +122,11 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
     public void OnMainTouch(InputAction.CallbackContext context)
     {
-        var touch = context.ReadValue<TouchState>();
-        TouchToAction(touch);
+        if (_isCanControl)
+        {
+            var touch = context.ReadValue<TouchState>();
+            TouchToAction(touch);
+        }
     }
 
     private void TouchToAction(TouchState touch)
