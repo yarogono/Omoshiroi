@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class BaseItem : ScriptableObject
 {
     [Header("BaseItemData")]
-    [SerializeField] private Sprite itemIcon;
-    [SerializeField] private GameObject objectPrefab;
-    [SerializeField] private int itemID;
-    [SerializeField] private string itemName;
-    [SerializeField] private string description;
-    [SerializeField] private eItemType itemType;
-    [SerializeField] private int maxStack;
-    [SerializeField] private bool isStackable;
+    [SerializeField] protected Sprite itemIcon;
+    [SerializeField] protected GameObject objectPrefab;
+    [SerializeField] protected int itemID;
+    [SerializeField] protected string itemName;
+    [SerializeField] protected string description;
+    [SerializeField] protected eItemType itemType;
+    [SerializeField] protected int maxStack;
+    [SerializeField] protected bool isStackable;
 
     public Sprite ItemIcon { get { return itemIcon; } }
     public GameObject ObjectPrefab { get { return objectPrefab; } }

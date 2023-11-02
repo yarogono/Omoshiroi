@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
+    [SerializeField] private UIInventoryPage Inventory;
+
+
     // Start is called before the first frame update
     void Start()
     {

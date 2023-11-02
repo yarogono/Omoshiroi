@@ -6,9 +6,9 @@ using UnityEngine;
 public class BaseMagic : BaseItem, IEquippable
 {
     [Header("MagicData")]
-    [SerializeField] private GameObject magicObject;
-    [SerializeField] private float range;
-    [SerializeField] private Animation anime;
+    [SerializeField] protected GameObject magicObject;
+    [SerializeField] protected float range;
+    [SerializeField] protected Animation anime;
 
     public void Equip(CharacterDataContainer cdc)
     {
