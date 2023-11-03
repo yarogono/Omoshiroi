@@ -75,13 +75,15 @@ public class t_PlayerController : MonoBehaviour
     public TextMeshPro checkPosXTest;
     public TextMeshPro checkPosYTest;
     public TextMeshPro checkPosZTest;
+    public TextMeshPro checkStateTest;
 
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";
-        checkPosXTest.text = $"X : {PosInfo.PosX} | x : {transform.position.x}";
-        checkPosYTest.text = $"Y : {PosInfo.PosY} | x : {transform.position.y}";
-        checkPosZTest.text = $"Z : {PosInfo.PosZ} | x : {transform.position.z}";
+        checkPosXTest.text = $"Ser_X : {PosInfo.PosX} | Cli_X : {transform.position.x}";
+        checkPosYTest.text = $"Ser_Y : {PosInfo.PosY} | Cli_Y : {transform.position.y}";
+        checkPosZTest.text = $"Ser_Z : {PosInfo.PosZ} | Cli_Z : {transform.position.z}";
+        checkStateTest.text = $"State : {PosInfo.State}";
     }
 
     protected virtual void Update()

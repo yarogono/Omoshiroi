@@ -31,7 +31,6 @@ public class t_ClonePlayerController : t_PlayerController
 
     public void SyncPos()
     {
-        Debug.Log($"S_r {Id} => {PosInfo}");
         gameObject.transform.position = new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
     }
 }

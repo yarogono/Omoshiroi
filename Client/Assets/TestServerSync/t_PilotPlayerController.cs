@@ -26,14 +26,15 @@ public class t_PilotPlayerController : t_PlayerController
 
         position = transform.position;
 
-        C_Move movePacket = new C_Move { PosInfo = PosInfo };
-        Debug.Log($"C_ {Id} => {movePacket.PosInfo}");
-        NetworkManager.Instance.Send(movePacket);
+        if (State == CreatureState.Moving)
+        {
+            C_Move movePacket = new C_Move { PosInfo = PosInfo };
+            NetworkManager.Instance.Send(movePacket);
+        }
     }
 
     private void FixedUpdate()
     {
-        //TODO 모듈화 시작
         Vector3 nextVec = speed * Time.deltaTime * inputVec.normalized;
 
         if (nextVec == Vector3.zero)

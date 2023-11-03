@@ -31,10 +31,10 @@ public class PacketHandler
             ObjectManager.Instance.Add(obj, pilotPlayer: false);
     }
 
-    public static void S_DespawnHandler(PacketSession session, IMessage packet) 
+    public static void S_DespawnHandler(PacketSession session, IMessage packet)
     {
         S_Despawn despawnPacket = packet as S_Despawn;
-        
+
         foreach (int playerId in despawnPacket.ObjectIds)
             ObjectManager.Instance.Remove(playerId);
     }
@@ -55,7 +55,6 @@ public class PacketHandler
         if (playerController == null)
             return;
 
-        Debug.Log($"S_s {movePacket.ObjectId} => {movePacket.PosInfo}");
         playerController.PosInfo = movePacket.PosInfo;
     }
 
