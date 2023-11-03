@@ -8,15 +8,17 @@ using UnityEngine.InputSystem.XR;
 public class CharacterMovement : MonoBehaviour
 {
     private CharacterController _controller;
+    private CharacterDataContainer _dataContainer;
 
     [Header("충격에 관한 설정")]
     [SerializeField][Tooltip("질량.\n 높을수록 충격에 움직이는 거리가 작다.")][Range(0.5f, 2f)] private float _mass = 1.0f;
     [SerializeField][Tooltip("충격시간.\n 높을수록 충격이 오래 지속된다.\n = 충격에 의해 더 멀리 날라간다.")] private float ImpactDampingTime = 0.2f;
     [Header("조작에 관한 설정")]
     [SerializeField][Tooltip("조작 반응성.\n 높을수록 조작이 느리게 반영된다.")] private float ControlDampingTime = 0.2f;
-    [SerializeField][Tooltip("조작으로 인한 최대 속도")] private float MaxSpeed = 0.5f;
+    //[SerializeField][Tooltip("조작으로 인한 최대 속도")] private float MaxSpeed = 0.5f;
+    private float MaxSpeed => _dataContainer.Stats.MoveSpeed;
     [Header("중력에 관한 설정")]
-    [SerializeField][Tooltip("중력으로 인한 추락 최대 속도")] private float MinFallSpeed = -3.0f;
+    [SerializeField][Tooltip("중력으로 인한 추락 최대 속도")] private float MaxFallSpeed = -3.0f;
 
     private Vector3 _controlDirection;
     private Vector3 _dampingVelocity;
@@ -28,9 +30,12 @@ public class CharacterMovement : MonoBehaviour
 
     private float _knockoutTime;
 
+    public float SpeedMultiflier { get; set; } = 1.0f;
+
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
+        _dataContainer = GetComponent<CharacterDataContainer>();
     }
 
     private void Update()
@@ -39,16 +44,19 @@ public class CharacterMovement : MonoBehaviour
         if (_knockoutTime > 0)
             _knockoutTime -= Time.deltaTime;
 
-        // 중력 계산 => g 가속도. 너무 빨라지지 않도록 clamping 하였음.
-        if (!_controller.isGrounded)
-            _currentGravity = Mathf.Max(_currentGravity + Physics.gravity.y * Time.deltaTime, MinFallSpeed);
-        else
-            _currentGravity = .0f;
-
         // 캐릭터 이동
         CalControl();
         CalPhysics();
         _controller.Move((_currentPhysics + _currentControl + _currentGravity * Vector3.up) * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        // 중력 계산 => g 가속도. 너무 빨라지지 않도록 clamping 하였음.
+        if (!_controller.isGrounded)
+            _currentGravity = Mathf.Max(_currentGravity + Physics.gravity.y * Time.fixedDeltaTime, MaxFallSpeed);
+        else
+            _currentGravity = .0f;
     }
 
     public void Reset()
@@ -113,7 +121,7 @@ public class CharacterMovement : MonoBehaviour
         if (_controlDirection == Vector3.zero)
             _currentControl = Vector3.SmoothDamp(_currentControl, Vector3.zero, ref _controlDamping, ControlDampingTime);
         else
-            _currentControl = Vector3.SmoothDamp(_currentControl, _controlDirection * MaxSpeed, ref _controlDamping, ControlDampingTime);
+            _currentControl = Vector3.SmoothDamp(_currentControl, _controlDirection * MaxSpeed * SpeedMultiflier, ref _controlDamping, ControlDampingTime);
     }
 
     private void CalPhysics()

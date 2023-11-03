@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.InputSystem.LowLevel;
 
 [Serializable]
@@ -82,14 +80,18 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         PlayerActions = InputActions.Player;
         PlayerActions.AddCallbacks(this);
 #endif
-#if DEVELOPMENT_BUILD || UNITY_EDITOR
-        OnMoveEvent += (t) => { MoveTestTxt.text = $"Move\n{t}"; };
-        OnAimEvent += (t) => { AimTestTxt.text = $"Aim\n{t}"; };
-        OnAttackEvent += (t) => { AimTestTxt.text = $"Attack\n{t}"; };
-        OnDodgeEvent += () => { DodgeTestTxt.text = $"Dodge\nCalled"; };
-        OnRunEvent += (t) => { DodgeTestTxt.text = $"Run\n{t}"; };
-#endif
-        OnMoveEvent += (t) => { MoveCharacter(t); };
+        if (MoveTestTxt != null)
+            OnMoveEvent += (x) => { MoveTestTxt.text = x.ToString(); };
+        if (AimTestTxt != null)
+        {
+            OnAimEvent += (x) => { AimTestTxt.text = x.ToString(); };
+            OnAttackEvent += (x) => { AimTestTxt.text = "Attack"; };
+        }
+        if (DodgeTestTxt != null)
+        {
+            OnRunEvent += (x) => { DodgeTestTxt.text = x.ToString(); };
+            OnDodgeEvent += () => { DodgeTestTxt.text = "Dodge"; };
+        }
     }
 
     private void Reset()
@@ -278,30 +280,15 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        //if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            CallMoveEvent(Vector3.zero);
+        }
+        else
         {
             Vector2 dir = context.ReadValue<Vector2>();
             CallMoveEvent(dir);
         }
-        else
-        {
-            CallMoveEvent(Vector3.zero);
-        }
     }
-
-    private void MoveCharacter(Vector2 direction)
-    {
-        Vector3 forward = Camera.main.transform.forward;
-        forward.y = 0;
-        forward.Normalize();
-        Vector3 right = Camera.main.transform.right;
-        right.y = 0;
-        right.Normalize();
-
-        direction.Normalize();
-
-        _movement.ControlMove(forward * direction.y + right * direction.x);
-    }
-
-    
 }
