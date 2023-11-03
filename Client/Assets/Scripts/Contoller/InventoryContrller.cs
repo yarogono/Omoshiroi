@@ -18,28 +18,27 @@ namespace Inventory
         [SerializeField]
         private InventorySO inventoryData;
 
-        public List<InventoryItem> initialItems = new List<InventoryItem>();
+       // public List<InventoryItem> initialItems = new List<InventoryItem>();
         [SerializeField]
         private Button BtnInventory;
         [SerializeField]
         private Button BtnCancel;
 
         UIInventoryPage _inventorypage;
-
+        PlayerInput playerInput;
 
         private void Start()
         {
             PrepareUI();
             PrepareInventoryData();
-
+            playerInput = GetComponent<PlayerInput>();  
             BtnInventory.onClick.AddListener(() =>
             {
-
-
                 if (inventoryUI.isActiveAndEnabled == false)
                 {
                     //_inventorypage = UIManager.Instance.ShowUI<UIInventoryPage>();  //ui매니져 사용해서 동적으로 껐다키기 
                     inventoryUI.Show();
+                    //playerInput.CanControl = false;
                     foreach (var item in inventoryData.GetCurrentInventoryState())
                     {
                         inventoryUI.UpdateData(item.Key, item.Value.item.ItemIcon, item.Value.quantity);
@@ -48,6 +47,7 @@ namespace Inventory
                 else
                 {
                     inventoryUI.Hide();
+                    //playerInput.CanControl = true;
                 }
             });
 
@@ -62,12 +62,12 @@ namespace Inventory
             inventoryData.Initialize();
             inventoryData.OnInventoryUpdated += UpdateInventoryUI;
 
-            foreach (InventoryItem item in initialItems)
-            {
-                if (item.IsEmpty)
-                    continue;
-                //inventoryData.AddItem(item);
-            }
+            //foreach (InventoryItem item in initialItems)
+            //{
+            //    if (item.IsEmpty)
+            //        continue;
+            //    inventoryData.AddItem(item);
+            //}
         }
         private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
         {
@@ -116,12 +116,11 @@ namespace Inventory
                 inventoryUI.ResetSelection();
                 return;
             }
-            BaseWeapon item = inventoryItem.item;
+            BaseItem item = inventoryItem.item;
             
             if(item.ItemType == eItemType.Weapon)
             {
-                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.Description}",
-                $"AP:{item.WeaponAP}\nAS:{item.WeaponAS}\nCP:{item.WeaponCP}\nCR:{item.WeaponCR}\nCR:{item.WeaponDEF}\nHP:{item.WeaponHP}\n");
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.Description}", item.Description);
             }
             else
             {

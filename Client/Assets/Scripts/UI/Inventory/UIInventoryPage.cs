@@ -63,7 +63,13 @@ using Inventory;
 
         private void HandleShowItemActions(UIInventoryItem inventoryItemUI)
         {
-
+        int index = listOfUIItems.IndexOf(inventoryItemUI);
+        if (index == -1)
+        {
+            ResetDraggtedItem();
+            return;
+        }
+        OnItemActionRequested?.Invoke(index);
         }
 
         private void HandleEndDrag(UIInventoryItem inventoryItemUI)
