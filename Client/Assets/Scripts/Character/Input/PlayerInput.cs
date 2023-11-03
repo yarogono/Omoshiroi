@@ -80,6 +80,18 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         PlayerActions = InputActions.Player;
         PlayerActions.AddCallbacks(this);
 #endif
+        if (MoveTestTxt != null)
+            OnMoveEvent += (x) => { MoveTestTxt.text = x.ToString(); };
+        if (AimTestTxt != null)
+        {
+            OnAimEvent += (x) => { AimTestTxt.text = x.ToString(); };
+            OnAttackEvent += (x) => { AimTestTxt.text = "Attack"; };
+        }
+        if (DodgeTestTxt != null)
+        {
+            OnRunEvent += (x) => { DodgeTestTxt.text = x.ToString(); };
+            OnDodgeEvent += () => { DodgeTestTxt.text = "Dodge"; };
+        }
     }
 
     private void Reset()
