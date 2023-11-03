@@ -25,6 +25,8 @@ public class CharacterStats : MonoBehaviour
         AtkPower = cbs.BaseAttackPower;
         CritRate = cbs.BaseCriticalRate;
         CritPower = cbs.BaseCriticalPower;
+        MoveSpeed = cbs.BaseMoveSpeed;
+        RunMultipiler = cbs.BaseRunMultiplier;
     }
 
     public void SetCharacterStats(int maxHp, int hp, int def, float atkSpeed, int atkPower, int critRate, float critPower, float moveSpeed, float runMulipiler)

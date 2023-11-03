@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "CharacterBaseStatsSO", menuName = "Character/CharacterBaseStatsSO")]
 public class CharacterBaseStats : ScriptableObject
 {
     [Header("Character's base stat")]
