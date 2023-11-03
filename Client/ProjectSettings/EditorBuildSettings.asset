@@ -8,4 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/TestServerSync/t_ServerSyncScene.unity
     guid: fa1b69f5327d34a2da36f10821f62951
-  m_configObjects: {}
+      - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 671e23c6059b6484c861ca2a51e82761
+  - enabled: 1
+    path: Assets/Scenes/PlayerTestScene.unity
+    guid: 2fe6a2644ea3855498cdd3f67d589ebf
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: b0b906b46e4865d45ade0035236f36dc
+  m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 603e7c641c9e51744bb429d15ac5af0d, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 00fcc890c45e910458d7f57fc24bb0f7, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 1c052f5998e0ab442806c112ceaba521, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 4fb56cda5327cce40a78be7600fed0bb, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 45de1bf82eb883a4d8e30b448c5ab6da, type: 2}
