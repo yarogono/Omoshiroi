@@ -9,6 +9,7 @@ public class BaseMagic : BaseItem, IEquippable
     [SerializeField] private GameObject magicObject;
     [SerializeField] private float range;
     [SerializeField] private Animation anime;
+    [SerializeField] private AttackData attackData;
 
     public void Equip(CharacterDataContainer cdc)
     {
