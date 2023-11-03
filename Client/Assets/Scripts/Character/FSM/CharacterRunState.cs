@@ -9,8 +9,8 @@ public class CharacterRunState : CharacterGroundState
     }
     public override void Enter()
     {
-        _stateMachine.MovementSpeedModifier = _stateMachine.CharacterSpeedMultiflier;
         base.Enter();
+        _stateMachine.MovementSpeedModifier = _stateMachine.CharacterSpeedMultiflier;
         StartAnimation(_stateMachine.Character.AnimationData.RunParameterHash);
     }
 

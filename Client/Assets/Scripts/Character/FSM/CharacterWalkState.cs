@@ -11,7 +11,6 @@ public class CharacterWalkState : CharacterGroundState
 
     public override void Enter()
     {
-        _stateMachine.MovementSpeedModifier = _stateMachine.CharacterSpeedMultiflier;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.WalkParameterHash);
     }

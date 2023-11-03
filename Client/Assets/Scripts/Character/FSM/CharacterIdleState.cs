@@ -12,7 +12,6 @@ public class CharacterIdleState : CharacterGroundState
 
     public override void Enter()
     {
-        _stateMachine.MovementSpeedModifier = 0.0f;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.IdleParameterHash);
     }

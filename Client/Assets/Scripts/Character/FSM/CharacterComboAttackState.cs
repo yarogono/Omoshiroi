@@ -8,7 +8,7 @@ public class CharacterComboAttackState : CharacterAttackState
     private bool alreadyApplyCombo;
 
     private CharacterStats stats;
-    // AttackInfoData attackInfoData;
+    private AttackInfo attackInfo;
 
     public CharacterComboAttackState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
@@ -25,9 +25,8 @@ public class CharacterComboAttackState : CharacterAttackState
 
         int comboIndex = _stateMachine.ComboIndex;
         stats = _stateMachine.Character.Stats;
-        // TODO
-        // 콤보에 따른 공격 정보를 가지고 올 것
-        // attackInfoData = _stateMachine.Character.Data.AttakData.GetAttackInfo(comboIndex);
+
+        attackInfo = (_stateMachine.Character.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic).AttackData.GetAttackInfo(comboIndex);
         _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, comboIndex);
     }
 
@@ -44,7 +43,7 @@ public class CharacterComboAttackState : CharacterAttackState
     {
         if (alreadyApplyCombo) return;
 
-        //if (attackInfoData.ComboStateIndex == -1) return;
+        if (attackInfo.ComboStateIndex == -1) return;
 
         if (!_stateMachine.IsAttacking) return;
 
@@ -56,7 +55,7 @@ public class CharacterComboAttackState : CharacterAttackState
         if (alreadyAppliedForce) return;
         alreadyAppliedForce = true;
 
-        //_stateMachine.Movement.AddImpact(_stateMachine.Character.transform.forward * attackInfoData.Force);
+        _stateMachine.Movement.AddImpact(_stateMachine.Character.transform.forward * attackInfo.Force);
     }
 
     public override void Update()
@@ -66,23 +65,23 @@ public class CharacterComboAttackState : CharacterAttackState
         float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, "Attack");
         if (normalizedTime < 1f)
         {
-            //    if (normalizedTime >= attackInfoData.ForceTransitionTime)
-            //        TryApplyForce();
+            if (normalizedTime >= attackInfo.ForceTransitionTime)
+                TryApplyForce();
 
-            //    if (normalizedTime >= attackInfoData.ComboTransitionTime)
-            //        TryComboAttack();
-            //}
-            //else
-            //{
-            //    if (alreadyApplyCombo)
-            //    {
-            //        _stateMachine.ComboIndex = attackInfoData.ComboStateIndex;
-            //        _stateMachine.ChangeState(_stateMachine.ComboAttackState);
-            //    }
-            //    else
-            //    {
-            //        _stateMachine.ChangeState(_stateMachine.IdleState);
-            //    }
+            if (normalizedTime >= attackInfo.ComboTransitionTime)
+                TryComboAttack();
+        }
+        else
+        {
+            if (alreadyApplyCombo)
+            {
+                _stateMachine.ComboIndex = attackInfo.ComboStateIndex;
+                _stateMachine.ChangeState(_stateMachine.ComboAttackState);
+            }
+            else
+            {
+                _stateMachine.ChangeState(_stateMachine.IdleState);
+            }
         }
     }
 }

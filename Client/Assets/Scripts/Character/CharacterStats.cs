@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterStats
 {
-    [field:SerializeField] public CharacterBaseStats cbs { get; private set; }
+    [field: SerializeField] public CharacterBaseStats cbs { get; private set; }
 
     public int MaxHp { get; private set; }
     public int Hp { get; private set; }
@@ -15,6 +15,7 @@ public class CharacterStats
     public float CritPower { get; private set; }
     public float MoveSpeed { get; private set; }
     public float RunMultipiler { get; private set; }
+    public float DodgeTime { get; private set; }
 
     public void Initialize()
     {

@@ -11,9 +11,9 @@ public class CharacterAttackState : BaseState
 
     public override void Enter()
     {
+        base.Enter();
         _stateMachine.MovementSpeedModifier = 0.1f;
         _stateMachine.IsAttacking = true;
-        base.Enter();
 
         StartAnimation(_stateMachine.Character.AnimationData.AttackParameterHash);
     }

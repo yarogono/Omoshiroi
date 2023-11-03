@@ -9,8 +9,8 @@ public class CharacterAimState : CharacterGroundState
     }
     public override void Enter()
     {
-        _stateMachine.MovementSpeedModifier = 0.5f;
         base.Enter();
+        _stateMachine.MovementSpeedModifier = 0.5f;
 
         StartAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
     }

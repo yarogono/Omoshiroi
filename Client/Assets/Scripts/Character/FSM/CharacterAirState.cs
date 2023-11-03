@@ -42,6 +42,6 @@ public class CharacterAirState : BaseState
 
     protected override void DodgeEvent()
     {
-        base.DodgeEvent();
+        // 아무고토 못하죠
     }
 }
