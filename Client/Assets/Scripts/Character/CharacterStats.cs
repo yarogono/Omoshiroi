@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CharacterStats : MonoBehaviour
+[System.Serializable]
+public class CharacterStats
 {
-    [SerializeField] CharacterBaseStats cbs;
+    [field:SerializeField] public CharacterBaseStats cbs { get; private set; }
 
     public int MaxHp { get; private set; }
     public int Hp { get; private set; }
@@ -16,8 +16,7 @@ public class CharacterStats : MonoBehaviour
     public float MoveSpeed { get; private set; }
     public float RunMultipiler { get; private set; }
 
-    // Start is called before the first frame update
-    private void Start()
+    public void Initialize()
     {
         MaxHp = cbs.BaseHP; Hp = MaxHp;
         Def = cbs.BaseDEF;

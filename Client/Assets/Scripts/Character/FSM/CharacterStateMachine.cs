@@ -38,5 +38,7 @@ public class CharacterStateMachine : StateMachine
         ComboAttackState = new CharacterComboAttackState(this);
         DodgeState = new CharacterDodgeState(this);
         AimState = new CharacterAimState(this);
+
+        ChangeState(IdleState);
     }
 }

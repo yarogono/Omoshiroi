@@ -15,7 +15,6 @@ public class CharacterAnimationData
     [SerializeField] private string fallParameterName = "Fall";
 
     [SerializeField] private string attackParameterName = "@Attack";
-    [SerializeField] private string baseAttackParameterName = "BaseAttack";
     [SerializeField] private string comboAttackParameterName = "ComboAttack";
     [SerializeField] private string comboIndexParameterName = "Combo";
 
@@ -30,7 +29,6 @@ public class CharacterAnimationData
     public int FallParameterHash { get; private set; }
 
     public int AttackParameterHash { get; private set; }
-    public int BaseAttackParameterHash { get; private set; }
     public int ComboAttackParameterHash { get; private set; }
     public int ComboIndexParameterHash { get; private set; }
 
@@ -48,7 +46,6 @@ public class CharacterAnimationData
 
         AttackParameterHash = Animator.StringToHash(attackParameterName);
         ComboAttackParameterHash = Animator.StringToHash(comboAttackParameterName);
-        BaseAttackParameterHash = Animator.StringToHash(baseAttackParameterName);
         ComboIndexParameterHash = Animator.StringToHash(comboIndexParameterName);
     }
 }
