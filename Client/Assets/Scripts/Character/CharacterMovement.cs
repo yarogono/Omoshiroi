@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
     [Header("조작에 관한 설정")]
     [SerializeField][Tooltip("조작 반응성.\n 높을수록 조작이 느리게 반영된다.")] private float ControlDampingTime = 0.2f;
     //[SerializeField][Tooltip("조작으로 인한 최대 속도")] private float MaxSpeed = 0.5f;
-    private float MaxSpeed => _dataContainer.Stats.moveSpeed;
+    private float MaxSpeed => _dataContainer.Stats.MoveSpeed;
     [Header("중력에 관한 설정")]
     [SerializeField][Tooltip("중력으로 인한 추락 최대 속도")] private float MaxFallSpeed = -3.0f;
 

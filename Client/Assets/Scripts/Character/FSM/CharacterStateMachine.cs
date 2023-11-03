@@ -9,7 +9,7 @@ public class CharacterStateMachine : StateMachine
     public CharacterDataContainer Character { get; }
     public BaseInput InputActions { get; }
     public CharacterMovement Movement { get; }
-    public float CharacterSpeedMultiflier { get => Character.Stats.runMultiplier; }
+    public float CharacterSpeedMultiflier { get => Character.Stats.RunMultipiler; }
 
     // States
     public CharacterIdleState IdleState { get; }
