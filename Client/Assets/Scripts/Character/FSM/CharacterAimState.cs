@@ -7,6 +7,20 @@ public class CharacterAimState : CharacterGroundState
     public CharacterAimState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
     }
+    public override void Enter()
+    {
+        _stateMachine.MovementSpeedModifier = 0.5f;
+        base.Enter();
+
+        StartAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        StopAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
+    }
 
     protected override void MoveEvent(Vector2 direction)
     {
@@ -19,10 +33,6 @@ public class CharacterAimState : CharacterGroundState
 
     protected override void AimEvent(Vector2 direction)
     {
-        if (direction == Vector2.zero)
-        {
-            _stateMachine.ChangeState(_stateMachine.AimState);
-        }
         base.AimEvent(direction);
     }
 

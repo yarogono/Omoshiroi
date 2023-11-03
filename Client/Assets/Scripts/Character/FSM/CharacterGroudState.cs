@@ -20,22 +20,12 @@ public class CharacterGroundState : BaseState
         base.Exit();
         StopAnimation(_stateMachine.Character.AnimationData.GroundParameterHash);
     }
-    public override void Update()
-    {
-        base.Update();
-
-        if (_stateMachine.IsAttacking)
-        {
-            _stateMachine.ChangeState(_stateMachine.ComboAttackState);
-            return;
-        }
-    }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        // 이거 잘 작동하는 확인이 필요함
-        // Mathf.Abs(_stateMachine.Character.Controller.velocity.y) > Mathf.Abs(Physics.gravity.y * Time.fixedDeltaTime)
+        // 이거 잘 작동하는지 확인이 필요함
+        // => Mathf.Abs(_stateMachine.Character.Controller.velocity.y) > Mathf.Abs(Physics.gravity.y * Time.fixedDeltaTime)
         if (!_stateMachine.Character.Controller.isGrounded
             && Mathf.Abs(_stateMachine.Character.Controller.velocity.y) > Mathf.Abs(Physics.gravity.y * Time.fixedDeltaTime))
         {
@@ -43,4 +33,5 @@ public class CharacterGroundState : BaseState
             return;
         }
     }
+
 }

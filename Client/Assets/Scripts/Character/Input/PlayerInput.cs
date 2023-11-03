@@ -268,14 +268,15 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        //if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Canceled)
         {
-            Vector2 dir = context.ReadValue<Vector2>();
-            CallMoveEvent(dir);
+            CallMoveEvent(Vector3.zero);
         }
         else
         {
-            CallMoveEvent(Vector3.zero);
+            Vector2 dir = context.ReadValue<Vector2>();
+            CallMoveEvent(dir);
         }
     }
 }

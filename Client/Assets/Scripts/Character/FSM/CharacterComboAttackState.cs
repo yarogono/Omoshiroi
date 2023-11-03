@@ -28,7 +28,7 @@ public class CharacterComboAttackState : CharacterAttackState
         // TODO
         // 콤보에 따른 공격 정보를 가지고 올 것
         // attackInfoData = _stateMachine.Character.Data.AttakData.GetAttackInfo(comboIndex);
-        _stateMachine.Character.Animator.SetInteger("Combo", comboIndex);
+        _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, comboIndex);
     }
 
     public override void Exit()
@@ -64,25 +64,25 @@ public class CharacterComboAttackState : CharacterAttackState
         base.Update();
 
         float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, "Attack");
-        //if (normalizedTime < 1f)
-        //{
-        //    if (normalizedTime >= attackInfoData.ForceTransitionTime)
-        //        TryApplyForce();
+        if (normalizedTime < 1f)
+        {
+            //    if (normalizedTime >= attackInfoData.ForceTransitionTime)
+            //        TryApplyForce();
 
-        //    if (normalizedTime >= attackInfoData.ComboTransitionTime)
-        //        TryComboAttack();
-        //}
-        //else
-        //{
-        //    if (alreadyApplyCombo)
-        //    {
-        //        _stateMachine.ComboIndex = attackInfoData.ComboStateIndex;
-        //        _stateMachine.ChangeState(_stateMachine.ComboAttackState);
-        //    }
-        //    else
-        //    {
-        //        _stateMachine.ChangeState(_stateMachine.IdleState);
-        //    }
-        //}
+            //    if (normalizedTime >= attackInfoData.ComboTransitionTime)
+            //        TryComboAttack();
+            //}
+            //else
+            //{
+            //    if (alreadyApplyCombo)
+            //    {
+            //        _stateMachine.ComboIndex = attackInfoData.ComboStateIndex;
+            //        _stateMachine.ChangeState(_stateMachine.ComboAttackState);
+            //    }
+            //    else
+            //    {
+            //        _stateMachine.ChangeState(_stateMachine.IdleState);
+            //    }
+        }
     }
 }

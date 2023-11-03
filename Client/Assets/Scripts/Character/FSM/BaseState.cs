@@ -52,10 +52,7 @@ public class BaseState : IState
 
     protected virtual void RunEvent(bool isRun)
     {
-        if (isRun)
-            _stateMachine.MovementSpeedModifier = _stateMachine.CharacterSpeedMultiflier;
-        else
-            _stateMachine.MovementSpeedModifier = 1.0f;
+
     }
 
     protected virtual void MoveEvent(Vector2 direction)
@@ -65,7 +62,6 @@ public class BaseState : IState
 
     protected virtual void AttackEvent(Vector2 direction)
     {
-        _stateMachine.IsAttacking = true;
         // TODO
         // 공격
     }
