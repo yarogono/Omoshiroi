@@ -33,6 +33,7 @@ public class t_PilotPlayerController : t_PlayerController
 
     private void FixedUpdate()
     {
+        //TODO 모듈화 시작
         Vector3 nextVec = speed * Time.deltaTime * inputVec.normalized;
 
         if (nextVec == Vector3.zero)
