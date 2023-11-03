@@ -51,6 +51,19 @@ public class EquipSystem
         {
             Dequip(equippedItems[0]);
         }
+    }
 
+    //해당하는 타입의 장비를 장착하고 있지 않다면 null 을 반환한다.
+    public BaseItem GetEquippedItem(eItemType itemType)
+    {
+        foreach(BaseItem item in equippedItems)
+        {
+            if(item.ItemType == itemType)
+            {
+                return item;
+            }
+        }
+
+        return null;
     }
 }
