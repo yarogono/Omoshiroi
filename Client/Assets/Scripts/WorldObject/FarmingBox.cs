@@ -12,10 +12,9 @@ using Inventory;
 
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
-    //[SerializeField] private 인벤토리클래스 Inventory;
-
-    private InventoryContrller inventoryController;
+    private InventoryContrller_FB inventoryController;
     private Collider farminBoxCollider;
+    private List<BaseItem> itemList;
 
     public Action OnOpened;
     public Action OnClosed;
@@ -23,7 +22,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     // Start is called before the first frame update
     private void Start()
     {
-        inventoryController = GetComponent<InventoryContrller>();
+        inventoryController = GetComponent<InventoryContrller_FB>();
         farminBoxCollider = GetComponent<Collider>();
         //파밍박스 여는 이벤트.AddListener(() => OnOpened?.Invoke());
         //파밍박스 닫는 이벤트.AddListener(() => OnClosed?.Invoke());

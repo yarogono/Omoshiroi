@@ -41,19 +41,28 @@ using Inventory;
         }
         public void InitializeinventoryUI(int inventorysize)
         {
-
             for (int i = 0; i < inventorysize; i++)
             {
+                UIInventoryItem uiItem_player = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
+                UIInventoryItem uiItem_fb = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
 
-                UIInventoryItem uiItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
-                uiItem.transform.SetParent(contentPanel);
-                listOfUIItems.Add(uiItem);
-                uiItem.OnItemClicked += HandleItemSelection;
-                uiItem.OnItemBeginDrag += HandleBeginDrag;
-                uiItem.OnItemDroppedOn += HandleSwap;
-                uiItem.OnItemEndDrag += HandleEndDrag;
-                uiItem.OnleftMouseBtnClick += HandleShowItemActions;
-            }
+                uiItem_player.transform.SetParent(contentPanel);
+                uiItem_fb.transform.SetParent(contentPanel_FB);
+
+                listOfUIItems.Add(uiItem_player);
+                uiItem_player.OnItemClicked += HandleItemSelection;
+                uiItem_player.OnItemBeginDrag += HandleBeginDrag;
+                uiItem_player.OnItemDroppedOn += HandleSwap;
+                uiItem_player.OnItemEndDrag += HandleEndDrag;
+                uiItem_player.OnleftMouseBtnClick += HandleShowItemActions;
+
+                listOfUIItems.Add(uiItem_fb);
+                uiItem_fb.OnItemClicked += HandleItemSelection;
+                uiItem_fb.OnItemBeginDrag += HandleBeginDrag;
+                uiItem_fb.OnItemDroppedOn += HandleSwap;
+                uiItem_fb.OnItemEndDrag += HandleEndDrag;
+                uiItem_fb.OnleftMouseBtnClick += HandleShowItemActions;
+        }
         }
 
         public void UpdateData(int itemIndex, Sprite itemImage, int itemQuantity)
