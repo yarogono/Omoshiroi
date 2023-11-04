@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectManager : CustomSingleton<ObjectManager>
 {
-    public t_PilotPlayerController pilotPlayerController { get; set; }
+    public PilotSync pilotSync { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
 
     public static GameObjectType GetObjectTypeById(int id)
@@ -32,10 +32,10 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
-                pilotPlayerController = gameObject.GetComponent<t_PilotPlayerController>();
-                pilotPlayerController.Id = info.ObjectId;
-                pilotPlayerController.PosInfo = info.PosInfo;
-                pilotPlayerController.Stat = info.StatInfo;
+                pilotSync = gameObject.GetComponent<PilotSync>();
+                pilotSync.Id = info.ObjectId;
+                pilotSync.PosInfo = info.PosInfo;
+                // pilotSync.Stat = info.StatInfo;
             }
             else
             {
@@ -54,12 +54,11 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
-                t_ClonePlayerController clonePlayerController =
-                    gameObject.GetComponent<t_ClonePlayerController>();
-                clonePlayerController.Id = info.ObjectId;
-                clonePlayerController.PosInfo = info.PosInfo;
-                clonePlayerController.Stat = info.StatInfo;
-                clonePlayerController.SyncPos();
+                CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+                cloneSync.Id = info.ObjectId;
+                cloneSync.PosInfo = info.PosInfo;
+                // cloneSync.Stat = info.StatInfo;
+                cloneSync.SyncPosition();
             }
         }
     }
@@ -88,6 +87,6 @@ public class ObjectManager : CustomSingleton<ObjectManager>
         }
 
         _objects.Clear();
-        pilotPlayerController = null;
+        pilotSync = null;
     }
 }
