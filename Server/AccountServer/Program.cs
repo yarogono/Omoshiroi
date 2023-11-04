@@ -1,5 +1,6 @@
 using AccountServer.DB;
 using AccountServer.Utils;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountServer
@@ -31,14 +32,22 @@ namespace AccountServer
 
             builder.Services.AddSingleton<PasswordEncryptor>();
 
-            WebApplication app = builder.Build();
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                                       .AddEnvironmentVariables();
+
+            var app = builder.Build();
 
             if (!app.Environment.IsDevelopment())
             {
-
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                app.UseHttpsRedirection();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseForwardedHeaders();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -14,7 +14,6 @@ class PacketHandler
         C_EnterGame enterGamePacket = packet as C_EnterGame;
         ClientSession clientSession = session as ClientSession;
 
-
         Player player = clientSession.MyPlayer;
 
         GameRoom room = Server.RoomManager.Instance.Find(1);
@@ -24,9 +23,8 @@ class PacketHandler
         Console.WriteLine($"{packetPlayer.Name} plyer");
         player = ObjectManager.Instance.Add<Player>();
         {
-            player.Info.Name = packetPlayer.Name;
+            player.Info.Name = $"Player_{player.Id}";
             player.Info.PosInfo.State = CreatureState.Idle;
-            player.Info.PosInfo.MoveDir = MoveDir.Down;
             player.Info.PosInfo.PosX = packetPlayer.PosInfo.PosX;
             player.Info.PosInfo.PosY = packetPlayer.PosInfo.PosY;
 
@@ -47,7 +45,7 @@ class PacketHandler
         C_Move movePacket = packet as C_Move;
         ClientSession clientSession = session as ClientSession;
 
-        //Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
+        Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
 
         Player player = clientSession.MyPlayer;
         if (player == null)
@@ -58,5 +56,24 @@ class PacketHandler
             return;
 
         room.Push(room.HandleMove, player, movePacket);
+    }
+
+    public static void C_LeaveGameHandler(PacketSession session, IMessage packet)
+    {
+        C_LeaveGame leaveGamePacket = packet as C_LeaveGame;
+        ClientSession clientSession = session as ClientSession;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+
+        if (player.Id != leaveGamePacket.PlayerId)
+            return;
+
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.LeaveGame, leaveGamePacket.PlayerId);
     }
 }

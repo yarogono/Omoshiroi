@@ -72,7 +72,6 @@ namespace Server.Game.Room
             if (type == GameObjectType.Player)
             {
                 Player player = null;
-                //_players.Find(p => p.Info.PlayerId == playerId);
                 if (_players.Remove(objectId, out player) == false)
                     return;
 
@@ -81,6 +80,7 @@ namespace Server.Game.Room
                 // 본인한테 정보 전송
                 {
                     S_LeaveGame leavePacket = new S_LeaveGame();
+                    leavePacket.PlayerId = player.Id;
                     player.Session.Send(leavePacket);
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using Server.Data;
 using Server.Game.Room;
 using ServerCore;
+using System;
 using System.Net;
 
 namespace Server
@@ -31,8 +32,8 @@ namespace Server
 
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
-            IPAddress ipAddr = ipHost.AddressList[0];
-            IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+            IPAddress ipAddr = IPAddress.Parse(ConfigManager.Config.gameServerIpAddr);
+            IPEndPoint endPoint = new IPEndPoint(ipAddr, ConfigManager.Config.gameServerPort);
 
             _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Listening...");
