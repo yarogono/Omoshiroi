@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Inventory;
 
-//인벤토리 정보가 있어야 함.
+//인벤토리 정보는 InventoryController 를 가짐.
+//BtnCancel 은 플레이어 인벤토리 UI 의 창 닫기 버튼으로 지정한다.
 //클릭 시 현재 오브젝트의 인벤토리 창이 열리도록 해야 함.
 //인벤토리 부분은 사실상 플레이어의 내용과 비슷할 듯 하다.
 
@@ -12,12 +14,17 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
     //[SerializeField] private 인벤토리클래스 Inventory;
 
-    public event Action OnOpened;
-    public event Action OnClosed;
+    private InventoryContrller inventoryController;
+    private Collider farminBoxCollider;
+
+    public Action OnOpened;
+    public Action OnClosed;
 
     // Start is called before the first frame update
     private void Start()
     {
+        inventoryController = GetComponent<InventoryContrller>();
+        farminBoxCollider = GetComponent<Collider>();
         //파밍박스 여는 이벤트.AddListener(() => OnOpened?.Invoke());
         //파밍박스 닫는 이벤트.AddListener(() => OnClosed?.Invoke());
     }
@@ -51,5 +58,13 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
         //대충 선택한 아이템을 플레이어의 인벤토리로 옮기고 현재 인벤토리에서 제거한다는 내용
     }
 
+    public void SetOpenAction(Action action)
+    {
+        OnOpened = action;
+    }
 
+    public void SetCloseAction(Action action)
+    {
+        OnClosed = action;
+    }
 }
