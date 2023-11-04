@@ -8,26 +8,14 @@ public class WebManager : CustomSingleton<WebManager>
 {
     private string _restApiUrl;
 
+
     private void Start()
     {
         ConfigManager.LoadConfig();
         _restApiUrl = ConfigManager.Config.restApiUrl;
-
-
-        AccountLoginReq req = new AccountLoginReq() { AccountName = "1234", AccountPassword = "1234" };
-        SendPostRequest<AccountLoginRes>("account/login", req, res =>
-        {
-            if (res.LoginOk == 0)
-            {
-                Debug.Log("login failed");
-            }
-            else if (res.LoginOk == 1)
-            {
-                Debug.Log("login succed");
-            }
-        });
-
     }
+
+
 
     public void SendPostRequest<T>(string url, object obj, Action<T> res)
     {
@@ -70,7 +58,7 @@ public class WebManager : CustomSingleton<WebManager>
 
             if (uwr.result == UnityWebRequest.Result.ProtocolError)
             {
-                Debug.Log(uwr.error);
+                Debug.Log($"Request Error : {uwr.error}");
             }
             else
             {
