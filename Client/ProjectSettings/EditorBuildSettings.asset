@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/TestServerSync/t_ServerSyncScene.unity
+    path: Assets/TestServerSync/Scenes/t_ServerSyncScene.unity
     guid: fa1b69f5327d34a2da36f10821f62951
-      - enabled: 1
-    path: Assets/Scenes/StartScene.unity
-    guid: 671e23c6059b6484c861ca2a51e82761
   - enabled: 1
     path: Assets/Scenes/PlayerTestScene.unity
     guid: 2fe6a2644ea3855498cdd3f67d589ebf

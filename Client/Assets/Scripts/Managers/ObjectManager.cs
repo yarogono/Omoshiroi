@@ -26,7 +26,9 @@ public class ObjectManager : CustomSingleton<ObjectManager>
         {
             if (pilotPlayer)
             {
-                GameObject gameObject = Instantiate(Resources.Load<GameObject>("t_PilotPlayer"));
+                GameObject gameObject = Instantiate(
+                    Resources.Load<GameObject>("Prefabs/PilotPlayer")
+                );
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
@@ -44,7 +46,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 );
 
                 GameObject gameObject = Instantiate(
-                    Resources.Load<GameObject>("t_ClonePlayer"),
+                    Resources.Load<GameObject>("Prefabs/ClonePlayer"),
                     SpawnPos,
                     Quaternion.identity
                 );
