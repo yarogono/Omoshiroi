@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // 씬 관리를 위한 네임스페이스 추가
+using UnityEngine.SceneManagement;
 
 
 public class SceneController : MonoBehaviour
@@ -9,8 +9,6 @@ public class SceneController : MonoBehaviour
     private string sceneName = "PlayerTestScene";
     [SerializeField]
     private Button BtnChangeScene;
-
-
     private void Start()
     {
         BtnChangeScene.onClick.AddListener(() =>

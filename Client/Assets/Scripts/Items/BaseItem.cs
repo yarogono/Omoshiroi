@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BaseItem : ScriptableObject
+public abstract class BaseItem : ScriptableObject
 {
     [Header("BaseItemData")]
     [SerializeField] protected Sprite itemIcon;
