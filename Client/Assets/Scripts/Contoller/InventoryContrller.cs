@@ -19,10 +19,10 @@ namespace Inventory
         private InventorySO inventoryData;
 
        // public List<InventoryItem> initialItems = new List<InventoryItem>();
-        [SerializeField]
-        private Button BtnInventory;
-        [SerializeField]
-        private Button BtnCancel;
+   
+        public Button BtnInventory;
+
+        public Button BtnCancel;
 
         UIInventoryPage _inventorypage;
         PlayerInput playerInput;
@@ -87,9 +87,45 @@ namespace Inventory
             inventoryUI.OnItemActionRequested += HandleItemActionRequest;
         }
 
+
+
         private void HandleItemActionRequest(int itemIndex)
         {
+            InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
+            if (inventoryItem.IsEmpty)
+                return;
 
+           
+
+        }
+
+        private void DropItem(int itemIndex, int quantity)
+        {
+            inventoryData.RemoveItem(itemIndex, quantity);
+            inventoryUI.ResetSelection();
+           
+        }
+        public void PerformAction(int itemIndex)
+        {
+            InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
+            if (inventoryItem.IsEmpty)
+                return;
+
+
+            IItemAction itemAction = inventoryItem.item as IItemAction;
+            if (itemAction != null)
+            {
+               itemAction.PerformAction(gameObject);
+             
+                if (inventoryData.GetItemAt(itemIndex).IsEmpty)
+                    inventoryUI.ResetSelection();
+            }
+
+            IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
+            if (destroyableItem != null)
+            {
+                inventoryData.RemoveItem(itemIndex, 1);
+            }
         }
 
         private void HandleDragging(int itemIndex)
@@ -126,7 +162,20 @@ namespace Inventory
             {
                 inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);           
             }
-            
+            //----------  액션패널
+            IItemAction itemAction = inventoryItem.item as IItemAction;
+            if (itemAction != null)
+            {
+
+                inventoryUI.ShowItemAction(itemIndex);
+                inventoryUI.AddAction(itemAction.ActionName, () => PerformAction(itemIndex));
+            }
+
+            IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
+            if (destroyableItem != null)
+            {
+                inventoryUI.AddAction("Drop", () => DropItem(itemIndex, inventoryItem.quantity));
+            }
         }
 
     

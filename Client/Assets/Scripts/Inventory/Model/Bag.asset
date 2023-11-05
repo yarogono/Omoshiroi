@@ -9,20 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f43a17b6c2571c4a9eb6723fe908da5, type: 3}
-  m_Name: bag
+  m_Script: {fileID: 11500000, guid: ac6b864f71c859e4d8d54dc062f337be, type: 3}
+  m_Name: Bag
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 616442665, guid: b216e219fe97ed9479e9b76889837dfc, type: 3}
   objectPrefab: {fileID: 0}
   itemID: 0
   itemName: Bag
-  description: BAGBAG
-  itemType: 0
-  maxStack: 50
+  description: Bag
+  itemType: 4
+  maxStack: 99
   isStackable: 1
-  weaponHP: 0
-  weaponDEF: 0
-  weaponAS: 0
-  weaponAP: 0
-  weaponCR: 0
-  weaponCP: -0.03
+  modifiersData: []
