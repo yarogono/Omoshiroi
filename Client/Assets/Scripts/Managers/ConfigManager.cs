@@ -7,6 +7,7 @@ public class ServerConfig
     public string dbConnectionString;
     public string gameServerIpAddr;
     public int gameServerPort;
+    public string restApiUrl;
 }
 
 public class ConfigManager
