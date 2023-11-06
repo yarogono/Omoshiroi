@@ -111,6 +111,8 @@ public class BaseState : IState
 
     protected void MoveCharacter(Vector2 direction)
     {
+        if (_stateMachine.Movement == null)
+            return;
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;
 
