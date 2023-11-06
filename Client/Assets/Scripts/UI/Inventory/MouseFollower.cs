@@ -7,8 +7,6 @@ public class MouseFollower : MonoBehaviour
     [SerializeField]
     private Canvas canvas;
 
-
-
     [SerializeField]
     private UIInventoryItem item;
 
@@ -23,6 +21,7 @@ public class MouseFollower : MonoBehaviour
     {
         item.SetData(sprite, quantity);
     }
+
     void Update()
     {
         Vector2 position;
