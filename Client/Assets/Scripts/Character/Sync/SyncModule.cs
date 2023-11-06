@@ -20,7 +20,6 @@ public class SyncModule : MonoBehaviour
                 return;
 
             position = new Vector3(value.PosX, value.PosY, value.PosZ);
-            State = value.State;
         }
     }
 
@@ -35,19 +34,6 @@ public class SyncModule : MonoBehaviour
             PosInfo.PosX = value.x;
             PosInfo.PosY = value.y;
             PosInfo.PosZ = value.z;
-            _updated = true;
-        }
-    }
-
-    public virtual CreatureState State
-    {
-        get { return PosInfo.State; }
-        set
-        {
-            if (PosInfo.State == value)
-                return;
-
-            PosInfo.State = value;
             _updated = true;
         }
     }
