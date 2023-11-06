@@ -207,7 +207,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1934932306}
         m_TargetAssemblyTypeName: NetworkManager, Assembly-CSharp
         m_MethodName: LeaveGame
         m_Mode: 1
