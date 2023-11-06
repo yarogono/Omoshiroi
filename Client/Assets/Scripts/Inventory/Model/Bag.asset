@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 616442665, guid: b216e219fe97ed9479e9b76889837dfc, type: 3}
   objectPrefab: {fileID: 0}
-  itemID: 0
+  itemID: 200001
   itemName: Bag
   description: Bag
   itemType: 4

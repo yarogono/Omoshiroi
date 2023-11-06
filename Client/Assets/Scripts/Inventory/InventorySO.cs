@@ -49,6 +49,8 @@ public class InventorySO : ScriptableObject
                 return quantity;
             }
         }
+
+
         quantity = AddStackableItem(item, quantity);
         InformAboutChange();
         return quantity;                
@@ -166,6 +168,8 @@ public class InventorySO : ScriptableObject
     }
 }
 
+
+
 [Serializable]
 public struct InventoryItem
 {
@@ -189,4 +193,5 @@ public struct InventoryItem
             item = null,
             quantity = 0,
         };
+
 }
