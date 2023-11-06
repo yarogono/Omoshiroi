@@ -16,7 +16,7 @@ public class PacketHandler
     {
         S_LeaveGame leaveGamePacket = packet as S_LeaveGame;
 
-        int pilotPlayerId = ObjectManager.Instance.pilotPlayerController.Id;
+        int pilotPlayerId = ObjectManager.Instance.pilotSync.Id;
         if (pilotPlayerId != leaveGamePacket.PlayerId)
             return;
 
@@ -48,14 +48,14 @@ public class PacketHandler
         if (gameObject == null)
             return;
 
-        if (ObjectManager.Instance.pilotPlayerController.Id == movePacket.ObjectId)
+        if (ObjectManager.Instance.pilotSync.Id == movePacket.ObjectId)
             return;
 
-        t_PlayerController playerController = gameObject.GetComponent<t_PlayerController>();
-        if (playerController == null)
+        SyncModule syncModule = gameObject.GetComponent<SyncModule>();
+        if (syncModule == null)
             return;
 
-        playerController.PosInfo = movePacket.PosInfo;
+        syncModule.PosInfo = movePacket.PosInfo;
     }
 
     public static void S_ChangeHpHandler(PacketSession session, IMessage packet) { }

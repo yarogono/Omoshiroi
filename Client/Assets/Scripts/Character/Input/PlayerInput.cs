@@ -13,7 +13,10 @@ public struct TouchAreaData
     public float Radius;
 }
 
-public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdPersonController.IPlayerActions
+public class PlayerInput
+    : BaseInput,
+        ThirdPersonController.ITestActions,
+        ThirdPersonController.IPlayerActions
 {
     public ThirdPersonController InputActions { get; private set; }
 
@@ -25,11 +28,16 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
     private CharacterMovement _movement;
 
     [Header("컨트롤 범위 설정")]
-    [SerializeField] private List<TouchAreaData> _TouchArea;
+    [SerializeField]
+    private List<TouchAreaData> _TouchArea;
+
     [Header("수동 조준 공격을 위한 최저 누름 시간")]
-    [SerializeField] private float _aimThresholdTime;
+    [SerializeField]
+    private float _aimThresholdTime;
+
     [Header("회피를 위한 최대 누름 시간")]
-    [SerializeField] private float _dodgeThresholdTime;
+    [SerializeField]
+    private float _dodgeThresholdTime;
     private bool _isCanControl;
     public bool CanControl
     {
@@ -39,7 +47,8 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
             _isCanControl = value;
             if (!value)
             {
-                TouchState endTouch = new TouchState() {
+                TouchState endTouch = new TouchState()
+                {
                     phase = UnityEngine.InputSystem.TouchPhase.Ended,
                     startPosition = Vector3.zero,
                     startTime = Time.realtimeSinceStartup,
@@ -54,9 +63,14 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         }
     }
 
-    [SerializeField] private TMP_Text MoveTestTxt;
-    [SerializeField] private TMP_Text AimTestTxt;
-    [SerializeField] private TMP_Text DodgeTestTxt;
+    [SerializeField]
+    private TMP_Text MoveTestTxt;
+
+    [SerializeField]
+    private TMP_Text AimTestTxt;
+
+    [SerializeField]
+    private TMP_Text DodgeTestTxt;
 
     Dictionary<int, (eTouchAreaType, Action<TouchState>)> _touchAction;
     bool[] _touchAreaOccupied;
@@ -81,16 +95,31 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         PlayerActions.AddCallbacks(this);
 #endif
         if (MoveTestTxt != null)
-            OnMoveEvent += (x) => { MoveTestTxt.text = x.ToString(); };
+            OnMoveEvent += (x) =>
+            {
+                MoveTestTxt.text = x.ToString();
+            };
         if (AimTestTxt != null)
         {
-            OnAimEvent += (x) => { AimTestTxt.text = x.ToString(); };
-            OnAttackEvent += (x) => { AimTestTxt.text = "Attack"; };
+            OnAimEvent += (x) =>
+            {
+                AimTestTxt.text = x.ToString();
+            };
+            OnAttackEvent += (x) =>
+            {
+                AimTestTxt.text = "Attack";
+            };
         }
         if (DodgeTestTxt != null)
         {
-            OnRunEvent += (x) => { DodgeTestTxt.text = x.ToString(); };
-            OnDodgeEvent += () => { DodgeTestTxt.text = "Dodge"; };
+            OnRunEvent += (x) =>
+            {
+                DodgeTestTxt.text = x.ToString();
+            };
+            OnDodgeEvent += () =>
+            {
+                DodgeTestTxt.text = "Dodge";
+            };
         }
     }
 
@@ -160,7 +189,12 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
     private void CallConnectAction(int touchId, TouchState touch)
     {
-        if (_touchAction.TryGetValue(touchId, out (eTouchAreaType, Action<TouchState>) connectedTouch))
+        if (
+            _touchAction.TryGetValue(
+                touchId,
+                out (eTouchAreaType, Action<TouchState>) connectedTouch
+            )
+        )
             connectedTouch.Item2?.Invoke(touch);
     }
 
@@ -177,7 +211,7 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
     {
         _touchAreaOccupied[(int)area] = true;
         Action<TouchState> action;
-        switch(area)
+        switch (area)
         {
             case eTouchAreaType.Move:
                 action = MoveAction;
@@ -205,7 +239,10 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
     private void AimFireAction(TouchState touch)
     {
-        if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began || touch.phase == UnityEngine.InputSystem.TouchPhase.Moved)
+        if (
+            touch.phase == UnityEngine.InputSystem.TouchPhase.Began
+            || touch.phase == UnityEngine.InputSystem.TouchPhase.Moved
+        )
             CallAimEvent(touch.position - touch.startPosition);
         else if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended)
         {
@@ -262,10 +299,7 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         return touchArea;
     }
 
-    public void OnTapTouch(InputAction.CallbackContext context)
-    {
-
-    }
+    public void OnTapTouch(InputAction.CallbackContext context) { }
 
     // 키보드 마우스 조작
     public void OnAim(InputAction.CallbackContext context)
