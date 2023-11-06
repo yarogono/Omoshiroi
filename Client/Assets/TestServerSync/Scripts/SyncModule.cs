@@ -4,28 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class t_PlayerController : MonoBehaviour
+public class SyncModule : MonoBehaviour
 {
     public int Id { get; set; }
-
-    StatInfo _stat = new StatInfo();
-    public virtual StatInfo Stat
-    {
-        get { return _stat; }
-        set
-        {
-            if (_stat.Equals(value))
-                return;
-
-            _stat.Speed = value.Speed;
-        }
-    }
-
-    public float Speed
-    {
-        get { return Stat.Speed; }
-        set { Stat.Speed = value; }
-    }
 
     protected bool _updated = false;
 
@@ -77,10 +58,6 @@ public class t_PlayerController : MonoBehaviour
     public TextMeshPro checkPosZTest;
     public TextMeshPro checkStateTest;
 
-    protected virtual void Update()
-    {
-        DrawTestInfo();
-    }
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";
@@ -88,5 +65,10 @@ public class t_PlayerController : MonoBehaviour
         checkPosYTest.text = $"Ser_Y : {PosInfo.PosY} | Cli_Y : {transform.position.y}";
         checkPosZTest.text = $"Ser_Z : {PosInfo.PosZ} | Cli_Z : {transform.position.z}";
         checkStateTest.text = $"State : {PosInfo.State}";
+    }
+
+    protected virtual void Update()
+    {
+        DrawTestInfo();
     }
 }
