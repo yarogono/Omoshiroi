@@ -10,7 +10,7 @@ namespace Inventory
 
     // 인벤토리 ui및 모델 과 통신 두요소모두에 종속된다  
 
-    public class InventoryContrller : MonoBehaviour
+    public class InventoryController : MonoBehaviour
     {
         [SerializeField]
         private UIInventoryPage inventoryUI;
