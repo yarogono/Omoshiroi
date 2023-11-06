@@ -32,7 +32,7 @@ MonoBehaviour:
       <Force>k__BackingField: 1
       <Damage>k__BackingField: 1
     - <AttackName>k__BackingField: end
-      <ComboStateIndex>k__BackingField: 2
+      <ComboStateIndex>k__BackingField: 0
       <ComboTransitionTime>k__BackingField: 0.5
       <ForceTransitionTime>k__BackingField: 0.2
       <Force>k__BackingField: 1
