@@ -42,3 +42,16 @@ public enum eTouchAreaType
     AimFire,
     DodgeRun,
 }
+
+public enum eStateType
+{
+    None,
+    Idle,
+    Walk,
+    Run,
+    Fall,
+    Dodge,
+    Attack,
+    ComboAttack,
+    Aim,
+}

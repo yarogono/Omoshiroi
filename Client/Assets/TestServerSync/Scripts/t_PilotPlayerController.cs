@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class t_PilotPlayerController : t_PlayerController
 {
+    bool _moveKeyPressed = false;
     public Vector3 inputVec;
     public float speed;
 

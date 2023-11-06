@@ -302,9 +302,21 @@ public class PlayerInput
     public void OnTapTouch(InputAction.CallbackContext context) { }
 
     // 키보드 마우스 조작
-    public void OnAim(InputAction.CallbackContext context) { }
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            CallAimEvent(context.ReadValue<Vector2>());
+        }
+    }
 
-    public void OnFire(InputAction.CallbackContext context) { }
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            CallAttackEvent(context.ReadValue<Vector2>());
+        }
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -313,10 +325,30 @@ public class PlayerInput
         {
             CallMoveEvent(Vector3.zero);
         }
-        else
+        else if (context.phase == InputActionPhase.Performed)
         {
             Vector2 dir = context.ReadValue<Vector2>();
             CallMoveEvent(dir);
+        }
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            CallRunEvent(false);
+        }
+        else if (context.phase == InputActionPhase.Performed)
+        {
+            CallRunEvent(true);
+        }
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            CallDodgeEvent();
         }
     }
 }

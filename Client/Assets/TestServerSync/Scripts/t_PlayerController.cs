@@ -81,7 +81,6 @@ public class t_PlayerController : MonoBehaviour
     {
         DrawTestInfo();
     }
-
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";

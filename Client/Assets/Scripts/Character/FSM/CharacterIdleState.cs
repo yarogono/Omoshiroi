@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 
 public class CharacterIdleState : CharacterGroundState
 {
+    private bool _isRun;
     public CharacterIdleState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -12,7 +13,7 @@ public class CharacterIdleState : CharacterGroundState
 
     public override void Enter()
     {
-        _stateMachine.MovementSpeedModifier = 0.0f;
+        _isRun = false;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.IdleParameterHash);
     }
@@ -27,34 +28,21 @@ public class CharacterIdleState : CharacterGroundState
     {
         if (direction != Vector2.zero)
         {
-            _stateMachine.ChangeState(_stateMachine.WalkState);
             base.MoveEvent(direction);
+            if (_isRun)
+                _stateMachine.ChangeState(eStateType.Run);
+            else
+                _stateMachine.ChangeState(eStateType.Walk);
         }
     }
 
     protected override void RunEvent(bool isRun)
     {
-        if (isRun)
-        {
-            _stateMachine.ChangeState(_stateMachine.RunState);
-        }
+        _isRun = isRun;
     }
 
     protected override void DodgeEvent()
     {
-        base.DodgeEvent();
-        _stateMachine.ChangeState(_stateMachine.DodgeState);
-    }
-
-    protected override void AttackEvent(Vector2 direction)
-    {
-        base.AttackEvent(direction);
-        _stateMachine.ChangeState(_stateMachine.ComboAttackState);
-    }
-
-    protected override void AimEvent(Vector2 direction)
-    {
-        base.AimEvent(direction);
-        _stateMachine.ChangeState(_stateMachine.AimState);
+        _stateMachine.ChangeState(eStateType.Dodge);
     }
 }

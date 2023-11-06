@@ -1,18 +1,39 @@
+using System.Collections.Generic;
+
 public abstract class StateMachine
 {
+    public eStateType previousStateType { get; private set; }
+    public eStateType currentStateType { get; private set; }
     protected IState currentState;
+    public Dictionary<eStateType, BaseState> States { get; private set; } = new Dictionary<eStateType, BaseState>();
 
-    public void ChangeState(IState newState)
+    public void ChangeState(eStateType newState)
     {
-        currentState?.Exit();
+        if (States.ContainsKey(newState))
+        {
+            currentState?.Exit();
 
-        currentState = newState;
+            previousStateType = currentStateType;
+            currentStateType = newState;
 
-        currentState?.Enter();
+            currentState = States[newState];
+
+            currentState?.Enter();
+        }
     }
 
     public void Update()
     {
         currentState?.Update();
+    }
+
+    public void PhysicsUpdate()
+    {
+        currentState?.PhysicsUpdate();
+    }
+
+    public void AddState(eStateType statetype, BaseState state)
+    {
+        States.Add(statetype, state);
     }
 }
