@@ -18,5 +18,5 @@ MonoBehaviour:
   _baseAttackPower: 1
   _baseCriticalRate: 1
   _baseCriticalPower: 1
-  _baseMoveSpeed: 1
-  _baseRunMultiplier: 1
+  _baseMoveSpeed: 2
+  _baseRunMultiplier: 2
