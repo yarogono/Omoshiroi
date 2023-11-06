@@ -21,13 +21,12 @@ namespace Inventory
         private InventorySO inventoryData_player;
 
         [SerializeField]
-        private InventorySO inventoryData_fb;
-
-        [SerializeField]
         private Button BtnCancel;
 
         private Action OnOpened;
         private Action OnClosed;
+
+        private InventorySO inventoryData_merged;
 
         UIInventoryPage_FB _inventorypage_FB;
         PlayerInput playerInput;
@@ -35,8 +34,8 @@ namespace Inventory
 
         private void Start()
         {
-            PrepareUI();
-            PrepareInventoryData();
+            inventoryData_merged = new InventorySO();
+
             playerInput = GetComponent<PlayerInput>();
             OnOpened = farmingBox.OnOpened;
             OnClosed = farmingBox.OnClosed;
@@ -46,8 +45,8 @@ namespace Inventory
 
         private void PrepareInventoryData()//인벤토리 데이터가 바뀔 때 호출 
         {
-            inventoryData_player.Initialize();
-            inventoryData_player.OnInventoryUpdated += UpdateInventoryUI;
+            inventoryData_merged.Initialize();
+            inventoryData_merged.OnInventoryUpdated += UpdateInventoryUI;
 
             //foreach (InventoryItem item in initialItems)
             //{
@@ -68,11 +67,17 @@ namespace Inventory
 
         private void PrepareUI()
         {
-            inventoryUI.InitializeinventoryUI(inventoryData_player.Size, inventoryData_fb.Size);
+            inventoryUI.InitializeinventoryUI(inventoryData_player.Size, farmingBox.InventorySize);
             inventoryUI.OnDescriptionRequested += HandleDescriptionRequest;
             inventoryUI.OnSwapItems += HandleSwapItems;
             inventoryUI.OnStartDragging += HandleDragging;
             inventoryUI.OnItemActionRequested += HandleItemActionRequest;
+        }
+
+        private void PrepareMergedSO()
+        {
+            inventoryData_merged.Size = inventoryData_player.Size + farmingBox.InventorySize;
+            inventoryData_merged.Initialize();
         }
 
         private void HandleItemActionRequest(int itemIndex)
@@ -81,7 +86,7 @@ namespace Inventory
 
         private void HandleDragging(int itemIndex)
         {
-            InventoryItem inventoryItem = inventoryData_player.GetItemAt(itemIndex);
+            InventoryItem inventoryItem = inventoryData_merged.GetItemAt(itemIndex);
             if (inventoryItem.IsEmpty)
             {
                 return;
@@ -92,12 +97,12 @@ namespace Inventory
 
         private void HandleSwapItems(int itemIndex_1, int itemIndex_2)
         {
-            inventoryData_player.SwapItems(itemIndex_1, itemIndex_2);
+            inventoryData_merged.SwapItems(itemIndex_1, itemIndex_2);
         }
 
         private void HandleDescriptionRequest(int itemIndex)
         {
-            InventoryItem inventoryItem = inventoryData_player.GetItemAt(itemIndex);
+            InventoryItem inventoryItem = inventoryData_merged.GetItemAt(itemIndex);
             if (inventoryItem.IsEmpty)
             {
                 inventoryUI.ResetSelection();
@@ -133,6 +138,9 @@ namespace Inventory
         {
             if (inventoryUI.isActiveAndEnabled == false)
             {
+                PrepareMergedSO();
+                PrepareUI();
+                PrepareInventoryData();
                 //playerInput.CanControl = false;
                 foreach (var item in inventoryData_player.GetCurrentInventoryState())
                 {
@@ -157,6 +165,8 @@ namespace Inventory
             if (inventoryUI.isActiveAndEnabled == true)
             {
                 inventoryUI.Hide();
+
+
 
 
                 OnClosed?.Invoke();

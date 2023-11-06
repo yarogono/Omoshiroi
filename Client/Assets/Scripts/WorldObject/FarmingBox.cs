@@ -13,7 +13,7 @@ using Inventory;
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
     [SerializeField] private InventoryItem testItem;
-    [SerializeField] private int inventorySize;
+    [SerializeField] public int InventorySize { get; private set; }
 
     private InventoryContrller_FB inventoryController;
     private Collider farminBoxCollider;

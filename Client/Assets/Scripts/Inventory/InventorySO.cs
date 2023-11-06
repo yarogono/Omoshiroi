@@ -26,6 +26,12 @@ public class InventorySO : ScriptableObject
         }
     }
 
+    public void InsertItem(int index, InventoryItem item){
+        if (index >= 0 && index < inventoryItems.Count)
+        {
+            inventoryItems[index] = item;
+        }
+    }
 
     public int AddItem(BaseItem item, int quantity)
     {

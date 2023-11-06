@@ -33,7 +33,7 @@ using Inventory;
 
         public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
 
-        public event Action<int, int> OnSwapItems; // 두아이템 스왑 
+        public event Action<int, int> OnSwapItems; // 두 아이템 스왑 
 
 
 
@@ -98,23 +98,23 @@ using Inventory;
             ResetDraggtedItem();
         }
 
-    internal void ResetAllItems()
-    {
-        foreach (var item in listOfUIItems)
+        internal void ResetAllItems()
         {
-            item.ResetData();
-            item.Deselect();
+            foreach (var item in listOfUIItems)
+            {
+                item.ResetData();
+                item.Deselect();
+            }
         }
-    }
 
-    /// <summary>
-    /// 드래그가 끝났을 때, 드래그 시작 위치와 끝 위치의 인덱스에 있는 아이템 값을 스왑한다.
-    /// 
-    /// 끝 위치가 시작 위치에 해당하는 인벤토리를 벗어났다면, 반대편 인벤토리인지 확인하도록 해야 한다.
-    /// 그리고 반대편 인벤토리라면 해당 인덱스 값을 가져와 바꾸도록 해야 한다.
-    /// </summary>
-    /// <param name="inventoryItemUI"> 플레이어 인벤토리 UI 또는 보관함 인벤토리 UI 를 입력</param>
-    private void HandleSwap(UIInventoryItem inventoryItemUI)
+        /// <summary>
+        /// 드래그가 끝났을 때, 드래그 시작 위치와 끝 위치의 인덱스에 있는 아이템 값을 스왑한다.
+        /// 
+        /// 끝 위치가 시작 위치에 해당하는 인벤토리를 벗어났다면, 반대편 인벤토리인지 확인하도록 해야 한다.
+        /// 그리고 반대편 인벤토리라면 해당 인덱스 값을 가져와 바꾸도록 해야 한다.
+        /// </summary>
+        /// <param name="inventoryItemUI"> 플레이어 인벤토리 UI 또는 보관함 인벤토리 UI 를 입력</param>
+        private void HandleSwap(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
             if (index == -1)
