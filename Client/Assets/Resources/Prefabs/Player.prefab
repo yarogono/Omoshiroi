@@ -310,6 +310,9 @@ MonoBehaviour:
     attackParameterName: '@Attack'
     comboAttackParameterName: ComboAttack
     comboIndexParameterName: Combo
+    GroundLayer:
+      serializedVersion: 2
+      m_Bits: 896
   TestEquipItem:
   - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
 --- !u!1 &3341134605525835870

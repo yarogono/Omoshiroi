@@ -26,6 +26,12 @@ public class InventorySO : ScriptableObject
         }
     }
 
+    public void InsertItem(int index, InventoryItem item){
+        if (index >= 0 && index < inventoryItems.Count)
+        {
+            inventoryItems[index] = item;
+        }
+    }
 
     public int AddItem(BaseItem item, int quantity)
     {
@@ -174,7 +180,6 @@ public struct InventoryItem
         {
             item = this.item,
             quantity = newQuantity,
-           
         };
     }
 
@@ -183,6 +188,5 @@ public struct InventoryItem
         {
             item = null,
             quantity = 0,
-           
         };
 }

@@ -17,6 +17,7 @@ public class CharacterAnimationData
     [SerializeField] private string attackParameterName = "@Attack";
     [SerializeField] private string comboAttackParameterName = "ComboAttack";
     [SerializeField] private string comboIndexParameterName = "Combo";
+    public LayerMask GroundLayer;
 
     public int GroundParameterHash { get; private set; }
     public int IdleParameterHash { get; private set; }
