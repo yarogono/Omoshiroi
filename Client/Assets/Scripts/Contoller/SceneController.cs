@@ -12,8 +12,15 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         BtnChangeScene.onClick.AddListener(() =>
-        {
-           LoadingScenController.LoadScene(sceneName);
+        {          
+            //login테스트
+            AccountLoginReq req = new AccountLoginReq() { AccountName = "qwer", AccountPassword = "qwer" };
+            AccountLoginRes newRes = null;
+            WebManager.Instance.SendPostRequest<AccountLoginRes>("account/login", req, res =>
+            {                
+                newRes = res;        
+            });
+            LoadingScenController.LoadScene(sceneName);
         });
     }
   
