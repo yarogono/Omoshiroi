@@ -53,8 +53,8 @@ public class CharacterComboAttackState : CharacterAttackState
     {
         if (alreadyAppliedForce) return;
         alreadyAppliedForce = true;
-
-        _stateMachine.Movement.AddImpact(_stateMachine.Character.transform.forward * attackInfo.Force);
+        Vector3 newDir = new Vector3() { x = _stateMachine.AttackDirection.normalized.x, z = _stateMachine.AttackDirection.normalized.y, y = 0.0f };
+        _stateMachine.Movement.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
     }
 
     public override void Update()
@@ -81,10 +81,21 @@ public class CharacterComboAttackState : CharacterAttackState
         }
     }
 
+    public override void PhysicsUpdate()
+    {
+        if (!CheckGround())
+            _stateMachine.ChangeState(eStateType.None);
+    }
+
     protected override void AttackEvent(Vector2 direction)
     {
         float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Attack");
         if (normalizedTime >= attackInfo.ComboTransitionTime)
             TryComboAttack();
+    }
+
+    protected override void AimEvent(Vector2 direction)
+    {
+        _stateMachine.AttackDirection = direction;
     }
 }

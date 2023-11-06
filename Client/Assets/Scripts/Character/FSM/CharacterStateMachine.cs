@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 public class CharacterStateMachine : StateMachine
 {
     // Character Info
@@ -11,6 +13,8 @@ public class CharacterStateMachine : StateMachine
     // State Info
     public float MovementSpeedMultiflier { set => Movement.SpeedMultiflier = value; }
     public int LayerInAnimator { get; }
+    public Vector2 AttackDirection { get; set; }
+
     public CharacterStateMachine(CharacterDataContainer character, int layerInAnimator)
     {
         Character = character;

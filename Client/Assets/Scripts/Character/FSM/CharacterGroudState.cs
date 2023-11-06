@@ -25,7 +25,7 @@ public class CharacterGroundState : BaseState
         base.PhysicsUpdate();
         // TODO
         // 이거 잘 작동하는지 확인이 필요함
-        if (!_stateMachine.Character.Controller.isGrounded
+        if (!CheckGround()
             && Mathf.Abs(_stateMachine.Character.Controller.velocity.y) > Mathf.Abs(Physics.gravity.y * Time.fixedDeltaTime))
         {
             _stateMachine.ChangeState(eStateType.Fall);
