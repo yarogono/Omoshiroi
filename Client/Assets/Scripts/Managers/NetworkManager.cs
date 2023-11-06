@@ -52,8 +52,7 @@ public class NetworkManager : CustomSingleton<NetworkManager>
             Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(
                 packet.Id
             );
-            if (handler != null)
-                handler.Invoke(_session, packet.Message);
+            handler?.Invoke(_session, packet.Message);
         }
     }
 
@@ -64,7 +63,7 @@ public class NetworkManager : CustomSingleton<NetworkManager>
 
     public void LeaveGame()
     {
-        t_PilotPlayerController pilotPlayerController = ObjectManager.Instance.pilotPlayerController;
+        PilotSync pilotPlayerController = ObjectManager.Instance.pilotSync;
         if (pilotPlayerController == null)
             return;
 

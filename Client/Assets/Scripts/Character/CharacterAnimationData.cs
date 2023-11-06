@@ -9,11 +9,11 @@ public class CharacterAnimationData
     [SerializeField] private string walkParameterName = "Walk";
     [SerializeField] private string runParameterName = "Run";
     [SerializeField] private string dodgeParameterName = "Dodge";
-    [SerializeField] private string aimParameterName = "Aim";
 
     [SerializeField] private string airParameterName = "@Air";
     [SerializeField] private string fallParameterName = "Fall";
 
+    [SerializeField] private string aimParameterName = "@Aim";
     [SerializeField] private string attackParameterName = "@Attack";
     [SerializeField] private string comboAttackParameterName = "ComboAttack";
     [SerializeField] private string comboIndexParameterName = "Combo";
@@ -23,11 +23,11 @@ public class CharacterAnimationData
     public int WalkParameterHash { get; private set; }
     public int RunParameterHash { get; private set; }
     public int DodgeParameterHash { get; private set; }
-    public int AimParameterHash { get; private set; }
 
     public int AirParameterHash { get; private set; }
     public int FallParameterHash { get; private set; }
 
+    public int AimParameterHash { get; private set; }
     public int AttackParameterHash { get; private set; }
     public int ComboAttackParameterHash { get; private set; }
     public int ComboIndexParameterHash { get; private set; }
