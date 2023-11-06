@@ -9,13 +9,11 @@ public class WebManager : CustomSingleton<WebManager>
     private string _restApiUrl;
 
 
-    private void Start()
+    private void Awake()
     {
         ConfigManager.LoadConfig();
         _restApiUrl = ConfigManager.Config.restApiUrl;
     }
-
-
 
     public void SendPostRequest<T>(string url, object obj, Action<T> res)
     {
