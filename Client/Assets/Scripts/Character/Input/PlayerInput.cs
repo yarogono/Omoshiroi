@@ -272,7 +272,9 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            CallAimEvent(context.ReadValue<Vector2>());
+            var point = context.ReadValue<Vector2>();
+            Vector2 center = new Vector2() { x = Display.main.renderingWidth / 2, y = Display.main.renderingHeight / 2};
+            CallAimEvent(center - point);
         }
     }
 
@@ -280,7 +282,7 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            CallAttackEvent(context.ReadValue<Vector2>());
+            CallAttackEvent(Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>()) - gameObject.transform.position);
         }
     }
 

@@ -66,9 +66,6 @@ public class CharacterComboAttackState : CharacterAttackState
         {
             if (normalizedTime >= attackInfo.ForceTransitionTime)
                 TryApplyForce();
-
-            if (normalizedTime >= attackInfo.ComboTransitionTime)
-                TryComboAttack();
         }
         else
         {
@@ -86,6 +83,8 @@ public class CharacterComboAttackState : CharacterAttackState
 
     protected override void AttackEvent(Vector2 direction)
     {
-        TryComboAttack();
+        float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Attack");
+        if (normalizedTime >= attackInfo.ComboTransitionTime)
+            TryComboAttack();
     }
 }
