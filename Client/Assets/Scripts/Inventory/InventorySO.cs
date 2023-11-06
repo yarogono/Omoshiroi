@@ -174,7 +174,6 @@ public struct InventoryItem
         {
             item = this.item,
             quantity = newQuantity,
-           
         };
     }
 
@@ -183,6 +182,5 @@ public struct InventoryItem
         {
             item = null,
             quantity = 0,
-           
         };
 }
