@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterFallState : CharacterAirState
 {
+    private eStateType _nextState;
     public CharacterFallState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -13,12 +15,17 @@ public class CharacterFallState : CharacterAirState
     {
         base.Enter();
 
+        _stateMachine.MovementSpeedMultiflier = 0.0f;
+        _nextState = _stateMachine.previousStateType;
+
         StartAnimation(_stateMachine.Character.AnimationData.FallParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        _stateMachine.MovementSpeedMultiflier = 1.0f;
 
         StopAnimation(_stateMachine.Character.AnimationData.FallParameterHash);
     }
@@ -27,35 +34,28 @@ public class CharacterFallState : CharacterAirState
     {
         base.Update();
 
-        if (_stateMachine.Character.Controller.isGrounded)
+        if (CheckGround())
         {
-            _stateMachine.ChangeState(eStateType.Idle);
+            _stateMachine.ChangeState(_nextState);
             return;
         }
     }
 
     protected override void RunEvent(bool isRun)
     {
-        // 아무고토 못하죠
+        if (isRun)
+            _nextState = eStateType.Run;
     }
 
     protected override void MoveEvent(Vector2 direction)
     {
-        // 아무고토 못하죠
-    }
-
-    protected override void AttackEvent(Vector2 direction)
-    {
-        // 아무고토 못하죠
-    }
-
-    protected override void AimEvent(Vector2 direction)
-    {
-        // 아무고토 못하죠
-    }
-
-    protected override void DodgeEvent()
-    {
-        // 아무고토 못하죠
+        MoveCharacter(direction);
+        if (direction == Vector2.zero)
+            _nextState = eStateType.Idle;
+        else
+        {
+            if (_nextState != eStateType.Run)
+                _nextState = eStateType.Walk;
+        }
     }
 }

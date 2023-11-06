@@ -52,4 +52,13 @@ public class CharacterDataContainer : MonoBehaviour
     {
         stateMachine.PhysicsUpdate();
     }
+
+    private void OnDrawGizmos()
+    {
+        Ray downRay = new Ray(transform.position, Vector3.down);
+
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawRay(downRay);
+    }
 }
