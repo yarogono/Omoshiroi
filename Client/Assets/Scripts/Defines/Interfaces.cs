@@ -1,4 +1,6 @@
 // 인터페이스 모음
+using System.Collections.Generic;
+using UnityEngine;
 
 public interface IInteractable
 {
@@ -33,3 +35,19 @@ public interface IState
     public void Update();
     public void PhysicsUpdate();
 }
+
+
+
+public interface IDestroyableItem
+{
+
+}
+
+public interface IItemAction
+{
+    public string ActionName { get; }
+    bool PerformAction(GameObject character);
+
+}
+
+

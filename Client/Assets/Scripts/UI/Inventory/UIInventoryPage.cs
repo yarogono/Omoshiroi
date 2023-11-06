@@ -28,9 +28,12 @@ using Inventory;
 
         public event Action<int, int> OnSwapItems; // 두아이템 스왑 
 
+       [SerializeField]
+        private UIItemActionPanel actionPanel;
 
 
-        private void Awake()
+
+    private void Awake()
         {
             Hide();
             mouseFollower.Toggle(false);
@@ -150,14 +153,24 @@ using Inventory;
             itemDescription.ResetDescription();
             DeselectAllItems();
         }
+    public void ShowItemAction(int itemIndex)
+    {
+        actionPanel.Toggle(true);
+        actionPanel.transform.position = listOfUIItems[itemIndex].transform.position;
+    }
 
+    public void AddAction(string actionName, Action performAction)
+    {
+        actionPanel.AddButon(actionName, performAction); //액션패널 호출 
+    }
 
-        private void DeselectAllItems()
+    private void DeselectAllItems()
         {
             foreach (UIInventoryItem item in listOfUIItems)
             {
                 item.Deselect();
             }
+        actionPanel.Toggle(false);
 
         }
 
@@ -165,6 +178,7 @@ using Inventory;
         public void Hide()
         {
             gameObject.SetActive(false);
-
+            actionPanel.Toggle(false);
+            ResetDraggtedItem();
         }
     }

@@ -13,7 +13,7 @@ public class InventorySO : ScriptableObject
     private List<InventoryItem> inventoryItems;
     BaseItem item;
     [field: SerializeField]
-    public int Size { get; private set; } = 10;
+    public int Size { get; set; } = 10;
 
     public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
 
@@ -103,6 +103,22 @@ public class InventorySO : ScriptableObject
             AddItemToFirstFreeSlot(item, newQuantity);
         }
         return quantity;
+    }
+    public void RemoveItem(int itemIndex, int amount)
+    {
+        if (inventoryItems.Count > itemIndex)
+        {
+            if (inventoryItems[itemIndex].IsEmpty)
+                return;
+            int reminder = inventoryItems[itemIndex].quantity - amount;
+            if (reminder <= 0)
+                inventoryItems[itemIndex] = InventoryItem.GetEmptyItem();
+            else
+                inventoryItems[itemIndex] = inventoryItems[itemIndex]
+                    .ChangeQuantity(reminder);
+
+            InformAboutChange();
+        }
     }
 
     public Dictionary<int, InventoryItem> GetCurrentInventoryState()

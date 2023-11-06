@@ -14,19 +14,13 @@ enum MsgId {
   S_CHANGE_HP = 6;
   S_DIE = 7;
   C_ENTER_GAME = 8;
+  C_LEAVE_GAME = 9;
 }
 
 enum CreatureState {
     IDLE = 0;
     MOVING = 1;
     DEAD = 2;
-}
-
-enum MoveDir {
-	UP = 0;
-	DOWN = 1;
-	LEFT = 2;
-	RIGHT = 3;
 }
 
 enum GameObjectType {
@@ -41,11 +35,15 @@ message C_EnterGame {
 }
 
 message S_EnterGame {
-  ObjectInfo player = 1;
+	ObjectInfo player = 1;
 }
 
 message S_LeaveGame {
+	int32 playerId = 1;
+}
 
+message C_LeaveGame {
+	int32 playerId = 1;
 }
 
 message S_Spawn {
@@ -85,8 +83,15 @@ message ObjectInfo {
 message PositionInfo {
 	CreatureState state = 1;
 	MoveDir moveDir = 2;
-	int32 posX = 3;
-	int32 posY = 4;
+	float posX = 3;
+	float posY = 4;
+	float posZ = 5;
+}
+
+message MoveDir {
+	float dirX = 1;
+	float dirY = 2;
+	float dirZ = 3;
 }
 
 message StatInfo {

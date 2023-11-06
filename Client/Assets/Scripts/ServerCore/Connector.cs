@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using UnityEngine;
 
 namespace ServerCore
 {
@@ -12,7 +13,11 @@ namespace ServerCore
         {
             for (int i = 0; i < count; i++)
             {
-                Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                Socket socket = new Socket(
+                    endPoint.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 _sessionFactory = sessionFactory;
 
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
@@ -45,7 +50,7 @@ namespace ServerCore
             }
             else
             {
-                //Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
+                Debug.Log($"OnConnectCompleted Fail: {args.SocketError}");
             }
         }
     }
