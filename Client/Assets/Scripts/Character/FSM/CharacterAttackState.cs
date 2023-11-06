@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterAttackState : BaseState
 {
+    public bool IsAttacking { get; protected set; }
+    public int ComboIndex { get; protected set; }
     public CharacterAttackState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -12,8 +14,9 @@ public class CharacterAttackState : BaseState
     public override void Enter()
     {
         base.Enter();
-        _stateMachine.MovementSpeedModifier = 0.1f;
-        _stateMachine.IsAttacking = true;
+
+        _stateMachine.MovementSpeedMultiflier = 0.1f;
+        IsAttacking = true;
 
         StartAnimation(_stateMachine.Character.AnimationData.AttackParameterHash);
     }
@@ -22,23 +25,9 @@ public class CharacterAttackState : BaseState
     {
         base.Exit();
 
+        _stateMachine.MovementSpeedMultiflier = 1.0f;
+        IsAttacking = false;
+
         StopAnimation(_stateMachine.Character.AnimationData.AttackParameterHash);
-    }
-
-    protected override void RunEvent(bool isRun)
-    {
-        // 아무고토 못하죠
-    }
-
-    protected override void AttackEvent(Vector2 direction)
-    {
-        base.AttackEvent(direction);
-    }
-
-    protected override void DodgeEvent()
-    {
-        base.DodgeEvent();
-        _stateMachine.IsAttacking = false;
-        _stateMachine.ChangeState(_stateMachine.DodgeState);
     }
 }

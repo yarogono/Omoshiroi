@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAimState : CharacterGroundState
+public class CharacterAimState : BaseState
 {
     public CharacterAimState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
@@ -10,7 +10,8 @@ public class CharacterAimState : CharacterGroundState
     public override void Enter()
     {
         base.Enter();
-        _stateMachine.MovementSpeedModifier = 0.5f;
+
+        _stateMachine.MovementSpeedMultiflier = 0.5f;
 
         StartAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
     }
@@ -19,38 +20,18 @@ public class CharacterAimState : CharacterGroundState
     {
         base.Exit();
 
-        StopAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
-    }
+        _stateMachine.MovementSpeedMultiflier = 1.0f;
 
-    protected override void MoveEvent(Vector2 direction)
-    {
-        if (direction == Vector2.zero)
-        {
-            _stateMachine.ChangeState(_stateMachine.IdleState);
-        }
-        base.MoveEvent(direction);
+        StopAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
     }
 
     protected override void AimEvent(Vector2 direction)
     {
-        base.AimEvent(direction);
-    }
-
-    protected override void DodgeEvent()
-    {
-        _stateMachine.ChangeState(_stateMachine.DodgeState);
-        base.DodgeEvent();
-    }
-
-    protected override void RunEvent(bool isRun)
-    {
-        if (isRun) { _stateMachine.ChangeState(_stateMachine.RunState); }
-        base.RunEvent(isRun);
+        // TODO
     }
 
     protected override void AttackEvent(Vector2 direction)
     {
-        _stateMachine.ChangeState(_stateMachine.ComboAttackState);
-        base.AttackEvent(direction);
+        _stateMachine.ChangeState(eStateType.ComboAttack);
     }
 }

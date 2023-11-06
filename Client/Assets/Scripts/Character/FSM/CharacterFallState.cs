@@ -29,8 +29,33 @@ public class CharacterFallState : CharacterAirState
 
         if (_stateMachine.Character.Controller.isGrounded)
         {
-            _stateMachine.ChangeState(_stateMachine.IdleState);
+            _stateMachine.ChangeState(eStateType.Idle);
             return;
         }
+    }
+
+    protected override void RunEvent(bool isRun)
+    {
+        // 아무고토 못하죠
+    }
+
+    protected override void MoveEvent(Vector2 direction)
+    {
+        // 아무고토 못하죠
+    }
+
+    protected override void AttackEvent(Vector2 direction)
+    {
+        // 아무고토 못하죠
+    }
+
+    protected override void AimEvent(Vector2 direction)
+    {
+        // 아무고토 못하죠
+    }
+
+    protected override void DodgeEvent()
+    {
+        // 아무고토 못하죠
     }
 }

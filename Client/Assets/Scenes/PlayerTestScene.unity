@@ -1980,18 +1980,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5397881333417574267, guid: 70469078667f23f4b989efb16d95d539, type: 3}
-      propertyPath: AimTestTxt
-      value: 
-      objectReference: {fileID: 1658100566}
-    - target: {fileID: 5397881333417574267, guid: 70469078667f23f4b989efb16d95d539, type: 3}
-      propertyPath: MoveTestTxt
-      value: 
-      objectReference: {fileID: 1621477293}
-    - target: {fileID: 5397881333417574267, guid: 70469078667f23f4b989efb16d95d539, type: 3}
-      propertyPath: DodgeTestTxt
-      value: 
-      objectReference: {fileID: 870818182}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -31,6 +31,7 @@ public class CharacterMovement : MonoBehaviour
     private float _knockoutTime;
 
     public float SpeedMultiflier { get; set; } = 1.0f;
+    public Vector3 ControlDireaction { get => _controlDirection; }
 
     private void Awake()
     {

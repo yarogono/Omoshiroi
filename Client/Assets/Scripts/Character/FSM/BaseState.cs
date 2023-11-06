@@ -4,6 +4,7 @@ public class BaseState : IState
 {
     protected CharacterStateMachine _stateMachine;
 
+
     public BaseState(CharacterStateMachine stateMachine)
     {
         _stateMachine = stateMachine;
@@ -52,12 +53,13 @@ public class BaseState : IState
 
     protected virtual void RunEvent(bool isRun)
     {
-
+        // 달리기
     }
 
     protected virtual void MoveEvent(Vector2 direction)
     {
-        MoveCharacter(direction);
+        // 이동
+        // MoveCharacter(direction);
     }
 
     protected virtual void AttackEvent(Vector2 direction)
@@ -88,15 +90,15 @@ public class BaseState : IState
         _stateMachine.Character.Animator.SetBool(animationHash, false);
     }
 
-    protected float GetNormalizedTime(Animator animator, string tag)
+    protected float GetNormalizedTime(Animator animator, int layer, string tag)
     {
-        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);
-        if (animator.IsInTransition(0) && nextInfo.IsTag(tag))
+        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(layer);
+        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(layer);
+        if (animator.IsInTransition(layer) && nextInfo.IsTag(tag))
         {
             return nextInfo.normalizedTime;
         }
-        else if (!animator.IsInTransition(0) && currentInfo.IsTag(tag))
+        else if (!animator.IsInTransition(layer) && currentInfo.IsTag(tag))
         {
             return currentInfo.normalizedTime;
         }
@@ -106,7 +108,7 @@ public class BaseState : IState
         }
     }
 
-    private void MoveCharacter(Vector2 direction)
+    protected void MoveCharacter(Vector2 direction)
     {
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;

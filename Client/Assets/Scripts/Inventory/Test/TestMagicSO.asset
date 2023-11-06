@@ -15,31 +15,25 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   objectPrefab: {fileID: 0}
   itemID: 0
-  itemName: 
-  description: 
+  itemName: "\uD14C\uC2A4\uD2B8 \uB9C8\uBC95"
+  description: "\uD14C\uC2A4\uD2B8\uC6A9 \uB9C8\uBC95\uC785\uB2C8\uB2E4."
   itemType: 2
-  maxStack: 0
+  maxStack: 1
   isStackable: 0
   magicObject: {fileID: 0}
-  range: 0
+  range: 5
   anime: {fileID: 0}
   attackData:
     <AttackInfos>k__BackingField:
-    - <AttackName>k__BackingField: 
-      <ComboStateIndex>k__BackingField: 0
-      <ComboTransitionTime>k__BackingField: 0
-      <ForceTransitionTime>k__BackingField: 0
-      <Force>k__BackingField: 0
-      <Damage>k__BackingField: 0
-    - <AttackName>k__BackingField: 
-      <ComboStateIndex>k__BackingField: 0
-      <ComboTransitionTime>k__BackingField: 0
-      <ForceTransitionTime>k__BackingField: 0
-      <Force>k__BackingField: 0
-      <Damage>k__BackingField: 0
-    - <AttackName>k__BackingField: 
-      <ComboStateIndex>k__BackingField: 0
-      <ComboTransitionTime>k__BackingField: 0
-      <ForceTransitionTime>k__BackingField: 0
-      <Force>k__BackingField: 0
-      <Damage>k__BackingField: 0
+    - <AttackName>k__BackingField: start
+      <ComboStateIndex>k__BackingField: 1
+      <ComboTransitionTime>k__BackingField: 0.5
+      <ForceTransitionTime>k__BackingField: 0.2
+      <Force>k__BackingField: 1
+      <Damage>k__BackingField: 1
+    - <AttackName>k__BackingField: end
+      <ComboStateIndex>k__BackingField: 2
+      <ComboTransitionTime>k__BackingField: 0.5
+      <ForceTransitionTime>k__BackingField: 0.2
+      <Force>k__BackingField: 1
+      <Damage>k__BackingField: 1

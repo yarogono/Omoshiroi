@@ -7,7 +7,7 @@ public class CharacterDataContainer : MonoBehaviour
 {
     [SerializeField] public Inventory1 Inven { get;}
     [field:SerializeField] public CharacterStats Stats { get; private set; }
-    [SerializeField] public EquipSystem Equipments { get; private set; }
+    [field:SerializeField] public EquipSystem Equipments { get; private set; }
 
     public Animator Animator { get; private set; }
     [field: SerializeField] public CharacterAnimationData AnimationData { get; private set; }
@@ -15,7 +15,10 @@ public class CharacterDataContainer : MonoBehaviour
     public CharacterMovement Movement { get; private set; }
     public BaseInput InputActions { get; private set; }
 
-    private CharacterStateMachine stateMachine;
+    private CombineStateMachine stateMachine;
+
+    [Header("테스트용 착용아이템")]
+    [SerializeField] private BaseItem[] TestEquipItem;
 
     private void Awake()
     {
@@ -30,11 +33,23 @@ public class CharacterDataContainer : MonoBehaviour
     {
         if (Stats.cbs != null)
             Stats.Initialize();
-        stateMachine = new CharacterStateMachine(this);
+
+        if (Equipments == null)
+            Equipments = new EquipSystem();
+
+        foreach (var item in TestEquipItem)
+            Equipments.Equip(item);
+
+        stateMachine = new CombineStateMachine(this);
     }
 
     void Update()
     {
-        
+        stateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.PhysicsUpdate();
     }
 }

@@ -23,11 +23,10 @@ public class CharacterComboAttackState : CharacterAttackState
         alreadyApplyCombo = false;
         alreadyAppliedForce = false;
 
-        int comboIndex = _stateMachine.ComboIndex;
         stats = _stateMachine.Character.Stats;
 
-        attackInfo = (_stateMachine.Character.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic).AttackData.GetAttackInfo(comboIndex);
-        _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, comboIndex);
+        attackInfo = (_stateMachine.Character.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic).AttackData.GetAttackInfo(ComboIndex);
+        _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, ComboIndex);
     }
 
     public override void Exit()
@@ -36,7 +35,7 @@ public class CharacterComboAttackState : CharacterAttackState
         StopAnimation(_stateMachine.Character.AnimationData.ComboAttackParameterHash);
 
         if (!alreadyApplyCombo)
-            _stateMachine.ComboIndex = 0;
+            ComboIndex = 0;
     }
 
     private void TryComboAttack()
@@ -45,7 +44,7 @@ public class CharacterComboAttackState : CharacterAttackState
 
         if (attackInfo.ComboStateIndex == -1) return;
 
-        if (!_stateMachine.IsAttacking) return;
+        if (!IsAttacking) return;
 
         alreadyApplyCombo = true;
     }
@@ -62,7 +61,7 @@ public class CharacterComboAttackState : CharacterAttackState
     {
         base.Update();
 
-        float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, "Attack");
+        float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Attack");
         if (normalizedTime < 1f)
         {
             if (normalizedTime >= attackInfo.ForceTransitionTime)
@@ -75,13 +74,18 @@ public class CharacterComboAttackState : CharacterAttackState
         {
             if (alreadyApplyCombo)
             {
-                _stateMachine.ComboIndex = attackInfo.ComboStateIndex;
-                _stateMachine.ChangeState(_stateMachine.ComboAttackState);
+                ComboIndex = attackInfo.ComboStateIndex;
+                _stateMachine.ChangeState(eStateType.ComboAttack);
             }
             else
             {
-                _stateMachine.ChangeState(_stateMachine.IdleState);
+                _stateMachine.ChangeState(eStateType.None);
             }
         }
+    }
+
+    protected override void AttackEvent(Vector2 direction)
+    {
+        TryComboAttack();
     }
 }

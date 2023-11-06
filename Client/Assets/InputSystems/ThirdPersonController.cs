@@ -198,6 +198,24 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa9bf891-438d-4dc1-9f37-4819bb694c1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""af5b8061-5edd-4398-ba9f-c88ab675c3de"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -257,24 +275,101 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""4ce61d0d-8d80-4cb6-8cac-6eab40d6909a"",
+                    ""name"": ""Position"",
+                    ""id"": ""f9b7ec5a-c696-4e14-95ff-372e9961a730"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""e26a381e-cb36-4d3c-8805-8f7d799991d1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""557291b9-0178-40b2-acee-56968f3bf1d4"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PointerControl"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Two Modifiers"",
+                    ""id"": ""28b18efa-641d-4fa7-ab0e-35ea702c255b"",
+                    ""path"": ""TwoModifiers"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier1"",
+                    ""id"": ""ef5a178a-abac-41fe-b26b-b16f78c8daa7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""modifier2"",
+                    ""id"": ""ae640d0b-9b6a-4a95-a5c5-564affcc25be"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""0f088d63-8048-45a6-893e-b5ed1211b182"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b347ead-4bbc-4fdb-841e-0f7ca5f6a77f"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PointerControl"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""779fac83-c4bc-47c3-a305-fa3ca368d82c"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""bfb70be5-4549-4612-9035-a3ff03e06836"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PointerControl"",
-                    ""action"": ""Fire"",
+                    ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -305,6 +400,8 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
         m_Test_Move = m_Test.FindAction("Move", throwIfNotFound: true);
         m_Test_Aim = m_Test.FindAction("Aim", throwIfNotFound: true);
         m_Test_Fire = m_Test.FindAction("Fire", throwIfNotFound: true);
+        m_Test_Run = m_Test.FindAction("Run", throwIfNotFound: true);
+        m_Test_Dodge = m_Test.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -431,6 +528,8 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
     private readonly InputAction m_Test_Move;
     private readonly InputAction m_Test_Aim;
     private readonly InputAction m_Test_Fire;
+    private readonly InputAction m_Test_Run;
+    private readonly InputAction m_Test_Dodge;
     public struct TestActions
     {
         private @ThirdPersonController m_Wrapper;
@@ -438,6 +537,8 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
         public InputAction @Move => m_Wrapper.m_Test_Move;
         public InputAction @Aim => m_Wrapper.m_Test_Aim;
         public InputAction @Fire => m_Wrapper.m_Test_Fire;
+        public InputAction @Run => m_Wrapper.m_Test_Run;
+        public InputAction @Dodge => m_Wrapper.m_Test_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_Test; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -456,6 +557,12 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
         }
 
         private void UnregisterCallbacks(ITestActions instance)
@@ -469,6 +576,12 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
         }
 
         public void RemoveCallbacks(ITestActions instance)
@@ -506,5 +619,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
         void OnMove(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }

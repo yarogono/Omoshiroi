@@ -19,29 +19,4 @@ public class CharacterAirState : BaseState
         base.Exit();
         StopAnimation(_stateMachine.Character.AnimationData.AirParameterHash);
     }
-
-    protected override void RunEvent(bool isRun)
-    {
-        // 아무고토 못하죠
-    }
-
-    protected override void MoveEvent(Vector2 direction)
-    {
-        // 아무고토 못하죠
-    }
-
-    protected override void AttackEvent(Vector2 direction)
-    {
-        // 아무고토 못하죠
-    }
-
-    protected override void AimEvent(Vector2 direction)
-    {
-        // 아무고토 못하죠
-    }
-
-    protected override void DodgeEvent()
-    {
-        // 아무고토 못하죠
-    }
 }

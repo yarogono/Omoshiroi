@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterRunState : CharacterGroundState
+public class CharacterRunState : CharacterWalkState
 {
+    public bool IsRun { get; private set; }
     public CharacterRunState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
     }
     public override void Enter()
     {
+        _stateMachine.MovementSpeedMultiflier = _stateMachine.CharacterSpeedMultiflier;
+        IsRun = true;
         base.Enter();
-        _stateMachine.MovementSpeedModifier = _stateMachine.CharacterSpeedMultiflier;
         StartAnimation(_stateMachine.Character.AnimationData.RunParameterHash);
     }
 
     public override void Exit()
     {
+        _stateMachine.MovementSpeedMultiflier = 1.0f;
         base.Exit();
         StopAnimation(_stateMachine.Character.AnimationData.RunParameterHash);
     }
@@ -24,34 +27,22 @@ public class CharacterRunState : CharacterGroundState
     {
         if (!isRun)
         {
-            _stateMachine.ChangeState(_stateMachine.WalkState);
+            IsRun = false;
+            _stateMachine.ChangeState(eStateType.Walk);
         }
     }
 
     protected override void MoveEvent(Vector2 direction)
     {
+        base.MoveEvent(direction);
         if (direction == Vector2.zero)
         {
-            _stateMachine.ChangeState(_stateMachine.IdleState);
+            _stateMachine.ChangeState(eStateType.Idle);
         }
-        base.MoveEvent(direction);
     }
 
     protected override void DodgeEvent()
     {
-        base.DodgeEvent();
-        _stateMachine.ChangeState(_stateMachine.DodgeState);
-    }
-
-    protected override void AttackEvent(Vector2 direction)
-    {
-        base.AttackEvent(direction);
-        _stateMachine.ChangeState(_stateMachine.ComboAttackState);
-    }
-
-    protected override void AimEvent(Vector2 direction)
-    {
-        base.AimEvent(direction);
-        _stateMachine.ChangeState(_stateMachine.AimState);
+        _stateMachine.ChangeState(eStateType.Dodge);
     }
 }
