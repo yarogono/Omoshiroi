@@ -12,16 +12,14 @@ using Inventory;
 
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
-    [SerializeField]
-    private InventoryItem testItem;
-
-    [SerializeField]
-    public int InventorySize { get; private set; }
-
+    [SerializeField] private InventoryItem testItem;
+    [SerializeField] private int inventorySize;
+    
     private InventoryController_FB inventoryController;
     private Collider farminBoxCollider;
 
     public Dictionary<int, InventoryItem> ItemList { get; private set; }
+    public int InventorySize { get { return inventorySize; } private set { inventorySize = value; } }
 
     public Action OnOpened;
     public Action OnClosed;

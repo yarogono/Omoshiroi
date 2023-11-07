@@ -472,7 +472,7 @@ MonoBehaviour:
   testItem:
     quantity: 1
     item: {fileID: 11400000, guid: 3d63bdf0459f06740bd0e3c0f572a064, type: 2}
-  inventorySize: 9
+  inventorySize: 10
 --- !u!114 &353929901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   farmingBox: {fileID: 353929900}
   inventoryUI: {fileID: 7022715561009260243}
   inventoryData_player: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
-  inventoryData_fb: {fileID: 11400000, guid: f94f25bdf9175f8479e70e5ee5ab3852, type: 2}
+  inventoryData_merged: {fileID: 11400000, guid: 5a6734ba4b296ad4faca3dd9d53566be, type: 2}
   BtnCancel: {fileID: 4969132920175859311}
 --- !u!1 &610181004
 GameObject:
@@ -717,7 +717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &839860201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1044,19 +1044,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7873714312459347827, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7873714312459347827, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7873714312459347827, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 17.890001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7873714312459347827, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -17.900002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8184898871078841236, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
       propertyPath: m_RaycastTarget
@@ -4009,7 +4009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1ae3bdaed51d448b0d91c46f84fe85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 699342288}
   item: {fileID: 0}
 --- !u!224 &3088729571997522133
 RectTransform:
@@ -6403,8 +6403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseFontSize: []
-  itemPrefab_player: {fileID: 1226340929728962863, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
-  itemPrefab: {fileID: 1226340929728962863, guid: c97b0f8cadb65e24c81aaf5170d4f655, type: 3}
+  itemPrefab: {fileID: 1226340929728962863, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
   contentPanel_player: {fileID: 7040231971247927697}
   contentPanel_fb: {fileID: 6348863268155009501}
   itemDescription: {fileID: 1626426349760502142}
