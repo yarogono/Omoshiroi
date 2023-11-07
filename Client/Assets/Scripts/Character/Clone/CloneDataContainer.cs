@@ -36,11 +36,11 @@ public class CloneDataContainer : MonoBehaviour
 
     void Update()
     {
-        _stateMachine.Update();
+        
     }
 
     private void FixedUpdate()
     {
-        _stateMachine.PhysicsUpdate();
+        
     }
 }

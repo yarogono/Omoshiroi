@@ -13,10 +13,7 @@ public struct TouchAreaData
     public float Radius;
 }
 
-public class PlayerInput
-    : BaseInput,
-        ThirdPersonController.ITestActions,
-        ThirdPersonController.IPlayerActions
+public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdPersonController.IPlayerActions
 {
     public ThirdPersonController InputActions { get; private set; }
 
