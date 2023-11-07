@@ -15,7 +15,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     [SerializeField] private InventoryItem testItem;
     [SerializeField] private int inventorySize;
     
-    private InventoryContrller_FB inventoryController;
+    private InventoryController_FB inventoryController;
     private Collider farminBoxCollider;
 
     public Dictionary<int, InventoryItem> ItemList { get; private set; }
