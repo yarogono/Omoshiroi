@@ -15,6 +15,8 @@ public class InventorySO : ScriptableObject
     [field: SerializeField]
     public int Size { get; set; } = 10;
 
+    public List<InventoryItem> InventoryItems { get; private set; }
+
     public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
 
     public void Initialize()
@@ -24,6 +26,10 @@ public class InventorySO : ScriptableObject
         {
             inventoryItems.Add(InventoryItem.GetEmptyItem());
         }
+    }
+
+    public void SetInventoryItems(List<InventoryItem> items){
+        inventoryItems = items;
     }
 
     public void InsertItem(int index, InventoryItem item){
@@ -162,7 +168,7 @@ public class InventorySO : ScriptableObject
         InformAboutChange();
     }
 
-    private void InformAboutChange() // 현재 가저온 인벤토리에이터  인벤토리컨트롤러에 전달 
+    public void InformAboutChange() // 현재 가저온 인벤토리에이터  인벤토리컨트롤러에 전달 
     {
         OnInventoryUpdated?.Invoke(GetCurrentInventoryState());
     }

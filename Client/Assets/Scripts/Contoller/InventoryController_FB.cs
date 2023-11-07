@@ -47,6 +47,7 @@ namespace Inventory
         private void PrepareInventoryData()//인벤토리 데이터가 바뀔 때 호출 
         {
             inventoryData_merged.OnInventoryUpdated += UpdateInventoryUI;
+            UpdateInventoryUI(inventoryData_merged.GetCurrentInventoryState());
 
             //foreach (InventoryItem item in initialItems)
             //{
@@ -62,6 +63,7 @@ namespace Inventory
         /// <param name="inventoryState"></param>
         private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
         {
+            inventoryUI.ResetAllItems();
             //inventoryUI.ResetAllItems();//인벤토리 데이터를 업데이트 할때 한번초기화
             foreach (var item in inventoryState)
             {
@@ -96,7 +98,7 @@ namespace Inventory
             }
 
             foreach(KeyValuePair<int, InventoryItem> item in farmingBox.ItemList){
-                inventoryData_merged.InsertItem(item.Key, item.Value);
+                inventoryData_merged.InsertItem(item.Key + (inventoryData_player.Size-1), item.Value);
             }
         }
 
@@ -178,6 +180,7 @@ namespace Inventory
             {
                 PrepareMergedSO();
                 PrepareInventoryData();
+                
                 //playerInput.CanControl = false;
                 foreach (var item in inventoryData_player.GetCurrentInventoryState())
                 {
@@ -207,9 +210,55 @@ namespace Inventory
             {
                 inventoryUI.Hide();
 
+                UpdateInventories();
+
                 OnClosed?.Invoke();
                 //playerInput.CanControl = true;
             }
+        }
+
+        private void UpdateInventories(){
+
+            Dictionary<int, InventoryItem> temp = inventoryData_merged.GetCurrentInventoryState();
+
+            Dictionary<int, InventoryItem> farmingBoxInventory = new Dictionary<int, InventoryItem>();
+
+            List<InventoryItem> playerInventory = SetEmptyPlayerInventory();
+
+            foreach (KeyValuePair<int, InventoryItem> fbi in temp)
+            {
+                if (fbi.Key > inventoryData_player.Size - 1)
+                {
+                    farmingBoxInventory.Add(fbi.Key -(inventoryData_player.Size-1), fbi.Value);
+                }
+                else
+                {
+                    playerInventory[fbi.Key] = fbi.Value;
+                }
+            }
+
+            //보관함 인벤토리에 변경 사항 반영
+            farmingBox.SetItemList(farmingBoxInventory);
+
+            //플레이어 인벤토리에 변경 사항 반영
+            inventoryData_player.SetInventoryItems(playerInventory);
+            inventoryData_player.InformAboutChange();
+
+            //파밍 UI 전용 임시 SO 초기화
+            inventoryData_merged.Initialize();
+        }
+
+        private List<InventoryItem> SetEmptyPlayerInventory()
+        {
+
+            List<InventoryItem> playerInventory = new List<InventoryItem>();
+
+            for (int i = 0; i < inventoryData_player.Size; i++)
+            {
+                playerInventory.Add(InventoryItem.GetEmptyItem());
+            }
+
+            return playerInventory;
         }
     }
 }
