@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class t_UIManager : MonoBehaviour
+public class LeaveGame : MonoBehaviour
 {
-    
     public void LeaveGameRoom()
     {
         NetworkManager.Instance.LeaveGame();
