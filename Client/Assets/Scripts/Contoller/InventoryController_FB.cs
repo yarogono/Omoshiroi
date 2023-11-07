@@ -62,6 +62,7 @@ namespace Inventory
         /// <param name="inventoryState"></param>
         private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
         {
+            inventoryUI.ResetAllItems();
             //inventoryUI.ResetAllItems();//인벤토리 데이터를 업데이트 할때 한번초기화
             foreach (var item in inventoryState)
             {
@@ -96,7 +97,7 @@ namespace Inventory
             }
 
             foreach(KeyValuePair<int, InventoryItem> item in farmingBox.ItemList){
-                inventoryData_merged.InsertItem(item.Key, item.Value);
+                inventoryData_merged.InsertItem(item.Key + (inventoryData_player.Size-1), item.Value);
             }
         }
 
