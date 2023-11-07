@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CloneSync : SyncModule
 {
-    public event Action<float, float, int, Vector3> OnCloneEvent;
+    public event Action<Vector3, float, int, Vector3> OnCloneEvent;
 
     protected override void Update()
     {
@@ -20,7 +20,7 @@ public class CloneSync : SyncModule
         gameObject.transform.position = new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
     }
 
-    public void CallCloneEvent(float velocity, float animTime, int state, Vector3 position)
+    public void CallCloneEvent(Vector3 velocity, float animTime, int state, Vector3 position)
     {
         OnCloneEvent?.Invoke(velocity, animTime, state, position);
     }
