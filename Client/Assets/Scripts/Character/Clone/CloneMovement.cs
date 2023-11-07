@@ -51,6 +51,7 @@ public class CloneMovement : MonoBehaviour
         gameObject.TryGetComponent<CloneSync>(out _sync);
         // TODO
         // _sync의 이벤트에 MoveClone 혹은 Move를 등록하도록 한다.
+        _sync.OnCloneEvent += NetworkInput;
     }
 
     void Update()
@@ -58,6 +59,11 @@ public class CloneMovement : MonoBehaviour
         UpdateMovement();
         if (AfterLastOrderTime > _limitTime)
             SmoothlyStop();
+    }
+
+    public void NetworkInput(float velocity, float animTime, int state, Vector3 position)
+    {
+        
     }
 
     public void MoveClone(Vector3 position, Vector3 velocity)
