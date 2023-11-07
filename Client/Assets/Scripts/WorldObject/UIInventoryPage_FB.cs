@@ -8,9 +8,6 @@ using Inventory;
     public class UIInventoryPage_FB : UIBase
     {
         [SerializeField]
-        private UIInventoryItem itemPrefab_player;
-
-        [SerializeField]
         private UIInventoryItem itemPrefab;
 
         [SerializeField]
@@ -49,18 +46,18 @@ using Inventory;
             int listSize = inventorysize_player + inventorysize_fb;
 
             UIInventoryItem uiItem;
-            for (int i = 0; i < listSize; i++)
-            {
-                //플레이어 인벤토리에 해당하는 인덱스라면
-                if(i < inventorysize_player)
-                {
-                    uiItem = Instantiate(itemPrefab_player, Vector3.zero, Quaternion.identity);
-                    uiItem.transform.SetParent(contentPanel_player);
 
+            for (int i = 0; i < listSize; i++)
+            {   
+                uiItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
+                //플레이어 인벤토리에 해당하는 인덱스라면
+
+                if (i < inventorysize_player)
+                {
+                    uiItem.transform.SetParent(contentPanel_player);
                 }
                 //보관함 인벤토리에 해당하는 인덱스라면
                 else{
-                    uiItem = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
                     uiItem.transform.SetParent(contentPanel_fb);
                 }
 
@@ -70,7 +67,6 @@ using Inventory;
                 uiItem.OnItemDroppedOn += HandleSwap;
                 uiItem.OnItemEndDrag += HandleEndDrag;
                 uiItem.OnleftMouseBtnClick += HandleShowItemActions;
-
             }
         }
 
@@ -90,7 +86,7 @@ using Inventory;
             ResetDraggtedItem();
             return;
         }
-        OnItemActionRequested?.Invoke(index);
+            OnItemActionRequested?.Invoke(index);
         }
 
         private void HandleEndDrag(UIInventoryItem inventoryItemUI)
@@ -122,9 +118,9 @@ using Inventory;
                 ResetDraggtedItem();
                 return;
             }
+            
             OnSwapItems?.Invoke(currentlyDraggedItemIndex, index);
             HandleItemSelection(inventoryItemUI);
-
         }
 
         internal void UpdateDescription(int itemIndex, Sprite itemImage, string name, string description)
@@ -159,15 +155,12 @@ using Inventory;
             Debug.Log(sprite.name);
         }
 
-        /// <summary>
-        /// 여길 뜯어고쳐야 할 듯 하다. 
-        /// </summary>
-        /// <param name="inventoryItemUI"></param>
         private void HandleItemSelection(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
+            Debug.Log($"index : {index}");
             if (index == -1)
-                return;
+                    return;
             OnDescriptionRequested?.Invoke(index);
         }
 
@@ -195,5 +188,7 @@ using Inventory;
         public void Hide()
         {
             gameObject.SetActive(false);
-        }
+            //actionPanel.Toggle(false);
+            ResetDraggtedItem();
+    }
     }

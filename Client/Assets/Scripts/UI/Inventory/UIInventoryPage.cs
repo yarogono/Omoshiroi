@@ -90,7 +90,7 @@ using Inventory;
     }
 
 
-    private void HandleSwap(UIInventoryItem inventoryItemUI)
+        private void HandleSwap(UIInventoryItem inventoryItemUI)
         {
             int index = listOfUIItems.IndexOf(inventoryItemUI);
             if (index == -1)
