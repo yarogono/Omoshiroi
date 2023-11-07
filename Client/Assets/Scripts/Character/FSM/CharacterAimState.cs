@@ -25,11 +25,18 @@ public class CharacterAimState : BaseState
         StopAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
     }
 
+    public override void PhysicsUpdate()
+    {
+        if (!CheckGround())
+            _stateMachine.ChangeState(eStateType.None);
+    }
+
     protected override void AimEvent(Vector2 direction)
     {
         // TODO
         if (direction.magnitude < 100f)
             _stateMachine.ChangeState(eStateType.None);
+        _stateMachine.AttackDirection = direction;
     }
 
     protected override void AttackEvent(Vector2 direction)

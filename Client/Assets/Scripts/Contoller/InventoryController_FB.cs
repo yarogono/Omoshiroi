@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,9 +6,9 @@ using UnityEngine.UI;
 
 namespace Inventory
 {
-    // 인벤토리 ui및 모델 과 통신 두 요소 모두에 종속된다  
+    // 인벤토리 ui및 모델 과 통신 두 요소 모두에 종속된다
 
-    public class InventoryContrller_FB : MonoBehaviour
+    public class InventoryController_FB : MonoBehaviour
     {
         [SerializeField]
         private FarmingBox farmingBox;
@@ -31,7 +30,6 @@ namespace Inventory
 
         UIInventoryPage_FB _inventorypage_FB;
         PlayerInput playerInput;
-
 
         private void Start()
         {
@@ -64,10 +62,10 @@ namespace Inventory
         /// <param name="inventoryState"></param>
         private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
         {
-            //inventoryUI.ResetAllItems();//인벤토리 데이터를 업데이트 할때 한번초기화 
+            //inventoryUI.ResetAllItems();//인벤토리 데이터를 업데이트 할때 한번초기화
             foreach (var item in inventoryState)
             {
-                inventoryUI.UpdateData(item.Key, item.Value.item.ItemIcon,item.Value.quantity);
+                inventoryUI.UpdateData(item.Key, item.Value.item.ItemIcon, item.Value.quantity);
             }
         }
 
@@ -102,9 +100,7 @@ namespace Inventory
             }
         }
 
-        private void HandleItemActionRequest(int itemIndex)
-        {
-        }
+        private void HandleItemActionRequest(int itemIndex) { }
 
         /// <summary>
         /// 인덱스를 입력받고, 해당 인덱스의 아이템을 드래그 중인 아이템으로 지정한다.
@@ -117,7 +113,7 @@ namespace Inventory
             {
                 return;
             }
-                
+
             inventoryUI.CreateDraggedItem(inventoryItem.item.ItemIcon, inventoryItem.quantity);
         }
 
@@ -144,16 +140,25 @@ namespace Inventory
                 return;
             }
             BaseItem item = inventoryItem.item;
-            
-            if(item.ItemType == eItemType.Weapon)
+
+            if (item.ItemType == eItemType.Weapon)
             {
-                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.Description}", item.Description);
+                inventoryUI.UpdateDescription(
+                    itemIndex,
+                    item.ItemIcon,
+                    $"{item.name}\n{item.Description}",
+                    item.Description
+                );
             }
             else
             {
-                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);           
+                inventoryUI.UpdateDescription(
+                    itemIndex,
+                    item.ItemIcon,
+                    item.name,
+                    item.Description
+                );
             }
-            
         }
 
         private void OnMouseDown()
@@ -181,7 +186,11 @@ namespace Inventory
 
                 foreach (var item in farmingBox.ItemList)
                 {
-                    inventoryUI.UpdateData(item.Key + (inventoryData_player.Size - 1), item.Value.item.ItemIcon, item.Value.quantity);
+                    inventoryUI.UpdateData(
+                        item.Key + (inventoryData_player.Size - 1),
+                        item.Value.item.ItemIcon,
+                        item.Value.quantity
+                    );
                 }
 
                 inventoryUI.Show();

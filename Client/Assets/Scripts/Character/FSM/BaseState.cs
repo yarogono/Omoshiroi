@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BaseState : IState
@@ -110,6 +111,8 @@ public class BaseState : IState
 
     protected void MoveCharacter(Vector2 direction)
     {
+        if (_stateMachine.Movement == null)
+            return;
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;
 
@@ -122,5 +125,18 @@ public class BaseState : IState
         direction.Normalize();
 
         _stateMachine.Movement.ControlMove(forward * direction.y + right * direction.x);
+    }
+
+    protected bool CheckGround()
+    {
+        if (_stateMachine.Character.Controller.isGrounded) return true;
+
+        Ray downRay = new Ray(_stateMachine.Character.transform.position, Vector3.down);
+
+        if (Physics.Raycast(downRay, 1.5f, _stateMachine.Character.AnimationData.GroundLayer))
+        {
+            return true;
+        }
+        return false;
     }
 }

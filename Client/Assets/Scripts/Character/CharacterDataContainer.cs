@@ -14,6 +14,7 @@ public class CharacterDataContainer : MonoBehaviour
     public CharacterController Controller { get; private set; }
     public CharacterMovement Movement { get; private set; }
     public BaseInput InputActions { get; private set; }
+    public PilotSync Sync { get; private set; }
 
     private CombineStateMachine stateMachine;
 
@@ -26,6 +27,7 @@ public class CharacterDataContainer : MonoBehaviour
         Movement = GetComponent<CharacterMovement>();
         InputActions = GetComponent<BaseInput>();
         Animator = GetComponent<Animator>();
+        Sync = GetComponent<PilotSync>();
         AnimationData.Initialize();
     }
 
@@ -51,5 +53,14 @@ public class CharacterDataContainer : MonoBehaviour
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Ray downRay = new Ray(transform.position, Vector3.down);
+
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawRay(downRay);
     }
 }

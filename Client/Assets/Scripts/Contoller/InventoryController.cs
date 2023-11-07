@@ -10,7 +10,7 @@ namespace Inventory
 
     // 인벤토리 ui및 모델 과 통신 두요소모두에 종속된다  
 
-    public class InventoryContrller : MonoBehaviour
+    public class InventoryController : MonoBehaviour
     {
         [SerializeField]
         private UIInventoryPage inventoryUI;
@@ -18,7 +18,7 @@ namespace Inventory
         [SerializeField]
         private InventorySO inventoryData;
 
-       // public List<InventoryItem> initialItems = new List<InventoryItem>();
+        public List<InventoryItem> initialItems = new List<InventoryItem>();
    
         public Button BtnInventory;
 
@@ -62,12 +62,12 @@ namespace Inventory
             inventoryData.Initialize();
             inventoryData.OnInventoryUpdated += UpdateInventoryUI;
 
-            //foreach (InventoryItem item in initialItems)
-            //{
-            //    if (item.IsEmpty)
-            //        continue;
-            //    inventoryData.AddItem(item);
-            //}
+            foreach (InventoryItem item in initialItems)
+            {
+                if (item.IsEmpty)
+                    continue;
+                inventoryData.AddItem(item);
+            }
         }
         private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
         {
@@ -103,7 +103,6 @@ namespace Inventory
         {
             inventoryData.RemoveItem(itemIndex, quantity);
             inventoryUI.ResetSelection();
-           
         }
         public void PerformAction(int itemIndex)
         {

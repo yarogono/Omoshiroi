@@ -61,7 +61,7 @@ public class CharacterDodgeState : BaseState
     {
         if (alreadyAppliedForce) return;
         alreadyAppliedForce = true;
-
+        if (_stateMachine.Movement == null) return;
         _stateMachine.Movement.AddImpact(_stateMachine.Movement.ControlDireaction * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier * 5, 0.5f);
     }
 

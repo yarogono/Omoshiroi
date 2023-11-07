@@ -12,6 +12,8 @@ public class AttackInfo
     [field: SerializeField][field: Range(0f, 3f)][Tooltip("공격 중 공격으로 움직이는 시간")] public float ForceTransitionTime { get; private set; }
     [field: SerializeField][field: Range(0.0f, 10f)][Tooltip("공격 중 공격으로 움직이는 힘")] public float Force { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
+    [field: SerializeField] public AnimationClip Anime { get; private set; }
+
 }
 
 

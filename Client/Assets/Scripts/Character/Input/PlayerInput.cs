@@ -308,7 +308,7 @@ public class PlayerInput
         {
             var point = context.ReadValue<Vector2>();
             Vector2 center = new Vector2() { x = Display.main.renderingWidth / 2, y = Display.main.renderingHeight / 2};
-            CallAimEvent(center - point);
+            CallAimEvent(point - center);
         }
     }
 
