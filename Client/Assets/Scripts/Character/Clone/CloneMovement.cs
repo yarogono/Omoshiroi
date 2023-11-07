@@ -61,9 +61,10 @@ public class CloneMovement : MonoBehaviour
             SmoothlyStop();
     }
 
-    public void NetworkInput(float velocity, float animTime, int state, Vector3 position)
+    public void NetworkInput(Vector3 velocity, float animTime, int state, Vector3 position)
     {
-        
+        if ((eStateType)state != eStateType.None || (eStateType)state != eStateType.Idle)
+            MoveClone(position, velocity);
     }
 
     public void MoveClone(Vector3 position, Vector3 velocity)
