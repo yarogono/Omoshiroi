@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class CloneDataContainer : MonoBehaviour
 {
+    [SerializeField] public Inventory1 Inven { get; }
+    [field: SerializeField] public CharacterStats Stats { get; private set; }
+    [field: SerializeField] public EquipSystem Equipments { get; private set; }
+    public Animator Animator { get; private set; }
+    [field: SerializeField] public CharacterAnimationData AnimationData { get; private set; }
     public CloneSync Sync { get; private set; }
     public CloneMovement Movement { get; private set; }
 
@@ -12,13 +17,19 @@ public class CloneDataContainer : MonoBehaviour
 
     private void Awake()
     {
-
+        Movement = GetComponent<CloneMovement>();
+        Animator = GetComponent<Animator>();
+        Sync = GetComponent<CloneSync>();
+        AnimationData.Initialize();
     }
 
     void Start()
     {
-        Sync = GetComponent<CloneSync>();
-        Movement = GetComponent<CloneMovement>();
+        if (Stats.cbs != null)
+            Stats.Initialize();
+
+        if (Equipments == null)
+            Equipments = new EquipSystem();
 
         _stateMachine = new CombineCloneStatemachine(this);
     }
