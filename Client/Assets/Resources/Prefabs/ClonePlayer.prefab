@@ -558,6 +558,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1088871691251878795}
   - component: {fileID: 3350111105225600338}
+  - component: {fileID: 4496292724122628551}
+  - component: {fileID: 3387555981660624464}
+  - component: {fileID: 6960480777913596459}
   m_Layer: 0
   m_Name: ClonePlayer
   m_TagString: Untagged
@@ -581,7 +584,7 @@ Transform:
   - {fileID: 2389127606293479906}
   - {fileID: 8626972394969032767}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3350111105225600338
 MonoBehaviour:
@@ -600,6 +603,70 @@ MonoBehaviour:
   checkPosYTest: {fileID: 2196889498417118186}
   checkPosZTest: {fileID: 8050957903132711359}
   checkStateTest: {fileID: 4226860418941225350}
+--- !u!114 &4496292724122628551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476a7b002b03a294193dde28fbbc6ff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Stats>k__BackingField:
+    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
+  <AnimationData>k__BackingField:
+    groundParameterName: '@Ground'
+    idleParameterName: Idle
+    walkParameterName: Walk
+    runParameterName: Run
+    dodgeParameterName: Dodge
+    airParameterName: '@Air'
+    fallParameterName: Fall
+    aimParameterName: '@Aim'
+    attackParameterName: '@Attack'
+    comboAttackParameterName: ComboAttack
+    comboIndexParameterName: Combo
+    GroundLayer:
+      serializedVersion: 2
+      m_Bits: 896
+--- !u!114 &3387555981660624464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9c08822f42e2c4e9ba6e823857d249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _limitTime: 600
+  _dampTime: 10
+--- !u!95 &6960480777913596459
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 143ab4af9b71ae149b52b7ad472c73ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3341134605525835870
 GameObject:
   m_ObjectHideFlags: 0
