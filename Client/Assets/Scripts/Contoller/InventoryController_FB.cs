@@ -102,8 +102,42 @@ namespace Inventory
             }
         }
 
-        private void HandleItemActionRequest(int itemIndex) { }
+        private void HandleItemActionRequest(int itemIndex)
+        {
+            InventoryItem inventoryItem = inventoryData_merged.GetItemAt(itemIndex);
+            if (inventoryItem.IsEmpty)
+                return;
+        }
+        private void DropItem(int itemIndex, int quantity)
+        {
+            inventoryData_merged.RemoveItem(itemIndex, quantity);
+            inventoryUI.ResetSelection();
+        }
+        public void PerformAction(int itemIndex)
+        {
+            InventoryItem inventoryItem = inventoryData_merged.GetItemAt(itemIndex);
+            if (inventoryItem.IsEmpty)
+                return;
 
+
+            IItemAction itemAction = inventoryItem.item as IItemAction;
+            if (itemAction != null)
+            {
+                itemAction.PerformAction(gameObject);
+
+                if (inventoryData_merged.GetItemAt(itemIndex).IsEmpty)
+                {
+                    inventoryUI.ResetSelection();
+                }
+
+            }
+
+            IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
+            if (destroyableItem != null)
+            {
+                inventoryData_merged.RemoveItem(itemIndex, 1);
+            }
+        }
         /// <summary>
         /// 인덱스를 입력받고, 해당 인덱스의 아이템을 드래그 중인 아이템으로 지정한다.
         /// </summary>
@@ -145,21 +179,25 @@ namespace Inventory
 
             if (item.ItemType == eItemType.Weapon)
             {
-                inventoryUI.UpdateDescription(
-                    itemIndex,
-                    item.ItemIcon,
-                    $"{item.name}\n{item.Description}",
-                    item.Description
-                );
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.Description}", item.Description);
             }
             else
             {
-                inventoryUI.UpdateDescription(
-                    itemIndex,
-                    item.ItemIcon,
-                    item.name,
-                    item.Description
-                );
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);
+            }
+            //----------  액션패널
+            IItemAction itemAction = inventoryItem.item as IItemAction;
+            if (itemAction != null)
+            {
+
+                inventoryUI.ShowItemAction(itemIndex);
+                inventoryUI.AddAction(itemAction.ActionName, () => PerformAction(itemIndex));
+            }
+
+            IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
+            if (destroyableItem != null)
+            {
+                inventoryUI.AddAction("Drop", () => DropItem(itemIndex, inventoryItem.quantity));
             }
         }
 
