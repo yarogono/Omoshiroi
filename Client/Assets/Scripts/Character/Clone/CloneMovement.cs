@@ -3,7 +3,7 @@ using UnityEngine;
 public class CloneMovement : MonoBehaviour
 {
     // 외부에서 객체의 정보를 가져가기 위함
-    public Vector3 Velocity { get => currentVelocity; }
+    public Vector3 Velocity { get => _lastVelocity; }
     public Vector3 Position { get => transform.position; }
 
     // 호출 시점 관련
@@ -13,8 +13,8 @@ public class CloneMovement : MonoBehaviour
 
     // 속도 관련
     private bool _velFlag;
-    private Vector3 LastVelocity;
-    private Vector3 currentVelocity;
+    private Vector3 _lastVelocity;
+    private Vector3 _orderedVelocity;
 
     // 위치 관련
     private bool _posFlag;
@@ -48,7 +48,7 @@ public class CloneMovement : MonoBehaviour
     {
         _lastPosition = position;
         _posFlag = true;
-        currentVelocity = velocity;
+        _orderedVelocity = velocity;
         _velFlag = true;
         _lastOrderTime = Time.realtimeSinceStartup;
     }
@@ -72,18 +72,18 @@ public class CloneMovement : MonoBehaviour
 
         if (_velFlag)
         {
-            deltaPosition += currentVelocity * Time.deltaTime;
-            LastVelocity = currentVelocity;
+            deltaPosition += _orderedVelocity * Time.deltaTime;
+            _lastVelocity = _orderedVelocity;
             _velFlag = false;
         }
         else
-            deltaPosition += LastVelocity * Time.deltaTime;
+            deltaPosition += _lastVelocity * Time.deltaTime;
 
         transform.position = deltaPosition;
     }
 
     private void SmoothlyStop()
     {
-        LastVelocity = Vector3.SmoothDamp(LastVelocity, Vector3.zero, ref _dampingVelocity, _dampTime);
+        _lastVelocity = Vector3.SmoothDamp(_lastVelocity, Vector3.zero, ref _dampingVelocity, _dampTime);
     }
 }
