@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 884507993187292007}
   - component: {fileID: 7838802115554181109}
   - component: {fileID: 7681882675822388626}
-  - component: {fileID: 1804217610784879546}
   - component: {fileID: 4313740379138048596}
   m_Layer: 0
   m_Name: Player
@@ -317,23 +316,6 @@ MonoBehaviour:
       m_Bits: 896
   TestEquipItem:
   - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
---- !u!114 &1804217610784879546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3119228395594561357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57fe3a3cfa58d24680ed3cce429a68b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  inventoryData: {fileID: 0}
-  initialItems: []
-  BtnInventory: {fileID: 0}
-  BtnCancel: {fileID: 0}
 --- !u!114 &4313740379138048596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb4c6bb1dcafea46adb919de07263ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryData: {fileID: 0}
+  inventoryData: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
 --- !u!1 &3341134605525835870
 GameObject:
   m_ObjectHideFlags: 0
