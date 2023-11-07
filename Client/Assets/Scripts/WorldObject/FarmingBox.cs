@@ -12,7 +12,6 @@ using Inventory;
 
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
-    [SerializeField] private InventoryItem testItem;
     [SerializeField] private int inventorySize;
     
     private InventoryController_FB inventoryController;
@@ -29,13 +28,8 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     {
         ItemList = new Dictionary<int, InventoryItem>();
 
-        //정해진 규칙에 따라 보관함 인벤토리에 아이템을 추가하는 내용이 들어갈 자리
-        ItemList.Add(2, testItem);
-
         inventoryController = GetComponent<InventoryController_FB>();
         farminBoxCollider = GetComponent<Collider>();
-        //파밍박스 여는 이벤트.AddListener(() => OnOpened?.Invoke());
-        //파밍박스 닫는 이벤트.AddListener(() => OnClosed?.Invoke());
     }
 
     // Update is called once per frame
@@ -51,21 +45,6 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     public void SetItemList(List<BaseItem> itemList)
     {
         //대충 받아온 아이템 데이터들로 인벤토리를 채운다는 내용.
-    }
-
-    public void LootSelectedItem(BaseItem selectedItem)
-    {
-        //대충 선택한 아이템을 플레이어의 인벤토리로 옮기고 현재 인벤토리에서 제거한다는 내용
-    }
-
-    public void SetOpenAction(Action action)
-    {
-        OnOpened = action;
-    }
-
-    public void SetCloseAction(Action action)
-    {
-        OnClosed = action;
     }
 
     public void SetItemList(Dictionary<int, InventoryItem> items)
