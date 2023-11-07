@@ -139,4 +139,85 @@ public class BaseState : IState
         }
         return false;
     }
+
+    public virtual void SetAnimation(Animator animator, int layer, float normalizeTime)
+    {
+        var state = animator.GetCurrentAnimatorStateInfo(layer);
+        animator.Play(state.fullPathHash, layer, normalizeTime);
+    }
+}
+
+public class CloneBaseState : IState
+{
+    protected CloneStateMachine _stateMachine;
+
+    public CloneBaseState(CloneStateMachine stateMachine)
+    {
+        _stateMachine = stateMachine;
+    }
+
+    public virtual void Enter()
+    {
+        
+    }
+
+    public virtual void Exit()
+    {
+        
+    }
+
+    public virtual void PhysicsUpdate()
+    {
+
+    }
+
+    public virtual void Update()
+    {
+
+    }
+
+    protected void StartAnimation(int animationHash)
+    {
+        _stateMachine.Clone.Animator.SetBool(animationHash, true);
+    }
+
+    protected void StopAnimation(int animationHash)
+    {
+        _stateMachine.Clone.Animator.SetBool(animationHash, false);
+    }
+
+    protected float GetNormalizedTime(Animator animator, int layer, string tag)
+    {
+        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(layer);
+        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(layer);
+        if (animator.IsInTransition(layer) && nextInfo.IsTag(tag))
+        {
+            return nextInfo.normalizedTime;
+        }
+        else if (!animator.IsInTransition(layer) && currentInfo.IsTag(tag))
+        {
+            return currentInfo.normalizedTime;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
+    protected bool CheckGround()
+    {
+        Ray downRay = new Ray(_stateMachine.Clone.transform.position, Vector3.down);
+
+        if (Physics.Raycast(downRay, 1.5f, _stateMachine.Clone.AnimationData.GroundLayer))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public virtual void SetAnimation(Animator animator, int layer, float normalizeTime)
+    {
+        var state = animator.GetCurrentAnimatorStateInfo(layer);
+        animator.Play(state.fullPathHash, layer, normalizeTime);
+    }
 }
