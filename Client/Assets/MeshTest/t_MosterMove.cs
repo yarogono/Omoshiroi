@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : MonoBehaviour
+public class t_MonsterMove : MonoBehaviour
 {
     public Transform goal;
+    private NavMeshAgent agent;
 
-    void Start()
+    private void Start()
     {
-        goal = GameObject.FindGameObjectWithTag("Player").transform;
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Update()
+    {
         agent.destination = goal.position;
     }
 }

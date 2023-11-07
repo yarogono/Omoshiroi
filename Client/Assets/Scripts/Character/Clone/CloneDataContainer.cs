@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class CloneDataContainer : MonoBehaviour
 {
-    [SerializeField] public Inventory1 Inven { get; }
-    [field: SerializeField] public CharacterStats Stats { get; private set; }
-    [field: SerializeField] public EquipSystem Equipments { get; private set; }
+    [SerializeField]
+    public Inventory1 Inven { get; }
+
+    [field: SerializeField]
+    public CharacterStats Stats { get; private set; }
+
+    [field: SerializeField]
+    public EquipSystem Equipments { get; private set; }
     public Animator Animator { get; private set; }
-    [field: SerializeField] public CharacterAnimationData AnimationData { get; private set; }
+
+    [field: SerializeField]
+    public CharacterAnimationData AnimationData { get; private set; }
     public CloneSync Sync { get; private set; }
     public CloneMovement Movement { get; private set; }
 
     private CombineCloneStatemachine _stateMachine;
-
 
     private void Awake()
     {
@@ -34,13 +40,7 @@ public class CloneDataContainer : MonoBehaviour
         _stateMachine = new CombineCloneStatemachine(this);
     }
 
-    void Update()
-    {
-        
-    }
+    void Update() { }
 
-    private void FixedUpdate()
-    {
-        
-    }
+    private void FixedUpdate() { }
 }

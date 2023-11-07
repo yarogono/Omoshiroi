@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CloneGroundState : CloneBaseState
 {
-    public CloneGroundState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneGroundState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
 
     public override void Enter()
     {
@@ -23,9 +22,8 @@ public class CloneGroundState : CloneBaseState
 
 public class CloneIdleState : CloneGroundState
 {
-    public CloneIdleState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneIdleState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
 
     public override void Enter()
     {
@@ -42,9 +40,8 @@ public class CloneIdleState : CloneGroundState
 
 public class CloneWalkState : CloneGroundState
 {
-    public CloneWalkState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneWalkState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
 
     public override void Enter()
     {
@@ -61,9 +58,8 @@ public class CloneWalkState : CloneGroundState
 
 public class CloneRunState : CloneGroundState
 {
-    public CloneRunState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneRunState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
 
     public override void Enter()
     {

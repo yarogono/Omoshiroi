@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CloneAimState : CloneBaseState
 {
-    public CloneAimState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneAimState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
 
     public override void Enter()
     {
