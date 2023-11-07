@@ -70,6 +70,14 @@ namespace AccountServer.Controllers
                                 .Where(a => a.AccountName == req.AccountName)
                                 .FirstOrDefault();
 
+            var query = (from a in _context.Accounts
+                         join p in _context.Accounts on a.PlayerDb.PlayerId equals p.PlayerDb.PlayerId
+                         join i in _context.Set<InventoryDb>() on p.PlayerDb.InventoryDb.InventoryId equals i.InventoryId
+                         select new { a.AccountName, i.Items }).SingleOrDefault();
+
+
+            ICollection<ItemDb> items = query.Items;
+
             AccountLoginRes res = new AccountLoginRes();
 
             if (account != null)
@@ -78,12 +86,19 @@ namespace AccountServer.Controllers
                 string accountPassword = account.AccountPassword;
                 if (_passwordEncryptor.IsmatchPassword(reqPassword, accountPassword))
                 {
-                    res.LoginOk = (int)Define.LoginResult.Success;
+                    res.IsLoginSucceed = true;
+
+                    foreach (ItemDb item in items)
+                    {
+                        PlayerItemRes playerItemRes = new PlayerItemRes() { Quantity = item.Quantity, TemplateId = item.TemplateId };
+                        res.Items.Add(playerItemRes);
+                    }
+
                     return res;
                 }
             }
 
-            res.LoginOk = (int)Define.LoginResult.Faile;
+            res.IsLoginSucceed = false;
             return res;
         }
     }
