@@ -25,6 +25,7 @@ public class CloneMovement : MonoBehaviour
 
     // 조금씩 느려지도록
     [Header("오랫동안 업데이트가 없으면 조금씩 느려져 멈추도록 설정함.")]
+    [SerializeField][Tooltip("제한 시간(초)")] private float _limitTime;
     [SerializeField][Tooltip("멈추는 시간")] private float _dampTime;
     private Vector3 _dampingVelocity;
     
@@ -39,7 +40,7 @@ public class CloneMovement : MonoBehaviour
     void Update()
     {
         UpdateMovement();
-        if (AfterLastOrderTime > 60)
+        if (AfterLastOrderTime > _limitTime)
             SmoothlyStop();
     }
 
