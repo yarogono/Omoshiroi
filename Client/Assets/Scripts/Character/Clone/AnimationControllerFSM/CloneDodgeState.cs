@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CloneDodgeState : CloneBaseState
 {
-    public CloneDodgeState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneDodgeState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
+
     public override void Enter()
     {
         base.Enter();

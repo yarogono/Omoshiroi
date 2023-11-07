@@ -39,7 +39,10 @@ public class CombineCloneStatemachine
         _stateMachine[0].ChangeState(eStateType.Idle);
 
         _stateMachine[1] = new CloneStateMachine(clone, 1);
-        _stateMachine[1].AddState(eStateType.ComboAttack, new CloneComboAttackState(_stateMachine[1]));
+        _stateMachine[1].AddState(
+            eStateType.ComboAttack,
+            new CloneComboAttackState(_stateMachine[1])
+        );
         _stateMachine[1].AddState(eStateType.Aim, new CloneAimState(_stateMachine[1]));
         _stateMachine[1].AddState(eStateType.None, new CloneNoneState(_stateMachine[1]));
         _stateMachine[1].ChangeState(eStateType.None);
@@ -71,13 +74,19 @@ public class CombineCloneStatemachine
 
     public void SetAnimation(eStateType state, float normalizeTime)
     {
-        if (_stateMachine[0].currentStateType != state && _stateMachine[1].currentStateType != state)
+        if (
+            _stateMachine[0].currentStateType != state && _stateMachine[1].currentStateType != state
+        )
             ChangeState(state);
         foreach (var stateMachine in _stateMachine)
         {
             if (stateMachine.currentStateType == state)
             {
-                stateMachine.CurrentState.SetAnimation(stateMachine.Clone.Animator, stateMachine.LayerInAnimator, normalizeTime);
+                stateMachine.CurrentState.SetAnimation(
+                    stateMachine.Clone.Animator,
+                    stateMachine.LayerInAnimator,
+                    normalizeTime
+                );
                 break;
             }
         }

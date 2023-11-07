@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class CloneAttackState : CloneBaseState
 {
-    public CloneAttackState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneAttackState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
 
     public override void Enter()
     {
@@ -21,12 +20,10 @@ public class CloneAttackState : CloneBaseState
     }
 }
 
-
 public class CloneComboAttackState : CloneAttackState
 {
-    public CloneComboAttackState(CloneStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CloneComboAttackState(CloneStateMachine stateMachine)
+        : base(stateMachine) { }
 
     public override void Enter()
     {
