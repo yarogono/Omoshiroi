@@ -17,4 +17,14 @@ public class CloneSync : SyncModule
     {
         gameObject.transform.position = new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
     }
+
+    public void ReceiveS_MovePacket() { }
+
+    public void ReceiveS_AttackPacket() { }
+
+    public void ReceiveS_FallPacket() { }
+
+    public void ReceiveS_DodgePacket() { }
+
+    public void ReceiveS_AimPacket() { }
 }
