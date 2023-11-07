@@ -21,7 +21,7 @@ public class CloneMovement : MonoBehaviour
     private Vector3 _lastPosition;
 
     // Sync 모듈
-    private CloneSync _sync;
+    //private CloneSync _sync;
 
     // 조금씩 느려지도록
     [Header("오랫동안 업데이트가 없으면 조금씩 느려져 멈추도록 설정함.")]
@@ -32,7 +32,7 @@ public class CloneMovement : MonoBehaviour
 
     void Start()
     {
-        gameObject.TryGetComponent<CloneSync>(out _sync);
+        //gameObject.TryGetComponent<CloneSync>(out _sync);
         // TODO
         // _sync의 이벤트에 MoveClone 혹은 Move를 등록하도록 한다.
     }
