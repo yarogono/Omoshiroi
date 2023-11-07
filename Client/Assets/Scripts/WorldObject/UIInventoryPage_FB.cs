@@ -31,7 +31,9 @@ using Inventory;
         public event Action<int> OnDescriptionRequested, OnItemActionRequested, OnStartDragging;
 
         public event Action<int, int> OnSwapItems; // 두 아이템 스왑 
-
+        
+       [SerializeField]
+        private UIItemActionPanel actionPanel;
 
 
         private void Awake()
@@ -176,6 +178,16 @@ using Inventory;
             itemDescription.ResetDescription();
             DeselectAllItems();
         }
+        public void ShowItemAction(int itemIndex)
+        {
+            actionPanel.Toggle(true);
+            actionPanel.transform.position = listOfUIItems[itemIndex].transform.position;
+        }
+
+        public void AddAction(string actionName, Action performAction)
+        {
+            actionPanel.AddButon(actionName, performAction); //액션패널 호출 
+        }
 
         private void DeselectAllItems()
         {
@@ -183,12 +195,13 @@ using Inventory;
             {
                 item.Deselect();
             }
+            actionPanel.Toggle(false);
         }
 
         public void Hide()
         {
             gameObject.SetActive(false);
-            //actionPanel.Toggle(false);
+            actionPanel.Toggle(false);
             ResetDraggtedItem();
-    }
+        }
     }
