@@ -14,7 +14,7 @@ public class SceneController : MonoBehaviour
         BtnChangeScene.onClick.AddListener(() =>
         {          
             //login테스트
-            AccountLoginReq req = new AccountLoginReq() { AccountName = "qwer", AccountPassword = "qwer" };
+            AccountLoginReq req = new AccountLoginReq() { AccountPassword = "qwer" };
             AccountLoginRes newRes = null;
             WebManager.Instance.SendPostRequest<AccountLoginRes>("account/login", req, res =>
             {                

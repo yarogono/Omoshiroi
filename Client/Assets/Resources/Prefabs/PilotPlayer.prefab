@@ -656,7 +656,6 @@ GameObject:
   - component: {fileID: 7838802115554181109}
   - component: {fileID: 7681882675822388626}
   - component: {fileID: -6892137914046388612}
-  - component: {fileID: 3634519162294631373}
   - component: {fileID: 2438545737654347830}
   m_Layer: 0
   m_Name: PilotPlayer
@@ -852,23 +851,6 @@ MonoBehaviour:
   checkPosYTest: {fileID: 571933099793841311}
   checkPosZTest: {fileID: 3209904956312514928}
   checkStateTest: {fileID: 8846325714620892954}
---- !u!114 &3634519162294631373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3119228395594561357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f57fe3a3cfa58d24680ed3cce429a68b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
-  inventoryData: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
-  initialItems: []
-  BtnInventory: {fileID: 0}
-  BtnCancel: {fileID: 0}
 --- !u!114 &2438545737654347830
 MonoBehaviour:
   m_ObjectHideFlags: 0

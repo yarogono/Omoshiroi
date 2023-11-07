@@ -25,13 +25,13 @@ namespace Inventory
         public Button BtnCancel;
 
         UIInventoryPage _inventorypage;
-        PlayerInput playerInput;
+     
 
         private void Start()
         {
             PrepareUI();
             PrepareInventoryData();
-            playerInput = GetComponent<PlayerInput>();  
+         
             BtnInventory.onClick.AddListener(() =>
             {
                 if (inventoryUI.isActiveAndEnabled == false)
@@ -94,9 +94,6 @@ namespace Inventory
             InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
             if (inventoryItem.IsEmpty)
                 return;
-
-           
-
         }
 
         private void DropItem(int itemIndex, int quantity)
@@ -117,7 +114,10 @@ namespace Inventory
                itemAction.PerformAction(gameObject);
              
                 if (inventoryData.GetItemAt(itemIndex).IsEmpty)
+                {
                     inventoryUI.ResetSelection();
+                }
+                    
             }
 
             IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
