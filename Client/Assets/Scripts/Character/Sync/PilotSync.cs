@@ -19,11 +19,11 @@ public class PilotSync : SyncModule
         NetworkManager.Instance.Send(movePacket);
     }
 
-    public void SencC_AttackPacket() { }
+    public void SendC_AttackPacket() { }
 
-    public void SencC_FallPacket() { }
+    public void SendC_FallPacket() { }
 
-    public void SencC_DodgePacket() { }
+    public void SendC_DodgePacket() { }
 
-    public void SencC_AimPacket() { }
+    public void SendC_AimPacket() { }
 }
