@@ -5,7 +5,6 @@ public class BaseState : IState
 {
     protected CharacterStateMachine _stateMachine;
 
-
     public BaseState(CharacterStateMachine stateMachine)
     {
         _stateMachine = stateMachine;
@@ -158,12 +157,12 @@ public class CloneBaseState : IState
 
     public virtual void Enter()
     {
-        AddInputActionsCallbacks();
+        //AddInputActionsCallbacks();
     }
 
     public virtual void Exit()
     {
-        RemoveInputActionsCallbacks();
+        //RemoveInputActionsCallbacks();
     }
 
     public virtual void PhysicsUpdate()
@@ -177,56 +176,56 @@ public class CloneBaseState : IState
     }
 
     // Input
-    protected virtual void AddInputActionsCallbacks()
-    {
-        CloneSync sync = _stateMachine.Sync;
+    //protected virtual void AddInputActionsCallbacks()
+    //{
+    //    CloneSync sync = _stateMachine.Sync;
 
-        //sync.OnMoveEvent += MoveEvent;
-        //sync.OnRunEvent += RunEvent;
-        //sync.OnAttackEvent += AttackEvent;
-        //sync.OnAimEvent += AimEvent;
-        //sync.OnDodgeEvent += DodgeEvent;
-    }
+    //    //sync.OnMoveEvent += MoveEvent;
+    //    //sync.OnRunEvent += RunEvent;
+    //    //sync.OnAttackEvent += AttackEvent;
+    //    //sync.OnAimEvent += AimEvent;
+    //    //sync.OnDodgeEvent += DodgeEvent;
+    //}
 
-    protected virtual void RemoveInputActionsCallbacks()
-    {
-        CloneSync sync = _stateMachine.Sync;
+    //protected virtual void RemoveInputActionsCallbacks()
+    //{
+    //    CloneSync sync = _stateMachine.Sync;
 
-        //sync.OnMoveEvent -= MoveEvent;
-        //sync.OnRunEvent -= RunEvent;
-        //sync.OnAttackEvent -= AttackEvent;
-        //sync.OnAimEvent -= AimEvent;
-        //sync.OnDodgeEvent -= DodgeEvent;
-    }
+    //    //sync.OnMoveEvent -= MoveEvent;
+    //    //sync.OnRunEvent -= RunEvent;
+    //    //sync.OnAttackEvent -= AttackEvent;
+    //    //sync.OnAimEvent -= AimEvent;
+    //    //sync.OnDodgeEvent -= DodgeEvent;
+    //}
 
-    protected virtual void RunEvent(bool isRun)
-    {
-        // 달리기
-    }
+    //protected virtual void RunEvent(bool isRun)
+    //{
+    //    // 달리기
+    //}
 
-    protected virtual void MoveEvent(Vector2 direction)
-    {
-        // 이동
-        // MoveCharacter(direction);
-    }
+    //protected virtual void MoveEvent(Vector2 direction)
+    //{
+    //    // 이동
+    //    // MoveCharacter(direction);
+    //}
 
-    protected virtual void AttackEvent(Vector2 direction)
-    {
-        // TODO
-        // 공격
-    }
+    //protected virtual void AttackEvent(Vector2 direction)
+    //{
+    //    // TODO
+    //    // 공격
+    //}
 
-    protected virtual void AimEvent(Vector2 direction)
-    {
-        // TODO
-        // 조준
-    }
+    //protected virtual void AimEvent(Vector2 direction)
+    //{
+    //    // TODO
+    //    // 조준
+    //}
 
-    protected virtual void DodgeEvent()
-    {
-        // TODO
-        // HealthSystem에 무적 적용
-    }
+    //protected virtual void DodgeEvent()
+    //{
+    //    // TODO
+    //    // HealthSystem에 무적 적용
+    //}
 
     protected void StartAnimation(int animationHash)
     {

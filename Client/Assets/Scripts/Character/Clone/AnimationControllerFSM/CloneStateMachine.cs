@@ -46,6 +46,8 @@ public class CombineCloneStatemachine
         _stateMachine[1].AddState(eStateType.Aim, new CloneAimState(_stateMachine[1]));
         _stateMachine[1].AddState(eStateType.None, new CloneNoneState(_stateMachine[1]));
         _stateMachine[1].ChangeState(eStateType.None);
+
+        clone.Sync.OnCloneEvent += CloneEvent;
     }
 
     public void Update()
@@ -66,6 +68,8 @@ public class CombineCloneStatemachine
         {
             if (stateMachine.States.ContainsKey(state))
             {
+                if (stateMachine.currentStateType == state && state != eStateType.ComboAttack)
+                    break;
                 stateMachine.ChangeState(state);
                 break;
             }
@@ -90,5 +94,11 @@ public class CombineCloneStatemachine
                 break;
             }
         }
+    }
+
+    public void CloneEvent(Vector3 velocity, float animTime, int state, Vector3 position)
+    {
+        ChangeState((eStateType)state);
+        SetAnimation((eStateType)state, animTime);
     }
 }

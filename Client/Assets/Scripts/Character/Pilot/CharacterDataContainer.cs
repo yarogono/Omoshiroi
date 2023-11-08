@@ -18,6 +18,7 @@ public class CharacterDataContainer : MonoBehaviour
     public CharacterMovement Movement { get; private set; }
     public BaseInput InputActions { get; private set; }
     public PilotSync Sync { get; private set; }
+    [field: SerializeField] public CharacterSpriteRotator SpriteRotator { get; private set; }
 
     private CombineStateMachine stateMachine;
    
@@ -50,6 +51,7 @@ public class CharacterDataContainer : MonoBehaviour
             Equipments.Equip(item);
 
         stateMachine = new CombineStateMachine(this);
+        SpriteRotator.Register(this);
     }
 
     void Update()
