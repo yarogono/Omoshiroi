@@ -20,7 +20,8 @@ public class CloneDataContainer : MonoBehaviour
     public CloneMovement Movement { get; private set; }
 
     private CombineCloneStatemachine _stateMachine;
-
+    [field: SerializeField]
+    public CharacterSpriteRotator SpriteRotator { get; private set; }
     private void Awake()
     {
         Movement = GetComponent<CloneMovement>();
@@ -38,6 +39,7 @@ public class CloneDataContainer : MonoBehaviour
             Equipments = new EquipSystem();
 
         _stateMachine = new CombineCloneStatemachine(this);
+        SpriteRotator.Register(this);
     }
 
     void Update() { }
