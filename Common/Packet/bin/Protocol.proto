@@ -78,11 +78,11 @@ message S_Sync {
 message ObjectInfo {
 	int32 objectId = 1;
 	string name = 2;
-	Vector3 position = 3;
+	P_Vector3 position = 3;
 	StatInfo statInfo = 4;
 	int32 state = 5;
 	float animTime = 6;
-	Vector3 velocity = 7;
+	P_Vector3 velocity = 7;
 }
 
 message StatInfo {
@@ -93,7 +93,7 @@ message StatInfo {
 	float speed = 5;
 }
 
-message Vector3 {
+message P_Vector3 {
 	float x = 1;
 	float y = 2;
 	float z = 3;
