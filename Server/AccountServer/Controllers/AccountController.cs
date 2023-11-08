@@ -46,6 +46,7 @@ namespace AccountServer.Controllers
                     AccountName = req.AccountName,
                     AccountPassword = encryptPassword
                 };
+
                 _context.Accounts.Add(newAccount);
 
                 _context.SaveChanges();
@@ -68,7 +69,9 @@ namespace AccountServer.Controllers
             AccountDb account = _context.Accounts
                                 .AsNoTracking()
                                 .Where(a => a.AccountName == req.AccountName)
+                                .Include(a => a.Items)
                                 .FirstOrDefault();
+
 
             AccountLoginRes res = new AccountLoginRes();
 
@@ -78,12 +81,22 @@ namespace AccountServer.Controllers
                 string accountPassword = account.AccountPassword;
                 if (_passwordEncryptor.IsmatchPassword(reqPassword, accountPassword))
                 {
-                    res.LoginOk = (int)Define.LoginResult.Success;
+                    res.IsLoginSucceed = true;
+
+                    ICollection<ItemDb> items = account.Items;
+
+                    res.Items = new List<PlayerItemRes>();
+                    foreach (ItemDb item in items)
+                    {
+                        PlayerItemRes playerItemRes = new PlayerItemRes() { Quantity = item.Quantity, TemplateId = item.TemplateId };
+                        res.Items.Add(playerItemRes);
+                    }
+
                     return res;
                 }
             }
 
-            res.LoginOk = (int)Define.LoginResult.Faile;
+            res.IsLoginSucceed = false;
             return res;
         }
     }

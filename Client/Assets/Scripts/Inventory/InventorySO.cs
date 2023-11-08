@@ -9,6 +9,8 @@ using UnityEngine;
 //모델
 public class InventorySO : ScriptableObject
 {
+
+  
     [SerializeField]
     private List<InventoryItem> inventoryItems;
     BaseItem item;

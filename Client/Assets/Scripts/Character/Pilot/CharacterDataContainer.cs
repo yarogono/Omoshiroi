@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
+
 public class CharacterDataContainer : MonoBehaviour
 {
+    
+
     [SerializeField] public Inventory1 Inven { get;}
     [field:SerializeField] public CharacterStats Stats { get; private set; }
     [field:SerializeField] public EquipSystem Equipments { get; private set; }
@@ -18,7 +21,7 @@ public class CharacterDataContainer : MonoBehaviour
     [field: SerializeField] public CharacterSpriteRotator SpriteRotator { get; private set; }
 
     private CombineStateMachine stateMachine;
-
+   
     [Header("테스트용 착용아이템")]
     [SerializeField] private BaseItem[] TestEquipItem;
 
@@ -30,10 +33,14 @@ public class CharacterDataContainer : MonoBehaviour
         Animator = GetComponent<Animator>();
         Sync = GetComponent<PilotSync>();
         AnimationData.Initialize();
+      
     }
 
     private void Start()
     {
+
+       
+
         if (Stats.cbs != null)
             Stats.Initialize();
 
@@ -65,4 +72,6 @@ public class CharacterDataContainer : MonoBehaviour
 
         Gizmos.DrawRay(downRay);
     }
+
+  
 }
