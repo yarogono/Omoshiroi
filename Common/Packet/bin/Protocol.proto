@@ -11,23 +11,20 @@ enum MsgId {
   S_DESPAWN = 3;
   C_MOVE = 4;
   S_MOVE = 5;
-  S_CHANGE_HP = 6;
+  S_HpDamage = 6;
   S_DIE = 7;
   C_ENTER_GAME = 8;
   C_LEAVE_GAME = 9;
-}
-
-enum CreatureState {
-    IDLE = 0;
-    MOVING = 1;
-    DEAD = 2;
+  C_SYNC = 10;
+  S_SYNC = 11;
+  C_CHANGE_HP = 12;
+  C_HpDamage = 13;
 }
 
 enum GameObjectType {
 	NONE = 0;
 	PLAYER = 1;
 	MONSTER = 2;
-	PROJECTILE = 3;
 }
 
 message C_EnterGame {
@@ -63,9 +60,18 @@ message S_Move {
 	PositionInfo posInfo = 2;
 }
 
-message S_ChangeHp {
+message S_HpDamage {
 	int32 objectId = 1;
-	int32 hp = 2;
+	int32 currentHp = 2;
+	int32 maxHp = 3;
+	int32 changeAmount = 4;
+}
+
+message C_HpDamage {
+	int32 objectId = 1;
+	int32 currentHp = 2;
+	int32 maxHp = 3;
+	int32 changeAmount = 4;
 }
 
 message S_Die {
@@ -73,25 +79,22 @@ message S_Die {
 	int32 attackerId = 2;
 }
 
+message C_Sync {
+	ObjectInfo player = 1;
+}
+
+message S_Sync {
+	ObjectInfo player = 1;
+}
+
 message ObjectInfo {
 	int32 objectId = 1;
 	string name = 2;
-	PositionInfo posInfo = 3;
+	Vector3 position = 3;
 	StatInfo statInfo = 4;
-}
-
-message PositionInfo {
-	CreatureState state = 1;
-	MoveDir moveDir = 2;
-	float posX = 3;
-	float posY = 4;
-	float posZ = 5;
-}
-
-message MoveDir {
-	float dirX = 1;
-	float dirY = 2;
-	float dirZ = 3;
+	int32 state = 5;
+	float animTime = 6;
+	Vector3 velocity = 7;
 }
 
 message StatInfo {
@@ -100,5 +103,10 @@ message StatInfo {
 	int32 maxHp =3;
 	int32 attack = 4;
 	float speed = 5;
-	int32 totalExp = 6;
+}
+
+message Vector3 {
+	float x = 1;
+	float y = 2;
+	float z = 3;
 }
