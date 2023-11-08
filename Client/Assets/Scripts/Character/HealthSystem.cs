@@ -8,7 +8,6 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private CharacterStats stats;
 
     PlayerHPReq req = new PlayerHPReq();
-    PlayerHPRes res = new PlayerHPRes();
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +22,9 @@ public class HealthSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// 초과 치유 또는 사망 조건에 대한 예외처리 포함. 치유의 경우 -데미지를 입력값으로 받도록 처리하면 됨. 
+    /// 단순히 체력 증감량을 현재 체력에 더해주고, 서버 측과 이에 대한 데이터를 통신한다. 
+    /// 초과 치유 또는 사망 조건에 대한 예외처리를 고려한 형태이나, 이에 대한 처리는 아직 구현되지 않았다.
     /// </summary>
-    /// <param name="damege"></param>
     public void ChangeHP(int changeAmount)
     {
         int remain = stats.Hp + changeAmount;
@@ -53,16 +52,12 @@ public class HealthSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// 플레이어 체력 정보를 보낼 url 경로와 PlayerHPRes 타입에 담겨야 할 멤버변수를 정해야 한다.
+    /// NetworkManager 의 Send 를 이용해야 함. 
     /// </summary>
     private void SendHPReq()
-    {
-        WebManager.Instance.SendPostRequest<PlayerHPRes>("url 경로", req, SetHPRes);    
+    { 
     }
 
-    private void SetHPRes(PlayerHPRes newRes){
-        res = newRes;
-    }
 }
 
 public class PlayerHPReq
@@ -72,7 +67,5 @@ public class PlayerHPReq
     public int HPChangeAmount { get; set; }
 }
 
-public class PlayerHPRes
-{
-    
-}
+
+
