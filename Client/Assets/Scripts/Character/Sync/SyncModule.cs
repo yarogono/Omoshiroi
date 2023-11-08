@@ -11,6 +11,7 @@ public class SyncModule : MonoBehaviour
     protected bool _updated = false;
 
     ObjectInfo _objectInfo = new ObjectInfo();
+
     public ObjectInfo ObjectInfo
     {
         get { return _objectInfo; }
@@ -43,6 +44,11 @@ public class SyncModule : MonoBehaviour
             ObjectInfo.Position.Z = value.z;
             _updated = true;
         }
+    }
+
+    public SyncModule()
+    {
+        _objectInfo.Position = new P_Vector3();
     }
 
     public TextMeshPro checkIdTest;

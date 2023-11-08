@@ -584,7 +584,7 @@ Transform:
   - {fileID: 2389127606293479906}
   - {fileID: 8626972394969032767}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3350111105225600338
 MonoBehaviour:
@@ -599,9 +599,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkIdTest: {fileID: 7313470445473239486}
-  checkPosXTest: {fileID: 7786366077630511887}
-  checkPosYTest: {fileID: 2196889498417118186}
-  checkPosZTest: {fileID: 8050957903132711359}
+  checkPositionX: {fileID: 7786366077630511887}
+  checkPositionY: {fileID: 2196889498417118186}
+  checkPositionZ: {fileID: 8050957903132711359}
   checkStateTest: {fileID: 4226860418941225350}
 --- !u!114 &4496292724122628551
 MonoBehaviour:
@@ -632,6 +632,9 @@ MonoBehaviour:
     GroundLayer:
       serializedVersion: 2
       m_Bits: 896
+  <SpriteRotator>k__BackingField:
+    _main: {fileID: 0}
+    _weapon: {fileID: 0}
 --- !u!114 &3387555981660624464
 MonoBehaviour:
   m_ObjectHideFlags: 0
