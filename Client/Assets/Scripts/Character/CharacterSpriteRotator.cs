@@ -27,6 +27,12 @@ public class CharacterSpriteRotator
         switch((eStateType)state)
         {
             case eStateType.Aim:
+            case eStateType.Attack:
+                RotateWaepon(velocity.normalized);
+                break;
+            case eStateType.Run:
+            case eStateType.Walk:
+                RotateMain(velocity.normalized);
                 break;
             default:
                 break;
