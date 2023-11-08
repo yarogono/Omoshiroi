@@ -6,6 +6,8 @@ namespace AccountServer.DB
     {
         public DbSet<AccountDb> Accounts { get; set; }
 
+        public DbSet<ItemDb> Item { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
@@ -16,6 +18,11 @@ namespace AccountServer.DB
             builder.Entity<AccountDb>()
                     .HasIndex(a => a.AccountName)
                     .IsUnique();
+
+
+            builder.Entity<ItemDb>()
+                .HasIndex(i => i.ItemId)
+                .IsUnique();
         }
     }
 }

@@ -18,6 +18,13 @@ namespace AccountServer.DB
 
     public class AccountLoginRes
     {
-        public int LoginOk { get; set; }
+        public bool IsLoginSucceed { get; set; }
+        public List<PlayerItemRes> Items { get; set; }
     }
-}
+
+    public class PlayerItemRes
+    {
+        public int TemplateId { get; set; }
+        public int Quantity { get; set; }
+    }
+    }
