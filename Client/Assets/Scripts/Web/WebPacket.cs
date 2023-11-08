@@ -1,3 +1,6 @@
+
+using System.Collections.Generic;
+
 public class AccountLoginReq
 {
     public string AccountName;
@@ -6,18 +9,10 @@ public class AccountLoginReq
 
 public class AccountLoginRes
 {
-    public bool IsLoginSucceed;
+    public bool IsLoginSucceed { get; set; }
+    public List<PlayerItemRes> Items { get; set; }
 }
 
-public class AddItemRequest
-{
-    public int ItemID { get; set; }
-    public int Quantity { get; set; }
-}
-public class AddItemResponse
-{
-    public bool IsSuccess;
-}
 
 public class PlayerItemRes
 {
