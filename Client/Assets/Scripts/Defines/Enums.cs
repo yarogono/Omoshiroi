@@ -55,3 +55,10 @@ public enum eStateType
     ComboAttack,
     Aim,
 }
+
+public enum eSoundType
+{
+    Bgm,
+    Effect,
+    MaxCount
+}

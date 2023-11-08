@@ -13,6 +13,8 @@ public class SceneController : MonoBehaviour
     public static List<PlayerItemRes> items = new List<PlayerItemRes>();
     private void Start()
     {
+        SoundManager.Instance.Play("BGM1", eSoundType.Bgm);
+
         BtnChangeScene.onClick.AddListener(() =>
         {          
             //login테스트
