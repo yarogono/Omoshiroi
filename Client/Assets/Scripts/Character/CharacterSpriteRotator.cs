@@ -64,9 +64,9 @@ public class CharacterSpriteRotator
 
             float angle = Vector2.Angle(axis, direction);
             if (direction.y > 0)
-                _weapon.transform.localEulerAngles = new Vector3() { x = 60, y = 0, z = -angle };
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = -angle };
             else
-                _weapon.transform.localEulerAngles = new Vector3() { x = 60, y = 0, z = angle };
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = angle };
         }
         else
         {
@@ -75,9 +75,9 @@ public class CharacterSpriteRotator
 
             float angle = Vector2.Angle(axis, direction);
             if (direction.y < 0)
-                _weapon.transform.localEulerAngles = new Vector3() { x = 60, y = 0, z = -angle };
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = -angle };
             else
-                _weapon.transform.localEulerAngles = new Vector3() { x = 60, y = 0, z = angle };
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = angle };
         }
     }
 }
