@@ -59,7 +59,7 @@ public class PacketHandler
         if (syncModule == null)
             return;
 
-        syncModule.ObjectInfo.Position = movePacket.Player.Position;
+        syncModule.P_Vector3 = movePacket.Player.Position;
     }
 
     public static void S_HpDamageHandler(PacketSession session, IMessage packet) { }

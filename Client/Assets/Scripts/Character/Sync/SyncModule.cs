@@ -10,45 +10,33 @@ public class SyncModule : MonoBehaviour
 
     protected bool _updated = false;
 
-    ObjectInfo _objectInfo = new ObjectInfo();
+    P_Vector3 _pVector3 = new P_Vector3();
 
-    public ObjectInfo ObjectInfo
+    public P_Vector3 P_Vector3
     {
-        get { return _objectInfo; }
+        get { return _pVector3; }
         set
         {
-            if (_objectInfo.Equals(value))
+            if (_pVector3.Equals(value))
                 return;
 
-            position = new Vector3(value.Position.X, value.Position.Y, value.Position.Z);
+            position = new Vector3(value.X, value.Y, value.Z);
         }
     }
 
     public Vector3 position
     {
-        get
-        {
-            return new Vector3(ObjectInfo.Position.X, ObjectInfo.Position.Y, ObjectInfo.Position.Z);
-        }
+        get { return new Vector3(_pVector3.X, _pVector3.Y, _pVector3.Z); }
         set
         {
-            if (
-                ObjectInfo.Position.X == value.x
-                && ObjectInfo.Position.Y == value.y
-                && ObjectInfo.Position.Z == value.z
-            )
+            if (_pVector3.X == value.x && _pVector3.Y == value.y && _pVector3.Z == value.z)
                 return;
 
-            ObjectInfo.Position.X = value.x;
-            ObjectInfo.Position.Y = value.y;
-            ObjectInfo.Position.Z = value.z;
+            _pVector3.X = value.x;
+            _pVector3.Y = value.y;
+            _pVector3.Z = value.z;
             _updated = true;
         }
-    }
-
-    public SyncModule()
-    {
-        _objectInfo.Position = new P_Vector3();
     }
 
     public TextMeshPro checkIdTest;
@@ -60,10 +48,10 @@ public class SyncModule : MonoBehaviour
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";
-        checkPositionX.text = $"Ser_X : {ObjectInfo.Position.X} | Cli_X : {transform.position.x}";
-        checkPositionY.text = $"Ser_Y : {ObjectInfo.Position.Y} | Cli_Y : {transform.position.y}";
-        checkPositionZ.text = $"Ser_Z : {ObjectInfo.Position.Z} | Cli_Z : {transform.position.z}";
-        checkStateTest.text = $"State : {ObjectInfo.State}";
+        checkPositionX.text = $"Ser_X : {_pVector3.X} | Cli_X : {transform.position.x}";
+        checkPositionY.text = $"Ser_Y : {_pVector3.Y} | Cli_Y : {transform.position.y}";
+        checkPositionZ.text = $"Ser_Z : {_pVector3.Z} | Cli_Z : {transform.position.z}";
+        // checkStateTest.text = $"State : {ObjectInfo.State}";
     }
 
     protected virtual void Update()
