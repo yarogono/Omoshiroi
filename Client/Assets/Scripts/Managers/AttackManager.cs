@@ -119,4 +119,11 @@ public class AttackManager : CustomSingleton<AttackManager>
         queue.Enqueue(attack);
     }
 
+    private void LateUpdate()
+    {
+        // 10분동안 봤는데 Melee의 총 개수는 20개인데, 최대 사용개수가 5개밖에 안되
+        // 줄여야겟다. 10개로 줄여
+        // Melee의 안쓰는 Queue에 있는 오브젝트를 디스트로이
+    }
+
 }
