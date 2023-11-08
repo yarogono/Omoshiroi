@@ -6,7 +6,9 @@ public class BaseAttack : MonoBehaviour
 {
     protected string _makerTag;
     public int Damage { get; private set; }
+    private Action _actAtDisable;
 
+    public void AddActAtDisable(Action action) { _actAtDisable += action; }
     /// <summary>
     /// 플래이어가 요청할 때 사용
     /// </summary>
@@ -45,5 +47,11 @@ public class BaseAttack : MonoBehaviour
     public virtual void ApplyDamage(CharacterDataContainer dataContainer)
     {
 
+    }
+
+    private void OnDisable()
+    {
+        _actAtDisable?.Invoke();
+        _actAtDisable = null;
     }
 }
