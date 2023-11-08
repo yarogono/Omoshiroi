@@ -38,7 +38,12 @@ public class NetworkManager : CustomSingleton<NetworkManager>
 
         C_EnterGame enterGamePacket = new C_EnterGame { Player = new ObjectInfo() };
         enterGamePacket.Player.Name = "test";
-        enterGamePacket.Player.PosInfo = new PositionInfo() { PosX = 0, PosY = 0 };
+        enterGamePacket.Player.Position = new Google.Protobuf.Protocol.Vector3()
+        {
+            X = 0,
+            Y = 0,
+            Z = 0
+        };
         enterGamePacket.Player.StatInfo = null;
 
         Send(enterGamePacket);
