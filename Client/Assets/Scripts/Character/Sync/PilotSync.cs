@@ -14,8 +14,9 @@ public class PilotSync : SyncModule
     public void SendC_MovePacket()
     {
         position = transform.position;
+        C_Sync c_Sync = new C_Sync();
 
-        C_Move movePacket = new C_Move { PosInfo = PosInfo };
+        // C_Sync movePacket = new C_Sync { Player.Position = ObjectInfo.Position };
         NetworkManager.Instance.Send(movePacket);
     }
 

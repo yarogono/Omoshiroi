@@ -10,47 +10,62 @@ public class SyncModule : MonoBehaviour
 
     protected bool _updated = false;
 
-    PositionInfo _positionInfo = new PositionInfo();
-    public PositionInfo PosInfo
+    ObjectInfo _objectInfo = new ObjectInfo();
+    public ObjectInfo ObjectInfo
     {
-        get { return _positionInfo; }
+        get { return _objectInfo; }
         set
         {
-            if (_positionInfo.Equals(value))
+            if (_objectInfo.Equals(value))
                 return;
 
-            position = new Vector3(value.PosX, value.PosY, value.PosZ);
+            position = new UnityEngine.Vector3(
+                value.Position.X,
+                value.Position.Y,
+                value.Position.Z
+            );
         }
     }
 
-    public Vector3 position
+    public UnityEngine.Vector3 position
     {
-        get { return new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ); }
+        get
+        {
+            return new UnityEngine.Vector3(
+                ObjectInfo.Position.X,
+                ObjectInfo.Position.Y,
+                ObjectInfo.Position.Z
+            );
+        }
         set
         {
-            if (PosInfo.PosX == value.x && PosInfo.PosY == value.y && PosInfo.PosZ == value.z)
+            if (
+                ObjectInfo.Position.X == value.x
+                && ObjectInfo.Position.Y == value.y
+                && ObjectInfo.Position.Z == value.z
+            )
                 return;
 
-            PosInfo.PosX = value.x;
-            PosInfo.PosY = value.y;
-            PosInfo.PosZ = value.z;
+            ObjectInfo.Position.X = value.x;
+            ObjectInfo.Position.Y = value.y;
+            ObjectInfo.Position.Z = value.z;
             _updated = true;
         }
     }
 
     public TextMeshPro checkIdTest;
-    public TextMeshPro checkPosXTest;
-    public TextMeshPro checkPosYTest;
-    public TextMeshPro checkPosZTest;
+    public TextMeshPro checkPositionX;
+    public TextMeshPro checkPositionY;
+    public TextMeshPro checkPositionZ;
     public TextMeshPro checkStateTest;
 
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";
-        checkPosXTest.text = $"Ser_X : {PosInfo.PosX} | Cli_X : {transform.position.x}";
-        checkPosYTest.text = $"Ser_Y : {PosInfo.PosY} | Cli_Y : {transform.position.y}";
-        checkPosZTest.text = $"Ser_Z : {PosInfo.PosZ} | Cli_Z : {transform.position.z}";
-        checkStateTest.text = $"State : {PosInfo.State}";
+        checkPositionX.text = $"Ser_X : {ObjectInfo.Position.X} | Cli_X : {transform.position.x}";
+        checkPositionY.text = $"Ser_Y : {ObjectInfo.Position.Y} | Cli_Y : {transform.position.y}";
+        checkPositionZ.text = $"Ser_Z : {ObjectInfo.Position.Z} | Cli_Z : {transform.position.z}";
+        checkStateTest.text = $"State : {ObjectInfo.State}";
     }
 
     protected virtual void Update()
