@@ -35,6 +35,7 @@ public class CharacterDodgeState : BaseState
         _nextState = _stateMachine.previousStateType;
         _isRun = _isRunInState;
         StartAnimation(_stateMachine.Character.AnimationData.DodgeParameterHash);
+        _stateMachine.Character.Sync?.SendC_DodgePacket();
     }
 
     public override void Exit()
@@ -55,6 +56,12 @@ public class CharacterDodgeState : BaseState
         {
             _stateMachine.ChangeState(_nextState);
         }
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        _stateMachine.Character.Sync?.SendC_DodgePacket();
     }
 
     private void TryApplyForce()

@@ -14,6 +14,7 @@ public class CharacterAimState : BaseState
         _stateMachine.MovementSpeedMultiflier = 0.5f;
 
         StartAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
+        _stateMachine.Character.Sync?.SendC_AimPacket();
     }
 
     public override void Exit()
@@ -29,6 +30,8 @@ public class CharacterAimState : BaseState
     {
         if (!CheckGround())
             _stateMachine.ChangeState(eStateType.None);
+        else
+            _stateMachine.Character.Sync?.SendC_AimPacket();
     }
 
     protected override void AimEvent(Vector2 direction)

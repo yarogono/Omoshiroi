@@ -41,6 +41,12 @@ public class CharacterFallState : CharacterAirState
         }
     }
 
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        _stateMachine.Character.Sync?.SendC_FallPacket();
+    }
+
     protected override void RunEvent(bool isRun)
     {
         if (isRun)
