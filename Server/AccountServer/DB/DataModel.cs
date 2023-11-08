@@ -15,26 +15,9 @@ namespace AccountServer.DB
         [Required(ErrorMessage = "AccountPassword를 입력하세요.")]
         public string AccountPassword { get; set; }
 
-        public PlayerDb PlayerDb { get; set; } = new PlayerDb();
+        public ICollection<ItemDb> Items { get; set; }
     }
 
-    [Table("Player")]
-    public class PlayerDb
-    {
-        [Key]
-        public int PlayerId { get; set; }
-
-        public InventoryDb InventoryDb { get; set; } = new InventoryDb();
-    }
-
-    [Table("Inventory")]
-    public class InventoryDb
-    {
-        [Key]
-        public int InventoryId { get; set; }
-
-        public ICollection<ItemDb> Items { get; set; } = new List<ItemDb>();
-    }
 
     [Table("Item")]
     public class ItemDb

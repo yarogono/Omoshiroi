@@ -46,6 +46,7 @@ namespace AccountServer.Controllers
                     AccountName = req.AccountName,
                     AccountPassword = encryptPassword
                 };
+
                 _context.Accounts.Add(newAccount);
 
                 _context.SaveChanges();
@@ -68,15 +69,9 @@ namespace AccountServer.Controllers
             AccountDb account = _context.Accounts
                                 .AsNoTracking()
                                 .Where(a => a.AccountName == req.AccountName)
+                                .Include(a => a.Items)
                                 .FirstOrDefault();
 
-            var query = (from a in _context.Accounts
-                         join p in _context.Accounts on a.PlayerDb.PlayerId equals p.PlayerDb.PlayerId
-                         join i in _context.Set<InventoryDb>() on p.PlayerDb.InventoryDb.InventoryId equals i.InventoryId
-                         select new { a.AccountName, i.Items }).SingleOrDefault();
-
-
-            ICollection<ItemDb> items = query.Items;
 
             AccountLoginRes res = new AccountLoginRes();
 
@@ -88,6 +83,9 @@ namespace AccountServer.Controllers
                 {
                     res.IsLoginSucceed = true;
 
+                    ICollection<ItemDb> items = account.Items;
+
+                    res.Items = new List<PlayerItemRes>();
                     foreach (ItemDb item in items)
                     {
                         PlayerItemRes playerItemRes = new PlayerItemRes() { Quantity = item.Quantity, TemplateId = item.TemplateId };

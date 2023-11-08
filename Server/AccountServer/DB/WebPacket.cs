@@ -27,4 +27,4 @@ namespace AccountServer.DB
         public int TemplateId { get; set; }
         public int Quantity { get; set; }
     }
-}
+    }
