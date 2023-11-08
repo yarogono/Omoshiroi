@@ -11,14 +11,14 @@ enum MsgId {
   S_DESPAWN = 3;
   C_MOVE = 4;
   S_MOVE = 5;
-  S_HpDamage = 6;
+  S_HP_DAMAGE = 6;
   S_DIE = 7;
   C_ENTER_GAME = 8;
   C_LEAVE_GAME = 9;
   C_SYNC = 10;
   S_SYNC = 11;
   C_CHANGE_HP = 12;
-  C_HpDamage = 13;
+  C_HP_DAMAGE = 13;
 }
 
 enum GameObjectType {
