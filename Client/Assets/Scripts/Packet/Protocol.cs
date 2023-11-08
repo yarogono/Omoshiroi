@@ -38,20 +38,20 @@ namespace Google.Protobuf.Protocol {
             "RGllEhAKCG9iamVjdElkGAEgASgFEhIKCmF0dGFja2VySWQYAiABKAUiLgoG",
             "Q19TeW5jEiQKBnBsYXllchgBIAEoCzIULlByb3RvY29sLk9iamVjdEluZm8i",
             "LgoGU19TeW5jEiQKBnBsYXllchgBIAEoCzIULlByb3RvY29sLk9iamVjdElu",
-            "Zm8ivQEKCk9iamVjdEluZm8SEAoIb2JqZWN0SWQYASABKAUSDAoEbmFtZRgC",
-            "IAEoCRIjCghwb3NpdGlvbhgDIAEoCzIRLlByb3RvY29sLlZlY3RvcjMSJAoI",
-            "c3RhdEluZm8YBCABKAsyEi5Qcm90b2NvbC5TdGF0SW5mbxINCgVzdGF0ZRgF",
-            "IAEoBRIQCghhbmltVGltZRgGIAEoAhIjCgh2ZWxvY2l0eRgHIAEoCzIRLlBy",
-            "b3RvY29sLlZlY3RvcjMiUwoIU3RhdEluZm8SDQoFbGV2ZWwYASABKAUSCgoC",
-            "aHAYAiABKAUSDQoFbWF4SHAYAyABKAUSDgoGYXR0YWNrGAQgASgFEg0KBXNw",
-            "ZWVkGAUgASgCIioKB1ZlY3RvcjMSCQoBeBgBIAEoAhIJCgF5GAIgASgCEgkK",
-            "AXoYAyABKAIqsAEKBU1zZ0lkEhAKDFNfRU5URVJfR0FNRRAAEhAKDFNfTEVB",
-            "VkVfR0FNRRABEgsKB1NfU1BBV04QAhINCglTX0RFU1BBV04QAxIJCgVTX0RJ",
-            "RRAEEhAKDENfRU5URVJfR0FNRRAFEhAKDENfTEVBVkVfR0FNRRAGEgoKBkNf",
-            "U1lOQxAHEgoKBlNfU1lOQxAIEg8KC1NfSFBfREFNQUdFEAkSDwoLQ19IUF9E",
-            "QU1BR0UQCiozCg5HYW1lT2JqZWN0VHlwZRIICgROT05FEAASCgoGUExBWUVS",
-            "EAESCwoHTU9OU1RFUhACQhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xi",
-            "BnByb3RvMw=="));
+            "Zm8iwQEKCk9iamVjdEluZm8SEAoIb2JqZWN0SWQYASABKAUSDAoEbmFtZRgC",
+            "IAEoCRIlCghwb3NpdGlvbhgDIAEoCzITLlByb3RvY29sLlBfVmVjdG9yMxIk",
+            "CghzdGF0SW5mbxgEIAEoCzISLlByb3RvY29sLlN0YXRJbmZvEg0KBXN0YXRl",
+            "GAUgASgFEhAKCGFuaW1UaW1lGAYgASgCEiUKCHZlbG9jaXR5GAcgASgLMhMu",
+            "UHJvdG9jb2wuUF9WZWN0b3IzIlMKCFN0YXRJbmZvEg0KBWxldmVsGAEgASgF",
+            "EgoKAmhwGAIgASgFEg0KBW1heEhwGAMgASgFEg4KBmF0dGFjaxgEIAEoBRIN",
+            "CgVzcGVlZBgFIAEoAiIsCglQX1ZlY3RvcjMSCQoBeBgBIAEoAhIJCgF5GAIg",
+            "ASgCEgkKAXoYAyABKAIqsAEKBU1zZ0lkEhAKDFNfRU5URVJfR0FNRRAAEhAK",
+            "DFNfTEVBVkVfR0FNRRABEgsKB1NfU1BBV04QAhINCglTX0RFU1BBV04QAxIJ",
+            "CgVTX0RJRRAEEhAKDENfRU5URVJfR0FNRRAFEhAKDENfTEVBVkVfR0FNRRAG",
+            "EgoKBkNfU1lOQxAHEgoKBlNfU1lOQxAIEg8KC1NfSFBfREFNQUdFEAkSDwoL",
+            "Q19IUF9EQU1BR0UQCiozCg5HYW1lT2JqZWN0VHlwZRIICgROT05FEAASCgoG",
+            "UExBWUVSEAESCwoHTU9OU1RFUhACQhuqAhhHb29nbGUuUHJvdG9idWYuUHJv",
+            "dG9jb2xiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.GameObjectType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -68,7 +68,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Sync), global::Google.Protobuf.Protocol.S_Sync.Parser, new[]{ "Player" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.ObjectInfo), global::Google.Protobuf.Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "Name", "Position", "StatInfo", "State", "AnimTime", "Velocity" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.StatInfo), global::Google.Protobuf.Protocol.StatInfo.Parser, new[]{ "Level", "Hp", "MaxHp", "Attack", "Speed" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.Vector3), global::Google.Protobuf.Protocol.Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.P_Vector3), global::Google.Protobuf.Protocol.P_Vector3.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null)
           }));
     }
     #endregion
@@ -1786,9 +1786,9 @@ namespace Google.Protobuf.Protocol {
 
     /// <summary>Field number for the "position" field.</summary>
     public const int PositionFieldNumber = 3;
-    private global::Google.Protobuf.Protocol.Vector3 position_;
+    private global::Google.Protobuf.Protocol.P_Vector3 position_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Google.Protobuf.Protocol.Vector3 Position {
+    public global::Google.Protobuf.Protocol.P_Vector3 Position {
       get { return position_; }
       set {
         position_ = value;
@@ -1830,9 +1830,9 @@ namespace Google.Protobuf.Protocol {
 
     /// <summary>Field number for the "velocity" field.</summary>
     public const int VelocityFieldNumber = 7;
-    private global::Google.Protobuf.Protocol.Vector3 velocity_;
+    private global::Google.Protobuf.Protocol.P_Vector3 velocity_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Google.Protobuf.Protocol.Vector3 Velocity {
+    public global::Google.Protobuf.Protocol.P_Vector3 Velocity {
       get { return velocity_; }
       set {
         velocity_ = value;
@@ -1961,7 +1961,7 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.position_ != null) {
         if (position_ == null) {
-          Position = new global::Google.Protobuf.Protocol.Vector3();
+          Position = new global::Google.Protobuf.Protocol.P_Vector3();
         }
         Position.MergeFrom(other.Position);
       }
@@ -1979,7 +1979,7 @@ namespace Google.Protobuf.Protocol {
       }
       if (other.velocity_ != null) {
         if (velocity_ == null) {
-          Velocity = new global::Google.Protobuf.Protocol.Vector3();
+          Velocity = new global::Google.Protobuf.Protocol.P_Vector3();
         }
         Velocity.MergeFrom(other.Velocity);
       }
@@ -2004,7 +2004,7 @@ namespace Google.Protobuf.Protocol {
           }
           case 26: {
             if (position_ == null) {
-              Position = new global::Google.Protobuf.Protocol.Vector3();
+              Position = new global::Google.Protobuf.Protocol.P_Vector3();
             }
             input.ReadMessage(Position);
             break;
@@ -2026,7 +2026,7 @@ namespace Google.Protobuf.Protocol {
           }
           case 58: {
             if (velocity_ == null) {
-              Velocity = new global::Google.Protobuf.Protocol.Vector3();
+              Velocity = new global::Google.Protobuf.Protocol.P_Vector3();
             }
             input.ReadMessage(Velocity);
             break;
@@ -2278,11 +2278,11 @@ namespace Google.Protobuf.Protocol {
 
   }
 
-  public sealed partial class Vector3 : pb::IMessage<Vector3> {
-    private static readonly pb::MessageParser<Vector3> _parser = new pb::MessageParser<Vector3>(() => new Vector3());
+  public sealed partial class P_Vector3 : pb::IMessage<P_Vector3> {
+    private static readonly pb::MessageParser<P_Vector3> _parser = new pb::MessageParser<P_Vector3>(() => new P_Vector3());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Vector3> Parser { get { return _parser; } }
+    public static pb::MessageParser<P_Vector3> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -2295,14 +2295,14 @@ namespace Google.Protobuf.Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector3() {
+    public P_Vector3() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector3(Vector3 other) : this() {
+    public P_Vector3(P_Vector3 other) : this() {
       x_ = other.x_;
       y_ = other.y_;
       z_ = other.z_;
@@ -2310,8 +2310,8 @@ namespace Google.Protobuf.Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Vector3 Clone() {
-      return new Vector3(this);
+    public P_Vector3 Clone() {
+      return new P_Vector3(this);
     }
 
     /// <summary>Field number for the "x" field.</summary>
@@ -2349,11 +2349,11 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Vector3);
+      return Equals(other as P_Vector3);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Vector3 other) {
+    public bool Equals(P_Vector3 other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2421,7 +2421,7 @@ namespace Google.Protobuf.Protocol {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Vector3 other) {
+    public void MergeFrom(P_Vector3 other) {
       if (other == null) {
         return;
       }
