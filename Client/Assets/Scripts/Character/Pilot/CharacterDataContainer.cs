@@ -19,6 +19,7 @@ public class CharacterDataContainer : MonoBehaviour
     public BaseInput InputActions { get; private set; }
     public PilotSync Sync { get; private set; }
     [field: SerializeField] public CharacterSpriteRotator SpriteRotator { get; private set; }
+    public HealthSystem Health { get; private set; }
 
     private CombineStateMachine stateMachine;
    
@@ -32,6 +33,7 @@ public class CharacterDataContainer : MonoBehaviour
         InputActions = GetComponent<BaseInput>();
         Animator = GetComponent<Animator>();
         Sync = GetComponent<PilotSync>();
+        Health = GetComponent<HealthSystem>();
         AnimationData.Initialize();
       
     }
