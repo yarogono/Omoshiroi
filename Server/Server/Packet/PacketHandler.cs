@@ -24,9 +24,7 @@ class PacketHandler
         player = ObjectManager.Instance.Add<Player>();
         {
             player.Info.Name = $"Player_{player.Id}";
-            player.Info.PosInfo.State = CreatureState.Idle;
-            player.Info.PosInfo.PosX = packetPlayer.PosInfo.PosX;
-            player.Info.PosInfo.PosY = packetPlayer.PosInfo.PosY;
+            player.Info.Position = packetPlayer.Position;
 
             StatInfo stat = null;
             player.Stat.MergeFrom(stat);
@@ -40,12 +38,10 @@ class PacketHandler
     }
 
 
-    public static void C_MoveHandler(PacketSession session, IMessage packet)
+    public static void C_SyncHandler(PacketSession session, IMessage packet)
     {
-        C_Move movePacket = packet as C_Move;
+        C_Sync syncPacket = packet as C_Sync;
         ClientSession clientSession = session as ClientSession;
-
-        Console.WriteLine($"C_Move ({movePacket.PosInfo.PosX}, {movePacket.PosInfo.PosY})");
 
         Player player = clientSession.MyPlayer;
         if (player == null)
@@ -55,7 +51,10 @@ class PacketHandler
         if (room == null)
             return;
 
-        room.Push(room.HandleMove, player, movePacket);
+        if (player.Id != syncPacket.Player.ObjectId)
+            return;
+
+        room.Push(room.HandleMove, player, syncPacket);
     }
 
     public static void C_LeaveGameHandler(PacketSession session, IMessage packet)
@@ -75,5 +74,15 @@ class PacketHandler
             return;
 
         room.Push(room.LeaveGame, leaveGamePacket.PlayerId);
+    }
+
+    public static void C_HpDamageHandler(PacketSession session, IMessage packet)
+    {
+        C_HpDamage leaveGamePacket = packet as C_HpDamage;
+        ClientSession clientSession = session as ClientSession;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
     }
 }
