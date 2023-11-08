@@ -19,23 +19,15 @@ public class SyncModule : MonoBehaviour
             if (_objectInfo.Equals(value))
                 return;
 
-            position = new UnityEngine.Vector3(
-                value.Position.X,
-                value.Position.Y,
-                value.Position.Z
-            );
+            position = new Vector3(value.Position.X, value.Position.Y, value.Position.Z);
         }
     }
 
-    public UnityEngine.Vector3 position
+    public Vector3 position
     {
         get
         {
-            return new UnityEngine.Vector3(
-                ObjectInfo.Position.X,
-                ObjectInfo.Position.Y,
-                ObjectInfo.Position.Z
-            );
+            return new Vector3(ObjectInfo.Position.X, ObjectInfo.Position.Y, ObjectInfo.Position.Z);
         }
         set
         {

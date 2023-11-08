@@ -38,7 +38,7 @@ public class NetworkManager : CustomSingleton<NetworkManager>
 
         C_EnterGame enterGamePacket = new C_EnterGame { Player = new ObjectInfo() };
         enterGamePacket.Player.Name = "test";
-        enterGamePacket.Player.Position = new Google.Protobuf.Protocol.Vector3()
+        enterGamePacket.Player.Position = new P_Vector3()
         {
             X = 0,
             Y = 0,
@@ -74,8 +74,8 @@ public class NetworkManager : CustomSingleton<NetworkManager>
 
         int id = pilotPlayerController.Id;
 
-        C_LeaveGame leaveGamePacket = new C_LeaveGame();
-        leaveGamePacket.PlayerId = id;
+        C_LeaveGame leaveGamePacket = new C_LeaveGame { PlayerId = id };
+
         Send(leaveGamePacket);
     }
 }

@@ -24,11 +24,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
         if (objectType == GameObjectType.Player)
         {
-            UnityEngine.Vector3 S_Position = new UnityEngine.Vector3(
-                info.Position.X,
-                info.Position.Y,
-                info.Position.Z
-            );
+            Vector3 S_Position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
 
             if (pilotPlayer)
             {
@@ -45,7 +41,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
             }
             else
             {
-                UnityEngine.Vector3 SpawnPos = S_Position;
+                Vector3 SpawnPos = S_Position;
 
                 GameObject gameObject = Instantiate(
                     Resources.Load<GameObject>("Prefabs/ClonePlayer"),
