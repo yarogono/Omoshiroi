@@ -103,7 +103,7 @@ public class CombineCloneStatemachine
         SetAnimation((eStateType)state, animTime);
     }
 
-    public void CloneMakeAttackAreaEvent(int Combo, Vector3 position, Vector2 direction)
+    public void CloneMakeAttackAreaEvent(int Combo, Vector3 position, Vector3 direction)
     {
         AttackManager.Instance.RqAttack(Combo, _stateMachine[0].Clone, position, direction);
     }

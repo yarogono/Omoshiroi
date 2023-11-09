@@ -5,10 +5,24 @@ using UnityEngine;
 
 public class MeleeAttack : BaseAttack
 {
+    [SerializeField] private float speed = 1f; // 공격의 속도
+    [SerializeField] private float lifeTime = 0.3f; // 공격이 존재할 수 있는 시간
+
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
         base.Initalize(attackInfo, dataContainer, tag);
         // 추가적으로 해야되는 작업
+        Invoke(nameof(Disactive), lifeTime);
+    }
+
+    private void Update()
+    {
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    private void Disactive()
+    {
+        gameObject.SetActive(false);
     }
 
     public override void ApplyDamage(HealthSystem health)
@@ -42,4 +56,6 @@ public class MeleeAttack : BaseAttack
             // NPC는 어떻게 감지해야되는지 고민
         }
     }
+
+    ontrigg
 }

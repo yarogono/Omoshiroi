@@ -31,7 +31,7 @@ public class AttackManager : CustomSingleton<AttackManager>
     private GameObject ObjPoolRoot;
     public LayerMask TargetLayer;
 
-    public void RqAttack(int ComboIndex, DataContainer dataContainer, Vector3 position, Vector2 direction)
+    public void RqAttack(int ComboIndex, DataContainer dataContainer, Vector3 position, Vector3 direction)
     {
         // 오브젝트풀링
         BaseItem item = dataContainer.Equipments.GetEquippedItem(eItemType.Magic);
@@ -40,7 +40,9 @@ public class AttackManager : CustomSingleton<AttackManager>
             BaseAttack attackObj = GetAttackFromPool(magic.AttackData.AttackInfos[ComboIndex].AttackType);
             // 풀링한오브젝트를 초기화
             attackObj.Initalize(magic.AttackData.AttackInfos[ComboIndex], dataContainer, dataContainer.tag);
-            attackObj.transform.position = position;
+            //attackObj.transform.SetLocalPositionAndRotation(position, Quaternion.FromToRotation(attackObj.transform.forward, direction));
+            attackObj.transform.SetPositionAndRotation(position, Quaternion.LookRotation(direction, Vector3.up));
+
             // attackObj.transform.rotation을 direction에 따라서 돌리기
         }
     }
