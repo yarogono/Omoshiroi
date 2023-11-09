@@ -20,11 +20,11 @@ MonoBehaviour:
   itemType: 2
   maxStack: 1
   isStackable: 0
-  magicObject: {fileID: 0}
-  range: 5
+  range: 1
   attackData:
     <AttackInfos>k__BackingField:
     - <AttackName>k__BackingField: start
+      <AttackType>k__BackingField: 1
       <ComboStateIndex>k__BackingField: 1
       <ComboTransitionTime>k__BackingField: 0.5
       <ForceTransitionTime>k__BackingField: 0.2
@@ -32,6 +32,7 @@ MonoBehaviour:
       <Damage>k__BackingField: 1
       <Anime>k__BackingField: {fileID: 7400000, guid: e738a61b954375b40a344cc06fd489bc, type: 2}
     - <AttackName>k__BackingField: end
+      <AttackType>k__BackingField: 2
       <ComboStateIndex>k__BackingField: 0
       <ComboTransitionTime>k__BackingField: 0.5
       <ForceTransitionTime>k__BackingField: 0.2

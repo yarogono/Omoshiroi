@@ -65,6 +65,10 @@ public enum eSoundType
 
 public enum eAttackType
 {
-    Melee,
-    Range,
+    Melee = 0,
+    SwordMelee1,
+    SwordMelee2,
+    Range = 100,
+    FireRange1,
+    FireRange2,
 }

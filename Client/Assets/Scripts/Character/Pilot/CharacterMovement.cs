@@ -77,6 +77,7 @@ public class CharacterMovement : MonoBehaviour
     /// <param name="knockoutDuration">조작 불가능 시간</param>
     public void AddImpact(Vector3 impact, float knockoutDuration = 0.3f)
     {
+        Debug.Log("넉백");
         _currentPhysics += impact / _mass;
         ApplyKnockOutTime(knockoutDuration);
     }

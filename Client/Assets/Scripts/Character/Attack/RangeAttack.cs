@@ -6,6 +6,7 @@ using UnityEngine;
 public class RangeAttack : BaseAttack
 {
     [SerializeField] private float speed = 10f; // 공격의 속도
+    [SerializeField] private float knockBackPower = 5f; // 공격의 속도
     [SerializeField] private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
     
     
@@ -16,16 +17,16 @@ public class RangeAttack : BaseAttack
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    public override void Initalize(DataContainer dataContainer, string tag)
-    {
-        int ap = dataContainer.Stats.AtkPower;
-        base.Initalize(dataContainer, tag);
-        Damage = dataContainer.Stats.AtkPower;
-        Launch();
+    public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
+    {       
+        base.Initalize(attackInfo, dataContainer, tag);
+        Damage = dataContainer.Stats.AtkPower;    
     }
 
     public void Launch()
     {
+
+
         // 공격생명주기
         Invoke(nameof(Deactivate), lifeTime);
 
@@ -44,16 +45,16 @@ public class RangeAttack : BaseAttack
         // 이곳에 충돌한 대상에 대한 처리 로직을 구현
         Debug.Log(other.name);
         
-        if (other.tag == "Clone")
+        if (other.tag == "Pilot")
         {
 
-            var characterData = other.GetComponent<CharacterDataContainer>();
+            var Data = other.GetComponent<HealthSystem>();
             CharacterMovement movement = other.GetComponent<CharacterMovement>();
-            if (characterData != null)
+            if (Data != null)
             {
                 //넉백을위한 Vector3계산
-                impact = -(other.gameObject.transform.position - transform.position).normalized*5;  
-                ApplyDamage(characterData);
+                impact = (other.gameObject.transform.position - transform.position).normalized*knockBackPower;  
+                ApplyDamage(Data);
                 //넉백             
                 movement.AddImpact(impact); 
             }
@@ -66,11 +67,11 @@ public class RangeAttack : BaseAttack
     }
 
 
-    public override void ApplyDamage(DataContainer dataContainer)
+    public override void ApplyDamage(HealthSystem healthSystem)
     {
-      
-        dataContainer.Health.TakeDamage(Damage);
-        //Deactivate();
+
+       healthSystem.TakeDamage(Damage);
+        Debug.Log(healthSystem.stats);
         gameObject.SetActive(false);
     }
  
