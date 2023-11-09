@@ -26,6 +26,8 @@ public class RangeAttack : BaseAttack
 
     public void Launch()
     {
+
+
         // 공격생명주기
         Invoke(nameof(Deactivate), lifeTime);
 
@@ -44,7 +46,7 @@ public class RangeAttack : BaseAttack
         // 이곳에 충돌한 대상에 대한 처리 로직을 구현
         Debug.Log(other.name);
         
-        if (other.tag == "Clone")
+        if (other.tag == "Pilot")
         {
 
             var characterData = other.GetComponent<CharacterDataContainer>();
