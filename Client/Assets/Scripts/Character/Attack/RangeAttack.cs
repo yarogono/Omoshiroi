@@ -3,15 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class RangeAttack : MonoBehaviour
+public class RangeAttack : BaseAttack
 {
     [SerializeField] private float speed = 10f; // 공격의 속도
     [SerializeField] private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
 
+    public override void Initalize(CharacterDataContainer dataContainer, string tag)
+    {
+        base.Initalize(dataContainer, tag);
+        Launch();
+    }
+
+    public override void Initalize(CloneDataContainer dataContainer, string tag)
+    {
+        base.Initalize(dataContainer, tag);
+        Launch();
+    }
+
     public void Launch()
     {
         // 공격생명주기
-        Invoke("Deactivate", lifeTime);
+        Invoke(nameof(Deactivate), lifeTime);
     }
 
     private void Update()
@@ -23,7 +35,8 @@ public class RangeAttack : MonoBehaviour
     private void Deactivate()
     {
         // 오브젝트를 비활성화하고 오브젝트 풀로 반환
-        AttackManager.Instance.ReturnAttackToPool(this.gameObject);
+        //AttackManager.Instance.ReturnAttackToPool(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,7 +45,8 @@ public class RangeAttack : MonoBehaviour
         // 이곳에 충돌한 대상에 대한 처리 로직을 구현
 
         // 충돌 후 비활성화를 위해 Deactivate 함수 호출
-        Deactivate();
+        //Deactivate();
+        gameObject.SetActive(false);
     }
 }
 
