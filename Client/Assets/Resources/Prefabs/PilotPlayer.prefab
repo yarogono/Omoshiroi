@@ -856,9 +856,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkIdTest: {fileID: 4345109138183699703}
-  checkPosXTest: {fileID: 6452503943687969880}
-  checkPosYTest: {fileID: 571933099793841311}
-  checkPosZTest: {fileID: 3209904956312514928}
+  checkPositionX: {fileID: 6452503943687969880}
+  checkPositionY: {fileID: 571933099793841311}
+  checkPositionZ: {fileID: 3209904956312514928}
   checkStateTest: {fileID: 8846325714620892954}
 --- !u!114 &2438545737654347830
 MonoBehaviour:
