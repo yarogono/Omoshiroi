@@ -18,6 +18,8 @@ public class SyncModule : MonoBehaviour
         {
             if (_objectInfo.Equals(value))
                 return;
+
+            _objectInfo.Position = P_Vector3;
         }
     }
 
