@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5248305082753026489}
   - component: {fileID: 3629139836858039547}
   m_Layer: 0
-  m_Name: MeleeAttack
+  m_Name: SwordMelee1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,9 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e726a60e0569c47a793c87384fc8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackArea: {fileID: 185632697289947278}
-  _attackFilter: {fileID: 5248305082753026489}
-  _attackRenderer: {fileID: 3629139836858039547}
 --- !u!64 &185632697289947278
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -71,7 +68,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -462981019419857548, guid: d13952630f9957c45accf79325448810, type: 3}
 --- !u!33 &5248305082753026489
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -79,7 +76,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526888661764172773}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -462981019419857548, guid: d13952630f9957c45accf79325448810, type: 3}
 --- !u!23 &3629139836858039547
 MeshRenderer:
   m_ObjectHideFlags: 0
