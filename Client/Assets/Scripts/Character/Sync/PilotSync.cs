@@ -10,7 +10,7 @@ public class PilotSync : SyncModule
     {
         base.Update();
 
-        // SendC_SyncPacket();
+        SendC_SyncPacket();
     }
 
     public void SendC_SyncPacket()
