@@ -18,7 +18,7 @@ public class BaseAttack : MonoBehaviour
         // Damage = ....
     }
 
-    public virtual void ApplyDamage(DataContainer dataContainer)
+    public virtual void ApplyDamage(HealthSystem healthSystem)
     {
 
     }
