@@ -15,7 +15,6 @@ namespace Server.Game.Object
         public GameRoom Room { get; set; }
 
         public ObjectInfo Info { get; set; } = new ObjectInfo();
-        public PositionInfo PosInfo { get; private set; } = new PositionInfo();
         public StatInfo Stat { get; private set; } = new StatInfo();
 
         public float Speed
@@ -30,21 +29,8 @@ namespace Server.Game.Object
             set { Stat.Hp = Math.Clamp(value, 0, Stat.MaxHp); }
         }
 
-        public MoveDir Dir
-        {
-            get { return PosInfo.MoveDir; }
-            set { PosInfo.MoveDir = value; }
-        }
-
-        public CreatureState State
-        {
-            get { return PosInfo.State; }
-            set { PosInfo.State = value; }
-        }
-
         public GameObject()
         {
-            Info.PosInfo = PosInfo;
             Info.StatInfo = Stat;
         }
 
@@ -55,10 +41,10 @@ namespace Server.Game.Object
 
             Stat.Hp = Math.Max(Stat.Hp -= damage, 0);
 
-            S_ChangeHp changePacket = new S_ChangeHp();
-            changePacket.ObjectId = Id;
-            changePacket.Hp = Stat.Hp;
-            Room.Broadcast(changePacket);
+            S_HpDamage hpDamagePacket = new S_HpDamage();
+            hpDamagePacket.ObjectId = Id;
+            hpDamagePacket.CurrentHp = Stat.Hp;
+            Room.Broadcast(hpDamagePacket);
 
             if (Stat.Hp <= 0)
             {
@@ -80,9 +66,9 @@ namespace Server.Game.Object
             room.LeaveGame(Id);
 
             Stat.Hp = Stat.MaxHp;
-            PosInfo.State = CreatureState.Idle;
-            PosInfo.PosX = 0;
-            PosInfo.PosY = 0;
+            Info.Position.X = 0;
+            Info.Position.Y = 0;
+            Info.Position.Z = 0;
 
             room.EnterGame(this);
         }
