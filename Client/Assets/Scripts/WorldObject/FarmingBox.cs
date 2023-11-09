@@ -48,13 +48,22 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 
     public void Interact() { }
 
-    public void SetItemList(List<BaseItem> itemList)
-    {
-        //대충 받아온 아이템 데이터들로 인벤토리를 채운다는 내용.
-    }
-
     public void SetItemList(Dictionary<int, InventoryItem> items)
     {
         ItemList = items;
+    }
+
+    /// <summary>
+    /// 현재 FarmingBox 의 object ID 를 함께 보내게 될 텐데, 이걸 어떻게 알 수 있는가?
+    /// </summary>
+    /// <param name="items"></param>
+    private void SendFarmingBoxOpen(Dictionary<int, InventoryItem> items)
+    {
+
+    }
+
+    private void SendFarmingBoxClose(Dictionary<int, InventoryItem> items)
+    {
+        
     }
 }
