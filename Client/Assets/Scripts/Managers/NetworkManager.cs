@@ -41,7 +41,7 @@ public class NetworkManager : CustomSingleton<NetworkManager>
         enterGamePacket.Player.Position = new P_Vector3()
         {
             X = 0,
-            Y = 0,
+            Y = 1.58f,
             Z = 0
         };
         enterGamePacket.Player.StatInfo = null;

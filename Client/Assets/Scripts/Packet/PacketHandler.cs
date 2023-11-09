@@ -45,21 +45,23 @@ public class PacketHandler
 
     public static void S_SyncHandler(PacketSession session, IMessage packet)
     {
-        S_Sync movePacket = packet as S_Sync;
+        S_Sync syncPacket = packet as S_Sync;
 
-        GameObject gameObject = ObjectManager.Instance.FindById(movePacket.Player.ObjectId);
+        Debug.Log($"{syncPacket.Player.ObjectId} Position : {syncPacket.Player.Position}");
+
+        GameObject gameObject = ObjectManager.Instance.FindById(syncPacket.Player.ObjectId);
 
         if (gameObject == null)
             return;
 
-        if (ObjectManager.Instance.pilotSync.Id == movePacket.Player.ObjectId)
+        if (ObjectManager.Instance.pilotSync.Id == syncPacket.Player.ObjectId)
             return;
 
         SyncModule syncModule = gameObject.GetComponent<SyncModule>();
         if (syncModule == null)
             return;
 
-        syncModule.P_Vector3 = movePacket.Player.Position;
+        syncModule.Player = syncPacket.Player;
     }
 
     /// <summary>
@@ -68,14 +70,20 @@ public class PacketHandler
     /// </summary>
     /// <param name="session"></param>
     /// <param name="packet"></param>
-    public static void S_HpDamageHandler(PacketSession session, IMessage packet) 
+    public static void S_HpDamageHandler(PacketSession session, IMessage packet)
     {
         S_HpDamage damagePacket = packet as S_HpDamage;
 
         GameObject gameObject = ObjectManager.Instance.FindById(damagePacket.ObjectId);
 
-        if (gameObject == null) { return; }
-        if (ObjectManager.Instance.pilotSync.Id == damagePacket.ObjectId) { return; }
+        if (gameObject == null)
+        {
+            return;
+        }
+        if (ObjectManager.Instance.pilotSync.Id == damagePacket.ObjectId)
+        {
+            return;
+        }
 
         CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
 
