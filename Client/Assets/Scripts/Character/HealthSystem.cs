@@ -6,7 +6,7 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
 
-    [SerializeField] private CharacterStats stats;
+    [SerializeField] public  CharacterStats stats;
 
     // Start is called before the first frame update
     void Start()

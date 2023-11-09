@@ -6,6 +6,7 @@ using UnityEngine;
 public class RangeAttack : BaseAttack
 {
     [SerializeField] private float speed = 10f; // 공격의 속도
+    [SerializeField] private float knockBackPower = 5f; // 공격의 속도
     [SerializeField] private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
     
     
@@ -17,11 +18,9 @@ public class RangeAttack : BaseAttack
     }
 
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
-    {
-        int ap = dataContainer.Stats.AtkPower;
+    {       
         base.Initalize(attackInfo, dataContainer, tag);
-        Damage = dataContainer.Stats.AtkPower;
-        Launch();
+        Damage = dataContainer.Stats.AtkPower;    
     }
 
     public void Launch()
@@ -54,7 +53,7 @@ public class RangeAttack : BaseAttack
             if (Data != null)
             {
                 //넉백을위한 Vector3계산
-                impact = -(other.gameObject.transform.position - transform.position).normalized*5;  
+                impact = (other.gameObject.transform.position - transform.position).normalized*knockBackPower;  
                 ApplyDamage(Data);
                 //넉백             
                 movement.AddImpact(impact); 
@@ -71,8 +70,8 @@ public class RangeAttack : BaseAttack
     public override void ApplyDamage(HealthSystem healthSystem)
     {
 
-        healthSystem.TakeDamage(Damage);
-        //Deactivate();
+       healthSystem.TakeDamage(Damage);
+        Debug.Log(healthSystem.stats);
         gameObject.SetActive(false);
     }
  
