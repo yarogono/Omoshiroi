@@ -79,11 +79,8 @@ public class PacketHandler
 
         CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
 
-        stats.SetMaxHP(damagePacket.MaxHp);
-        stats.SetHP(damagePacket.CurrentHp - damagePacket.ChangeAmount);
-
-        if (stats.Hp > stats.MaxHp) { stats.SetHP(stats.MaxHp); }
-        else if (stats.Hp < 0) { stats.SetHP(0); }
+        stats.MaxHp = damagePacket.MaxHp;
+        stats.Hp = damagePacket.CurrentHp - damagePacket.ChangeAmount;
     }
 
     /// <summary>
@@ -103,10 +100,7 @@ public class PacketHandler
 
         CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
 
-        stats.SetMaxHP(damagePacket.MaxHp);
-        stats.SetHP(damagePacket.CurrentHp + damagePacket.ChangeAmount);
-
-        if (stats.Hp > stats.MaxHp) { stats.SetHP(stats.MaxHp); }
-        else if (stats.Hp < 0) { stats.SetHP(0); }
+        stats.MaxHp = damagePacket.MaxHp;
+        stats.Hp = damagePacket.CurrentHp - damagePacket.ChangeAmount;
     }
 }
