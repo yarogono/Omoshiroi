@@ -24,6 +24,8 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
         if (objectType == GameObjectType.Player)
         {
+            Vector3 S_Position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+
             if (pilotPlayer)
             {
                 GameObject gameObject = Instantiate(
@@ -34,16 +36,12 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 pilotSync = gameObject.GetComponent<PilotSync>();
                 pilotSync.Id = info.ObjectId;
-                pilotSync.PosInfo = info.PosInfo;
+                pilotSync.position = S_Position;
                 // pilotSync.Stat = info.StatInfo;
             }
             else
             {
-                Vector3 SpawnPos = new Vector3(
-                    info.PosInfo.PosX,
-                    info.PosInfo.PosY,
-                    info.PosInfo.PosZ
-                );
+                Vector3 SpawnPos = S_Position;
 
                 GameObject gameObject = Instantiate(
                     Resources.Load<GameObject>("Prefabs/ClonePlayer"),
@@ -56,7 +54,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
-                cloneSync.PosInfo = info.PosInfo;
+                cloneSync.position = S_Position;
                 // cloneSync.Stat = info.StatInfo;
                 cloneSync.SyncPosition();
             }

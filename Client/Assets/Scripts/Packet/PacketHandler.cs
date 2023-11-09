@@ -39,26 +39,28 @@ public class PacketHandler
             ObjectManager.Instance.Remove(playerId);
     }
 
-    public static void S_MoveHandler(PacketSession session, IMessage packet)
-    {
-        S_Move movePacket = packet as S_Move;
+    public static void S_ChangeHpHandler(PacketSession session, IMessage packet) { }
 
-        GameObject gameObject = ObjectManager.Instance.FindById(movePacket.ObjectId);
+    public static void S_DieHandler(PacketSession session, IMessage packet) { }
+
+    public static void S_SyncHandler(PacketSession session, IMessage packet)
+    {
+        S_Sync movePacket = packet as S_Sync;
+
+        GameObject gameObject = ObjectManager.Instance.FindById(movePacket.Player.ObjectId);
 
         if (gameObject == null)
             return;
 
-        if (ObjectManager.Instance.pilotSync.Id == movePacket.ObjectId)
+        if (ObjectManager.Instance.pilotSync.Id == movePacket.Player.ObjectId)
             return;
 
         SyncModule syncModule = gameObject.GetComponent<SyncModule>();
         if (syncModule == null)
             return;
 
-        syncModule.PosInfo = movePacket.PosInfo;
+        syncModule.P_Vector3 = movePacket.Player.Position;
     }
 
-    public static void S_ChangeHpHandler(PacketSession session, IMessage packet) { }
-
-    public static void S_DieHandler(PacketSession session, IMessage packet) { }
+    public static void S_HpDamageHandler(PacketSession session, IMessage packet) { }
 }
