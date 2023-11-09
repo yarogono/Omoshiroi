@@ -34,6 +34,7 @@ namespace Inventory
         private void Start()
         {
             PrepareUI();
+            AddItemsFromServer();
             playerInput = GetComponent<PlayerInput>();
             OnOpened = farmingBox.OnOpened;
             OnClosed = farmingBox.OnClosed;
@@ -42,19 +43,36 @@ namespace Inventory
         }
 
         /// <summary>
-        /// 통합 인벤토리 데이터가 바뀔 때 마다 호출된다. 통합 인벤토리를 비우고, OnInventoryUpdated 이벤트에 UpdateInventoryUI 를 붙인다.
+        /// 수정 중. 아이템 스폰 방식에 대해 좀 더 이야기 해 볼 필요가 있어 보임.
         /// </summary>
-        private void PrepareInventoryData()//인벤토리 데이터가 바뀔 때 호출 
+        public void AddItemsFromServer(/*서버에서 받아온 아이템 리스트 or 스폰시킬 아이템 목록*/)
         {
+            List<BaseItem> items = new List<BaseItem>();
+
+            // 초기 아이템 리스트가 정의되지 않았다면 새로 생성
+
+            inventoryData_merged.Initialize();
             inventoryData_merged.OnInventoryUpdated += UpdateInventoryUI;
             UpdateInventoryUI(inventoryData_merged.GetCurrentInventoryState());
 
-            //foreach (InventoryItem item in initialItems)
-            //{
-            //    if (item.IsEmpty)
-            //        continue;
-            //    inventoryData.AddItem(item);
-            //}
+            Dictionary<int, InventoryItem> inventoryData = new Dictionary<int, InventoryItem>();
+
+            // 받아온 아이템 리스트를 순회하면서 임시 인벤토리 양식에 추가
+            foreach (var item in items)
+            {
+                //// 서버 아이템 ID와 일치하는 ItemList의 아이템 찾습니다
+                //InventoryItem foundItem = ItemList.Find(item => item.item.ItemID == serverItem.TemplateId);
+                //if (foundItem.item != null)
+                //{
+                //    Debug.Log(serverItem + "순회");
+                //    // 아이템을 찾았다면, 새 인스턴스를 생성하고 수량을 설정합니다
+                //    InventoryItem newItem = new InventoryItem(); // 새로운 InventoryItem 인스턴스를 만듭니다
+                //    newItem.item = foundItem.item; // 찾은 아이템의 정보를 새 인스턴스에 복사합니다
+                //    newItem.quantity = serverItem.Quantity; // 서버에서 받은 수량을 설정합니다
+                //    inventoryData.AddItem(newItem);
+
+                //}
+            }
         }
 
         /// <summary>
@@ -217,7 +235,6 @@ namespace Inventory
             if (inventoryUI.isActiveAndEnabled == false)
             {
                 PrepareMergedSO();
-                PrepareInventoryData();
                 
                 //playerInput.CanControl = false;
                 foreach (var item in inventoryData_player.GetCurrentInventoryState())
