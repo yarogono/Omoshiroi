@@ -10,8 +10,18 @@ public class SyncModule : MonoBehaviour
 
     protected bool _updated = false;
 
-    P_Vector3 _pVector3 = new P_Vector3();
+    // public ObjectInfo _objectInfo = new ObjectInfo();
+    // public ObjectInfo ObjectInfo
+    // {
+    //     get { return _objectInfo; }
+    //     set
+    //     {
+    //         if (_objectInfo.Equals(value))
+    //             return;
+    //     }
+    // }
 
+    P_Vector3 _pVector3 = new P_Vector3();
     public P_Vector3 P_Vector3
     {
         get { return _pVector3; }
