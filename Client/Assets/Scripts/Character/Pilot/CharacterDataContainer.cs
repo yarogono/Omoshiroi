@@ -10,10 +10,9 @@ public class CharacterDataContainer : DataContainer
     public CharacterMovement Movement { get; private set; }
     public BaseInput InputActions { get; private set; }
     public PilotSync Sync { get; private set; }
-    public HealthSystem Health { get; private set; }
 
     private CombineStateMachine stateMachine;
-   
+
     [Header("테스트용 착용아이템")]
     [SerializeField] private BaseItem[] TestEquipItem;
 
@@ -26,14 +25,11 @@ public class CharacterDataContainer : DataContainer
         Sync = GetComponent<PilotSync>();
         Health = GetComponent<HealthSystem>();
         AnimationData.Initialize();
-      
+
     }
 
     private void Start()
     {
-
-       
-
         if (Stats.cbs != null)
             Stats.Initialize();
 
@@ -65,6 +61,4 @@ public class CharacterDataContainer : DataContainer
 
         Gizmos.DrawRay(downRay);
     }
-
-  
 }
