@@ -25,7 +25,11 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
         if (objectType == GameObjectType.Player)
         {
-            Vector3 S_Position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+            Vector3 S_Position = new Vector3(
+                info.PosInfo.PosX,
+                info.PosInfo.PosY,
+                info.PosInfo.PosZ
+            );
 
             if (pilotPlayer)
             {

@@ -10,16 +10,16 @@ public class PilotSync : SyncModule
     {
         base.Update();
 
-        SendC_SyncPacket();
+        // SendC_SyncPacket();
     }
 
     public void SendC_SyncPacket()
     {
-        Player.Position = new P_Vector3
+        Player.PosInfo = new PositionInfo
         {
-            X = transform.position.x,
-            Y = transform.position.y,
-            Z = transform.position.z
+            PosX = transform.position.x,
+            PosY = transform.position.y,
+            PosZ = transform.position.z
         };
 
         C_Sync syncPacket = new C_Sync { Player = Player };

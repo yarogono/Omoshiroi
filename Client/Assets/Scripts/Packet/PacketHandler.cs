@@ -47,7 +47,7 @@ public class PacketHandler
     {
         S_Sync syncPacket = packet as S_Sync;
 
-        Debug.Log($"{syncPacket.Player.ObjectId} Position : {syncPacket.Player.Position}");
+        Debug.Log($"{syncPacket.Player.ObjectId} Position : {syncPacket.Player.PosInfo}");
 
         GameObject gameObject = ObjectManager.Instance.FindById(syncPacket.Player.ObjectId);
 
@@ -103,8 +103,14 @@ public class PacketHandler
 
         GameObject gameObject = ObjectManager.Instance.FindById(damagePacket.ObjectId);
 
-        if (gameObject == null) { return; }
-        if (ObjectManager.Instance.pilotSync.Id == damagePacket.ObjectId) { return; }
+        if (gameObject == null)
+        {
+            return;
+        }
+        if (ObjectManager.Instance.pilotSync.Id == damagePacket.ObjectId)
+        {
+            return;
+        }
 
         CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
 
