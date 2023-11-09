@@ -31,7 +31,7 @@ public class AttackManager : CustomSingleton<AttackManager>
     private GameObject ObjPoolRoot;
     public LayerMask TargetLayer;
 
-    public void RqAttack(int ComboIndex, CharacterDataContainer dataContainer, Vector3 position, Vector2 direction)
+    public void RqAttack(int ComboIndex, DataContainer dataContainer, Vector3 position, Vector2 direction)
     {
         // 오브젝트풀링
         BaseItem item = dataContainer.Equipments.GetEquippedItem(eItemType.Magic);
