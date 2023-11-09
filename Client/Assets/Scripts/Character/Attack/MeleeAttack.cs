@@ -1,50 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MeleeAttack : BaseAttack
 {
-    /// <summary>
-    /// 플래이어가 요청할 때 사용
-    /// </summary>
-    /// <param name="dataContainer"></param>
-    /// <param name="tag"></param>
-    public override void Initalize(CharacterDataContainer dataContainer, string tag)
+    public override void Initalize(DataContainer dataContainer, string tag)
     {
         base.Initalize(dataContainer, tag);
         // 추가적으로 해야되는 작업
+        var Magic = dataContainer.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic;
+        Damage = dataContainer.Stats.AtkPower;
     }
 
-    /// <summary>
-    /// NPC, Clone이 요청할 때 사용
-    /// </summary>
-    /// <param name="dataContainer"></param>
-    /// <param name="tag"></param>
-    public override void Initalize(CloneDataContainer dataContainer, string tag)
-    {
-        base.Initalize(dataContainer, tag);
-        // 추가적으로 해야되는 작업
-    }
-
-    /// <summary>
-    /// NPC에게 부딪혔을 때 사용
-    /// </summary>
-    /// <param name="dataContainer"></param>
-    public override void ApplyDamage(CloneDataContainer dataContainer)
+    public override void ApplyDamage(DataContainer dataContainer)
     {
         base.ApplyDamage(dataContainer);
         // 추가적으로 해야되는 작업
-    }
-
-    /// <summary>
-    /// 플래이어에게 부딪혔을 때 사용
-    /// </summary>
-    /// <param name="dataContainer"></param>
-    public override void ApplyDamage(CharacterDataContainer dataContainer)
-    {
-        base.ApplyDamage(dataContainer);
-        // dataContainer.Health.ChangeHP(...);
-        // 추가적으로 해야되는 작업
+        dataContainer.Health.TakeDamage(-Damage);
+        gameObject.SetActive(false);
+        // 피격음 재생
     }
 
     /// <summary>
@@ -55,7 +30,8 @@ public class MeleeAttack : BaseAttack
     {
         if (!other.CompareTag(_makerTag))
         {
-            ApplyDamage(other.GetComponent<CharacterDataContainer>());
+            var data = other.GetComponent<DataContainer>();
+            ApplyDamage(data);
         }
     }
 

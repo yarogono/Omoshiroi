@@ -12,9 +12,9 @@ namespace Server.Game.Object
             ObjectType = GameObjectType.Player;
         }
 
-        public override void OnDamaged(GameObject attacker, int damage)
+        public override void HpDamage(C_HpDamage hpDamagePacket)
         {
-            base.OnDamaged(attacker, damage);
+            base.HpDamage(hpDamagePacket);
         }
 
         public override void OnDead(GameObject attacker)

@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 6512405951364919538}
   - component: {fileID: 3229680276495624399}
   - component: {fileID: 7822232555172900303}
-  - component: {fileID: 6846992302355664896}
+  - component: {fileID: 9066215110043148123}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -208,7 +208,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2783407816970436849}
   m_Enabled: 1
---- !u!114 &6846992302355664896
+--- !u!114 &9066215110043148123
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
+  m_RequiresOpaqueTextureOption: 0
   m_CameraType: 0
   m_Cameras: []
   m_RendererIndex: -1
@@ -231,10 +231,10 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
-  m_StopNaN: 0
+  m_StopNaN: 1
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1
@@ -261,16 +261,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1088871691251878795}
-  - component: {fileID: 6819789151499577018}
   - component: {fileID: 7564447416552305516}
   - component: {fileID: 5397881333417574267}
-  - component: {fileID: 884507993187292007}
-  - component: {fileID: 7838802115554181109}
   - component: {fileID: 7681882675822388626}
   - component: {fileID: 4313740379138048596}
+  - component: {fileID: 884507993187292007}
+  - component: {fileID: 7838802115554181109}
+  - component: {fileID: 6819789151499577018}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Pilot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,34 +291,8 @@ Transform:
   - {fileID: 1928497838679130253}
   - {fileID: 2389127606293479906}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &6819789151499577018
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3119228395594561357}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7564447416552305516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +336,53 @@ MonoBehaviour:
   MoveTestTxt: {fileID: 0}
   AimTestTxt: {fileID: 0}
   DodgeTestTxt: {fileID: 0}
+--- !u!114 &7681882675822388626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c270f575c1eddf448e94203f49f57cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Stats>k__BackingField:
+    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
+  <AnimationData>k__BackingField:
+    groundParameterName: '@Ground'
+    idleParameterName: Idle
+    walkParameterName: Walk
+    runParameterName: Run
+    dodgeParameterName: Dodge
+    airParameterName: '@Air'
+    fallParameterName: Fall
+    aimParameterName: '@Aim'
+    attackParameterName: '@Attack'
+    comboAttackParameterName: ComboAttack
+    comboIndexParameterName: Combo
+    GroundLayer:
+      serializedVersion: 2
+      m_Bits: 896
+  <SpriteRotator>k__BackingField:
+    _main: {fileID: 8065987409721138812}
+    _weapon: {fileID: 895937083953360931}
+  TestEquipItem:
+  - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
+--- !u!114 &4313740379138048596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb4c6bb1dcafea46adb919de07263ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryData: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
 --- !u!114 &884507993187292007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,53 +434,32 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7681882675822388626
-MonoBehaviour:
+--- !u!143 &6819789151499577018
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3119228395594561357}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c270f575c1eddf448e94203f49f57cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Stats>k__BackingField:
-    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
-  <AnimationData>k__BackingField:
-    groundParameterName: '@Ground'
-    idleParameterName: Idle
-    walkParameterName: Walk
-    runParameterName: Run
-    dodgeParameterName: Dodge
-    airParameterName: '@Air'
-    fallParameterName: Fall
-    aimParameterName: '@Aim'
-    attackParameterName: '@Attack'
-    comboAttackParameterName: ComboAttack
-    comboIndexParameterName: Combo
-    GroundLayer:
-      serializedVersion: 2
-      m_Bits: 896
-  <SpriteRotator>k__BackingField:
-    _main: {fileID: 8065987409721138812}
-    _weapon: {fileID: 895937083953360931}
-  TestEquipItem:
-  - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
---- !u!114 &4313740379138048596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3119228395594561357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb4c6bb1dcafea46adb919de07263ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryData: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3341134605525835870
 GameObject:
   m_ObjectHideFlags: 0

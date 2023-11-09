@@ -8,11 +8,10 @@ using ServerCore;
 
 class PacketHandler
 {
-
     public static void C_EnterGameHandler(PacketSession session, IMessage packet)
     {
-        C_EnterGame enterGamePacket = packet as C_EnterGame;
-        ClientSession clientSession = session as ClientSession;
+        C_EnterGame enterGamePacket = (C_EnterGame)packet;
+        ClientSession clientSession = (ClientSession)session;
 
         Player player = clientSession.MyPlayer;
 
@@ -40,8 +39,8 @@ class PacketHandler
 
     public static void C_SyncHandler(PacketSession session, IMessage packet)
     {
-        C_Sync syncPacket = packet as C_Sync;
-        ClientSession clientSession = session as ClientSession;
+        C_Sync syncPacket = (C_Sync)packet;
+        ClientSession clientSession = (ClientSession)session;
 
         Player player = clientSession.MyPlayer;
         if (player == null)
@@ -59,8 +58,8 @@ class PacketHandler
 
     public static void C_LeaveGameHandler(PacketSession session, IMessage packet)
     {
-        C_LeaveGame leaveGamePacket = packet as C_LeaveGame;
-        ClientSession clientSession = session as ClientSession;
+        C_LeaveGame leaveGamePacket = (C_LeaveGame)packet;
+        ClientSession clientSession = (ClientSession)session;
 
         Player player = clientSession.MyPlayer;
         if (player == null)
@@ -78,11 +77,19 @@ class PacketHandler
 
     public static void C_HpDamageHandler(PacketSession session, IMessage packet)
     {
-        C_HpDamage leaveGamePacket = packet as C_HpDamage;
-        ClientSession clientSession = session as ClientSession;
+        C_HpDamage hpDamagePacket = (C_HpDamage)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (hpDamagePacket == null)
+            return;
 
         Player player = clientSession.MyPlayer;
         if (player == null)
             return;
+
+        if (player.Id != clientSession.MyPlayer.Id)
+            return;
+
+        player.HpDamage(hpDamagePacket);
     }
 }

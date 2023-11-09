@@ -7,16 +7,20 @@ public class RangeAttack : BaseAttack
 {
     [SerializeField] private float speed = 10f; // 공격의 속도
     [SerializeField] private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
-
-    public override void Initalize(CharacterDataContainer dataContainer, string tag)
+    
+    
+    Vector3 impact;
+    private void Update()
     {
-        base.Initalize(dataContainer, tag);
-        Launch();
+        // 매 프레임마다 공격을 전방으로 이동시킴
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    public override void Initalize(CloneDataContainer dataContainer, string tag)
+    public override void Initalize(DataContainer dataContainer, string tag)
     {
+        int ap = dataContainer.Stats.AtkPower;
         base.Initalize(dataContainer, tag);
+        Damage = dataContainer.Stats.AtkPower;
         Launch();
     }
 
@@ -24,12 +28,7 @@ public class RangeAttack : BaseAttack
     {
         // 공격생명주기
         Invoke(nameof(Deactivate), lifeTime);
-    }
 
-    private void Update()
-    {
-        // 매 프레임마다 공격을 전방으로 이동시킴
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     private void Deactivate()
@@ -43,10 +42,37 @@ public class RangeAttack : BaseAttack
     {
         // 다른 콜라이더와 충돌 시 호출됨
         // 이곳에 충돌한 대상에 대한 처리 로직을 구현
+        Debug.Log(other.name);
+        
+        if (other.tag == "Clone")
+        {
 
-        // 충돌 후 비활성화를 위해 Deactivate 함수 호출
+            var characterData = other.GetComponent<CharacterDataContainer>();
+            CharacterMovement movement = other.GetComponent<CharacterMovement>();
+            if (characterData != null)
+            {
+                //넉백을위한 Vector3계산
+                impact = -(other.gameObject.transform.position - transform.position).normalized*5;  
+                ApplyDamage(characterData);
+                //넉백             
+                movement.AddImpact(impact); 
+            }
+            else
+            {
+                Debug.LogError("Component null");
+            }
+        }
+        this.gameObject.SetActive(false);
+    }
+
+
+    public override void ApplyDamage(DataContainer dataContainer)
+    {
+      
+        dataContainer.Health.TakeDamage(Damage);
         //Deactivate();
         gameObject.SetActive(false);
     }
+ 
 }
 
