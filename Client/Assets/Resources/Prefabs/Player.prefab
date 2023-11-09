@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 884507993187292007}
   - component: {fileID: 7838802115554181109}
   - component: {fileID: 6819789151499577018}
+  - component: {fileID: 344471059937254796}
   m_Layer: 0
   m_Name: Player
   m_TagString: Pilot
@@ -291,7 +292,7 @@ Transform:
   - {fileID: 1928497838679130253}
   - {fileID: 2389127606293479906}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7564447416552305516
 MonoBehaviour:
@@ -460,6 +461,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &344471059937254796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb821abce43f7b3459730718da9a5c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
 --- !u!1 &3341134605525835870
 GameObject:
   m_ObjectHideFlags: 0
