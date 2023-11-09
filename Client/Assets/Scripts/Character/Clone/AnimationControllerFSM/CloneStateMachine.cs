@@ -48,6 +48,7 @@ public class CombineCloneStatemachine
         _stateMachine[1].ChangeState(eStateType.None);
 
         clone.Sync.OnCloneEvent += CloneEvent;
+        //clone.Sync.OnMakeAttackEvent += CloneAttackEvent;
     }
 
     public void Update()
@@ -100,5 +101,10 @@ public class CombineCloneStatemachine
     {
         ChangeState((eStateType)state);
         SetAnimation((eStateType)state, animTime);
+    }
+
+    public void CloneAttackEvent(eAttackType type, CharacterDataContainer dataContainer, Vector3 position, Vector2 direction)
+    {
+        AttackManager.Instance.RqAttack(type, dataContainer, position, direction);
     }
 }

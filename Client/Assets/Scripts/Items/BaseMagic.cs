@@ -6,7 +6,7 @@ using UnityEngine;
 public class BaseMagic : BaseItem, IEquippable
 {
     [Header("MagicData")]
-    [SerializeField] private GameObject magicObject;
+    //[SerializeField] private GameObject magicObject;
     [SerializeField] private float range;
     //[SerializeField] private Animation anime;
     [SerializeField] private AttackData attackData;
@@ -19,7 +19,7 @@ public class BaseMagic : BaseItem, IEquippable
     {
     }
 
-    public GameObject MagicObject { get { return magicObject; } }
+    //public GameObject MagicObject { get { return magicObject; } }
     public float Range { get { return range; } }
     //public Animation Anime { get { return anime; } }
     public AttackData AttackData { get {  return attackData; } }

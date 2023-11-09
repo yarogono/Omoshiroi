@@ -31,15 +31,18 @@ public class AttackManager : CustomSingleton<AttackManager>
     private GameObject ObjPoolRoot;
     public LayerMask TargetLayer;
 
-    public void RqAttack(eAttackType type, CharacterDataContainer dataContainer, Vector3 position, Vector2 direction)
+    public void RqAttack(int ComboIndex, CharacterDataContainer dataContainer, Vector3 position, Vector2 direction)
     {
         // 오브젝트풀링
-        BaseAttack attackObj = GetAttackFromPool(type);
-        // 풀링한오브젝트를 초기화
-        attackObj.Initalize(dataContainer, dataContainer.tag);
-        attackObj.transform.position = position;
-        // attackObj.transform.rotation을 direction에 따라서 돌리기
-
+        BaseItem item = dataContainer.Equipments.GetEquippedItem(eItemType.Magic);
+        if (item is BaseMagic magic)
+        {
+            BaseAttack attackObj = GetAttackFromPool(magic.AttackData.AttackInfos[ComboIndex].AttackType);
+            // 풀링한오브젝트를 초기화
+            attackObj.Initalize(dataContainer, dataContainer.tag);
+            attackObj.transform.position = position;
+            // attackObj.transform.rotation을 direction에 따라서 돌리기
+        }
     }
 
     private void Awake()

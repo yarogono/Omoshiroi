@@ -10,6 +10,7 @@ public class MeleeAttack : BaseAttack
         base.Initalize(dataContainer, tag);
         // 추가적으로 해야되는 작업
         var Magic = dataContainer.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic;
+        
     }
 
     public override void ApplyDamage(HealthSystem health)
