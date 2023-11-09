@@ -55,7 +55,8 @@ public class CharacterComboAttackState : CharacterAttackState
         if (attackInfo.AttackType == eAttackType.Melee)
             _stateMachine.Movement?.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
 
-        AttackManager.Instance.RqAttack(attackInfo.AttackType, _stateMachine.Character, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
+        AttackManager.Instance.RqAttack(ComboIndex, _stateMachine.Character, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
+        //_stateMachine.Character.Sync.SendC_MakeAttackPacket(ComboIndex, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
     }
 
     public override void Update()

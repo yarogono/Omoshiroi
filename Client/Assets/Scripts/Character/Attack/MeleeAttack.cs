@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class MeleeAttack : BaseAttack
 {
-    public override void Initalize(DataContainer dataContainer, string tag)
+    [SerializeField] protected Mesh _attackArea;
+    public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
-        base.Initalize(dataContainer, tag);
+        base.Initalize(attackInfo, dataContainer, tag);
         // 추가적으로 해야되는 작업
         var Magic = dataContainer.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic;
+        
     }
 
     public override void ApplyDamage(HealthSystem health)
