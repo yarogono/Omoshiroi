@@ -12,7 +12,12 @@ public class BaseInput : MonoBehaviour
     public event Action<Vector2> OnAttackEvent;
     public event Action OpenInventory;
     public event Action CloseInventory;
-    
+    public event Action OnAttackAreaMake;
+
+    public void CallOnAttackAreaMake()
+    {
+        OnAttackAreaMake?.Invoke();
+    }
     public void CallMoveEvent(Vector2 input)
     {
         OnMoveEvent?.Invoke(input);

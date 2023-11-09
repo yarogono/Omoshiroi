@@ -17,7 +17,7 @@ public class MeleeAttack : BaseAttack
     {
         base.ApplyDamage(dataContainer);
         // 추가적으로 해야되는 작업
-        dataContainer.Health.TakeDamage(-Damage);
+        dataContainer.Health.TakeDamage(Damage);
         gameObject.SetActive(false);
         // 피격음 재생
     }

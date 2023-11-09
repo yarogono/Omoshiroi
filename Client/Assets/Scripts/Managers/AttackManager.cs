@@ -30,10 +30,10 @@ public class AttackManager : CustomSingleton<AttackManager>
     [SerializeField]
     private GameObject ObjPoolRoot;
 
-    public void RqAttack<T>(eAttackType type, CharacterDataContainer dataContainer, Vector3 position, Vector2 direction) where T : BaseAttack
+    public void RqAttack(eAttackType type, CharacterDataContainer dataContainer, Vector3 position, Vector2 direction)
     {
         // 오브젝트풀링
-        T attackObj = GetAttackFromPool<T>(type);
+        BaseAttack attackObj = GetAttackFromPool(type);
         // 풀링한오브젝트를 초기화
         attackObj.Initalize(dataContainer, dataContainer.tag);
         attackObj.transform.position = position;
@@ -69,7 +69,7 @@ public class AttackManager : CustomSingleton<AttackManager>
 
     }
 
-    public T GetAttackFromPool<T>(eAttackType type) where T : BaseAttack
+    public BaseAttack GetAttackFromPool(eAttackType type)
     {
         // 풀에 오브젝트가 있으면 하나를 꺼내서 활성화하고 반환
         if (PoolsDic.ContainsKey(type))
@@ -78,7 +78,7 @@ public class AttackManager : CustomSingleton<AttackManager>
             if (attackQueue.Count > 0)
             {
                 var attack = attackQueue.Dequeue();
-                if (attack.TryGetComponent<T>(out T script))
+                if (attack.TryGetComponent<BaseAttack>(out BaseAttack script))
                 {
                     attack.SetActive(true);
                     script.AddActAtDisable(() => { ReturnAttackToPool(attackQueue, attack); });
@@ -95,7 +95,7 @@ public class AttackManager : CustomSingleton<AttackManager>
                 PoolObj item = PoolItem.Find(x => x.Type == type);
                 // 풀이 비어있으면 새로운 오브젝트를 생성하여 반환
                 var newAttack = Instantiate(item.Prefab, ObjPoolRoot.transform);
-                if (newAttack.TryGetComponent<T>(out T script))
+                if (newAttack.TryGetComponent<BaseAttack>(out BaseAttack script))
                 {
                     newAttack.SetActive(true);
                     script.AddActAtDisable(() => { ReturnAttackToPool(attackQueue, newAttack); });

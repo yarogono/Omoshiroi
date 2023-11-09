@@ -18,7 +18,7 @@ public class CharacterNoneState : BaseState
             if (direction.magnitude >= 100f)
                 _stateMachine.ChangeState(eStateType.Aim);
         }
-        _stateMachine.AttackDirection = direction;
+        base.AimEvent(direction);
     }
 
     protected override void AttackEvent(Vector2 direction)
