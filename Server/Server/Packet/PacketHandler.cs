@@ -13,14 +13,14 @@ class PacketHandler
         C_EnterGame enterGamePacket = (C_EnterGame)packet;
         ClientSession clientSession = (ClientSession)session;
 
-        Player player = clientSession.MyPlayer;
+        Player sessionPlayer = clientSession.MyPlayer;
 
         GameRoom room = Server.RoomManager.Instance.Find(1);
 
         var packetPlayer = enterGamePacket.Player;
 
-        Console.WriteLine($"{packetPlayer.Name} plyer");
-        player = ObjectManager.Instance.Add<Player>();
+        Console.WriteLine($"Enter User : {packetPlayer.Name} plyer");
+        Player player = ObjectManager.Instance.Add<Player>();
         {
             player.Info.Name = $"Player_{player.Id}";
             player.Info.Position = packetPlayer.Position;
@@ -50,9 +50,7 @@ class PacketHandler
         if (room == null)
             return;
 
-        if (player.Id != syncPacket.Player.ObjectId)
-            return;
-
+        Console.WriteLine($"ID: {player.Id}  X: {syncPacket.Player.Position.X} Y: {syncPacket.Player.Position.Y} Z : {syncPacket.Player.Position.Z}");
         room.Push(room.HandleMove, player, syncPacket);
     }
 
