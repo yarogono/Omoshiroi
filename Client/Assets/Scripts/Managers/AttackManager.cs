@@ -39,7 +39,7 @@ public class AttackManager : CustomSingleton<AttackManager>
         {
             BaseAttack attackObj = GetAttackFromPool(magic.AttackData.AttackInfos[ComboIndex].AttackType);
             // 풀링한오브젝트를 초기화
-            attackObj.Initalize(dataContainer, dataContainer.tag);
+            attackObj.Initalize(magic.AttackData.AttackInfos[ComboIndex], dataContainer, dataContainer.tag);
             attackObj.transform.position = position;
             // attackObj.transform.rotation을 direction에 따라서 돌리기
         }

@@ -16,10 +16,10 @@ public class RangeAttack : BaseAttack
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    public override void Initalize(DataContainer dataContainer, string tag)
+    public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
         int ap = dataContainer.Stats.AtkPower;
-        base.Initalize(dataContainer, tag);
+        base.Initalize(attackInfo, dataContainer, tag);
         Damage = dataContainer.Stats.AtkPower;
         Launch();
     }

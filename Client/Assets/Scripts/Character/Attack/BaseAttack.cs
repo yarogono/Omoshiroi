@@ -8,10 +8,11 @@ public class BaseAttack : MonoBehaviour
     public int Damage { get; protected set; }
     protected Action _actAtDisable;
     protected DataContainer _data;
+    protected AttackInfo _attackInfo;
 
     public void AddActAtDisable(Action action) { _actAtDisable += action; }
 
-    public virtual void Initalize(DataContainer dataContainer, string tag)
+    public virtual void Initalize(AttackInfo attackInfo , DataContainer dataContainer, string tag)
     {
         _makerTag = tag;
         _data = dataContainer;
