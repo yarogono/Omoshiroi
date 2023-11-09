@@ -13,11 +13,10 @@ public class MeleeAttack : BaseAttack
         Damage = dataContainer.Stats.AtkPower;
     }
 
-    public override void ApplyDamage(DataContainer dataContainer)
+    public override void ApplyDamage(HealthSystem health)
     {
-        base.ApplyDamage(dataContainer);
-        // 추가적으로 해야되는 작업
-        dataContainer.Health.TakeDamage(Damage);
+        base.ApplyDamage(health);
+        health.TakeDamage(Damage);
         gameObject.SetActive(false);
         // 피격음 재생
     }
@@ -31,7 +30,7 @@ public class MeleeAttack : BaseAttack
         if (!other.CompareTag(_makerTag))
         {
             var data = other.GetComponent<DataContainer>();
-            ApplyDamage(data);
+            ApplyDamage(data.Health);
         }
     }
 
