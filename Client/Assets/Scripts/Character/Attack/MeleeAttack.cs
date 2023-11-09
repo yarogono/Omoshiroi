@@ -5,15 +5,10 @@ using UnityEngine;
 
 public class MeleeAttack : BaseAttack
 {
-    [SerializeField] protected MeshCollider _attackArea;
-    [SerializeField] protected MeshFilter _attackFilter;
-    [SerializeField] protected MeshRenderer _attackRenderer;
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
         base.Initalize(attackInfo, dataContainer, tag);
         // 추가적으로 해야되는 작업
-        
-        
     }
 
     public override void ApplyDamage(HealthSystem health)

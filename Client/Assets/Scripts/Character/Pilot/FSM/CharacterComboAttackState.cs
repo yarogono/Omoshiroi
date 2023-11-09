@@ -52,7 +52,7 @@ public class CharacterComboAttackState : CharacterAttackState
         if (_stateMachine.Movement == null) return;
         Vector3 newDir = new Vector3() { x = _stateMachine.AttackDirection.normalized.x, z = _stateMachine.AttackDirection.normalized.y, y = 0.0f };
 
-        if (attackInfo.AttackType == eAttackType.Melee)
+        if (attackInfo.AttackType < eAttackType.Range)
             _stateMachine.Movement?.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
 
         AttackManager.Instance.RqAttack(ComboIndex, _stateMachine.Character, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
