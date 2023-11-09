@@ -72,6 +72,7 @@ public class BaseState : IState
     {
         // TODO
         // 조준
+        _stateMachine.AttackDirection = direction;
     }
 
     protected virtual void DodgeEvent()
