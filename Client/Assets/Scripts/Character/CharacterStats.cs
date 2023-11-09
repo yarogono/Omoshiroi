@@ -46,4 +46,9 @@ public class CharacterStats
     {
         Hp = hp;
     }
+
+    public void SetMaxHP(int maxHp)
+    {
+        MaxHp = maxHp;
+    }
 }
