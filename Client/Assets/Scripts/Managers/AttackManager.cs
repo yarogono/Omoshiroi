@@ -29,6 +29,7 @@ public class AttackManager : CustomSingleton<AttackManager>
     //풀 
     [SerializeField]
     private GameObject ObjPoolRoot;
+    public LayerMask TargetLayer;
 
     public void RqAttack(eAttackType type, CharacterDataContainer dataContainer, Vector3 position, Vector2 direction)
     {
