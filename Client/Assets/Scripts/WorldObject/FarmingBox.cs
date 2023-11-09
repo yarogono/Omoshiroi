@@ -5,15 +5,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Inventory;
 
-//인벤토리 정보는 InventoryController 를 가짐.
-//BtnCancel 은 플레이어 인벤토리 UI 의 창 닫기 버튼으로 지정한다.
-//클릭 시 현재 오브젝트의 인벤토리 창이 열리도록 해야 함.
-//인벤토리 부분은 사실상 플레이어의 내용과 비슷할 듯 하다.
-
+/// <summary>
+/// 테스트가 용이하도록 임의대로 아이템 스폰을 자체적인 SO 로 관리하도록 해 두었음.
+/// </summary>
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
     [SerializeField] private int inventorySize;
-    
+    [SerializeField] private InventorySO inventorySO;
+
     private InventoryController_FB inventoryController;
     private Collider farminBoxCollider;
 
@@ -27,6 +26,13 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     private void Start()
     {
         ItemList = new Dictionary<int, InventoryItem>();
+
+        Dictionary<int, InventoryItem> items = inventorySO.GetCurrentInventoryState();
+
+        foreach (KeyValuePair<int, InventoryItem> item in items)
+        {
+            ItemList.Add(item.Key, item.Value);
+        }
 
         inventoryController = GetComponent<InventoryController_FB>();
         farminBoxCollider = GetComponent<Collider>();
