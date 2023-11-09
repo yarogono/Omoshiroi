@@ -6,8 +6,8 @@ public class CharacterStats
 {
     [field: SerializeField] public CharacterBaseStats cbs { get; private set; }
 
-    public int MaxHp { get; private set; }
-    public int Hp { get; private set; }
+    public int MaxHp { get; set; }
+    public int Hp { get { return Hp; } set { if (value > MaxHp) { Hp = MaxHp; } } }
     public int Def { get; private set; }
     public float AtkSpeed { get; private set; }
     public int AtkPower { get; private set; }
@@ -44,6 +44,7 @@ public class CharacterStats
 
     public void SetHP(int hp)
     {
+        if (hp > MaxHp) { Hp = MaxHp; return; }
         Hp = hp;
     }
 
