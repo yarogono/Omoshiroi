@@ -57,11 +57,7 @@ namespace Server.Game.Room
             {
                 S_Spawn spawnPacket = new S_Spawn();
                 spawnPacket.Objects.Add(gameObject.Info);
-                foreach (Player p in _players.Values)
-                {
-                    if (p.Id != gameObject.Id)
-                        p.Session.Send(spawnPacket);
-                }
+                Broadcast(spawnPacket, gameObject.Id);
             }
         }
 
@@ -89,11 +85,7 @@ namespace Server.Game.Room
             {
                 S_Despawn despawnPacket = new S_Despawn();
                 despawnPacket.ObjectIds.Add(objectId);
-                foreach (Player p in _players.Values)
-                {
-                    if (p.Id != objectId)
-                        p.Session.Send(despawnPacket);
-                }
+                Broadcast(despawnPacket, objectId);
             }
         }
 
@@ -138,6 +130,15 @@ namespace Server.Game.Room
             foreach (Player p in _players.Values)
             {
                 p.Session.Send(packet);
+            }
+        }
+
+        public void Broadcast(IMessage packet, int exceptPlayerId)
+        {
+            foreach (Player p in _players.Values)
+            {
+                if (p.Id != exceptPlayerId)
+                    p.Session.Send(packet);
             }
         }
     }
