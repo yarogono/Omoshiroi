@@ -62,3 +62,9 @@ public enum eSoundType
     Effect,
     MaxCount
 }
+
+public enum eAttackType
+{
+    Melee,
+    Range,
+}

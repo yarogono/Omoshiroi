@@ -10,47 +10,58 @@ public class SyncModule : MonoBehaviour
 
     protected bool _updated = false;
 
-    PositionInfo _positionInfo = new PositionInfo();
-    public PositionInfo PosInfo
+    public ObjectInfo _objectInfo = new ObjectInfo();
+    public ObjectInfo ObjectInfo
     {
-        get { return _positionInfo; }
+        get { return _objectInfo; }
         set
         {
-            if (_positionInfo.Equals(value))
+            if (_objectInfo.Equals(value))
+                return;
+        }
+    }
+
+    P_Vector3 _pVector3 = new P_Vector3();
+    public P_Vector3 P_Vector3
+    {
+        get { return _pVector3; }
+        set
+        {
+            if (_pVector3.Equals(value))
                 return;
 
-            position = new Vector3(value.PosX, value.PosY, value.PosZ);
+            position = new Vector3(value.X, value.Y, value.Z);
         }
     }
 
     public Vector3 position
     {
-        get { return new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ); }
+        get { return new Vector3(_pVector3.X, _pVector3.Y, _pVector3.Z); }
         set
         {
-            if (PosInfo.PosX == value.x && PosInfo.PosY == value.y && PosInfo.PosZ == value.z)
+            if (_pVector3.X == value.x && _pVector3.Y == value.y && _pVector3.Z == value.z)
                 return;
 
-            PosInfo.PosX = value.x;
-            PosInfo.PosY = value.y;
-            PosInfo.PosZ = value.z;
+            _pVector3.X = value.x;
+            _pVector3.Y = value.y;
+            _pVector3.Z = value.z;
             _updated = true;
         }
     }
 
     public TextMeshPro checkIdTest;
-    public TextMeshPro checkPosXTest;
-    public TextMeshPro checkPosYTest;
-    public TextMeshPro checkPosZTest;
+    public TextMeshPro checkPositionX;
+    public TextMeshPro checkPositionY;
+    public TextMeshPro checkPositionZ;
     public TextMeshPro checkStateTest;
 
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";
-        checkPosXTest.text = $"Ser_X : {PosInfo.PosX} | Cli_X : {transform.position.x}";
-        checkPosYTest.text = $"Ser_Y : {PosInfo.PosY} | Cli_Y : {transform.position.y}";
-        checkPosZTest.text = $"Ser_Z : {PosInfo.PosZ} | Cli_Z : {transform.position.z}";
-        checkStateTest.text = $"State : {PosInfo.State}";
+        checkPositionX.text = $"Ser_X : {_pVector3.X} | Cli_X : {transform.position.x}";
+        checkPositionY.text = $"Ser_Y : {_pVector3.Y} | Cli_Y : {transform.position.y}";
+        checkPositionZ.text = $"Ser_Z : {_pVector3.Z} | Cli_Z : {transform.position.z}";
+        // checkStateTest.text = $"State : {ObjectInfo.State}";
     }
 
     protected virtual void Update()

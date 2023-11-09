@@ -2,26 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloneDataContainer : MonoBehaviour
+public class CloneDataContainer : DataContainer
 {
-    [SerializeField]
-    public Inventory1 Inven { get; }
-
-    [field: SerializeField]
-    public CharacterStats Stats { get; private set; }
-
-    [field: SerializeField]
-    public EquipSystem Equipments { get; private set; }
-    public Animator Animator { get; private set; }
-
-    [field: SerializeField]
-    public CharacterAnimationData AnimationData { get; private set; }
     public CloneSync Sync { get; private set; }
     public CloneMovement Movement { get; private set; }
 
     private CombineCloneStatemachine _stateMachine;
-    [field: SerializeField]
-    public CharacterSpriteRotator SpriteRotator { get; private set; }
+
     private void Awake()
     {
         Movement = GetComponent<CloneMovement>();

@@ -16,11 +16,29 @@ public class RangeAttack : BaseAttack
     }
 
     public override void Initalize(CharacterDataContainer dataContainer, string tag)
+
     {
 
         int ap = dataContainer.Stats.AtkPower;
         base.Initalize(dataContainer, tag);
         Launch();
+
+    {
+        base.Initalize(dataContainer, tag);
+        Launch();
+    }
+
+    public override void Initalize(CloneDataContainer dataContainer, string tag)
+    {
+        base.Initalize(dataContainer, tag);
+        Launch();
+    }
+
+    public void Launch()
+    {
+        // 공격생명주기
+        Invoke(nameof(Deactivate), lifeTime);
+
     }
 
     public override void Initalize(CloneDataContainer dataContainer, string tag)
@@ -70,10 +88,14 @@ public class RangeAttack : BaseAttack
         this.gameObject.SetActive(false);
     }
 
+
     public override void ApplyDamage(CharacterDataContainer dataContainer)
     {
         AP=dataContainer.Stats.AtkPower;
         dataContainer.Health.ChangeHP(AP);
+        //Deactivate();
+        gameObject.SetActive(false);
+
     }
  
 }
