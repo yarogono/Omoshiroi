@@ -68,7 +68,7 @@ public class RangeAttack : BaseAttack
 
     public override void ApplyDamage(DataContainer dataContainer)
     {
-        AP=dataContainer.Stats.AtkPower;
+      
         dataContainer.Health.TakeDamage(Damage);
         //Deactivate();
         gameObject.SetActive(false);
