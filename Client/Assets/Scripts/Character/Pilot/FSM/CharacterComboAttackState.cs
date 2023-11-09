@@ -55,7 +55,8 @@ public class CharacterComboAttackState : CharacterAttackState
         alreadyAppliedForce = true;
         if (_stateMachine.Movement == null) return;
         Vector3 newDir = new Vector3() { x = _stateMachine.AttackDirection.normalized.x, z = _stateMachine.AttackDirection.normalized.y, y = 0.0f };
-        _stateMachine.Movement?.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
+        //_stateMachine.Movement?.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
+        AttackManager.Instance.RqAttack(attackInfo.AttackType, _stateMachine.Character, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
     }
 
     public override void Update()
@@ -97,6 +98,6 @@ public class CharacterComboAttackState : CharacterAttackState
 
     protected override void AimEvent(Vector2 direction)
     {
-        _stateMachine.AttackDirection = direction;
+        base.AimEvent(direction);
     }
 }
