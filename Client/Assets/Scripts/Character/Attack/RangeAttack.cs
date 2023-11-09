@@ -49,13 +49,13 @@ public class RangeAttack : BaseAttack
         if (other.tag == "Pilot")
         {
 
-            var characterData = other.GetComponent<CharacterDataContainer>();
+            var Data = other.GetComponent<HealthSystem>();
             CharacterMovement movement = other.GetComponent<CharacterMovement>();
-            if (characterData != null)
+            if (Data != null)
             {
                 //넉백을위한 Vector3계산
                 impact = -(other.gameObject.transform.position - transform.position).normalized*5;  
-                ApplyDamage(characterData);
+                ApplyDamage(Data);
                 //넉백             
                 movement.AddImpact(impact); 
             }
@@ -68,10 +68,10 @@ public class RangeAttack : BaseAttack
     }
 
 
-    public override void ApplyDamage(DataContainer dataContainer)
+    public override void ApplyDamage(HealthSystem healthSystem)
     {
-      
-        dataContainer.Health.TakeDamage(Damage);
+
+        healthSystem.TakeDamage(Damage);
         //Deactivate();
         gameObject.SetActive(false);
     }
