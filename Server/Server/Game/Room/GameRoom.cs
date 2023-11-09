@@ -97,25 +97,27 @@ namespace Server.Game.Room
             }
         }
 
-        public void HandleMove(Player player, C_Move movePacket)
+        public void HandleMove(Player player, C_Sync syncPacket)
         {
-            if (player == null)
+            if (syncPacket.Player == null)
                 return;
 
             // TODO : 검증
-
-            PositionInfo movePosInfo = movePacket.PosInfo;
             ObjectInfo info = player.Info;
 
-            info.PosInfo.State = movePosInfo.State;
-            info.PosInfo.MoveDir = movePosInfo.MoveDir;
+            info.Position = syncPacket.Player.Position;
+            info.State = syncPacket.Player.State;
+            info.Velocity = syncPacket.Player.Velocity;
 
             // 다른 플레이어한테도 알려준다
-            S_Move resMovePacket = new S_Move();
-            resMovePacket.ObjectId = player.Info.ObjectId;
-            resMovePacket.PosInfo = movePacket.PosInfo;
+            S_Sync resSyncPacket = new S_Sync();
+            resSyncPacket.Player.ObjectId = syncPacket.Player.ObjectId;
+            resSyncPacket.Player.Position = syncPacket.Player.Position;
+            resSyncPacket.Player.State = syncPacket.Player.State;
+            resSyncPacket.Player.AnimTime = syncPacket.Player.AnimTime;
+            resSyncPacket.Player.Name = syncPacket.Player.Name;
 
-            Broadcast(resMovePacket);
+            Broadcast(resSyncPacket);
         }
 
 
