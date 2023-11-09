@@ -7,7 +7,8 @@ public class RangeAttack : BaseAttack
 {
     [SerializeField] private float speed = 10f; // 공격의 속도
     [SerializeField] private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
-    int AP;
+    
+    
     Vector3 impact;
     private void Update()
     {
@@ -19,6 +20,7 @@ public class RangeAttack : BaseAttack
     {
         int ap = dataContainer.Stats.AtkPower;
         base.Initalize(dataContainer, tag);
+        Damage = dataContainer.Stats.AtkPower;
         Launch();
     }
 
@@ -50,7 +52,7 @@ public class RangeAttack : BaseAttack
             if (characterData != null)
             {
                 //넉백을위한 Vector3계산
-                impact = -(other.gameObject.transform.position - transform.position).normalized;  
+                impact = -(other.gameObject.transform.position - transform.position).normalized*5;  
                 ApplyDamage(characterData);
                 //넉백             
                 movement.AddImpact(impact); 
@@ -67,7 +69,7 @@ public class RangeAttack : BaseAttack
     public override void ApplyDamage(DataContainer dataContainer)
     {
         AP=dataContainer.Stats.AtkPower;
-        dataContainer.Health.ChangeHP(AP);
+        dataContainer.Health.TakeDamage(Damage);
         //Deactivate();
         gameObject.SetActive(false);
     }
