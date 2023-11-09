@@ -6,8 +6,19 @@ public class CharacterStats
 {
     [field: SerializeField] public CharacterBaseStats cbs { get; private set; }
 
+    private int maxHp;
+    private int hp;
+    private int def;
+    private float atkSpeed;
+    private int atkPower;
+    private int critRate;
+    private float critPower;
+    private float moveSpeed;
+    private float runMultipiler;
+    private float dodgeTime;
+
     public int MaxHp { get; set; }
-    public int Hp { get { return Hp; } set { if (value > MaxHp) { Hp = MaxHp; } } }
+    public int Hp { get { return hp; } set { if (value > MaxHp) { hp = MaxHp; } } }
     public int Def { get; private set; }
     public float AtkSpeed { get; private set; }
     public int AtkPower { get; private set; }
@@ -40,16 +51,5 @@ public class CharacterStats
         CritPower = critPower;
         MoveSpeed = moveSpeed;
         RunMultipiler = runMulipiler;
-    }
-
-    public void SetHP(int hp)
-    {
-        if (hp > MaxHp) { Hp = MaxHp; return; }
-        Hp = hp;
-    }
-
-    public void SetMaxHP(int maxHp)
-    {
-        MaxHp = maxHp;
     }
 }
