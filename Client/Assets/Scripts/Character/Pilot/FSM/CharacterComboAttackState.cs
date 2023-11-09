@@ -6,8 +6,6 @@ public class CharacterComboAttackState : CharacterAttackState
 {
     private bool alreadyAppliedForce;
     private bool alreadyApplyCombo;
-
-    private CharacterStats stats;
     private AttackInfo attackInfo;
 
     public CharacterComboAttackState(CharacterStateMachine stateMachine) : base(stateMachine)
@@ -22,8 +20,6 @@ public class CharacterComboAttackState : CharacterAttackState
 
         alreadyApplyCombo = false;
         alreadyAppliedForce = false;
-
-        stats = _stateMachine.Character.Stats;
 
         attackInfo = (_stateMachine.Character.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic).AttackData.GetAttackInfo(ComboIndex);
         _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, ComboIndex);
@@ -55,7 +51,10 @@ public class CharacterComboAttackState : CharacterAttackState
         alreadyAppliedForce = true;
         if (_stateMachine.Movement == null) return;
         Vector3 newDir = new Vector3() { x = _stateMachine.AttackDirection.normalized.x, z = _stateMachine.AttackDirection.normalized.y, y = 0.0f };
-        //_stateMachine.Movement?.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
+
+        if (attackInfo.AttackType == eAttackType.Melee)
+            _stateMachine.Movement?.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
+
         AttackManager.Instance.RqAttack(attackInfo.AttackType, _stateMachine.Character, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
     }
 
