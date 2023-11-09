@@ -47,7 +47,7 @@ public class CombineCloneStatemachine
         _stateMachine[1].AddState(eStateType.None, new CloneNoneState(_stateMachine[1]));
         _stateMachine[1].ChangeState(eStateType.None);
 
-        clone.Sync.OnCloneEvent += CloneEvent;
+        clone.Sync.OnCloneEvent += CloneFSMEvent;
         //clone.Sync.OnMakeAttackEvent += CloneAttackEvent;
     }
 
@@ -97,13 +97,13 @@ public class CombineCloneStatemachine
         }
     }
 
-    public void CloneEvent(Vector3 velocity, float animTime, int state, Vector3 position)
+    public void CloneFSMEvent(Vector3 velocity, float animTime, int state, Vector3 position)
     {
         ChangeState((eStateType)state);
         SetAnimation((eStateType)state, animTime);
     }
 
-    public void CloneAttackEvent(int Combo, Vector3 position, Vector2 direction)
+    public void CloneMakeAttackAreaEvent(int Combo, Vector3 position, Vector2 direction)
     {
         AttackManager.Instance.RqAttack(Combo, _stateMachine[0].Clone, position, direction);
     }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MeleeAttack : BaseAttack
 {
-    [SerializeField] protected Mesh _attackArea;
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
         base.Initalize(attackInfo, dataContainer, tag);
