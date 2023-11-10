@@ -9,10 +9,14 @@ public class HealthSystem : MonoBehaviour
 
     private CharacterStats stats;
 
+    private void Awake()
+    {
+        stats = dataContainer.Stats;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        stats = dataContainer.Stats;
     }
 
     // Update is called once per frame
