@@ -7,6 +7,7 @@ using Inventory;
 using ServerCore;
 using Google.Protobuf;
 using Google.Protobuf.Protocol;
+using Google.Protobuf.Collections;
 
 /// <summary>
 /// 테스트가 용이하도록 임의대로 아이템 스폰을 자체적인 SO 로 관리하도록 해 두었음.
@@ -62,34 +63,34 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
         }
     }
 
-    public void OpenBox(bool isOpen)
+    /// <summary>
+    /// 서버에서 받아온 [farminBoxID, isOpen, farmingBoxInventory] 데이터를 이용해 작업을 수행한다.
+    /// 해당하는 파밍박스를 식별하고, isOpen 이 true 라면 파밍박스를 열 수 없음을 알리고 종료, false 라면 파밍박스 인벤토리를 데이터대로 갱신해주면 된다. 
+    /// </summary>
+    public void OpenBox(S_FarmingBoxOpen FBData)
     {
-        if (isOpen)
+        if (FBData.IsOpen)
         {
-            //누군가가 파밍박스를 연 상태여서 해당 파밍박스를 열 수 없음을 알리는 연출
-            Debug.Log($"{FBPacket.FarmingBoxId} 를 누군가가 뒤져 보는 중이므로 열 수 없습니다.");
+            //상자를 열 수 없는 상태라는 것을 알려주는 연출에 대한 내용.
+            Debug.Log($"{FBData.FarmingBoxId} 를 누군가가 뒤져 보는 중이므로 열 수 없습니다.");
             return;
         }
 
+        RepeatedField<FarmingBoxItem> items = FBData.Items;
+        InventoryItem item;
+
+        //for (int i = 0; i < items.Count; i++)
+        //{
+        //     item.i items[i].ItemId, items[i].Quantity)
+        //    ItemList.Add(i, );
+        //}
+
+        //foreach (FarmingBoxItem item in FBData.Items)
+        //{
+        //    ItemList.Add(item.ItemId)
+        //}
+
         inventoryController.OpenInventoryUI();
-    }
-
-    /// <summary>
-    /// FarmingBox 를 열 수 없는 상태라면, 이것을 열 수 없다는 것을 알리는 연출이 추가될 예정이다.
-    /// </summary>
-    /// <param name="isOpened"></param>
-    private bool OpenFarmingBox(bool isOpened)
-    {
-        if (isOpened)
-        {
-            //상자를 열 수 없는 상태라는 것을 알려주는 연출에 대한 내용.
-
-            return false;
-        }
-
-        //FarmingBox 인벤토리를 세팅하는 내용.
-
-        return true;
     }
 
     /// <summary>
@@ -110,10 +111,6 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 
 public partial class PacketHandler
 {
-    /// <summary>
-    /// 서버에서 받아온 데이터 중 [farminBoxID, isOpen, farmingBoxInventory] 데이터를 이용해 작업을 수행하는 핸들러.
-    /// 해당하는 파밍박스를 식별하고, isOpen 이 true 라면 파밍박스를 열 수 없음을 알리고 종료, false 라면 파밍박스 인벤토리를 데이터대로 갱신해주면 된다. 
-    /// </summary>
     public static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
     {
         S_FarmingBoxOpen FBPacket = packet as S_FarmingBoxOpen;
@@ -127,7 +124,7 @@ public partial class PacketHandler
 
         FarmingBox farmingBox = gameObject.GetComponent<FarmingBox>();
 
-        farmingBox.OpenBox(FBPacket.IsOpen);
+        farmingBox.OpenBox(FBPacket);
     }
 
     public static void S_FarmingBoxSpawnHandler(PacketSession session, IMessage packet)
