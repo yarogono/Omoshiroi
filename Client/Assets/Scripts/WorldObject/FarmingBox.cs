@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using Inventory;
 using ServerCore;
 using Google.Protobuf;
+using Google.Protobuf.Protocol;
 
 /// <summary>
 /// 테스트가 용이하도록 임의대로 아이템 스폰을 자체적인 SO 로 관리하도록 해 두었음.
@@ -14,8 +15,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
 {
     [SerializeField] private int inventorySize;
     [SerializeField] private InventorySO inventorySO;
-
-    private InventoryController_FB inventoryController;
+    [SerializeField] private InventoryController_FB inventoryController;
     private Collider farminBoxCollider;
 
     public Dictionary<int, InventoryItem> ItemList { get; private set; }
@@ -53,6 +53,25 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     public void SetItemList(Dictionary<int, InventoryItem> items)
     {
         ItemList = items;
+    }
+    private void OnMouseDown()
+    {
+        if (/*Vector3.Distance(this.transform.position, 플레이어.transform.position) < 20*/ true)
+        {
+            SendFarmingBoxOpen
+        }
+    }
+
+    public void OpenBox(bool isOpen)
+    {
+        if (isOpen)
+        {
+            //누군가가 파밍박스를 연 상태여서 해당 파밍박스를 열 수 없음을 알리는 연출
+            Debug.Log($"{FBPacket.FarmingBoxId} 를 누군가가 뒤져 보는 중이므로 열 수 없습니다.");
+            return;
+        }
+
+        inventoryController.OpenInventoryUI();
     }
 
     /// <summary>
@@ -93,12 +112,26 @@ public partial class PacketHandler
 {
     /// <summary>
     /// 서버에서 받아온 데이터 중 [farminBoxID, isOpen, farmingBoxInventory] 데이터를 이용해 작업을 수행하는 핸들러.
-    /// 해당하는 파밍박스를 식별하고, 파밍박스 인벤토리를 데이터대로 갱신해주면 된다. 
+    /// 해당하는 파밍박스를 식별하고, isOpen 이 true 라면 파밍박스를 열 수 없음을 알리고 종료, false 라면 파밍박스 인벤토리를 데이터대로 갱신해주면 된다. 
     /// </summary>
-    /// <param name="session"></param>
-    /// <param name="packet"></param>
     public static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
     {
-        
+        S_FarmingBoxOpen FBPacket = packet as S_FarmingBoxOpen;
+
+        GameObject gameObject = ObjectManager.Instance.FindById(FBPacket.FarmingBoxId);
+
+        if(gameObject == null)
+        {
+            return;
+        }
+
+        FarmingBox farmingBox = gameObject.GetComponent<FarmingBox>();
+
+        farmingBox.OpenBox(FBPacket.IsOpen);
+    }
+
+    public static void S_FarmingBoxSpawnHandler(PacketSession session, IMessage packet)
+    {
+
     }
 }
