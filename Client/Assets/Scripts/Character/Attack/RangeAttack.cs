@@ -19,6 +19,7 @@ public class RangeAttack : BaseAttack
 
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
+
         base.Initalize(attackInfo, dataContainer, tag);
 
     }
@@ -48,7 +49,7 @@ public class RangeAttack : BaseAttack
         // 이곳에 충돌한 대상에 대한 처리 로직을 구현
         Debug.Log(other.name);
 
-        if (other.tag == "Pilot")
+        if (!other.CompareTag(_makerTag))
         {
 
             var Data = other.GetComponent<DataContainer>();
@@ -68,8 +69,8 @@ public class RangeAttack : BaseAttack
             {
                 Debug.LogError("Component null");
             }
+            this.gameObject.SetActive(false);
         }
-        this.gameObject.SetActive(false);
     }
 
 
