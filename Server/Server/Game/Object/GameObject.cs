@@ -72,9 +72,9 @@ namespace Server.Game.Object
             Room.LeaveGame(Id);
 
             Stat.Hp = Stat.MaxHp;
-            Info.Position.X = 0;
-            Info.Position.Y = 0;
-            Info.Position.Z = 0;
+            Info.PosInfo.PosX = 0;
+            Info.PosInfo.PosY = 0;
+            Info.PosInfo.PosZ = 0;
 
             Room.EnterGame(this);
         }

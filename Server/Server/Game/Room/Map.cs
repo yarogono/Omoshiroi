@@ -79,16 +79,16 @@ namespace Server.Game.Room
             if (gameObject.Room == null)
                 return false;
 
-            P_Vector3 posInfo = gameObject.Info.Position ;
+            PositionInfo posInfo = gameObject.Info.PosInfo;
 
-            if (posInfo.X < MinX || posInfo.X > MaxX)
+            if (posInfo.PosX < MinX || posInfo.PosX > MaxX)
                 return false;
-            if (posInfo.Y < MinY || posInfo.Y > MaxY)
+            if (posInfo.PosY < MinY || posInfo.PosY > MaxY)
                 return false;
 
             {
-                float x = posInfo.X - MinX;
-                float y = MaxY - posInfo.Y;
+                float x = posInfo.PosX - MinX;
+                float y = MaxY - posInfo.PosY;
                 //if (_objects[y, x] == gameObject)
                 //    _objects[y, x] = null;
             }

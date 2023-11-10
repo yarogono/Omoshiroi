@@ -27,10 +27,16 @@ class PacketManager
 		_handler.Add((ushort)MsgId.CEnterGame, PacketHandler.C_EnterGameHandler);		
 		_onRecv.Add((ushort)MsgId.CLeaveGame, MakePacket<C_LeaveGame>);
 		_handler.Add((ushort)MsgId.CLeaveGame, PacketHandler.C_LeaveGameHandler);		
-		_onRecv.Add((ushort)MsgId.CSync, MakePacket<C_Sync>);
-		_handler.Add((ushort)MsgId.CSync, PacketHandler.C_SyncHandler);		
+		_onRecv.Add((ushort)MsgId.CMove, MakePacket<C_Move>);
+		_handler.Add((ushort)MsgId.CMove, PacketHandler.C_MoveHandler);		
 		_onRecv.Add((ushort)MsgId.CHpDamage, MakePacket<C_HpDamage>);
-		_handler.Add((ushort)MsgId.CHpDamage, PacketHandler.C_HpDamageHandler);
+		_handler.Add((ushort)MsgId.CHpDamage, PacketHandler.C_HpDamageHandler);		
+		_onRecv.Add((ushort)MsgId.CAim, MakePacket<C_Aim>);
+		_handler.Add((ushort)MsgId.CAim, PacketHandler.C_AimHandler);		
+		_onRecv.Add((ushort)MsgId.CBattle, MakePacket<C_Battle>);
+		_handler.Add((ushort)MsgId.CBattle, PacketHandler.C_BattleHandler);		
+		_onRecv.Add((ushort)MsgId.CAttack, MakePacket<C_Attack>);
+		_handler.Add((ushort)MsgId.CAttack, PacketHandler.C_AttackHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

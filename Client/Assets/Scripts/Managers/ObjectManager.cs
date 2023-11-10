@@ -42,7 +42,9 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 pilotSync = gameObject.GetComponent<PilotSync>();
                 pilotSync.Id = info.ObjectId;
-                pilotSync.Player = info;
+                pilotSync.PosInfo = info.PosInfo;
+                pilotSync.StatInfo = info.StatInfo;
+                pilotSync.State = info.State;
             }
             else
             {
@@ -58,8 +60,22 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
-                cloneSync.Player = info;
-                cloneSync.SyncPosition();
+                cloneSync.PosInfo = info.PosInfo;
+                cloneSync.StatInfo = info.StatInfo;
+                cloneSync.State = info.State;
+                cloneSync.CallMoveEvent(
+                    cloneSync.State,
+                    new Vector3(
+                        cloneSync.PosInfo.PosX,
+                        cloneSync.PosInfo.PosY,
+                        cloneSync.PosInfo.PosZ
+                    ),
+                    new Vector3(
+                        cloneSync.VelInfo.VelX,
+                        cloneSync.VelInfo.VelY,
+                        cloneSync.VelInfo.VelZ
+                    )
+                );
             }
         }
     }
