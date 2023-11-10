@@ -3869,7 +3869,7 @@ GameObject:
   - component: {fileID: 894557770}
   - component: {fileID: 894557769}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BtnReturnRobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6351,8 +6351,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1318211112}
-  - component: {fileID: 1318211114}
   - component: {fileID: 1318211113}
+  - component: {fileID: 1318211114}
+  - component: {fileID: 1318211115}
   m_Layer: 0
   m_Name: UIController
   m_TagString: Untagged
@@ -6406,10 +6407,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1318211111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74907727fb62bd447af8bfdb5c0121fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 2734de6d1a70f024aa26cf970f83c489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 1765787716}
+  MaxHp: 100
+  CurHp: 50
+  BtnLeavGame: {fileID: 894557769}
+--- !u!114 &1318211115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318211111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d38d3db708dc54b888768ab0d8984069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1327217530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4423857786125230, guid: e191e21fcb275784a9f8b6d08dcd932c, type: 3}
