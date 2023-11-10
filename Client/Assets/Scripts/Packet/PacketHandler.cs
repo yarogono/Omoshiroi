@@ -57,7 +57,15 @@ public class PacketHandler
         if (syncModule == null)
             return;
 
-        syncModule.PosInfo = movePacket.PosInfo;
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        // cloneSync.State = movePacket.State;
+        // cloneSync.PosInfo = movePacket.PosInfo;
+        // cloneSync.VelInfo = movePacket.VelInfo;
+
+        cloneSync.CallMoveEvent(movePacket.State, movePacket.PosInfo, movePacket.VelInfo);
     }
 
     /// <summary>
@@ -116,6 +124,7 @@ public class PacketHandler
 
     public static void S_AimHandler(PacketSession session, IMessage packet)
     {
+        Debug.Log($"Call AimHander");
         S_Aim aimPacket = packet as S_Aim;
 
         GameObject gameObject = ObjectManager.Instance.FindById(aimPacket.ObjectId);
@@ -128,6 +137,13 @@ public class PacketHandler
         {
             return;
         }
+
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        Debug.Log($"Call AimHander Done");
+        cloneSync.CallAimEvent(aimPacket.State, aimPacket.VelInfo);
     }
 
     public static void S_BattleHandler(PacketSession session, IMessage packet)
@@ -144,6 +160,17 @@ public class PacketHandler
         {
             return;
         }
+
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        cloneSync.CallBattleEvent(
+            battlePacket.State,
+            battlePacket.AnimTime,
+            battlePacket.PosInfo,
+            battlePacket.VelInfo
+        );
     }
 
     public static void S_AttackHandler(PacketSession session, IMessage packet)
@@ -160,6 +187,16 @@ public class PacketHandler
         {
             return;
         }
+
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        cloneSync.CallAttackEvent(
+            attackPacket.ComboIndex,
+            attackPacket.PosInfo,
+            attackPacket.VelInfo
+        );
     }
 
     public static void S_DieHandler(PacketSession session, IMessage packet) { }

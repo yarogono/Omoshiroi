@@ -26,9 +26,9 @@ public class CharacterIdleState : CharacterGroundState
 
     protected override void MoveEvent(Vector2 direction)
     {
+        base.MoveEvent(direction);
         if (direction != Vector2.zero)
         {
-            base.MoveEvent(direction);
             if (_isRun)
                 _stateMachine.ChangeState(eStateType.Run);
             else

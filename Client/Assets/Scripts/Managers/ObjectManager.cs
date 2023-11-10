@@ -14,11 +14,6 @@ public class ObjectManager : CustomSingleton<ObjectManager>
         return (GameObjectType)type;
     }
 
-    public void Update()
-    {
-        Debug.Log($"_objects.Count : {_objects.Count}");
-    }
-
     public void Add(ObjectInfo info, bool pilotPlayer = false)
     {
         GameObjectType objectType = GetObjectTypeById(info.ObjectId);
@@ -63,19 +58,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 cloneSync.PosInfo = info.PosInfo;
                 cloneSync.StatInfo = info.StatInfo;
                 cloneSync.State = info.State;
-                cloneSync.CallMoveEvent(
-                    cloneSync.State,
-                    new Vector3(
-                        cloneSync.PosInfo.PosX,
-                        cloneSync.PosInfo.PosY,
-                        cloneSync.PosInfo.PosZ
-                    ),
-                    new Vector3(
-                        cloneSync.VelInfo.VelX,
-                        cloneSync.VelInfo.VelY,
-                        cloneSync.VelInfo.VelZ
-                    )
-                );
+                cloneSync.CallMoveEvent(cloneSync.State, cloneSync.PosInfo, cloneSync.VelInfo);
             }
         }
     }
