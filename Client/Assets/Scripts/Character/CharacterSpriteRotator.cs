@@ -18,35 +18,67 @@ public class CharacterSpriteRotator
 
     public void Register(CloneDataContainer container)
     {
-        container.Sync.OnCloneEvent += NetworkInput;
+        container.Sync.OnAimEvent += AimNetwork;
+        container.Sync.OnMoveEvent += MoveNetwork;
         _weaponBase = _weapon.transform.position;
     }
 
-    public void NetworkInput(Vector3 velocity, float animTime, int state, Vector3 position)
-    {
-        switch((eStateType)state)
-        {
-            case eStateType.Aim:
-            case eStateType.Attack:
-                RotateWaepon(velocity.normalized);
-                break;
-            case eStateType.Run:
-            case eStateType.Walk:
-                RotateMain(velocity.normalized);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void MoveInput(Vector2 direction)
+    private void MoveInput(Vector2 direction)
     {
         RotateMain(direction);
     }
 
-    public void AimInput(Vector2 direction)
+    private void AimInput(Vector2 direction)
     {
-        RotateWaepon(direction);
+        RotateWeapon(direction);
+    }
+
+    private void MoveNetwork(int state, Vector3 posInfo, Vector3 velInfo)
+    {
+        RotateMain(velInfo);
+    }
+
+    private void AimNetwork(int state, Vector3 velInfo)
+    {
+        RotateWeapon(velInfo);
+    }
+
+    private void RotateMain(Vector3 direction)
+    {
+        float direc = direction.x * _main.transform.localScale.x;
+        if (direc < 0)
+        {
+            Vector3 target = _main.transform.localScale;
+            target.x = target.x * (-1);
+            _main.transform.localScale = target;
+        }
+    }
+
+    private void RotateWeapon(Vector3 direction)
+    {
+        Vector3 axis;
+        if (direction.x < 0)
+        {
+            _weapon.transform.localScale = new Vector3() { x = -1, y = 1, z = 1 };
+            axis = new Vector3() { x = -1, y = 0, z = 0 };
+
+            float angle = Vector3.Angle(axis, direction);
+            if (direction.z > 0)
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = -angle };
+            else
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = angle };
+        }
+        else
+        {
+            _weapon.transform.localScale = Vector3.one;
+            axis = new Vector3() { x = 1, y = 0, z = 0 };
+
+            float angle = Vector3.Angle(axis, direction);
+            if (direction.z < 0)
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = -angle };
+            else
+                _weapon.transform.localEulerAngles = new Vector3() { x = 90, y = 0, z = angle };
+        }
     }
 
     private void RotateMain(Vector2 direction)
@@ -60,7 +92,7 @@ public class CharacterSpriteRotator
         }
     }
 
-    private void RotateWaepon(Vector2 direction)
+    private void RotateWeapon(Vector2 direction)
     {
         Vector2 axis;
         if (direction.x < 0)

@@ -23,6 +23,7 @@ public class CharacterComboAttackState : CharacterAttackState
 
         attackInfo = (_stateMachine.Character.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic).AttackData.GetAttackInfo(ComboIndex);
         _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, ComboIndex);
+        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, 0.0f, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
     }
 
     public override void Exit()

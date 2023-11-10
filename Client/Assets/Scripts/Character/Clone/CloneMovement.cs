@@ -49,9 +49,7 @@ public class CloneMovement : MonoBehaviour
     void Start()
     {
         gameObject.TryGetComponent<CloneSync>(out _sync);
-        // TODO
-        // _sync의 이벤트에 MoveClone 혹은 Move를 등록하도록 한다.
-        _sync.OnCloneEvent += NetworkInput;
+        _sync.OnMoveEvent += NetworkInput;
     }
 
     void Update()
@@ -61,10 +59,9 @@ public class CloneMovement : MonoBehaviour
             SmoothlyStop();
     }
 
-    public void NetworkInput(Vector3 velocity, float animTime, int state, Vector3 position)
+    public void NetworkInput(int state, Vector3 posInfo, Vector3 velInfo)
     {
-        if ((eStateType)state != eStateType.None || (eStateType)state != eStateType.Idle)
-            MoveClone(position, velocity);
+        MoveClone(posInfo, velInfo);
     }
 
     public void MoveClone(Vector3 position, Vector3 velocity)

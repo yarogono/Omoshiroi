@@ -10,7 +10,44 @@ public class SyncModule : MonoBehaviour
 
     public string Name { get; set; }
 
-    public int State { get; set; }
+    int _state;
+    public int State
+    {
+        get { return _state; }
+        set
+        {
+            if (_state.Equals(value))
+                return;
+
+            _state = value;
+        }
+    }
+
+    float _animTime;
+    public float AnimTime
+    {
+        get { return _animTime; }
+        set
+        {
+            if (_animTime.Equals(value))
+                return;
+
+            _animTime = value;
+        }
+    }
+
+    int _comboIndex;
+    public int ComboIndex
+    {
+        get { return _comboIndex; }
+        set
+        {
+            if (_comboIndex.Equals(value))
+                return;
+
+            _comboIndex = value;
+        }
+    }
 
     StatInfo _statInfo = new StatInfo();
     public StatInfo StatInfo

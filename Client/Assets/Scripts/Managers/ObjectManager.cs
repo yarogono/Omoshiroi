@@ -63,7 +63,19 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 cloneSync.PosInfo = info.PosInfo;
                 cloneSync.StatInfo = info.StatInfo;
                 cloneSync.State = info.State;
-                cloneSync.SyncPosition();
+                cloneSync.CallMoveEvent(
+                    cloneSync.State,
+                    new Vector3(
+                        cloneSync.PosInfo.PosX,
+                        cloneSync.PosInfo.PosY,
+                        cloneSync.PosInfo.PosZ
+                    ),
+                    new Vector3(
+                        cloneSync.VelInfo.VelX,
+                        cloneSync.VelInfo.VelY,
+                        cloneSync.VelInfo.VelZ
+                    )
+                );
             }
         }
     }
