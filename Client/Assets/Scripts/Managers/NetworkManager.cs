@@ -4,6 +4,7 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class NetworkManager : CustomSingleton<NetworkManager>
@@ -38,11 +39,11 @@ public class NetworkManager : CustomSingleton<NetworkManager>
 
         C_EnterGame enterGamePacket = new C_EnterGame { Player = new ObjectInfo() };
         enterGamePacket.Player.Name = "test";
-        enterGamePacket.Player.Position = new P_Vector3()
+        enterGamePacket.Player.PosInfo = new PositionInfo()
         {
-            X = 0,
-            Y = 0,
-            Z = 0
+            PosX = 0,
+            PosY = 1.58f,
+            PosZ = 0
         };
         enterGamePacket.Player.StatInfo = null;
 
