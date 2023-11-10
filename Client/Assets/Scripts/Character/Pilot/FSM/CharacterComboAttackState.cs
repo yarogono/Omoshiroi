@@ -23,7 +23,7 @@ public class CharacterComboAttackState : CharacterAttackState
 
         attackInfo = (_stateMachine.Character.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic).AttackData.GetAttackInfo(ComboIndex);
         _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, ComboIndex);
-        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, 0.0f, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
+        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, 0.0f, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void Exit()
@@ -69,6 +69,7 @@ public class CharacterComboAttackState : CharacterAttackState
         {
             if (normalizedTime >= attackInfo.ForceTransitionTime)
                 TryApplyForce();
+            _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
         }
         else
         {
