@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Slider HpBar;
+
+    [SerializeField] private float MaxHp;
+    [SerializeField] private float CurHp;
+
+    private void Start()
+    {
+        HpBar.value = CurHp / MaxHp;
+
+    }
+
+    private void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HandlerHp()
     {
-        
+        HpBar.value = Mathf.Lerp(HpBar.value, CurHp / MaxHp, Time.deltaTime * 10);
     }
 }
