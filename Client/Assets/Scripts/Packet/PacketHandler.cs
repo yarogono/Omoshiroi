@@ -51,12 +51,7 @@ public class PacketHandler
         if (ObjectManager.Instance.pilotSync.Id == movePacket.ObjectId)
             return;
 
-        SyncModule syncModule = gameObject.GetComponent<SyncModule>();
-        if (syncModule == null)
-            return;
-
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
         // cloneSync.State = movePacket.State;
@@ -127,16 +122,12 @@ public class PacketHandler
         GameObject gameObject = ObjectManager.Instance.FindById(aimPacket.ObjectId);
 
         if (gameObject == null)
-        {
             return;
-        }
-        if (ObjectManager.Instance.pilotSync.Id == aimPacket.ObjectId)
-        {
-            return;
-        }
 
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
+        if (ObjectManager.Instance.pilotSync.Id == aimPacket.ObjectId)
+            return;
+
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
         cloneSync.CallAimEvent(aimPacket.State, aimPacket.VelInfo);
@@ -157,8 +148,7 @@ public class PacketHandler
             return;
         }
 
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
         cloneSync.CallBattleEvent(
@@ -184,8 +174,7 @@ public class PacketHandler
             return;
         }
 
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
         cloneSync.CallAttackEvent(

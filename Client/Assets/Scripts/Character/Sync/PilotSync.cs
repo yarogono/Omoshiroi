@@ -53,7 +53,6 @@ public class PilotSync : SyncModule
 
         C_Aim aimPacket = new C_Aim { State = State, VelInfo = VelInfo };
         NetworkManager.Instance.Send(aimPacket);
-        Debug.Log($"Pilot Aim {velInfo}");
     }
 
     public void SendC_BattlePacket(int state, float animTime, Vector3 posInfo, Vector3 velInfo)

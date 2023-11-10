@@ -51,12 +51,16 @@ public class NetworkManager : CustomSingleton<NetworkManager>
     void Update()
     {
         List<PacketMessage> list = PacketQueue.Instance.PopAll();
-        foreach (PacketMessage packet in list)
+
+        if (list.Count != 0)
         {
-            Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(
-                packet.Id
-            );
-            handler?.Invoke(_session, packet.Message);
+            foreach (PacketMessage packet in list)
+            {
+                Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(
+                    packet.Id
+                );
+                handler?.Invoke(_session, packet.Message);
+            }
         }
     }
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-
 public class CharacterDataContainer : DataContainer
 {
     public CharacterController Controller { get; private set; }
@@ -14,7 +13,8 @@ public class CharacterDataContainer : DataContainer
     private CombineStateMachine stateMachine;
 
     [Header("테스트용 착용아이템")]
-    [SerializeField] private BaseItem[] TestEquipItem;
+    [SerializeField]
+    private BaseItem[] TestEquipItem;
 
     private void Awake()
     {
@@ -24,7 +24,6 @@ public class CharacterDataContainer : DataContainer
         Animator = GetComponent<Animator>();
         Sync = GetComponent<PilotSync>();
         AnimationData.Initialize();
-
     }
 
     private void Start()
