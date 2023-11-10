@@ -2499,7 +2499,6 @@ GameObject:
   - component: {fileID: 2223460335526993391}
   - component: {fileID: 9102956608702525821}
   - component: {fileID: 5492689681438746674}
-  - component: {fileID: 9102956608702525822}
   m_Layer: 0
   m_Name: Player
   m_TagString: Pilot
@@ -2855,6 +2854,7 @@ MonoBehaviour:
   <SpriteRotator>k__BackingField:
     _main: {fileID: 9037900780998119668}
     _weapon: {fileID: 2229902179543449259}
+  health: {fileID: 0}
   TestEquipItem:
   - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
 --- !u!64 &8705618777525559031
@@ -2940,17 +2940,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9102956608702525822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4167113349589662149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb821abce43f7b3459730718da9a5c0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats:
-    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
