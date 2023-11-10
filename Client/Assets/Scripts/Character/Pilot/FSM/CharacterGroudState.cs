@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 
 public class CharacterGroundState : BaseState
 {
-    public CharacterGroundState(CharacterStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public CharacterGroundState(CharacterStateMachine stateMachine)
+        : base(stateMachine) { }
+
     public override void Enter()
     {
         base.Enter();
@@ -25,8 +25,11 @@ public class CharacterGroundState : BaseState
         base.PhysicsUpdate();
         // TODO
         // 이거 잘 작동하는지 확인이 필요함
-        if (!CheckGround()
-            && Mathf.Abs(_stateMachine.Character.Controller.velocity.y) > Mathf.Abs(Physics.gravity.y * Time.fixedDeltaTime))
+        if (
+            !CheckGround()
+            && Mathf.Abs(_stateMachine.Character.Controller.velocity.y)
+                > Mathf.Abs(Physics.gravity.y * Time.fixedDeltaTime)
+        )
         {
             _stateMachine.ChangeState(eStateType.Fall);
             return;

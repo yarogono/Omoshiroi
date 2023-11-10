@@ -3,6 +3,11 @@
     "WSL": {
       "commandName": "WSL2",
       "distributionName": ""
+    },
+    "Server": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Program Files\\UnityProject\\Omoshiroi\\Server\\Server\\bin\\Debug\\net6.0\\Server.exe",
+      "workingDirectory": "D:\\Program Files\\UnityProject\\Omoshiroi\\Server\\Server\\bin\\Debug\\net6.0"
     }
   }
 }

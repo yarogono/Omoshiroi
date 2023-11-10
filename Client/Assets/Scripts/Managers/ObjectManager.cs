@@ -1,5 +1,6 @@
 using Google.Protobuf.Protocol;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectManager : CustomSingleton<ObjectManager>
@@ -24,20 +25,24 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
         if (objectType == GameObjectType.Player)
         {
-            Vector3 S_Position = new Vector3(info.Position.X, info.Position.Y, info.Position.Z);
+            Vector3 S_Position = new Vector3(
+                info.PosInfo.PosX,
+                info.PosInfo.PosY,
+                info.PosInfo.PosZ
+            );
 
             if (pilotPlayer)
             {
                 GameObject gameObject = Instantiate(
                     Resources.Load<GameObject>("Prefabs/PilotPlayer")
                 );
+
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
                 pilotSync = gameObject.GetComponent<PilotSync>();
                 pilotSync.Id = info.ObjectId;
-                pilotSync.position = S_Position;
-                // pilotSync.Stat = info.StatInfo;
+                pilotSync.Player = info;
             }
             else
             {
@@ -49,13 +54,11 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                     Quaternion.identity
                 );
 
-                gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
-                cloneSync.position = S_Position;
-                // cloneSync.Stat = info.StatInfo;
+                cloneSync.Player = info;
                 cloneSync.SyncPosition();
             }
         }
