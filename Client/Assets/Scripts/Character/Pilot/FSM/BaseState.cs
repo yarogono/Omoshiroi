@@ -72,7 +72,8 @@ public class BaseState : IState
     {
         // TODO
         // 조준
-        _stateMachine.AttackDirection = direction;
+        direction.Normalize();
+        _stateMachine.AttackDirection = new Vector3() { x = direction.x, y = 0, z = direction.y };
     }
 
     protected virtual void DodgeEvent()
