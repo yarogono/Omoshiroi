@@ -22,6 +22,10 @@ enum MsgId {
 	C_ATTACK = 14;
 	S_ATTACK = 15;
 	S_DIE = 16;
+	S_FARMING_BOX_SPAWN = 17;
+	C_FARMING_BOX_OPEN = 18;
+	S_FARMING_BOX_OPEN = 19;
+	C_FARMING_BOX_CLOSE = 20;
 }
 
 enum GameObjectType {
@@ -125,6 +129,23 @@ message S_Attack {
 	VelocityInfo velInfo = 4;
 }
 
+message S_FarmingBoxSpawn {
+	repeated FarmingBoxInfo boxInfo = 1;
+}
+
+message C_FarmingBoxOpen {
+	int32 objectId = 1;
+}
+
+message S_FarmingBoxOpen {
+	FarmingBoxInfo boxInfo = 1;
+}
+
+message C_FarmingBoxClose {
+	int32 playerId = 1;
+	FarmingBoxInfo farmingBoxInfo = 2;
+}
+
 message ObjectInfo {
 	int32 objectId = 1;
 	string name = 2;
@@ -158,3 +179,21 @@ message DirectionInfo {
 	float dirY = 2;
 	float dirZ = 3;
 }
+
+message FarmingBoxInfo {
+	int32 objectId = 1;
+	bool isOpen = 2;
+	FarmingBoxPosition farmingBoxPosition = 3;
+	repeated FarmingBoxItem boxItems = 4;
+}
+
+message FarmingBoxItem {
+   int32 itemId = 1;
+   int32 quantity = 2;
+}
+
+message FarmingBoxPosition {
+  float boxX = 1;
+  float boxY = 2;
+  float boxZ = 3;
+} 
