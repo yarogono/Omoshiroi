@@ -31,8 +31,8 @@ public class CharacterMovement : MonoBehaviour
     private float _knockoutTime;
 
     public float SpeedMultiflier { get; set; } = 1.0f;
-    public Vector3 ControlDireaction { get => _controlDirection; }
-
+    public Vector3 ControlDirection { get => _controlDirection; }
+    public Vector3 FinalDirection { get; private set; }
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -48,7 +48,8 @@ public class CharacterMovement : MonoBehaviour
         // 캐릭터 이동
         CalControl();
         CalPhysics();
-        _controller.Move((_currentPhysics + _currentControl + _currentGravity * Vector3.up) * Time.deltaTime);
+        FinalDirection = (_currentPhysics + _currentControl + _currentGravity * Vector3.up);
+        _controller.Move(FinalDirection * Time.deltaTime);
     }
 
     private void FixedUpdate()

@@ -96,15 +96,34 @@ public class CombineCloneStatemachine
             }
         }
     }
-
+    // 삭제될 예정
     public void CloneFSMEvent(Vector3 velocity, float animTime, int state, Vector3 position)
     {
         ChangeState((eStateType)state);
         SetAnimation((eStateType)state, animTime);
     }
 
-    public void CloneMakeAttackAreaEvent(int Combo, Vector3 position, Vector3 direction)
+    public void CloneAttackEvent(int comboIndex, Vector3 position, Vector3 direction)
     {
-        AttackManager.Instance.RqAttack(Combo, _stateMachine[0].Clone, position, direction);
+        // 공격 생성
+        AttackManager.Instance.RqAttack(comboIndex, _stateMachine[0].Clone, position, direction);
+    }
+
+    public void CloneMoveEvent(int state, Vector3 posInfo, Vector3 velInfo)
+    {
+        // 걷기, 달리기, 낙하
+        eStateType type = (eStateType)state;
+    }
+
+    public void CloneBattleEvent(int state, float animTime, Vector3 posInfo, Vector3 velInfo)
+    {
+        // 회피, 공격 애니메이션 시작
+        eStateType type = (eStateType)state;
+    }
+
+    public void CloneAimEvent(int state, Vector3 velInfo)
+    {
+        // 조준
+        eStateType type = (eStateType)state;
     }
 }

@@ -19,26 +19,26 @@ public class SyncModule : MonoBehaviour
 
             _player.ObjectId = value.ObjectId;
             _player.Name = value.Name;
-            _player.Position = value.Position;
+            _player.PosInfo = value.PosInfo;
             _player.StatInfo = value.StatInfo;
             _player.State = value.State;
             _player.AnimTime = value.AnimTime;
-            _player.Velocity = value.Velocity;
+            _player.VelInfo = value.VelInfo;
         }
     }
 
-    P_Vector3 _position = new P_Vector3();
-    public P_Vector3 Position
+    PositionInfo _posInfo = new PositionInfo();
+    public PositionInfo PosInfo
     {
-        get { return _position; }
+        get { return _posInfo; }
         set
         {
-            if (_position.Equals(value))
+            if (_posInfo.Equals(value))
                 return;
 
-            _player.Position.X = value.X;
-            _player.Position.Y = value.Y;
-            _player.Position.Z = value.Z;
+            _player.PosInfo.PosX = value.PosX;
+            _player.PosInfo.PosY = value.PosY;
+            _player.PosInfo.PosZ = value.PosZ;
         }
     }
 
@@ -51,9 +51,9 @@ public class SyncModule : MonoBehaviour
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";
-        checkPositionX.text = $"Ser_X : {Player.Position.X} | Cli_X : {transform.position.x}";
-        checkPositionY.text = $"Ser_Y : {Player.Position.Y} | Cli_Y : {transform.position.y}";
-        checkPositionZ.text = $"Ser_Z : {Player.Position.Z} | Cli_Z : {transform.position.z}";
+        checkPositionX.text = $"Ser_X : {Player.PosInfo.PosX} | Cli_X : {transform.position.x}";
+        checkPositionY.text = $"Ser_Y : {Player.PosInfo.PosY} | Cli_Y : {transform.position.y}";
+        checkPositionZ.text = $"Ser_Z : {Player.PosInfo.PosZ} | Cli_Z : {transform.position.z}";
         // checkStateTest.text = $"State : {ObjectInfo.State}";
     }
 
