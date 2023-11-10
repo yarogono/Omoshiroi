@@ -39,6 +39,6 @@ public class CharacterGroundState : BaseState
     protected override void MoveEvent(Vector2 direction)
     {
         var v3direction = MoveCharacter(direction);
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, v3direction);
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 }

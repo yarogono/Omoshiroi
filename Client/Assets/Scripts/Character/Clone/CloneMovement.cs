@@ -51,7 +51,7 @@ public class CloneMovement : MonoBehaviour
         gameObject.TryGetComponent<CloneSync>(out _sync);
         // TODO
         // _sync의 이벤트에 MoveClone 혹은 Move를 등록하도록 한다.
-        _sync.OnCloneEvent += NetworkInput;
+        //_sync.OnCloneEvent += NetworkInput;
     }
 
     void Update()

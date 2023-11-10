@@ -47,7 +47,7 @@ public class CombineCloneStatemachine
         _stateMachine[1].AddState(eStateType.None, new CloneNoneState(_stateMachine[1]));
         _stateMachine[1].ChangeState(eStateType.None);
 
-        clone.Sync.OnCloneEvent += CloneFSMEvent;
+        //clone.Sync.OnCloneEvent += CloneFSMEvent;
         //clone.Sync.OnMakeAttackEvent += CloneAttackEvent;
     }
 
