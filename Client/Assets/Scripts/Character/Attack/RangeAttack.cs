@@ -49,7 +49,7 @@ public class RangeAttack : BaseAttack
         {
 
             var Data = other.GetComponent<HealthSystem>();
-            CharacterMovement movement = other.GetComponent<CharacterMovement>();
+            CharacterMovement movement = other.GetComponent<CharacterMovement>();  //데이터컨테이너로 캐싱 
             if (Data != null)
             {
                 //넉백을위한 Vector3계산
@@ -69,9 +69,9 @@ public class RangeAttack : BaseAttack
 
     public override void ApplyDamage(HealthSystem healthSystem)
     {
-
-       healthSystem.TakeDamage(Damage);
-        Debug.Log(healthSystem.stats);
+        Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
+        healthSystem.TakeDamage(Damage);
+        Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
         gameObject.SetActive(false);
     }
  
