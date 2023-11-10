@@ -23,7 +23,7 @@ public class CharacterComboAttackState : CharacterAttackState
 
         attackInfo = (_stateMachine.Character.Equipments.GetEquippedItem(eItemType.Magic) as BaseMagic).AttackData.GetAttackInfo(ComboIndex);
         _stateMachine.Character.Animator.SetInteger(_stateMachine.Character.AnimationData.ComboIndexParameterHash, ComboIndex);
-        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, 0.0f, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.ComboAttack, 0.0f, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void Exit()
@@ -69,7 +69,7 @@ public class CharacterComboAttackState : CharacterAttackState
         {
             if (normalizedTime >= attackInfo.ForceTransitionTime)
                 TryApplyForce();
-            _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+            //_stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
         }
         else
         {
@@ -89,6 +89,12 @@ public class CharacterComboAttackState : CharacterAttackState
     {
         if (!CheckGround())
             _stateMachine.ChangeState(eStateType.None);
+        else
+        {
+            float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Attack");
+            if (normalizedTime < 1f)
+                _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+        }
     }
 
     protected override void AttackEvent(Vector2 direction)
