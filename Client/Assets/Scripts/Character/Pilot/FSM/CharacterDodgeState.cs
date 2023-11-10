@@ -35,7 +35,7 @@ public class CharacterDodgeState : BaseState
         _nextState = _stateMachine.previousStateType;
         _isRun = _isRunInState;
         StartAnimation(_stateMachine.Character.AnimationData.DodgeParameterHash);
-        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, 0.0f, _stateMachine.Character.transform.position, _stateMachine.Character.Movement.FinalDirection);
+        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, 0.0f, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void Exit()
@@ -62,7 +62,7 @@ public class CharacterDodgeState : BaseState
     {
         base.PhysicsUpdate();
         float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Dodge");
-        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Movement.FinalDirection);
+        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     private void TryApplyForce()
