@@ -3,7 +3,7 @@ using Google.Protobuf.Protocol;
 using ServerCore;
 using UnityEngine;
 
-public class PacketHandler
+public partial class PacketHandler
 {
     public static void S_EnterGameHandler(PacketSession session, IMessage packet)
     {
