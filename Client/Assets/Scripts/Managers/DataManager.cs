@@ -5,7 +5,7 @@ using UnityEngine;
 public interface ILoader<Key, Value>
 {
     /// <summary>
-    /// 서버에서 받아온 데이터를 필요할 때마다 빠르게 접근할 수 있도록 Dictionary 형태로 가공한다.
+    /// json 파일의 데이터를 필요할 때마다 빠르게 접근할 수 있도록 Dictionary 형태로 가공한다.
     /// </summary>
     /// <returns></returns>
     Dictionary<Key, Value> MakeDict();
