@@ -35,7 +35,7 @@ public class CharacterDodgeState : BaseState
         _nextState = _stateMachine.previousStateType;
         _isRun = _isRunInState;
         StartAnimation(_stateMachine.Character.AnimationData.DodgeParameterHash);
-        _stateMachine.Character.Sync?.SendC_DodgePacket();
+        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, 0.0f, _stateMachine.Character.transform.position, _stateMachine.Character.Movement.FinalDirection);
     }
 
     public override void Exit()
@@ -61,7 +61,8 @@ public class CharacterDodgeState : BaseState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        _stateMachine.Character.Sync?.SendC_DodgePacket();
+        float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Dodge");
+        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Movement.FinalDirection);
     }
 
     private void TryApplyForce()
@@ -69,7 +70,7 @@ public class CharacterDodgeState : BaseState
         if (alreadyAppliedForce) return;
         alreadyAppliedForce = true;
         if (_stateMachine.Movement == null) return;
-        _stateMachine.Movement.AddImpact(_stateMachine.Movement.ControlDireaction * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier * 5, 0.5f);
+        _stateMachine.Movement.AddImpact(_stateMachine.Movement.ControlDirection * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier * 5, 0.5f);
     }
 
     protected override void MoveEvent(Vector2 direction)
