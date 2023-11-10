@@ -10,10 +10,10 @@ public class PilotSync : SyncModule
     {
         base.Update();
 
-        SendC_SyncPacket();
+        // SendC_MovePacket();
     }
 
-    public void SendC_SyncPacket()
+    public void SendC_MovePacket(int state, Vector3 posInfo, Vector3 velInfo)
     {
         Player.PosInfo = new PositionInfo
         {
@@ -26,11 +26,9 @@ public class PilotSync : SyncModule
         NetworkManager.Instance.Send(syncPacket);
     }
 
-    public void SendC_AttackPacket() { }
+    public void SendC_AimPacket(int state, Vector3 velInfo) { }
 
-    public void SendC_FallPacket() { }
+    public void SendC_BattlePacket(int state, float animTime, Vector3 posInfo, Vector3 velInfo) { }
 
-    public void SendC_DodgePacket() { }
-
-    public void SendC_AimPacket() { }
+    public void SencC_AttackPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo) { }
 }

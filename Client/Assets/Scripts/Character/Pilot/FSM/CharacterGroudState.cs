@@ -39,6 +39,6 @@ public class CharacterGroundState : BaseState
     protected override void MoveEvent(Vector2 direction)
     {
         MoveCharacter(direction);
-        _stateMachine.Character.Sync?.SendC_SyncPacket();
+        _stateMachine.Character.Sync?.SendC_MovePacket();
     }
 }
