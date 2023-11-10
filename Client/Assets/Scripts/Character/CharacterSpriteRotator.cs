@@ -18,7 +18,7 @@ public class CharacterSpriteRotator
 
     public void Register(CloneDataContainer container)
     {
-        container.Sync.OnCloneEvent += NetworkInput;
+        //container.Sync.OnCloneEvent += NetworkInput;
         _weaponBase = _weapon.transform.position;
     }
 
