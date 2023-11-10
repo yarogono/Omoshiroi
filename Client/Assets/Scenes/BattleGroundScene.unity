@@ -6414,6 +6414,7 @@ MonoBehaviour:
   MaxHp: 100
   CurHp: 50
   BtnLeavGame: {fileID: 894557769}
+  _healthSystem: {fileID: 2050723859}
 --- !u!114 &1318211115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10109,6 +10110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataContainer: {fileID: 8648795468235746074}
+  stats:
+    <cbs>k__BackingField: {fileID: 0}
 --- !u!4 &2050723860
 Transform:
   m_ObjectHideFlags: 0
