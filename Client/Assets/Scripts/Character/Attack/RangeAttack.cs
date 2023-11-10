@@ -18,17 +18,21 @@ public class RangeAttack : BaseAttack
     }
 
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
-    {       
+    {
         base.Initalize(attackInfo, dataContainer, tag);
-        
+
     }
     private void Start()
-    {      
+    {
+
     }
     public void Launch()
     {
+
+
         // 공격생명주기
         Invoke(nameof(Deactivate), lifeTime);
+
     }
 
     private void Deactivate()
@@ -43,10 +47,10 @@ public class RangeAttack : BaseAttack
         // 다른 콜라이더와 충돌 시 호출됨
         // 이곳에 충돌한 대상에 대한 처리 로직을 구현
         Debug.Log(other.name);
-        
+
         if (other.tag == "Pilot")
         {
-       
+
             var Data = other.GetComponent<DataContainer>();
             var HealthData = Data.Health;
             APDatar = Data.Stats.AtkPower;
@@ -55,10 +59,10 @@ public class RangeAttack : BaseAttack
             if (Data != null)
             {
                 //넉백을위한 Vector3계산
-                impact = (other.gameObject.transform.position - transform.position).normalized*knockBackPower;  
+                impact = (other.gameObject.transform.position - transform.position).normalized * knockBackPower;
                 ApplyDamage(HealthData);
                 //넉백             
-                movement.AddImpact(impact); 
+                movement.AddImpact(impact);
             }
             else
             {
@@ -71,11 +75,11 @@ public class RangeAttack : BaseAttack
 
     public override void ApplyDamage(HealthSystem healthSystem)
     {
-        Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
+        // Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
         healthSystem.TakeDamage(APDatar);
-        Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
+        // Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
         gameObject.SetActive(false);
     }
- 
+
 }
 

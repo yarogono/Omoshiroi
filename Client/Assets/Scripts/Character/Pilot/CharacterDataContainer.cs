@@ -24,6 +24,7 @@ public class CharacterDataContainer : DataContainer
         Animator = GetComponent<Animator>();
         Sync = GetComponent<PilotSync>();
         AnimationData.Initialize();
+
         if (Stats.cbs != null)
             Stats.Initialize();
 
