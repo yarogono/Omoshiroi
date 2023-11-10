@@ -26,4 +26,15 @@ namespace Data
         }
     }
     #endregion
+
+    #region FarmingBoxInventory
+    [Serializable]
+    public class FarmingBoxInventoryItem
+    {
+        public int itemId;
+        public int quantity;
+    }
+
+
+    #endregion
 }
