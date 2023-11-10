@@ -5,23 +5,34 @@ import "google/protobuf/timestamp.proto";
 option csharp_namespace = "Google.Protobuf.Protocol";
 
 enum MsgId {
-  S_ENTER_GAME = 0;
-  S_LEAVE_GAME = 1;
-  S_SPAWN = 2;
-  S_DESPAWN = 3;
-  S_DIE = 4;
-  C_ENTER_GAME = 5;
-  C_LEAVE_GAME = 6;
-  C_SYNC = 7;;
-  S_SYNC = 8;
-  S_HP_DAMAGE = 9;
-  C_HP_DAMAGE = 10;
+	C_ENTER_GAME = 0;
+	S_ENTER_GAME = 1;
+	C_LEAVE_GAME = 2;
+	S_LEAVE_GAME = 3;
+	S_SPAWN = 4;
+	S_DESPAWN = 5;
+	C_MOVE = 6;
+	S_MOVE = 7;
+	C_HP_DAMAGE = 8;
+	S_HP_DAMAGE = 9;
+	C_AIM = 10;
+	S_AIM = 11;
+	C_BATTLE = 12;
+	S_BATTLE = 13;
+	C_ATTACK = 14;
+	S_ATTACK = 15;
+	S_DIE = 16;
+	S_FARMING_BOX_SPAWN = 17;
+	C_FARMING_BOX_OPEN = 18;
+	S_FARMING_BOX_OPEN = 19;
+	C_FARMING_BOX_CLOSE = 20;
 }
 
 enum GameObjectType {
 	NONE = 0;
 	PLAYER = 1;
 	MONSTER = 2;
+	FARMING_BOX = 3;
 }
 
 message C_EnterGame {
@@ -62,17 +73,81 @@ message C_HpDamage {
 	int32 changeAmount = 4;
 }
 
+message C_Move {
+	int32 state = 1;
+	PositionInfo posInfo = 2;
+	VelocityInfo velInfo = 3;
+}
+
+message S_Move {
+	int32 objectId = 1;
+	int32 state = 2;
+	PositionInfo posInfo = 3;
+	VelocityInfo velInfo = 4;
+}
+
 message S_Die {
 	int32 objectId = 1;
 	int32 attackerId = 2;
 }
 
-message C_Sync {
-	ObjectInfo player = 1;
+message C_Aim {
+	int32 state = 1;
+	VelocityInfo velInfo = 2;
 }
 
-message S_Sync {
-	ObjectInfo player = 1;
+message S_Aim {
+	int32 objectId = 1;
+	int32 state = 2;
+	VelocityInfo velInfo = 3;
+}
+
+message C_Battle {
+	int32 state = 1;
+	float animTime = 2;
+	PositionInfo posInfo = 3;
+	VelocityInfo velInfo = 4;
+}
+
+message S_Battle {
+	int32 objectId = 1;
+	int32 state = 2;
+	float animTime = 3;
+	PositionInfo posInfo = 4;
+	VelocityInfo velInfo = 5;
+}
+
+message C_Attack {
+	int32 comboIndex = 1;
+	PositionInfo posInfo = 2;
+	VelocityInfo velInfo = 3;
+}
+
+message S_Attack {
+	int32 objectId = 1;
+	int32 comboIndex = 2;
+	PositionInfo posInfo = 3;
+	VelocityInfo velInfo = 4;
+}
+
+message S_FarmingBoxSpawn {
+	repeated ObjectInfo boxInfos = 1;
+}
+
+message C_FarmingBoxOpen {
+	int32 farmingBoxId = 1;
+}
+
+message S_FarmingBoxOpen {
+	bool isOpen = 1;
+	int32 farmingBoxId = 2;
+	repeated FarmingBoxItem items = 3;
+}
+
+message C_FarmingBoxClose {
+	int32 playerId = 1;
+    int32 farmingBoxId = 2;
+	repeated FarmingBoxItem items = 3;
 }
 
 message ObjectInfo {
@@ -81,9 +156,6 @@ message ObjectInfo {
 	PositionInfo posInfo = 3;
 	StatInfo statInfo = 4;
 	int32 state = 5;
-	float animTime = 6;
-	VelocityInfo velInfo = 7;
-	DirectionInfo dirInfo = 8;
 }
 
 message StatInfo {
@@ -94,7 +166,6 @@ message StatInfo {
 	float speed = 5;
 }
 
-
 message PositionInfo {
 	float posX = 1;
 	float posY = 2;
@@ -104,11 +175,16 @@ message PositionInfo {
 message VelocityInfo {
 	float velX = 1;
 	float velY = 2;
-	float velz = 3;
+	float velZ = 3;
 }
 
 message DirectionInfo {
 	float dirX = 1;
 	float dirY = 2;
 	float dirZ = 3;
+}
+
+message FarmingBoxItem {
+   int32 itemId = 1;
+   int32 quantity = 2;
 }

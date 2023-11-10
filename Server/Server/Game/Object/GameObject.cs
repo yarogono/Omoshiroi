@@ -17,18 +17,6 @@ namespace Server.Game.Object
         public ObjectInfo Info { get; set; } = new ObjectInfo();
         public StatInfo Stat { get; private set; } = new StatInfo();
 
-        public float Speed
-        {
-            get { return Stat.Speed; }
-            set { Stat.Speed = value; }
-        }
-
-        public int Hp
-        {
-            get { return Stat.Hp; }
-            set { Stat.Hp = Math.Clamp(value, 0, Stat.MaxHp); }
-        }
-
         public GameObject()
         {
             Info.StatInfo = Stat;
@@ -72,9 +60,9 @@ namespace Server.Game.Object
             Room.LeaveGame(Id);
 
             Stat.Hp = Stat.MaxHp;
-            Info.Position.X = 0;
-            Info.Position.Y = 0;
-            Info.Position.Z = 0;
+            Info.PosInfo.PosX = 0;
+            Info.PosInfo.PosY = 0;
+            Info.PosInfo.PosZ = 0;
 
             Room.EnterGame(this);
         }

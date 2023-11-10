@@ -16,6 +16,7 @@ public class CharacterIdleState : CharacterGroundState
         _isRun = false;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.IdleParameterHash);
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, Vector3.zero);
     }
 
     public override void Exit()
@@ -26,9 +27,9 @@ public class CharacterIdleState : CharacterGroundState
 
     protected override void MoveEvent(Vector2 direction)
     {
+        base.MoveEvent(direction);
         if (direction != Vector2.zero)
         {
-            base.MoveEvent(direction);
             if (_isRun)
                 _stateMachine.ChangeState(eStateType.Run);
             else

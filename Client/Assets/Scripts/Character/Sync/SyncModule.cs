@@ -8,23 +8,86 @@ public class SyncModule : MonoBehaviour
 {
     public int Id { get; set; }
 
-    public ObjectInfo _player = new ObjectInfo();
-    public ObjectInfo Player
+    public string Name { get; set; }
+
+    int _state;
+    public int State
     {
-        get { return _player; }
+        get { return _state; }
         set
         {
-            if (_player.Equals(value))
+            if (_state.Equals(value))
                 return;
 
-            _player.ObjectId = value.ObjectId;
-            _player.Name = value.Name;
-            _player.PosInfo = value.PosInfo;
-            _player.StatInfo = value.StatInfo;
-            _player.State = value.State;
-            _player.AnimTime = value.AnimTime;
-            _player.VelInfo = value.VelInfo;
+            _state = value;
         }
+    }
+
+    float _animTime;
+    public float AnimTime
+    {
+        get { return _animTime; }
+        set
+        {
+            if (_animTime.Equals(value))
+                return;
+
+            _animTime = value;
+        }
+    }
+
+    int _comboIndex;
+    public int ComboIndex
+    {
+        get { return _comboIndex; }
+        set
+        {
+            if (_comboIndex.Equals(value))
+                return;
+
+            _comboIndex = value;
+        }
+    }
+
+    StatInfo _statInfo = new StatInfo();
+    public StatInfo StatInfo
+    {
+        get { return _statInfo; }
+        set
+        {
+            if (_statInfo.Equals(value))
+                return;
+
+            _statInfo.Level = value.Level;
+            _statInfo.Hp = value.Hp;
+            _statInfo.MaxHp = value.MaxHp;
+            _statInfo.Attack = value.Attack;
+            _statInfo.Speed = value.Speed;
+        }
+    }
+
+    public int Level
+    {
+        get { return StatInfo.Level; }
+        set { StatInfo.Level = value; }
+    }
+
+    public float Speed
+    {
+        get { return StatInfo.Speed; }
+        set { StatInfo.Speed = value; }
+    }
+
+    public int Attack
+    {
+        get { return StatInfo.Attack; }
+        set { StatInfo.Attack = value; }
+    }
+
+    public int Hp
+    {
+        get { return StatInfo.Hp; }
+        set { StatInfo.Hp = value; }
     }
 
     PositionInfo _posInfo = new PositionInfo();
@@ -36,10 +99,35 @@ public class SyncModule : MonoBehaviour
             if (_posInfo.Equals(value))
                 return;
 
-            _player.PosInfo.PosX = value.PosX;
-            _player.PosInfo.PosY = value.PosY;
-            _player.PosInfo.PosZ = value.PosZ;
+            _posInfo.PosX = value.PosX;
+            _posInfo.PosY = value.PosY;
+            _posInfo.PosZ = value.PosZ;
         }
+    }
+
+    public Vector3 PosInfoToVec3
+    {
+        get { return new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ); }
+    }
+
+    VelocityInfo _velInfo = new VelocityInfo();
+    public VelocityInfo VelInfo
+    {
+        get { return _velInfo; }
+        set
+        {
+            if (_velInfo.Equals(value))
+                return;
+
+            VelInfo.VelX = value.VelX;
+            VelInfo.VelY = value.VelY;
+            VelInfo.VelZ = value.VelZ;
+        }
+    }
+
+    public Vector3 ToVector3(float x, float y, float z)
+    {
+        return new Vector3(x, y, z);
     }
 
     public TextMeshPro checkIdTest;
@@ -51,10 +139,10 @@ public class SyncModule : MonoBehaviour
     public void DrawTestInfo()
     {
         checkIdTest.text = $"ID : {Id}";
-        checkPositionX.text = $"Ser_X : {Player.PosInfo.PosX} | Cli_X : {transform.position.x}";
-        checkPositionY.text = $"Ser_Y : {Player.PosInfo.PosY} | Cli_Y : {transform.position.y}";
-        checkPositionZ.text = $"Ser_Z : {Player.PosInfo.PosZ} | Cli_Z : {transform.position.z}";
-        // checkStateTest.text = $"State : {ObjectInfo.State}";
+        checkPositionX.text = $"Ser_X : {PosInfo.PosX} | Cli_X : {transform.position.x}";
+        checkPositionY.text = $"Ser_Y : {PosInfo.PosY} | Cli_Y : {transform.position.y}";
+        checkPositionZ.text = $"Ser_Z : {PosInfo.PosZ} | Cli_Z : {transform.position.z}";
+        checkStateTest.text = $"State : {State}";
     }
 
     protected virtual void Update()

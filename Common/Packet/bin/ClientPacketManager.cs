@@ -31,12 +31,22 @@ class PacketManager
 		_handler.Add((ushort)MsgId.SSpawn, PacketHandler.S_SpawnHandler);		
 		_onRecv.Add((ushort)MsgId.SDespawn, MakePacket<S_Despawn>);
 		_handler.Add((ushort)MsgId.SDespawn, PacketHandler.S_DespawnHandler);		
+		_onRecv.Add((ushort)MsgId.SMove, MakePacket<S_Move>);
+		_handler.Add((ushort)MsgId.SMove, PacketHandler.S_MoveHandler);		
+		_onRecv.Add((ushort)MsgId.SHpDamage, MakePacket<S_HpDamage>);
+		_handler.Add((ushort)MsgId.SHpDamage, PacketHandler.S_HpDamageHandler);		
+		_onRecv.Add((ushort)MsgId.SAim, MakePacket<S_Aim>);
+		_handler.Add((ushort)MsgId.SAim, PacketHandler.S_AimHandler);		
+		_onRecv.Add((ushort)MsgId.SBattle, MakePacket<S_Battle>);
+		_handler.Add((ushort)MsgId.SBattle, PacketHandler.S_BattleHandler);		
+		_onRecv.Add((ushort)MsgId.SAttack, MakePacket<S_Attack>);
+		_handler.Add((ushort)MsgId.SAttack, PacketHandler.S_AttackHandler);		
 		_onRecv.Add((ushort)MsgId.SDie, MakePacket<S_Die>);
 		_handler.Add((ushort)MsgId.SDie, PacketHandler.S_DieHandler);		
-		_onRecv.Add((ushort)MsgId.SSync, MakePacket<S_Sync>);
-		_handler.Add((ushort)MsgId.SSync, PacketHandler.S_SyncHandler);		
-		_onRecv.Add((ushort)MsgId.SHpDamage, MakePacket<S_HpDamage>);
-		_handler.Add((ushort)MsgId.SHpDamage, PacketHandler.S_HpDamageHandler);
+		_onRecv.Add((ushort)MsgId.SFarmingBoxSpawn, MakePacket<S_FarmingBoxSpawn>);
+		_handler.Add((ushort)MsgId.SFarmingBoxSpawn, PacketHandler.S_FarmingBoxSpawnHandler);		
+		_onRecv.Add((ushort)MsgId.SFarmingBoxOpen, MakePacket<S_FarmingBoxOpen>);
+		_handler.Add((ushort)MsgId.SFarmingBoxOpen, PacketHandler.S_FarmingBoxOpenHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

@@ -1,0 +1,34 @@
+{
+  "FarmingBoxInventory": [
+    {
+      "inventoryId": "1",
+      "inventory": [
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        },
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        }
+      ]
+    },
+    {
+      "inventoryId": "2",
+      "inventory": [
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        },
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        },
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        }
+      ]
+    }
+  ]
+} 

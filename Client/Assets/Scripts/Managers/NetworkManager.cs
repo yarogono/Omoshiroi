@@ -4,8 +4,6 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using UnityEditorInternal;
-using UnityEngine;
 
 public class NetworkManager : CustomSingleton<NetworkManager>
 {

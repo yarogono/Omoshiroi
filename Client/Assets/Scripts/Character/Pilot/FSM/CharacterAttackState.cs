@@ -19,7 +19,6 @@ public class CharacterAttackState : BaseState
         IsAttacking = true;
 
         StartAnimation(_stateMachine.Character.AnimationData.AttackParameterHash);
-        _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, 0.0f, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
     }
 
     public override void Exit()

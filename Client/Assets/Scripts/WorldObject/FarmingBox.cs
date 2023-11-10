@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Inventory;
+using ServerCore;
+using Google.Protobuf;
 
 /// <summary>
 /// 테스트가 용이하도록 임의대로 아이템 스폰을 자체적인 SO 로 관리하도록 해 두었음.
@@ -54,6 +56,24 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     }
 
     /// <summary>
+    /// FarmingBox 를 열 수 없는 상태라면, 이것을 열 수 없다는 것을 알리는 연출이 추가될 예정이다.
+    /// </summary>
+    /// <param name="isOpened"></param>
+    private bool OpenFarmingBox(bool isOpened)
+    {
+        if (isOpened)
+        {
+            //상자를 열 수 없는 상태라는 것을 알려주는 연출에 대한 내용.
+
+            return false;
+        }
+
+        //FarmingBox 인벤토리를 세팅하는 내용.
+
+        return true;
+    }
+
+    /// <summary>
     /// 현재 FarmingBox 의 object ID 를 함께 보내게 될 텐데, 이걸 어떻게 알 수 있는가?
     /// </summary>
     /// <param name="items"></param>
@@ -63,6 +83,21 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     }
 
     private void SendFarmingBoxClose(Dictionary<int, InventoryItem> items)
+    {
+        
+    }
+
+}
+
+public partial class PacketHandler
+{
+    /// <summary>
+    /// 서버에서 받아온 데이터 중 [farminBoxID, isOpen, farmingBoxInventory] 데이터를 이용해 작업을 수행하는 핸들러.
+    /// 해당하는 파밍박스를 식별하고, 파밍박스 인벤토리를 데이터대로 갱신해주면 된다. 
+    /// </summary>
+    /// <param name="session"></param>
+    /// <param name="packet"></param>
+    public static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
     {
         
     }

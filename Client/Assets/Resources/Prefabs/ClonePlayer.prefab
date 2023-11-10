@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2278087387428543428}
   - component: {fileID: 3404438016222311397}
   - component: {fileID: 7786366077630511887}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: t_PosX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 8804934893879172555}
   - component: {fileID: 1023510098757266890}
   - component: {fileID: 7313470445473239486}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: t_ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 296619849424079404}
   - component: {fileID: 7976474332911922617}
   - component: {fileID: 8050957903132711359}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: t_PosZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6886481645523569416}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,9 +561,9 @@ GameObject:
   - component: {fileID: 4496292724122628551}
   - component: {fileID: 3387555981660624464}
   - component: {fileID: 6960480777913596459}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ClonePlayer
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -635,6 +635,7 @@ MonoBehaviour:
   <SpriteRotator>k__BackingField:
     _main: {fileID: 3072282686292334073}
     _weapon: {fileID: 5277609655161961382}
+  <Health>k__BackingField: {fileID: 0}
 --- !u!114 &3387555981660624464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,7 +683,7 @@ GameObject:
   - component: {fileID: 4005787946614269975}
   - component: {fileID: 88452687545922850}
   - component: {fileID: 3395555875949534202}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 232324734737842793}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +818,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7238752334334511719}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -851,7 +852,7 @@ GameObject:
   - component: {fileID: 1564465866962102074}
   - component: {fileID: 1829678508082489489}
   - component: {fileID: 2125039530561259545}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +935,7 @@ GameObject:
   - component: {fileID: 7810743536217997916}
   - component: {fileID: 1191561351167843900}
   - component: {fileID: 2196889498417118186}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: t_PosY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1104,7 +1105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8626972394969032767}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ShowInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1142,7 +1143,7 @@ GameObject:
   - component: {fileID: 4491946607617850231}
   - component: {fileID: 7261142653549010690}
   - component: {fileID: 4226860418941225350}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: t_State
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1312,7 +1313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6531729288290901223}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -3,11 +3,13 @@ using Google.Protobuf.Protocol;
 using ServerCore;
 using UnityEngine;
 
-public class PacketHandler
+public partial class PacketHandler
 {
     public static void S_EnterGameHandler(PacketSession session, IMessage packet)
     {
         S_EnterGame enterGamePacket = packet as S_EnterGame;
+
+        Debug.Log($"Packet {packet.Descriptor} is Online");
 
         ObjectManager.Instance.Add(enterGamePacket.Player, pilotPlayer: true);
     }
@@ -39,29 +41,31 @@ public class PacketHandler
             ObjectManager.Instance.Remove(playerId);
     }
 
-    public static void S_ChangeHpHandler(PacketSession session, IMessage packet) { }
-
-    public static void S_DieHandler(PacketSession session, IMessage packet) { }
-
-    public static void S_SyncHandler(PacketSession session, IMessage packet)
+    public static void S_MoveHandler(PacketSession session, IMessage packet)
     {
-        S_Sync syncPacket = packet as S_Sync;
+        S_Move movePacket = packet as S_Move;
 
-        Debug.Log($"{syncPacket.Player.ObjectId} Position : {syncPacket.Player.PosInfo}");
-
-        GameObject gameObject = ObjectManager.Instance.FindById(syncPacket.Player.ObjectId);
+        GameObject gameObject = ObjectManager.Instance.FindById(movePacket.ObjectId);
 
         if (gameObject == null)
             return;
 
-        if (ObjectManager.Instance.pilotSync.Id == syncPacket.Player.ObjectId)
+        if (ObjectManager.Instance.pilotSync.Id == movePacket.ObjectId)
             return;
 
         SyncModule syncModule = gameObject.GetComponent<SyncModule>();
         if (syncModule == null)
             return;
 
-        syncModule.Player = syncPacket.Player;
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        // cloneSync.State = movePacket.State;
+        // cloneSync.PosInfo = movePacket.PosInfo;
+        // cloneSync.VelInfo = movePacket.VelInfo;
+
+        cloneSync.CallMoveEvent(movePacket.State, movePacket.PosInfo, movePacket.VelInfo);
     }
 
     /// <summary>
@@ -118,21 +122,95 @@ public class PacketHandler
         stats.Hp = damagePacket.CurrentHp + damagePacket.ChangeAmount;
     }
 
-
-    /// <summary>
-    /// 클라이언트 측의 FarmingBox 인벤토리 데이터 요청에 대한 응답을 처리하는 Handler.
-    /// 받아온 인벤토리 데이터를 토대로 해당 object ID 를 가지는 FarmingBox 인벤토리의 데이터를 갱신한다.
-    /// </summary>
-    /// <param name="packet">FarmingBox 의 object ID, Dictionary<int, InventoryItem> 을 포함한다.</param>
-    public static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
+    public static void S_AimHandler(PacketSession session, IMessage packet)
     {
+        Debug.Log($"Call AimHander");
+        S_Aim aimPacket = packet as S_Aim;
+
+        GameObject gameObject = ObjectManager.Instance.FindById(aimPacket.ObjectId);
+
+        if (gameObject == null)
+        {
+            return;
+        }
+        if (ObjectManager.Instance.pilotSync.Id == aimPacket.ObjectId)
+        {
+            return;
+        }
+
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        Debug.Log($"Call AimHander Done");
+        cloneSync.CallAimEvent(aimPacket.State, aimPacket.VelInfo);
     }
 
-    /// <summary>
-    /// 서버 측이 클라이언트에서 받아온 FarmingBox 인벤토리 데이터에 대한 응답을 처리하는 Handler. 
-    /// 받아오는 별다른 내용이 없으므로, 딱히 처리할 내용도 없을 듯 하다.
-    /// </summary>
-    public static void S_FarmingBoxCloseHandler(PacketSession session, IMessage packet)
+    public static void S_BattleHandler(PacketSession session, IMessage packet)
     {
+        S_Battle battlePacket = packet as S_Battle;
+
+        GameObject gameObject = ObjectManager.Instance.FindById(battlePacket.ObjectId);
+
+        if (gameObject == null)
+        {
+            return;
+        }
+        if (ObjectManager.Instance.pilotSync.Id == battlePacket.ObjectId)
+        {
+            return;
+        }
+
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        cloneSync.CallBattleEvent(
+            battlePacket.State,
+            battlePacket.AnimTime,
+            battlePacket.PosInfo,
+            battlePacket.VelInfo
+        );
     }
+
+    public static void S_AttackHandler(PacketSession session, IMessage packet)
+    {
+        S_Attack attackPacket = packet as S_Attack;
+
+        GameObject gameObject = ObjectManager.Instance.FindById(attackPacket.ObjectId);
+
+        if (gameObject == null)
+        {
+            return;
+        }
+        if (ObjectManager.Instance.pilotSync.Id == attackPacket.ObjectId)
+        {
+            return;
+        }
+
+        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
+        if (cloneSync == null)
+            return;
+
+        cloneSync.CallAttackEvent(
+            attackPacket.ComboIndex,
+            attackPacket.PosInfo,
+            attackPacket.VelInfo
+        );
+    }
+
+    public static void S_DieHandler(PacketSession session, IMessage packet) { }
+
+    // /// <summary>
+    // /// 클라이언트 측의 FarmingBox 인벤토리 데이터 요청에 대한 응답을 처리하는 Handler.
+    // /// 받아온 인벤토리 데이터를 토대로 해당 object ID 를 가지는 FarmingBox 인벤토리의 데이터를 갱신한다.
+    // /// </summary>
+    // /// <param name="packet">FarmingBox 의 object ID, Dictionary<int, InventoryItem> 을 포함한다.</param>
+    // public static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet) { }
+
+    // /// <summary>
+    // /// 서버 측이 클라이언트에서 받아온 FarmingBox 인벤토리 데이터에 대한 응답을 처리하는 Handler.
+    // /// 받아오는 별다른 내용이 없으므로, 딱히 처리할 내용도 없을 듯 하다.
+    // /// </summary>
+    // public static void S_FarmingBoxCloseHandler(PacketSession session, IMessage packet) { }
 }

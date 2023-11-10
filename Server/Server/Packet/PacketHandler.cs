@@ -23,7 +23,7 @@ class PacketHandler
         Player player = ObjectManager.Instance.Add<Player>();
         {
             player.Info.Name = $"Player_{player.Id}";
-            player.Info.Position = packetPlayer.Position;
+            player.Info.PosInfo = packetPlayer.PosInfo;
 
             StatInfo stat = null;
             player.Stat.MergeFrom(stat);
@@ -37,9 +37,9 @@ class PacketHandler
     }
 
 
-    public static void C_SyncHandler(PacketSession session, IMessage packet)
+    public static void C_MoveHandler(PacketSession session, IMessage packet)
     {
-        C_Sync syncPacket = (C_Sync)packet;
+        C_Move movePacket = (C_Move)packet;
         ClientSession clientSession = (ClientSession)session;
 
         Player player = clientSession.MyPlayer;
@@ -50,8 +50,8 @@ class PacketHandler
         if (room == null)
             return;
 
-        Console.WriteLine($"ID: {player.Id}  X: {syncPacket.Player.Position.X} Y: {syncPacket.Player.Position.Y} Z : {syncPacket.Player.Position.Z}");
-        room.Push(room.HandleMove, player, syncPacket);
+        Console.WriteLine($"ID: {player.Id}  X: {movePacket.PosInfo.PosX} Y: {movePacket.PosInfo.PosY} Z : {movePacket.PosInfo.PosZ}");
+        room.Push(room.HandleMove, player, movePacket);
     }
 
     public static void C_LeaveGameHandler(PacketSession session, IMessage packet)
@@ -89,5 +89,75 @@ class PacketHandler
             return;
 
         player.HpDamage(hpDamagePacket);
+    }
+
+    public static void C_AimHandler(PacketSession session, IMessage packet)
+    {
+        C_Aim aimPacket = (C_Aim)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (aimPacket == null)
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+    }
+
+    public static void C_BattleHandler(PacketSession session, IMessage packet)
+    {
+        C_Battle battlePacket = (C_Battle)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (battlePacket == null)
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+    }
+
+    public static void C_AttackHandler(PacketSession session, IMessage packet)
+    {
+        C_Attack attackPacket = (C_Attack)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (attackPacket == null)
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+
+    }
+
+
+    public static void C_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
+    {
+        C_FarmingBoxOpen farmingBoxOpenPacket = (C_FarmingBoxOpen)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (farmingBoxOpenPacket == null)
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+
+    }
+
+
+    public static void C_FarmingBoxCloseHandler(PacketSession session, IMessage packet)
+    {
+        C_FarmingBoxClose farmingBoxClosePacket = (C_FarmingBoxClose)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (farmingBoxClosePacket == null)
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+
     }
 }

@@ -19,7 +19,7 @@ public class CharacterFallState : CharacterAirState
         _nextState = _stateMachine.previousStateType;
 
         StartAnimation(_stateMachine.Character.AnimationData.FallParameterHash);
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)eStateType.Fall, _stateMachine.Character.transform.position, _stateMachine.Character.Movement.FinalDirection);
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)eStateType.Fall, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void Exit()
@@ -34,18 +34,17 @@ public class CharacterFallState : CharacterAirState
     public override void Update()
     {
         base.Update();
-
         if (CheckGround())
         {
             _stateMachine.ChangeState(_nextState);
             return;
         }
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)eStateType.Fall, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)eStateType.Fall, _stateMachine.Character.transform.position, _stateMachine.Character.Movement.FinalDirection);
     }
 
     protected override void RunEvent(bool isRun)
