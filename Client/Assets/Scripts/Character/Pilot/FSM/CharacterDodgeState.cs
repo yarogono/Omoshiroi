@@ -53,7 +53,6 @@ public class CharacterDodgeState : BaseState
             {
                 TryApplyForce();
             }
-            _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
         }
         else
         {
@@ -64,6 +63,9 @@ public class CharacterDodgeState : BaseState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Dodge");
+        if (normalizedTime < 1f)
+            _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Dodge, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     private void TryApplyForce()

@@ -17,18 +17,6 @@ namespace Server.Game.Object
         public ObjectInfo Info { get; set; } = new ObjectInfo();
         public StatInfo Stat { get; private set; } = new StatInfo();
 
-        public float Speed
-        {
-            get { return Stat.Speed; }
-            set { Stat.Speed = value; }
-        }
-
-        public int Hp
-        {
-            get { return Stat.Hp; }
-            set { Stat.Hp = Math.Clamp(value, 0, Stat.MaxHp); }
-        }
-
         public GameObject()
         {
             Info.StatInfo = Stat;

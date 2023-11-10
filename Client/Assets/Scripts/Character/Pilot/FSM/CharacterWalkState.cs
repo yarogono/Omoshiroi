@@ -13,12 +13,19 @@ public class CharacterWalkState : CharacterGroundState
     {
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.WalkParameterHash);
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void Exit()
     {
         base.Exit();
         StopAnimation(_stateMachine.Character.AnimationData.WalkParameterHash);
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     protected override void RunEvent(bool isRun)
