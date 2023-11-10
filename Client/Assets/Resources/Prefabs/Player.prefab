@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5829009672308649151}
   - component: {fileID: 6644646647032079124}
   - component: {fileID: 6354434156285281180}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2389127606293479906}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 3229680276495624399}
   - component: {fileID: 7822232555172900303}
   - component: {fileID: 9066215110043148123}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 7838802115554181109}
   - component: {fileID: 6819789151499577018}
   - component: {fileID: 344471059937254796}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Player
   m_TagString: Pilot
   m_Icon: {fileID: 0}
@@ -369,6 +369,7 @@ MonoBehaviour:
   <SpriteRotator>k__BackingField:
     _main: {fileID: 8065987409721138812}
     _weapon: {fileID: 895937083953360931}
+  <Health>k__BackingField: {fileID: 0}
   TestEquipItem:
   - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
 --- !u!114 &4313740379138048596
@@ -473,8 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb821abce43f7b3459730718da9a5c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
+  dataContainer: {fileID: 0}
 --- !u!1 &3341134605525835870
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2303460561941305186}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2715773736815614352}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: CameraContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1928497838679130253}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 8270226206897873810}
   - component: {fileID: 4929448466052054695}
   - component: {fileID: 7659958960753758335}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5074349647807121900}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
