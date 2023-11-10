@@ -32,6 +32,7 @@ enum GameObjectType {
 	NONE = 0;
 	PLAYER = 1;
 	MONSTER = 2;
+	FARMING_BOX = 3;
 }
 
 message C_EnterGame {
@@ -130,20 +131,23 @@ message S_Attack {
 }
 
 message S_FarmingBoxSpawn {
-	repeated FarmingBoxInfo boxInfo = 1;
+	repeated ObjectInfo boxInfos = 1;
 }
 
 message C_FarmingBoxOpen {
-	int32 objectId = 1;
+	int32 farmingBoxId = 1;
 }
 
 message S_FarmingBoxOpen {
-	FarmingBoxInfo boxInfo = 1;
+	bool isOpen = 1;
+	int32 farmingBoxId = 2;
+	repeated FarmingBoxItem items = 3;
 }
 
 message C_FarmingBoxClose {
 	int32 playerId = 1;
-	FarmingBoxInfo farmingBoxInfo = 2;
+    int32 farmingBoxId = 2;
+	repeated FarmingBoxItem items = 3;
 }
 
 message ObjectInfo {
@@ -180,20 +184,7 @@ message DirectionInfo {
 	float dirZ = 3;
 }
 
-message FarmingBoxInfo {
-	int32 objectId = 1;
-	bool isOpen = 2;
-	FarmingBoxPosition farmingBoxPosition = 3;
-	repeated FarmingBoxItem boxItems = 4;
-}
-
 message FarmingBoxItem {
    int32 itemId = 1;
    int32 quantity = 2;
 }
-
-message FarmingBoxPosition {
-  float boxX = 1;
-  float boxY = 2;
-  float boxZ = 3;
-} 

@@ -36,7 +36,11 @@ class PacketManager
 		_onRecv.Add((ushort)MsgId.CBattle, MakePacket<C_Battle>);
 		_handler.Add((ushort)MsgId.CBattle, PacketHandler.C_BattleHandler);		
 		_onRecv.Add((ushort)MsgId.CAttack, MakePacket<C_Attack>);
-		_handler.Add((ushort)MsgId.CAttack, PacketHandler.C_AttackHandler);
+		_handler.Add((ushort)MsgId.CAttack, PacketHandler.C_AttackHandler);		
+		_onRecv.Add((ushort)MsgId.CFarmingBoxOpen, MakePacket<C_FarmingBoxOpen>);
+		_handler.Add((ushort)MsgId.CFarmingBoxOpen, PacketHandler.C_FarmingBoxOpenHandler);		
+		_onRecv.Add((ushort)MsgId.CFarmingBoxClose, MakePacket<C_FarmingBoxClose>);
+		_handler.Add((ushort)MsgId.CFarmingBoxClose, PacketHandler.C_FarmingBoxCloseHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
