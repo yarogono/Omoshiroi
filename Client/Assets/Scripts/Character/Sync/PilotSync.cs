@@ -9,21 +9,26 @@ public class PilotSync : SyncModule
     protected override void Update()
     {
         base.Update();
+
+        // SendC_MovePacket();
     }
 
-    public void SendC_MovePacket()
+    public void SendC_MovePacket(int state, Vector3 posInfo, Vector3 velInfo)
     {
-        position = transform.position;
+        Player.PosInfo = new PositionInfo
+        {
+            PosX = transform.position.x,
+            PosY = transform.position.y,
+            PosZ = transform.position.z
+        };
 
-        C_Sync movePacket = new C_Sync { Player = new ObjectInfo { Position = P_Vector3 } };
-        NetworkManager.Instance.Send(movePacket);
+        C_Sync syncPacket = new C_Sync { Player = Player };
+        NetworkManager.Instance.Send(syncPacket);
     }
 
-    public void SendC_AttackPacket() { }
+    public void SendC_AimPacket(int state, Vector3 velInfo) { }
 
-    public void SendC_FallPacket() { }
+    public void SendC_BattlePacket(int state, float animTime, Vector3 posInfo, Vector3 velInfo) { }
 
-    public void SendC_DodgePacket() { }
-
-    public void SendC_AimPacket() { }
+    public void SendC_AttackPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo) { }
 }

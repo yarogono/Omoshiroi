@@ -20,7 +20,7 @@ public class CharacterStateMachine : StateMachine
         }
     }
     public int LayerInAnimator { get; }
-    public Vector2 AttackDirection { get; set; }
+    public Vector3 AttackDirection { get; set; }
 
     public CharacterStateMachine(CharacterDataContainer character, int layerInAnimator)
     {

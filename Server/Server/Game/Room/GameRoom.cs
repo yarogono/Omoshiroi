@@ -103,13 +103,14 @@ namespace Server.Game.Room
 
             // 다른 플레이어한테도 알려준다
             S_Sync resSyncPacket = new S_Sync();
+            resSyncPacket.Player = new ObjectInfo();
             resSyncPacket.Player.ObjectId = syncPacket.Player.ObjectId;
             resSyncPacket.Player.Position = syncPacket.Player.Position;
             resSyncPacket.Player.State = syncPacket.Player.State;
             resSyncPacket.Player.AnimTime = syncPacket.Player.AnimTime;
             resSyncPacket.Player.Name = syncPacket.Player.Name;
 
-            Broadcast(resSyncPacket);
+            Broadcast(resSyncPacket, player.Id);
         }
 
 

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed1c6c8c6a918547a498fa48765409f, type: 3}
   m_Name: TestBaseStatsSO
   m_EditorClassIdentifier: 
-  _baseHP: 1
+  _baseHP: 100
   _baseDEF: 1
   _baseAttackSpeed: 1
-  _baseAttackPower: 1
+  _baseAttackPower: 20
   _baseCriticalRate: 1
   _baseCriticalPower: 1
   _baseMoveSpeed: 2

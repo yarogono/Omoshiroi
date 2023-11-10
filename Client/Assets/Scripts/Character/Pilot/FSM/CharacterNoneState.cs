@@ -8,7 +8,11 @@ public class CharacterNoneState : BaseState
     {
     }
 
-    public override void Enter() { base.Enter(); }
+    public override void Enter()
+    {
+        base.Enter();
+        _stateMachine.Character.Sync.SendC_AimPacket((int)eStateType.None, Vector3.zero);
+    }
     public override void Exit() { base.Exit(); }
 
     protected override void AimEvent(Vector2 direction)
