@@ -102,6 +102,12 @@ class PacketHandler
         Player player = clientSession.MyPlayer;
         if (player == null)
             return;
+
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.HandleAim, player, aimPacket);
     }
 
     public static void C_BattleHandler(PacketSession session, IMessage packet)
@@ -115,6 +121,12 @@ class PacketHandler
         Player player = clientSession.MyPlayer;
         if (player == null)
             return;
+
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.HandleBattle, player, battlePacket);
     }
 
     public static void C_AttackHandler(PacketSession session, IMessage packet)
@@ -123,6 +135,41 @@ class PacketHandler
         ClientSession clientSession = (ClientSession)session;
 
         if (attackPacket == null)
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.HandleAttack, player, attackPacket);
+    }
+
+
+    public static void C_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
+    {
+        C_FarmingBoxOpen farmingBoxOpenPacket = (C_FarmingBoxOpen)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (farmingBoxOpenPacket == null)
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+
+    }
+
+
+    public static void C_FarmingBoxCloseHandler(PacketSession session, IMessage packet)
+    {
+        C_FarmingBoxClose farmingBoxClosePacket = (C_FarmingBoxClose)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (farmingBoxClosePacket == null)
             return;
 
         Player player = clientSession.MyPlayer;

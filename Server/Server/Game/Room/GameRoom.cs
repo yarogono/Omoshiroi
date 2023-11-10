@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Server.Game.Object;
+using System;
 
 namespace Server.Game.Room
 {
@@ -50,6 +51,10 @@ namespace Server.Game.Room
                     }
 
                     player.Session.Send(spawnPacket);
+                }
+
+                {
+                    S_FarmingBoxSpawn farmingBoxSpawnPacket = new S_FarmingBoxSpawn();
                 }
             }
 
@@ -110,6 +115,43 @@ namespace Server.Game.Room
             resMovePacket.State = movePacket.State;
 
             Broadcast(resMovePacket, player.Id);
+        }
+
+        public void HandleAim(Player player, C_Aim aimPacket)
+        {
+            VelocityInfo velInfo = aimPacket.VelInfo;
+            int playerId = player.Id;
+
+            S_Aim resAimPacket = new S_Aim() { ObjectId = playerId, State = aimPacket.State };
+            resAimPacket.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
+
+            Broadcast(aimPacket, playerId);
+        }
+
+        public void HandleBattle(Player player, C_Battle battlePacket)
+        {
+            int playerId = player.Id;
+            PositionInfo posInfo = battlePacket.PosInfo;
+            VelocityInfo velInfo = battlePacket.VelInfo;
+            
+
+            S_Battle resBattle = new S_Battle() { ObjectId = playerId, AnimTime = battlePacket.AnimTime, State = battlePacket.State};
+            resBattle.PosInfo = new PositionInfo() { PosX = posInfo.PosX, PosY = posInfo.PosY, PosZ = posInfo.PosZ };
+            resBattle.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
+            Broadcast(resBattle, playerId);
+        }
+
+        public void HandleAttack(Player player, C_Attack attackPacket)
+        {
+            int playerId = player.Id;
+            PositionInfo posInfo = attackPacket.PosInfo;
+            VelocityInfo velInfo = attackPacket.VelInfo;
+
+            S_Attack resAttack = new S_Attack() { ObjectId = playerId, ComboIndex = attackPacket.ComboIndex };
+            resAttack.PosInfo = new PositionInfo() { PosX = posInfo.PosX, PosY = posInfo.PosY, PosZ = posInfo.PosZ };
+            resAttack.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
+
+            Broadcast(resAttack, playerId);
         }
 
 
