@@ -8,8 +8,8 @@ public class RangeAttack : BaseAttack
     [SerializeField] private float speed = 10f; // 공격의 속도
     [SerializeField] private float knockBackPower = 5f; // 공격의 속도
     [SerializeField] private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
-    
-    
+
+    int APDatar;
     Vector3 impact;
     private void Update()
     {
@@ -20,9 +20,12 @@ public class RangeAttack : BaseAttack
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {       
         base.Initalize(attackInfo, dataContainer, tag);
-        Damage = dataContainer.Stats.AtkPower;    
+        
     }
-
+    private void Start()
+    {
+       
+    }
     public void Launch()
     {
 
@@ -47,14 +50,17 @@ public class RangeAttack : BaseAttack
         
         if (other.tag == "Pilot")
         {
+       
+            var Data = other.GetComponent<DataContainer>();
+            var HealthData = Data.Health;
+            APDatar = Data.Stats.AtkPower;
 
-            var Data = other.GetComponent<HealthSystem>();
             CharacterMovement movement = other.GetComponent<CharacterMovement>();  //데이터컨테이너로 캐싱 
             if (Data != null)
             {
                 //넉백을위한 Vector3계산
                 impact = (other.gameObject.transform.position - transform.position).normalized*knockBackPower;  
-                ApplyDamage(Data);
+                ApplyDamage(HealthData);
                 //넉백             
                 movement.AddImpact(impact); 
             }
@@ -69,9 +75,9 @@ public class RangeAttack : BaseAttack
 
     public override void ApplyDamage(HealthSystem healthSystem)
     {
-        Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
-        healthSystem.TakeDamage(Damage);
-        Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
+       // Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
+        healthSystem.TakeDamage(APDatar);
+       // Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
         gameObject.SetActive(false);
     }
  
