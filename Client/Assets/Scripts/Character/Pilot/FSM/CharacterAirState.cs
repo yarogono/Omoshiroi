@@ -12,7 +12,7 @@ public class CharacterAirState : BaseState
     {
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.AirParameterHash);
-        _stateMachine.Character.Sync?.SendC_FallPacket();
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)eStateType.Fall, _stateMachine.Character.transform.position, _stateMachine.Character.Movement.FinalDirection);
     }
 
     public override void Exit()

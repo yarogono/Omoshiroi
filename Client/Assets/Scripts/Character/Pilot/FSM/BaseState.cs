@@ -110,10 +110,10 @@ public class BaseState : IState
         }
     }
 
-    protected void MoveCharacter(Vector2 direction)
+    protected Vector3 MoveCharacter(Vector2 direction)
     {
         if (_stateMachine.Movement == null)
-            return;
+            return Vector3.zero;
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;
 
@@ -126,6 +126,7 @@ public class BaseState : IState
         direction.Normalize();
 
         _stateMachine.Movement.ControlMove(forward * direction.y + right * direction.x);
+        return forward * direction.y + right * direction.x;
     }
 
     protected bool CheckGround()
