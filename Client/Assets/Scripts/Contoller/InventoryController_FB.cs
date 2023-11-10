@@ -40,6 +40,7 @@ namespace Inventory
             OnClosed = farmingBox.OnClosed;
 
             BtnCancel.onClick.AddListener(() => CloseInventoryUI());
+            BtnCancel.onClick.AddListener(() => OnClosed?.Invoke());
         }
 
         /// <summary>
@@ -223,6 +224,7 @@ namespace Inventory
         {
             if (/*Vector3.Distance(this.transform.position, 플레이어.transform.position) < 20*/ true)
             {
+                OnOpened();
                 OpenInventoryUI();
             }
         }
