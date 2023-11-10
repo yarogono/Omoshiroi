@@ -17,7 +17,7 @@ public class CharacterStats
     private float runMultipiler;
     private float dodgeTime;
 
-    public int MaxHp { get; set; }
+    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
     public int Hp 
     { 
         get { return hp; } 
@@ -27,14 +27,14 @@ public class CharacterStats
             hp = value;
         } 
     }
-    public int Def { get; private set; }
-    public float AtkSpeed { get; private set; }
-    public int AtkPower { get; private set; }
-    public int CritRate { get; private set; }
-    public float CritPower { get; private set; }
-    public float MoveSpeed { get; private set; }
-    public float RunMultipiler { get; private set; }
-    public float DodgeTime { get; private set; }
+    public int Def { get { return maxHp; } set { maxHp = value; } }
+    public float AtkSpeed { get { return atkSpeed; } set { atkSpeed = value; } }
+    public int AtkPower { get { return atkPower; } set { atkPower = value; } }
+    public int CritRate { get { return critRate; } set { critRate = value; } }
+    public float CritPower { get { return critPower; } set { critPower = value; } }
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+    public float RunMultipiler { get { return runMultipiler; } set { runMultipiler = value; } }
+    public float DodgeTime { get { return dodgeTime; } set { dodgeTime = value; } }
 
     public void Initialize()
     {
