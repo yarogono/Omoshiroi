@@ -63,7 +63,7 @@ namespace Google.Protobuf.Protocol {
             "bWF4SHAYAyABKAUSDgoGYXR0YWNrGAQgASgFEg0KBXNwZWVkGAUgASgCIjgK",
             "DFBvc2l0aW9uSW5mbxIMCgRwb3NYGAEgASgCEgwKBHBvc1kYAiABKAISDAoE",
             "cG9zWhgDIAEoAiI4CgxWZWxvY2l0eUluZm8SDAoEdmVsWBgBIAEoAhIMCgR2",
-            "ZWxZGAIgASgCEgwKBHZlbHoYAyABKAIiOQoNRGlyZWN0aW9uSW5mbxIMCgRk",
+            "ZWxZGAIgASgCEgwKBHZlbFoYAyABKAIiOQoNRGlyZWN0aW9uSW5mbxIMCgRk",
             "aXJYGAEgASgCEgwKBGRpclkYAiABKAISDAoEZGlyWhgDIAEoAir+AQoFTXNn",
             "SWQSEAoMQ19FTlRFUl9HQU1FEAASEAoMU19FTlRFUl9HQU1FEAESEAoMQ19M",
             "RUFWRV9HQU1FEAISEAoMU19MRUFWRV9HQU1FEAMSCwoHU19TUEFXThAEEg0K",
@@ -96,7 +96,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.ObjectInfo), global::Google.Protobuf.Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "Name", "PosInfo", "StatInfo", "State" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.StatInfo), global::Google.Protobuf.Protocol.StatInfo.Parser, new[]{ "Level", "Hp", "MaxHp", "Attack", "Speed" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.PositionInfo), global::Google.Protobuf.Protocol.PositionInfo.Parser, new[]{ "PosX", "PosY", "PosZ" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.VelocityInfo), global::Google.Protobuf.Protocol.VelocityInfo.Parser, new[]{ "VelX", "VelY", "Velz" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.VelocityInfo), global::Google.Protobuf.Protocol.VelocityInfo.Parser, new[]{ "VelX", "VelY", "VelZ" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.DirectionInfo), global::Google.Protobuf.Protocol.DirectionInfo.Parser, new[]{ "DirX", "DirY", "DirZ" }, null, null, null, null)
           }));
     }
@@ -3869,7 +3869,7 @@ namespace Google.Protobuf.Protocol {
     public VelocityInfo(VelocityInfo other) : this() {
       velX_ = other.velX_;
       velY_ = other.velY_;
-      velz_ = other.velz_;
+      velZ_ = other.velZ_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3900,14 +3900,14 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
-    /// <summary>Field number for the "velz" field.</summary>
-    public const int VelzFieldNumber = 3;
-    private float velz_;
+    /// <summary>Field number for the "velZ" field.</summary>
+    public const int VelZFieldNumber = 3;
+    private float velZ_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public float Velz {
-      get { return velz_; }
+    public float VelZ {
+      get { return velZ_; }
       set {
-        velz_ = value;
+        velZ_ = value;
       }
     }
 
@@ -3926,7 +3926,7 @@ namespace Google.Protobuf.Protocol {
       }
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(VelX, other.VelX)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(VelY, other.VelY)) return false;
-      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Velz, other.Velz)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(VelZ, other.VelZ)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3935,7 +3935,7 @@ namespace Google.Protobuf.Protocol {
       int hash = 1;
       if (VelX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(VelX);
       if (VelY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(VelY);
-      if (Velz != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Velz);
+      if (VelZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(VelZ);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3957,9 +3957,9 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(21);
         output.WriteFloat(VelY);
       }
-      if (Velz != 0F) {
+      if (VelZ != 0F) {
         output.WriteRawTag(29);
-        output.WriteFloat(Velz);
+        output.WriteFloat(VelZ);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -3975,7 +3975,7 @@ namespace Google.Protobuf.Protocol {
       if (VelY != 0F) {
         size += 1 + 4;
       }
-      if (Velz != 0F) {
+      if (VelZ != 0F) {
         size += 1 + 4;
       }
       if (_unknownFields != null) {
@@ -3995,8 +3995,8 @@ namespace Google.Protobuf.Protocol {
       if (other.VelY != 0F) {
         VelY = other.VelY;
       }
-      if (other.Velz != 0F) {
-        Velz = other.Velz;
+      if (other.VelZ != 0F) {
+        VelZ = other.VelZ;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4018,7 +4018,7 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 29: {
-            Velz = input.ReadFloat();
+            VelZ = input.ReadFloat();
             break;
           }
         }

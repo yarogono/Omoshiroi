@@ -150,7 +150,7 @@ message PositionInfo {
 message VelocityInfo {
 	float velX = 1;
 	float velY = 2;
-	float velz = 3;
+	float velZ = 3;
 }
 
 message DirectionInfo {
