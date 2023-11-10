@@ -69,9 +69,9 @@ public class RangeAttack : BaseAttack
 
     public override void ApplyDamage(HealthSystem healthSystem)
     {
-        Debug.Log(healthSystem.stats.Hp);
-        healthSystem.TakeRecovery(10);
-        Debug.Log(healthSystem.stats.Hp);
+        Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
+        healthSystem.TakeDamage(Damage);
+        Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
         gameObject.SetActive(false);
     }
  
