@@ -51,6 +51,10 @@ namespace Server.Game.Room
 
                     player.Session.Send(spawnPacket);
                 }
+
+                {
+                    S_FarmingBoxSpawn farmingBoxSpawnPacket = new S_FarmingBoxSpawn();
+                }
             }
 
             // 타인한테 정보 전송
