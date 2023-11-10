@@ -16,33 +16,41 @@ public class CloneSync : SyncModule
         base.Update();
     }
 
-    public void CallMoveEvent(int state, Vector3 posInfo, Vector3 velInfo)
+    public void CallMoveEvent(int state, PositionInfo posInfo, VelocityInfo velInfo)
     {
-        OnMoveEvent?.Invoke(state, posInfo, velInfo);
+        OnMoveEvent?.Invoke(
+            state,
+            ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
+            ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
+        );
     }
 
-    public void CallAimEvent(int state, Vector3 velInfo)
+    public void CallAimEvent(int state, VelocityInfo velInfo)
     {
-        OnAimEvent?.Invoke(state, velInfo);
+        OnAimEvent?.Invoke(state, ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ));
     }
 
-    public void CallBattleEvent(int state, float animTime, Vector3 posInfo, Vector3 velInfo)
+    public void CallBattleEvent(
+        int state,
+        float animTime,
+        PositionInfo posInfo,
+        VelocityInfo velInfo
+    )
     {
-        OnBattleEvent?.Invoke(state, animTime, posInfo, velInfo);
+        OnBattleEvent?.Invoke(
+            state,
+            animTime,
+            ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
+            ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
+        );
     }
 
-    public void CallAttackEvent(int comboIndex, Vector3 posInfo, Vector3 velInfo)
+    public void CallAttackEvent(int comboIndex, PositionInfo posInfo, VelocityInfo velInfo)
     {
-        OnAttackEvent?.Invoke(comboIndex, posInfo, velInfo);
+        OnAttackEvent?.Invoke(
+            comboIndex,
+            ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
+            ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
+        );
     }
-
-    public void ReceiveS_MovePacket() { }
-
-    public void ReceiveS_AttackPacket() { }
-
-    public void ReceiveS_FallPacket() { }
-
-    public void ReceiveS_DodgePacket() { }
-
-    public void ReceiveS_AimPacket() { }
 }
