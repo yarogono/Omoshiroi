@@ -25,12 +25,14 @@ public class CharacterDataContainer : DataContainer
         Sync = GetComponent<PilotSync>();
         AnimationData.Initialize();
 
+        if (Stats.cbs != null)
+            Stats.Initialize();
+
     }
 
     private void Start()
     {
-        if (Stats.cbs != null)
-            Stats.Initialize();
+    
 
         if (Equipments == null)
             Equipments = new EquipSystem();

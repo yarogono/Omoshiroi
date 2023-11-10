@@ -18,8 +18,8 @@ public class HealthSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       //var UI = UIManager.Instance.ShowUI<UIController>();
-       //UI.InitHpbar(this);
+        //var UI = UIManager.Instance.ShowUI<UIController>();
+        //UI.InitHpbar(this);
     }
 
     // Update is called once per frame
