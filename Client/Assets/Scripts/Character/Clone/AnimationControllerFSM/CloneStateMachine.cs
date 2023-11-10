@@ -47,8 +47,10 @@ public class CombineCloneStatemachine
         _stateMachine[1].AddState(eStateType.None, new CloneNoneState(_stateMachine[1]));
         _stateMachine[1].ChangeState(eStateType.None);
 
-        clone.Sync.OnCloneEvent += CloneFSMEvent;
-        //clone.Sync.OnMakeAttackEvent += CloneAttackEvent;
+        clone.Sync.OnMoveEvent += CloneMoveEvent;
+        clone.Sync.OnAimEvent += CloneAimEvent;
+        clone.Sync.OnBattleEvent += CloneBattleEvent;
+        clone.Sync.OnAttackEvent += CloneAttackEvent;
     }
 
     public void Update()
@@ -96,12 +98,6 @@ public class CombineCloneStatemachine
             }
         }
     }
-    // 삭제될 예정
-    public void CloneFSMEvent(Vector3 velocity, float animTime, int state, Vector3 position)
-    {
-        ChangeState((eStateType)state);
-        SetAnimation((eStateType)state, animTime);
-    }
 
     public void CloneAttackEvent(int comboIndex, Vector3 position, Vector3 direction)
     {
@@ -113,17 +109,27 @@ public class CombineCloneStatemachine
     {
         // 걷기, 달리기, 낙하
         eStateType type = (eStateType)state;
+        if (_stateMachine[0].currentStateType != type && _stateMachine[1].currentStateType != type)
+            ChangeState(type);
     }
 
     public void CloneBattleEvent(int state, float animTime, Vector3 posInfo, Vector3 velInfo)
     {
         // 회피, 공격 애니메이션 시작
         eStateType type = (eStateType)state;
+        if (type == eStateType.Dodge || type == eStateType.ComboAttack)
+        {
+            if (_stateMachine[0].currentStateType != type && _stateMachine[1].currentStateType != type)
+                ChangeState(type);
+            SetAnimation(type, animTime);
+        }
     }
 
     public void CloneAimEvent(int state, Vector3 velInfo)
     {
         // 조준
         eStateType type = (eStateType)state;
+        if (_stateMachine[1].currentStateType != type)
+            ChangeState(type);
     }
 }

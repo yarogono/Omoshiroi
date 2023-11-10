@@ -30,8 +30,6 @@ public class CharacterAimState : BaseState
     {
         if (!CheckGround())
             _stateMachine.ChangeState(eStateType.None);
-        else
-            _stateMachine.Character.Sync?.SendC_AimPacket((int)eStateType.Aim, _stateMachine.AttackDirection);
     }
 
     protected override void AimEvent(Vector2 direction)
@@ -40,6 +38,7 @@ public class CharacterAimState : BaseState
         if (direction.magnitude < 100f)
             _stateMachine.ChangeState(eStateType.None);
         base.AimEvent(direction);
+        _stateMachine.Character.Sync?.SendC_AimPacket((int)eStateType.Aim, _stateMachine.AttackDirection);
     }
 
     protected override void AttackEvent(Vector2 direction)
