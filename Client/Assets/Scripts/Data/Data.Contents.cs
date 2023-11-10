@@ -51,7 +51,7 @@ namespace Data
             Dictionary<int, FBInventory> dict = new Dictionary<int, FBInventory>();
             foreach (FBInventory inventory in fBInventories)
             {
-                dict.Add(inventory.inventoryID, inventory);
+                dict.Add(inventory.inventoryId, inventory);
             }
             return dict;
         }
