@@ -10,17 +10,7 @@ public class SyncModule : MonoBehaviour
 
     public string Name { get; set; }
 
-    public int State
-    {
-        get { return State; }
-        set
-        {
-            if (State.Equals(value))
-                return;
-
-            State = value;
-        }
-    }
+    public int State { get; set; }
 
     StatInfo _statInfo = new StatInfo();
     public StatInfo StatInfo
