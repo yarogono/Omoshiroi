@@ -51,7 +51,7 @@ public class HealthSystem : MonoBehaviour
         }
 
         //서버에 자신의 ID 와 입은 피해량 정보를 전달하는 내용
-        SendHPDamage(stats.MaxHp, stats.Hp, changeAmount);
+        //SendHPDamage(stats.MaxHp, stats.Hp, changeAmount);
     
         stats.Hp = remain;
     }
