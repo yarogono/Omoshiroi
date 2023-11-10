@@ -37,11 +37,13 @@ public class UIController: MonoBehaviour
 
     private void Update()
     {
-       // HandlerHp();
+        HandlerHp();
     }
 
     public  void HandlerHp()
     {
+        MaxHp = (float)dataContainer.Health.stats.MaxHp;
+        CurHp = (float)dataContainer.Health.stats.Hp;
         HpBar.value = Mathf.Lerp(HpBar.value, (float)CurHp / (float)MaxHp, Time.deltaTime * 10);
     }
 

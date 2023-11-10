@@ -14,11 +14,12 @@ public class RangeAttack : BaseAttack
     private void Update()
     {
         // 매 프레임마다 공격을 전방으로 이동시킴
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+       transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
+
         base.Initalize(attackInfo, dataContainer, tag);
 
     }
@@ -48,7 +49,7 @@ public class RangeAttack : BaseAttack
         // 이곳에 충돌한 대상에 대한 처리 로직을 구현
         Debug.Log(other.name);
 
-        if (other.tag == "Pilot")
+        if (other.CompareTag(_makerTag))
         {
 
             var Data = other.GetComponent<DataContainer>();
