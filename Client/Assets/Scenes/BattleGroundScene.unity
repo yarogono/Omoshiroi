@@ -1406,7 +1406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334454742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.00922, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4569,7 +4569,7 @@ MonoBehaviour:
   ObjPoolRoot: {fileID: 1727988902}
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
 --- !u!4 &963186895
 Transform:
   m_ObjectHideFlags: 0
@@ -6189,6 +6189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ground
       objectReference: {fileID: 0}
+    - target: {fileID: 4852525801412086413, guid: ba29262629a8d824284ce0047048f987, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3384759710123402531, guid: ba29262629a8d824284ce0047048f987, type: 3}
@@ -6411,9 +6415,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HpBar: {fileID: 1765787716}
-  MaxHp: 100
-  CurHp: 50
   BtnLeavGame: {fileID: 894557769}
+  dataContainer: {fileID: 8648795468235746074}
 --- !u!114 &1318211115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8653,7 +8656,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727988902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49216568, y: -2.5654767, z: 2.024687}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10109,6 +10112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataContainer: {fileID: 8648795468235746074}
+  stats:
+    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
 --- !u!4 &2050723860
 Transform:
   m_ObjectHideFlags: 0
@@ -10806,7 +10811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4167113349589662149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 18.8, z: 5.21}
+  m_LocalPosition: {x: 0, y: 18.096, z: 5.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11316,7 +11321,7 @@ MonoBehaviour:
     _weapon: {fileID: 2229902179543449259}
   <Health>k__BackingField: {fileID: 2050723859}
   TestEquipItem:
-  - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
+  - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
 --- !u!64 &8705618777525559031
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ class PacketHandler
         if (room == null)
             return;
 
-        Console.WriteLine($"ID: {player.Id}  X: {movePacket.PosInfo.PosX} Y: {movePacket.PosInfo.PosY} Z : {movePacket.PosInfo.PosZ}");
+        //Console.WriteLine($"ID: {player.Id}  X: {movePacket.PosInfo.PosX} Y: {movePacket.PosInfo.PosY} Z : {movePacket.PosInfo.PosZ}");
         room.Push(room.HandleMove, player, movePacket);
     }
 

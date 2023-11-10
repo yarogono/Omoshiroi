@@ -41,7 +41,7 @@ public class AttackManager : CustomSingleton<AttackManager>
             // 풀링한오브젝트를 초기화
             attackObj.Initalize(magic.AttackData.AttackInfos[ComboIndex], dataContainer, dataContainer.tag);
             //attackObj.transform.SetLocalPositionAndRotation(position, Quaternion.FromToRotation(attackObj.transform.forward, direction));
-            attackObj.transform.SetPositionAndRotation(position, Quaternion.LookRotation(direction, Vector3.up));
+            attackObj.transform.SetPositionAndRotation(position, Quaternion.FromToRotation(Vector3.forward, direction));
 
             // attackObj.transform.rotation을 direction에 따라서 돌리기
         }

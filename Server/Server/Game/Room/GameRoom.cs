@@ -125,7 +125,7 @@ namespace Server.Game.Room
             S_Aim resAimPacket = new S_Aim() { ObjectId = playerId, State = aimPacket.State };
             resAimPacket.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
 
-            Broadcast(aimPacket, playerId);
+            Broadcast(resAimPacket, playerId);
         }
 
         public void HandleBattle(Player player, C_Battle battlePacket)

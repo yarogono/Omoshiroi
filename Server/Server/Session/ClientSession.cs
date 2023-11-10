@@ -43,6 +43,9 @@ namespace Server
 
 		public override void OnDisconnected(EndPoint endPoint)
 		{
+			if (MyPlayer == null)
+				return;
+
 			GameRoom room = RoomManager.Instance.Find(1);
 			room.Push(room.LeaveGame, MyPlayer.Info.ObjectId);
 
@@ -53,7 +56,7 @@ namespace Server
 
 		public override void OnSend(int numOfBytes)
 		{
-			Console.WriteLine($"Transferred bytes: {numOfBytes}");
+			//Console.WriteLine($"Transferred bytes: {numOfBytes}");
 		}
 	}
 }

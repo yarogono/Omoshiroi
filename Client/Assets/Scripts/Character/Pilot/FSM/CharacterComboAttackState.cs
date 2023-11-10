@@ -57,7 +57,7 @@ public class CharacterComboAttackState : CharacterAttackState
             _stateMachine.Movement?.AddImpact(newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier, 0.1f);
 
         AttackManager.Instance.RqAttack(ComboIndex, _stateMachine.Character, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
-        _stateMachine.Character.Sync.SendC_AttackPacket(ComboIndex, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
+        _stateMachine.Character.Sync?.SendC_AttackPacket(ComboIndex, _stateMachine.Character.transform.position, _stateMachine.AttackDirection);
     }
 
     public override void Update()
