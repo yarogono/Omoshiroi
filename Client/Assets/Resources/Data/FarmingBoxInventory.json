@@ -1,14 +1,34 @@
 {
   "FarmingBoxInventory": [
     {
-      "id": "1",
-      "name": "도끼",
-      "damage": "10"
+      "inventoryId": "1",
+      "inventory": [
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        },
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        }
+      ]
     },
     {
-      "id": "2",
-      "name": "칼",
-      "damage": "5"
+      "inventoryId": "2",
+      "inventory": [
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        },
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        },
+        {
+          "itemId": "10001",
+          "quantity": "1"
+        }
+      ]
     }
   ]
 } 

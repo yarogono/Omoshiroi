@@ -38,7 +38,7 @@ namespace Data
 
     public class FBInventory
     {
-        public int inventoryID;
+        public int inventoryId;
         public List<(int, int)> inventory;
     }
 
