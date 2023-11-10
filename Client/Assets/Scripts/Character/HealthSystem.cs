@@ -6,8 +6,9 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     [field:SerializeField] DataContainer dataContainer;
-
-    private CharacterStats stats;
+    public CharacterStats stats;
+   
+    
 
     private void Awake()
     {
@@ -17,6 +18,8 @@ public class HealthSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       //var UI = UIManager.Instance.ShowUI<UIController>();
+       //UI.InitHpbar(this);
     }
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class HealthSystem : MonoBehaviour
     /// </summary>
     public void TakeDamage(int changeAmount)
     {
+      
         int remain = stats.Hp - changeAmount;
 
         if(remain <= 0)
@@ -48,7 +52,7 @@ public class HealthSystem : MonoBehaviour
 
         //서버에 자신의 ID 와 입은 피해량 정보를 전달하는 내용
         SendHPDamage(stats.MaxHp, stats.Hp, changeAmount);
-
+    
         stats.Hp = remain;
     }
     

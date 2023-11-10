@@ -7,14 +7,18 @@ public class UIController: MonoBehaviour
 {
     public Slider HpBar;
 
-    [SerializeField] private float MaxHp;
-    [SerializeField] private float CurHp;
+    private float MaxHp;
+     private float CurHp;
     LeaveGame leaveGame;
     public  Button BtnLeavGame;
+    [SerializeField] private DataContainer dataContainer;
 
+
+   
     private void Start()
     {
-        HpBar.value = CurHp / MaxHp;
+        InitHpbar(dataContainer);
+
         leaveGame = GetComponent<LeaveGame>();
 
         BtnLeavGame.onClick.AddListener(() =>
@@ -30,13 +34,22 @@ public class UIController: MonoBehaviour
         });
     }
 
-        private void Update()
-        {
-         
-        }
 
-    private void HandlerHp()
+    private void Update()
+    {
+        HandlerHp();
+    }
+
+    public  void HandlerHp()
     {
         HpBar.value = Mathf.Lerp(HpBar.value, CurHp / MaxHp, Time.deltaTime * 10);
+    }
+
+    public void InitHpbar(DataContainer dataContainer)
+    {
+        
+        MaxHp = (float)dataContainer.Health.stats.MaxHp;
+        CurHp = (float)dataContainer.Health.stats.Hp;
+        HpBar.value = CurHp / MaxHp;
     }
 }

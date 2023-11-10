@@ -23,16 +23,12 @@ public class RangeAttack : BaseAttack
         
     }
     private void Start()
-    {
-       
+    {      
     }
     public void Launch()
     {
-
-
         // 공격생명주기
         Invoke(nameof(Deactivate), lifeTime);
-
     }
 
     private void Deactivate()
@@ -75,9 +71,9 @@ public class RangeAttack : BaseAttack
 
     public override void ApplyDamage(HealthSystem healthSystem)
     {
-       // Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
+        Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
         healthSystem.TakeDamage(APDatar);
-       // Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
+        Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
         gameObject.SetActive(false);
     }
  
