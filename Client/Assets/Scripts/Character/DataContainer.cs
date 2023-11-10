@@ -13,6 +13,5 @@ public class DataContainer : MonoBehaviour
     public Animator Animator { get; protected set; }
     [field: SerializeField] public CharacterAnimationData AnimationData { get; protected set; }
     [field: SerializeField] public CharacterSpriteRotator SpriteRotator { get; protected set; }
-
-    public HealthSystem Health { get; protected set; }
+    [field: SerializeField] public HealthSystem Health { get; protected set; }
 }
