@@ -18,7 +18,15 @@ public class CharacterStats
     private float dodgeTime;
 
     public int MaxHp { get; set; }
-    public int Hp { get { return hp; } set { if (value > MaxHp) { hp = MaxHp; } } }
+    public int Hp 
+    { 
+        get { return hp; } 
+        set 
+        {
+            if (value > MaxHp) { hp = MaxHp; return; }
+            hp = value;
+        } 
+    }
     public int Def { get; private set; }
     public float AtkSpeed { get; private set; }
     public int AtkPower { get; private set; }
