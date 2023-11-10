@@ -15,15 +15,29 @@ public class PilotSync : SyncModule
 
     public void SendC_MovePacket(int state, Vector3 posInfo, Vector3 velInfo)
     {
-        Player.PosInfo = new PositionInfo
+        State = state;
+
+        PosInfo = new PositionInfo
         {
-            PosX = transform.position.x,
-            PosY = transform.position.y,
-            PosZ = transform.position.z
+            PosX = posInfo.x,
+            PosY = posInfo.y,
+            PosZ = posInfo.z
         };
 
-        C_Sync syncPacket = new C_Sync { Player = Player };
-        NetworkManager.Instance.Send(syncPacket);
+        VelInfo = new VelocityInfo
+        {
+            VelX = velInfo.x,
+            VelY = velInfo.y,
+            VelZ = velInfo.z,
+        };
+
+        C_Move movePacket = new C_Move
+        {
+            State = State,
+            PosInfo = PosInfo,
+            VelInfo = VelInfo
+        };
+        NetworkManager.Instance.Send(movePacket);
     }
 
     public void SendC_AimPacket(int state, Vector3 velInfo) { }

@@ -17,11 +17,7 @@ public class CloneSync : SyncModule
 
     public void SyncPosition()
     {
-        transform.position = new Vector3(
-            Player.PosInfo.PosX,
-            Player.PosInfo.PosY,
-            Player.PosInfo.PosZ
-        );
+        transform.position = new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
     }
 
     public void CallCloneEvent(Vector3 velocity, float animTime, int state, Vector3 position)
