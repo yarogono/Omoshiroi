@@ -3,7 +3,7 @@ using Google.Protobuf.Protocol;
 using ServerCore;
 using UnityEngine;
 
-public class PacketHandler
+public partial class PacketHandler
 {
     public static void S_EnterGameHandler(PacketSession session, IMessage packet)
     {
@@ -116,23 +116,5 @@ public class PacketHandler
 
         stats.MaxHp = damagePacket.MaxHp;
         stats.Hp = damagePacket.CurrentHp + damagePacket.ChangeAmount;
-    }
-
-
-    /// <summary>
-    /// 클라이언트 측의 FarmingBox 인벤토리 데이터 요청에 대한 응답을 처리하는 Handler.
-    /// 받아온 인벤토리 데이터를 토대로 해당 object ID 를 가지는 FarmingBox 인벤토리의 데이터를 갱신한다.
-    /// </summary>
-    /// <param name="packet">FarmingBox 의 object ID, Dictionary<int, InventoryItem> 을 포함한다.</param>
-    public static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
-    {
-    }
-
-    /// <summary>
-    /// 서버 측이 클라이언트에서 받아온 FarmingBox 인벤토리 데이터에 대한 응답을 처리하는 Handler. 
-    /// 받아오는 별다른 내용이 없으므로, 딱히 처리할 내용도 없을 듯 하다.
-    /// </summary>
-    public static void S_FarmingBoxCloseHandler(PacketSession session, IMessage packet)
-    {
     }
 }
