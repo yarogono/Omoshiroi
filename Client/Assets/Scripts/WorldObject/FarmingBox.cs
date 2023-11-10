@@ -59,7 +59,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     {
         if (/*Vector3.Distance(this.transform.position, 플레이어.transform.position) < 20*/ true)
         {
-            SendFarmingBoxOpen
+            //SendFarmingBoxOpen
         }
     }
 
