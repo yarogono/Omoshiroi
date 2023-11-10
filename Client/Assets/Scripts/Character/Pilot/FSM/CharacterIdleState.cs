@@ -16,6 +16,7 @@ public class CharacterIdleState : CharacterGroundState
         _isRun = false;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.IdleParameterHash);
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, Vector3.zero);
     }
 
     public override void Exit()
