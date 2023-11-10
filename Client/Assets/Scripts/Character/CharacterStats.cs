@@ -27,7 +27,7 @@ public class CharacterStats
             hp = value;
         } 
     }
-    public int Def { get { return maxHp; } set { maxHp = value; } }
+    public int Def { get { return def; } set { def = value; } }
     public float AtkSpeed { get { return atkSpeed; } set { atkSpeed = value; } }
     public int AtkPower { get { return atkPower; } set { atkPower = value; } }
     public int CritRate { get { return critRate; } set { critRate = value; } }
