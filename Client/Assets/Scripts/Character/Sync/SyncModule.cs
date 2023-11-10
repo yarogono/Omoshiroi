@@ -105,6 +105,11 @@ public class SyncModule : MonoBehaviour
         }
     }
 
+    public Vector3 PosInfoToVec3
+    {
+        get { return new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ); }
+    }
+
     VelocityInfo _velInfo = new VelocityInfo();
     public VelocityInfo VelInfo
     {
@@ -120,6 +125,11 @@ public class SyncModule : MonoBehaviour
         }
     }
 
+    public Vector3 ToVector3(float x, float y, float z)
+    {
+        return new Vector3(x, y, z);
+    }
+
     public TextMeshPro checkIdTest;
     public TextMeshPro checkPositionX;
     public TextMeshPro checkPositionY;
@@ -132,7 +142,7 @@ public class SyncModule : MonoBehaviour
         checkPositionX.text = $"Ser_X : {PosInfo.PosX} | Cli_X : {transform.position.x}";
         checkPositionY.text = $"Ser_Y : {PosInfo.PosY} | Cli_Y : {transform.position.y}";
         checkPositionZ.text = $"Ser_Z : {PosInfo.PosZ} | Cli_Z : {transform.position.z}";
-        // checkStateTest.text = $"State : {ObjectInfo.State}";
+        checkStateTest.text = $"State : {State}";
     }
 
     protected virtual void Update()
