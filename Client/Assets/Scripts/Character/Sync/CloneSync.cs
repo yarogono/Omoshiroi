@@ -6,23 +6,34 @@ using UnityEngine;
 
 public class CloneSync : SyncModule
 {
-    public event Action<Vector3, float, int, Vector3> OnCloneEvent;
+    public event Action<int, Vector3, Vector3> OnMoveEvent;
+    public event Action<int, Vector3> OnAimEvent;
+    public event Action<int, float, Vector3, Vector3> OnBattleEvent;
+    public event Action<int, Vector3, Vector3> OnAttackEvent;
 
     protected override void Update()
     {
         base.Update();
-
-        SyncPosition();
     }
 
-    public void SyncPosition()
+    public void CallMoveEvent(int state, Vector3 posInfo, Vector3 velInfo)
     {
-        transform.position = new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ);
+        OnMoveEvent?.Invoke(state, posInfo, velInfo);
     }
 
-    public void CallCloneEvent(Vector3 velocity, float animTime, int state, Vector3 position)
+    public void CallAimEvent(int state, Vector3 velInfo)
     {
-        OnCloneEvent?.Invoke(velocity, animTime, state, position);
+        OnAimEvent?.Invoke(state, velInfo);
+    }
+
+    public void CallBattleEvent(int state, float animTime, Vector3 posInfo, Vector3 velInfo)
+    {
+        OnBattleEvent?.Invoke(state, animTime, posInfo, velInfo);
+    }
+
+    public void CallAttackEvent(int comboIndex, Vector3 posInfo, Vector3 velInfo)
+    {
+        OnAttackEvent?.Invoke(comboIndex, posInfo, velInfo);
     }
 
     public void ReceiveS_MovePacket() { }
