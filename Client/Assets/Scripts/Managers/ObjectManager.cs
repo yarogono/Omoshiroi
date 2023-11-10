@@ -16,7 +16,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
     public void Update()
     {
-        Debug.Log($"_objects.Count : {_objects.Count}");
+        //Debug.Log($"_objects.Count : {_objects.Count}");
     }
 
     public void Add(ObjectInfo info, bool pilotPlayer = false)

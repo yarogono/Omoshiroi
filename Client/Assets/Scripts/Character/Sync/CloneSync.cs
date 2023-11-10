@@ -23,11 +23,13 @@ public class CloneSync : SyncModule
             ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
             ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
         );
+        Debug.Log($"Clone Move ({velInfo.VelX},{velInfo.VelY},{velInfo.VelZ})");
     }
 
     public void CallAimEvent(int state, VelocityInfo velInfo)
     {
         OnAimEvent?.Invoke(state, ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ));
+        Debug.Log($"Clone Aim ({velInfo.VelX},{velInfo.VelY},{velInfo.VelZ})");
     }
 
     public void CallBattleEvent(
@@ -43,6 +45,7 @@ public class CloneSync : SyncModule
             ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
             ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
         );
+        Debug.Log($"Clone Battle ({animTime}) ({velInfo.VelX},{velInfo.VelY},{velInfo.VelZ})");
     }
 
     public void CallAttackEvent(int comboIndex, PositionInfo posInfo, VelocityInfo velInfo)
@@ -52,5 +55,6 @@ public class CloneSync : SyncModule
             ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
             ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
         );
+        Debug.Log($"Clone Attack ({comboIndex}) ({velInfo.VelX},{velInfo.VelY},{velInfo.VelZ})");
     }
 }
