@@ -30,5 +30,5 @@ public class PilotSync : SyncModule
 
     public void SendC_BattlePacket(int state, float animTime, Vector3 posInfo, Vector3 velInfo) { }
 
-    public void SencC_AttackPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo) { }
+    public void SendC_AttackPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo) { }
 }
