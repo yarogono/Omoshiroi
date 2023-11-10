@@ -9,6 +9,8 @@ public class PacketHandler
     {
         S_EnterGame enterGamePacket = packet as S_EnterGame;
 
+        Debug.Log($"Packet {packet.Descriptor} is Online");
+
         ObjectManager.Instance.Add(enterGamePacket.Player, pilotPlayer: true);
     }
 
@@ -42,8 +44,6 @@ public class PacketHandler
     public static void S_MoveHandler(PacketSession session, IMessage packet)
     {
         S_Move movePacket = packet as S_Move;
-
-        Debug.Log($"{movePacket.ObjectId} Position : {movePacket.PosInfo}");
 
         GameObject gameObject = ObjectManager.Instance.FindById(movePacket.ObjectId);
 
