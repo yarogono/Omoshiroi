@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    [SerializeField] DataContainer dataContainer;
+    [field:SerializeField] DataContainer dataContainer;
 
     private CharacterStats stats;
 
