@@ -23,7 +23,7 @@ public class CharacterStats
         get { return hp; } 
         set 
         {
-            if (value > MaxHp) { value = MaxHp; }
+            if (value > MaxHp) { hp = MaxHp; return; }
             hp = value;
         } 
     }
