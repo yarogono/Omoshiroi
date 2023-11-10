@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+    [SerializeField] DataContainer dataContainer;
 
-    [SerializeField] public  CharacterStats stats;
+    private CharacterStats stats;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        stats = dataContainer.Stats;
     }
 
     // Update is called once per frame
