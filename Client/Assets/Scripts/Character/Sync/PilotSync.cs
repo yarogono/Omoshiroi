@@ -35,6 +35,7 @@ public class PilotSync : SyncModule
             PosInfo = PosInfo,
             VelInfo = VelInfo
         };
+
         NetworkManager.Instance.Send(movePacket);
         Debug.Log($"Pilot Move {velInfo}");
     }

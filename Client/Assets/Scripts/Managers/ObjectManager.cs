@@ -14,11 +14,6 @@ public class ObjectManager : CustomSingleton<ObjectManager>
         return (GameObjectType)type;
     }
 
-    public void Update()
-    {
-        //Debug.Log($"_objects.Count : {_objects.Count}");
-    }
-
     public void Add(ObjectInfo info, bool pilotPlayer = false)
     {
         GameObjectType objectType = GetObjectTypeById(info.ObjectId);

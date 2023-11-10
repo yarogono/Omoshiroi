@@ -61,6 +61,10 @@ public class PacketHandler
         if (cloneSync == null)
             return;
 
+        // cloneSync.State = movePacket.State;
+        // cloneSync.PosInfo = movePacket.PosInfo;
+        // cloneSync.VelInfo = movePacket.VelInfo;
+
         cloneSync.CallMoveEvent(movePacket.State, movePacket.PosInfo, movePacket.VelInfo);
     }
 
@@ -120,6 +124,7 @@ public class PacketHandler
 
     public static void S_AimHandler(PacketSession session, IMessage packet)
     {
+        Debug.Log($"Call AimHander");
         S_Aim aimPacket = packet as S_Aim;
 
         GameObject gameObject = ObjectManager.Instance.FindById(aimPacket.ObjectId);
@@ -137,6 +142,7 @@ public class PacketHandler
         if (cloneSync == null)
             return;
 
+        Debug.Log($"Call AimHander Done");
         cloneSync.CallAimEvent(aimPacket.State, aimPacket.VelInfo);
     }
 
