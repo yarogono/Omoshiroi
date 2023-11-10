@@ -14,6 +14,7 @@ public class CharacterRunState : CharacterWalkState
         IsRun = true;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.RunParameterHash);
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void Exit()
