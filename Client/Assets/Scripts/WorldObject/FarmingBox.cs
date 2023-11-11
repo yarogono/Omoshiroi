@@ -79,18 +79,25 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
         RepeatedField<FarmingBoxItem> items = FBData.Items;
         InventoryItem item;
 
-        //for (int i = 0; i < items.Count; i++)
-        //{
-        //     item.i items[i].ItemId, items[i].Quantity)
-        //    ItemList.Add(i, );
-        //}
-
-        //foreach (FarmingBoxItem item in FBData.Items)
-        //{
-        //    ItemList.Add(item.ItemId)
-        //}
+        for (int i = 0; i < items.Count; i++)
+        {
+            //ItemID 로 BaseItem 을 구하고, 파밍박스 인벤토리에 추가한다.
+            
+        }
 
         inventoryController.OpenInventoryUI();
+    }
+
+    private void findItem(int itemId)
+    {
+        BaseItem item;
+        DataManager dataManager = DataManager.Instance;
+        Data.ItemData itemData;
+
+        if (dataManager.WeaponItemDict.ContainsKey(itemId)) { itemData = dataManager.WeaponItemDict[itemId]; }
+
+
+        //return item;
     }
 
     /// <summary>
