@@ -39,7 +39,7 @@ namespace Data
     public class FBInventory
     {
         public int inventoryId;
-        public List<(int, int)> inventory;
+        public List<FBInventoryItem> inventory;
     }
 
     public class FarmingBoxInventoryData : ILoader<int, FBInventory>

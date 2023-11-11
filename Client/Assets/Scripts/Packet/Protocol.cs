@@ -55,24 +55,34 @@ namespace Google.Protobuf.Protocol {
             "Zm8SJwoHdmVsSW5mbxgDIAEoCzIWLlByb3RvY29sLlZlbG9jaXR5SW5mbyKC",
             "AQoIU19BdHRhY2sSEAoIb2JqZWN0SWQYASABKAUSEgoKY29tYm9JbmRleBgC",
             "IAEoBRInCgdwb3NJbmZvGAMgASgLMhYuUHJvdG9jb2wuUG9zaXRpb25JbmZv",
-            "EicKB3ZlbEluZm8YBCABKAsyFi5Qcm90b2NvbC5WZWxvY2l0eUluZm8iigEK",
-            "Ck9iamVjdEluZm8SEAoIb2JqZWN0SWQYASABKAUSDAoEbmFtZRgCIAEoCRIn",
-            "Cgdwb3NJbmZvGAMgASgLMhYuUHJvdG9jb2wuUG9zaXRpb25JbmZvEiQKCHN0",
-            "YXRJbmZvGAQgASgLMhIuUHJvdG9jb2wuU3RhdEluZm8SDQoFc3RhdGUYBSAB",
-            "KAUiUwoIU3RhdEluZm8SDQoFbGV2ZWwYASABKAUSCgoCaHAYAiABKAUSDQoF",
-            "bWF4SHAYAyABKAUSDgoGYXR0YWNrGAQgASgFEg0KBXNwZWVkGAUgASgCIjgK",
-            "DFBvc2l0aW9uSW5mbxIMCgRwb3NYGAEgASgCEgwKBHBvc1kYAiABKAISDAoE",
-            "cG9zWhgDIAEoAiI4CgxWZWxvY2l0eUluZm8SDAoEdmVsWBgBIAEoAhIMCgR2",
-            "ZWxZGAIgASgCEgwKBHZlbFoYAyABKAIiOQoNRGlyZWN0aW9uSW5mbxIMCgRk",
-            "aXJYGAEgASgCEgwKBGRpclkYAiABKAISDAoEZGlyWhgDIAEoAir+AQoFTXNn",
-            "SWQSEAoMQ19FTlRFUl9HQU1FEAASEAoMU19FTlRFUl9HQU1FEAESEAoMQ19M",
-            "RUFWRV9HQU1FEAISEAoMU19MRUFWRV9HQU1FEAMSCwoHU19TUEFXThAEEg0K",
-            "CVNfREVTUEFXThAFEgoKBkNfTU9WRRAGEgoKBlNfTU9WRRAHEg8KC0NfSFBf",
-            "REFNQUdFEAgSDwoLU19IUF9EQU1BR0UQCRIJCgVDX0FJTRAKEgkKBVNfQUlN",
-            "EAsSDAoIQ19CQVRUTEUQDBIMCghTX0JBVFRMRRANEgwKCENfQVRUQUNLEA4S",
-            "DAoIU19BVFRBQ0sQDxIJCgVTX0RJRRAQKjMKDkdhbWVPYmplY3RUeXBlEggK",
-            "BE5PTkUQABIKCgZQTEFZRVIQARILCgdNT05TVEVSEAJCG6oCGEdvb2dsZS5Q",
-            "cm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "EicKB3ZlbEluZm8YBCABKAsyFi5Qcm90b2NvbC5WZWxvY2l0eUluZm8iOwoR",
+            "U19GYXJtaW5nQm94U3Bhd24SJgoIYm94SW5mb3MYASADKAsyFC5Qcm90b2Nv",
+            "bC5PYmplY3RJbmZvIigKEENfRmFybWluZ0JveE9wZW4SFAoMZmFybWluZ0Jv",
+            "eElkGAEgASgFImEKEFNfRmFybWluZ0JveE9wZW4SDgoGaXNPcGVuGAEgASgI",
+            "EhQKDGZhcm1pbmdCb3hJZBgCIAEoBRInCgVpdGVtcxgDIAMoCzIYLlByb3Rv",
+            "Y29sLkZhcm1pbmdCb3hJdGVtImQKEUNfRmFybWluZ0JveENsb3NlEhAKCHBs",
+            "YXllcklkGAEgASgFEhQKDGZhcm1pbmdCb3hJZBgCIAEoBRInCgVpdGVtcxgD",
+            "IAMoCzIYLlByb3RvY29sLkZhcm1pbmdCb3hJdGVtIooBCgpPYmplY3RJbmZv",
+            "EhAKCG9iamVjdElkGAEgASgFEgwKBG5hbWUYAiABKAkSJwoHcG9zSW5mbxgD",
+            "IAEoCzIWLlByb3RvY29sLlBvc2l0aW9uSW5mbxIkCghzdGF0SW5mbxgEIAEo",
+            "CzISLlByb3RvY29sLlN0YXRJbmZvEg0KBXN0YXRlGAUgASgFIlMKCFN0YXRJ",
+            "bmZvEg0KBWxldmVsGAEgASgFEgoKAmhwGAIgASgFEg0KBW1heEhwGAMgASgF",
+            "Eg4KBmF0dGFjaxgEIAEoBRINCgVzcGVlZBgFIAEoAiI4CgxQb3NpdGlvbklu",
+            "Zm8SDAoEcG9zWBgBIAEoAhIMCgRwb3NZGAIgASgCEgwKBHBvc1oYAyABKAIi",
+            "OAoMVmVsb2NpdHlJbmZvEgwKBHZlbFgYASABKAISDAoEdmVsWRgCIAEoAhIM",
+            "CgR2ZWxaGAMgASgCIjkKDURpcmVjdGlvbkluZm8SDAoEZGlyWBgBIAEoAhIM",
+            "CgRkaXJZGAIgASgCEgwKBGRpcloYAyABKAIiMgoORmFybWluZ0JveEl0ZW0S",
+            "DgoGaXRlbUlkGAEgASgFEhAKCHF1YW50aXR5GAIgASgFKuACCgVNc2dJZBIQ",
+            "CgxDX0VOVEVSX0dBTUUQABIQCgxTX0VOVEVSX0dBTUUQARIQCgxDX0xFQVZF",
+            "X0dBTUUQAhIQCgxTX0xFQVZFX0dBTUUQAxILCgdTX1NQQVdOEAQSDQoJU19E",
+            "RVNQQVdOEAUSCgoGQ19NT1ZFEAYSCgoGU19NT1ZFEAcSDwoLQ19IUF9EQU1B",
+            "R0UQCBIPCgtTX0hQX0RBTUFHRRAJEgkKBUNfQUlNEAoSCQoFU19BSU0QCxIM",
+            "CghDX0JBVFRMRRAMEgwKCFNfQkFUVExFEA0SDAoIQ19BVFRBQ0sQDhIMCghT",
+            "X0FUVEFDSxAPEgkKBVNfRElFEBASFwoTU19GQVJNSU5HX0JPWF9TUEFXThAR",
+            "EhYKEkNfRkFSTUlOR19CT1hfT1BFThASEhYKElNfRkFSTUlOR19CT1hfT1BF",
+            "ThATEhcKE0NfRkFSTUlOR19CT1hfQ0xPU0UQFCpECg5HYW1lT2JqZWN0VHlw",
+            "ZRIICgROT05FEAASCgoGUExBWUVSEAESCwoHTU9OU1RFUhACEg8KC0ZBUk1J",
+            "TkdfQk9YEANCG6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.GameObjectType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -93,11 +103,16 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Battle), global::Google.Protobuf.Protocol.S_Battle.Parser, new[]{ "ObjectId", "State", "AnimTime", "PosInfo", "VelInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_Attack), global::Google.Protobuf.Protocol.C_Attack.Parser, new[]{ "ComboIndex", "PosInfo", "VelInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Attack), global::Google.Protobuf.Protocol.S_Attack.Parser, new[]{ "ObjectId", "ComboIndex", "PosInfo", "VelInfo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_FarmingBoxSpawn), global::Google.Protobuf.Protocol.S_FarmingBoxSpawn.Parser, new[]{ "BoxInfos" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_FarmingBoxOpen), global::Google.Protobuf.Protocol.C_FarmingBoxOpen.Parser, new[]{ "FarmingBoxId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_FarmingBoxOpen), global::Google.Protobuf.Protocol.S_FarmingBoxOpen.Parser, new[]{ "IsOpen", "FarmingBoxId", "Items" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.C_FarmingBoxClose), global::Google.Protobuf.Protocol.C_FarmingBoxClose.Parser, new[]{ "PlayerId", "FarmingBoxId", "Items" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.ObjectInfo), global::Google.Protobuf.Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "Name", "PosInfo", "StatInfo", "State" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.StatInfo), global::Google.Protobuf.Protocol.StatInfo.Parser, new[]{ "Level", "Hp", "MaxHp", "Attack", "Speed" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.PositionInfo), global::Google.Protobuf.Protocol.PositionInfo.Parser, new[]{ "PosX", "PosY", "PosZ" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.VelocityInfo), global::Google.Protobuf.Protocol.VelocityInfo.Parser, new[]{ "VelX", "VelY", "VelZ" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.DirectionInfo), global::Google.Protobuf.Protocol.DirectionInfo.Parser, new[]{ "DirX", "DirY", "DirZ" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.DirectionInfo), global::Google.Protobuf.Protocol.DirectionInfo.Parser, new[]{ "DirX", "DirY", "DirZ" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.FarmingBoxItem), global::Google.Protobuf.Protocol.FarmingBoxItem.Parser, new[]{ "ItemId", "Quantity" }, null, null, null, null)
           }));
     }
     #endregion
@@ -122,12 +137,17 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("C_ATTACK")] CAttack = 14,
     [pbr::OriginalName("S_ATTACK")] SAttack = 15,
     [pbr::OriginalName("S_DIE")] SDie = 16,
+    [pbr::OriginalName("S_FARMING_BOX_SPAWN")] SFarmingBoxSpawn = 17,
+    [pbr::OriginalName("C_FARMING_BOX_OPEN")] CFarmingBoxOpen = 18,
+    [pbr::OriginalName("S_FARMING_BOX_OPEN")] SFarmingBoxOpen = 19,
+    [pbr::OriginalName("C_FARMING_BOX_CLOSE")] CFarmingBoxClose = 20,
   }
 
   public enum GameObjectType {
     [pbr::OriginalName("NONE")] None = 0,
     [pbr::OriginalName("PLAYER")] Player = 1,
     [pbr::OriginalName("MONSTER")] Monster = 2,
+    [pbr::OriginalName("FARMING_BOX")] FarmingBox = 3,
   }
 
   #endregion
@@ -3163,6 +3183,610 @@ namespace Google.Protobuf.Protocol {
 
   }
 
+  public sealed partial class S_FarmingBoxSpawn : pb::IMessage<S_FarmingBoxSpawn> {
+    private static readonly pb::MessageParser<S_FarmingBoxSpawn> _parser = new pb::MessageParser<S_FarmingBoxSpawn>(() => new S_FarmingBoxSpawn());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S_FarmingBoxSpawn> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[17]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_FarmingBoxSpawn() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_FarmingBoxSpawn(S_FarmingBoxSpawn other) : this() {
+      boxInfos_ = other.boxInfos_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_FarmingBoxSpawn Clone() {
+      return new S_FarmingBoxSpawn(this);
+    }
+
+    /// <summary>Field number for the "boxInfos" field.</summary>
+    public const int BoxInfosFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Google.Protobuf.Protocol.ObjectInfo> _repeated_boxInfos_codec
+        = pb::FieldCodec.ForMessage(10, global::Google.Protobuf.Protocol.ObjectInfo.Parser);
+    private readonly pbc::RepeatedField<global::Google.Protobuf.Protocol.ObjectInfo> boxInfos_ = new pbc::RepeatedField<global::Google.Protobuf.Protocol.ObjectInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Google.Protobuf.Protocol.ObjectInfo> BoxInfos {
+      get { return boxInfos_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S_FarmingBoxSpawn);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S_FarmingBoxSpawn other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!boxInfos_.Equals(other.boxInfos_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= boxInfos_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      boxInfos_.WriteTo(output, _repeated_boxInfos_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += boxInfos_.CalculateSize(_repeated_boxInfos_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S_FarmingBoxSpawn other) {
+      if (other == null) {
+        return;
+      }
+      boxInfos_.Add(other.boxInfos_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            boxInfos_.AddEntriesFrom(input, _repeated_boxInfos_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class C_FarmingBoxOpen : pb::IMessage<C_FarmingBoxOpen> {
+    private static readonly pb::MessageParser<C_FarmingBoxOpen> _parser = new pb::MessageParser<C_FarmingBoxOpen>(() => new C_FarmingBoxOpen());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C_FarmingBoxOpen> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[18]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_FarmingBoxOpen() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_FarmingBoxOpen(C_FarmingBoxOpen other) : this() {
+      farmingBoxId_ = other.farmingBoxId_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_FarmingBoxOpen Clone() {
+      return new C_FarmingBoxOpen(this);
+    }
+
+    /// <summary>Field number for the "farmingBoxId" field.</summary>
+    public const int FarmingBoxIdFieldNumber = 1;
+    private int farmingBoxId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FarmingBoxId {
+      get { return farmingBoxId_; }
+      set {
+        farmingBoxId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C_FarmingBoxOpen);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C_FarmingBoxOpen other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (FarmingBoxId != other.FarmingBoxId) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (FarmingBoxId != 0) hash ^= FarmingBoxId.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (FarmingBoxId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(FarmingBoxId);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (FarmingBoxId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FarmingBoxId);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C_FarmingBoxOpen other) {
+      if (other == null) {
+        return;
+      }
+      if (other.FarmingBoxId != 0) {
+        FarmingBoxId = other.FarmingBoxId;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            FarmingBoxId = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class S_FarmingBoxOpen : pb::IMessage<S_FarmingBoxOpen> {
+    private static readonly pb::MessageParser<S_FarmingBoxOpen> _parser = new pb::MessageParser<S_FarmingBoxOpen>(() => new S_FarmingBoxOpen());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<S_FarmingBoxOpen> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[19]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_FarmingBoxOpen() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_FarmingBoxOpen(S_FarmingBoxOpen other) : this() {
+      isOpen_ = other.isOpen_;
+      farmingBoxId_ = other.farmingBoxId_;
+      items_ = other.items_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public S_FarmingBoxOpen Clone() {
+      return new S_FarmingBoxOpen(this);
+    }
+
+    /// <summary>Field number for the "isOpen" field.</summary>
+    public const int IsOpenFieldNumber = 1;
+    private bool isOpen_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool IsOpen {
+      get { return isOpen_; }
+      set {
+        isOpen_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "farmingBoxId" field.</summary>
+    public const int FarmingBoxIdFieldNumber = 2;
+    private int farmingBoxId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FarmingBoxId {
+      get { return farmingBoxId_; }
+      set {
+        farmingBoxId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "items" field.</summary>
+    public const int ItemsFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::Google.Protobuf.Protocol.FarmingBoxItem> _repeated_items_codec
+        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.Protocol.FarmingBoxItem.Parser);
+    private readonly pbc::RepeatedField<global::Google.Protobuf.Protocol.FarmingBoxItem> items_ = new pbc::RepeatedField<global::Google.Protobuf.Protocol.FarmingBoxItem>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Google.Protobuf.Protocol.FarmingBoxItem> Items {
+      get { return items_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as S_FarmingBoxOpen);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(S_FarmingBoxOpen other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (IsOpen != other.IsOpen) return false;
+      if (FarmingBoxId != other.FarmingBoxId) return false;
+      if(!items_.Equals(other.items_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (IsOpen != false) hash ^= IsOpen.GetHashCode();
+      if (FarmingBoxId != 0) hash ^= FarmingBoxId.GetHashCode();
+      hash ^= items_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (IsOpen != false) {
+        output.WriteRawTag(8);
+        output.WriteBool(IsOpen);
+      }
+      if (FarmingBoxId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(FarmingBoxId);
+      }
+      items_.WriteTo(output, _repeated_items_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (IsOpen != false) {
+        size += 1 + 1;
+      }
+      if (FarmingBoxId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FarmingBoxId);
+      }
+      size += items_.CalculateSize(_repeated_items_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(S_FarmingBoxOpen other) {
+      if (other == null) {
+        return;
+      }
+      if (other.IsOpen != false) {
+        IsOpen = other.IsOpen;
+      }
+      if (other.FarmingBoxId != 0) {
+        FarmingBoxId = other.FarmingBoxId;
+      }
+      items_.Add(other.items_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            IsOpen = input.ReadBool();
+            break;
+          }
+          case 16: {
+            FarmingBoxId = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            items_.AddEntriesFrom(input, _repeated_items_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class C_FarmingBoxClose : pb::IMessage<C_FarmingBoxClose> {
+    private static readonly pb::MessageParser<C_FarmingBoxClose> _parser = new pb::MessageParser<C_FarmingBoxClose>(() => new C_FarmingBoxClose());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<C_FarmingBoxClose> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[20]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_FarmingBoxClose() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_FarmingBoxClose(C_FarmingBoxClose other) : this() {
+      playerId_ = other.playerId_;
+      farmingBoxId_ = other.farmingBoxId_;
+      items_ = other.items_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public C_FarmingBoxClose Clone() {
+      return new C_FarmingBoxClose(this);
+    }
+
+    /// <summary>Field number for the "playerId" field.</summary>
+    public const int PlayerIdFieldNumber = 1;
+    private int playerId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int PlayerId {
+      get { return playerId_; }
+      set {
+        playerId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "farmingBoxId" field.</summary>
+    public const int FarmingBoxIdFieldNumber = 2;
+    private int farmingBoxId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int FarmingBoxId {
+      get { return farmingBoxId_; }
+      set {
+        farmingBoxId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "items" field.</summary>
+    public const int ItemsFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::Google.Protobuf.Protocol.FarmingBoxItem> _repeated_items_codec
+        = pb::FieldCodec.ForMessage(26, global::Google.Protobuf.Protocol.FarmingBoxItem.Parser);
+    private readonly pbc::RepeatedField<global::Google.Protobuf.Protocol.FarmingBoxItem> items_ = new pbc::RepeatedField<global::Google.Protobuf.Protocol.FarmingBoxItem>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::Google.Protobuf.Protocol.FarmingBoxItem> Items {
+      get { return items_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as C_FarmingBoxClose);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(C_FarmingBoxClose other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (PlayerId != other.PlayerId) return false;
+      if (FarmingBoxId != other.FarmingBoxId) return false;
+      if(!items_.Equals(other.items_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (PlayerId != 0) hash ^= PlayerId.GetHashCode();
+      if (FarmingBoxId != 0) hash ^= FarmingBoxId.GetHashCode();
+      hash ^= items_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (PlayerId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(PlayerId);
+      }
+      if (FarmingBoxId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(FarmingBoxId);
+      }
+      items_.WriteTo(output, _repeated_items_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (PlayerId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerId);
+      }
+      if (FarmingBoxId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FarmingBoxId);
+      }
+      size += items_.CalculateSize(_repeated_items_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(C_FarmingBoxClose other) {
+      if (other == null) {
+        return;
+      }
+      if (other.PlayerId != 0) {
+        PlayerId = other.PlayerId;
+      }
+      if (other.FarmingBoxId != 0) {
+        FarmingBoxId = other.FarmingBoxId;
+      }
+      items_.Add(other.items_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            PlayerId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            FarmingBoxId = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            items_.AddEntriesFrom(input, _repeated_items_codec);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class ObjectInfo : pb::IMessage<ObjectInfo> {
     private static readonly pb::MessageParser<ObjectInfo> _parser = new pb::MessageParser<ObjectInfo>(() => new ObjectInfo());
     private pb::UnknownFieldSet _unknownFields;
@@ -3171,7 +3795,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[17]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[21]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3424,7 +4048,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[18]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[22]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3665,7 +4289,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[19]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[23]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -3850,7 +4474,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[20]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[24]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4035,7 +4659,7 @@ namespace Google.Protobuf.Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[21]; }
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[25]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -4204,6 +4828,163 @@ namespace Google.Protobuf.Protocol {
           }
           case 29: {
             DirZ = input.ReadFloat();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class FarmingBoxItem : pb::IMessage<FarmingBoxItem> {
+    private static readonly pb::MessageParser<FarmingBoxItem> _parser = new pb::MessageParser<FarmingBoxItem>(() => new FarmingBoxItem());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<FarmingBoxItem> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Google.Protobuf.Protocol.ProtocolReflection.Descriptor.MessageTypes[26]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FarmingBoxItem() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FarmingBoxItem(FarmingBoxItem other) : this() {
+      itemId_ = other.itemId_;
+      quantity_ = other.quantity_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FarmingBoxItem Clone() {
+      return new FarmingBoxItem(this);
+    }
+
+    /// <summary>Field number for the "itemId" field.</summary>
+    public const int ItemIdFieldNumber = 1;
+    private int itemId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ItemId {
+      get { return itemId_; }
+      set {
+        itemId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "quantity" field.</summary>
+    public const int QuantityFieldNumber = 2;
+    private int quantity_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Quantity {
+      get { return quantity_; }
+      set {
+        quantity_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as FarmingBoxItem);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(FarmingBoxItem other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (ItemId != other.ItemId) return false;
+      if (Quantity != other.Quantity) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (ItemId != 0) hash ^= ItemId.GetHashCode();
+      if (Quantity != 0) hash ^= Quantity.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (ItemId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ItemId);
+      }
+      if (Quantity != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Quantity);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (ItemId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ItemId);
+      }
+      if (Quantity != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Quantity);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(FarmingBoxItem other) {
+      if (other == null) {
+        return;
+      }
+      if (other.ItemId != 0) {
+        ItemId = other.ItemId;
+      }
+      if (other.Quantity != 0) {
+        Quantity = other.Quantity;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            ItemId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            Quantity = input.ReadInt32();
             break;
           }
         }
