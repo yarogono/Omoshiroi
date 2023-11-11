@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
-    [field: SerializeField]
-    DataContainer dataContainer;
-    public CharacterStats stats;
+    CharacterStats stats;
 
     public int Id { get; set; }
 
@@ -53,45 +51,16 @@ public class SyncModule : MonoBehaviour
         }
     }
 
-    StatInfo _statInfo = new StatInfo();
     public StatInfo StatInfo
     {
-        get { return _statInfo; }
         set
         {
-            if (_statInfo.Equals(value))
-                return;
-
-            _statInfo.Level = value.Level;
-            _statInfo.Hp = value.Hp;
-            _statInfo.MaxHp = value.MaxHp;
-            _statInfo.Attack = value.Attack;
-            _statInfo.Speed = value.Speed;
+            stats.Level = value.Level;
+            stats.Hp = value.Hp;
+            stats.MaxHp = value.MaxHp;
+            stats.AtkPower = value.Attack;
+            stats.MoveSpeed = value.Speed;
         }
-    }
-
-    public int Level
-    {
-        get { return StatInfo.Level; }
-        set { StatInfo.Level = value; }
-    }
-
-    public float Speed
-    {
-        get { return StatInfo.Speed; }
-        set { StatInfo.Speed = value; }
-    }
-
-    public int Attack
-    {
-        get { return StatInfo.Attack; }
-        set { StatInfo.Attack = value; }
-    }
-
-    public int Hp
-    {
-        get { return StatInfo.Hp; }
-        set { StatInfo.Hp = value; }
     }
 
     PositionInfo _posInfo = new PositionInfo();
@@ -141,28 +110,28 @@ public class SyncModule : MonoBehaviour
     public TextMeshPro TestText5;
     public GameObject healthPointBar;
 
-    public void DrawInfo()
-    {
-        TestText1.text = $"PlayerName : {Name}";
-        TestText2.text = $"Level : {StatInfo.Level}";
-        TestText3.text = $"MaxHp : {StatInfo.MaxHp}";
-        TestText4.text = $"Attack : {StatInfo.Attack}";
-        TestText5.text = $"State : {State}";
-
-        healthPointBar.GetComponent<RectTransform>().localScale = new Vector3(
-            StatInfo.Hp / StatInfo.MaxHp,
-            0,
-            0
-        );
-    }
-
     private void Start()
     {
-        stats = dataContainer.Stats;
+        stats = gameObject.GetComponent<DataContainer>().Stats;
     }
 
     protected virtual void Update()
     {
         DrawInfo();
+    }
+
+    public void DrawInfo()
+    {
+        TestText1.text = $"PlayerName : {Name}";
+        TestText2.text = $"Level : {stats.Level}";
+        TestText3.text = $"Hp / MaxHP: {stats.Hp} / {stats.MaxHp} | {stats.Hp / stats.MaxHp}";
+        TestText4.text = $"AtkPower : {stats.AtkPower}";
+        TestText5.text = $"State : {State}";
+
+        healthPointBar.GetComponent<RectTransform>().localScale = new Vector3(
+            50.0f / stats.MaxHp,
+            0,
+            0
+        );
     }
 }

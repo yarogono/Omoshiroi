@@ -109,8 +109,9 @@ public class PilotSync : SyncModule
         NetworkManager.Instance.Send(attackPacket);
     }
 
-    public void SendC_ChangeHpPacket(int hp)
+    public void SendC_ChangeHpPacket(int currentHp)
     {
-        // C_ChangeHp
+        C_ChangeHp changeHpPacket = new C_ChangeHp { CurrentHp = currentHp };
+        NetworkManager.Instance.Send(changeHpPacket);
     }
 }
