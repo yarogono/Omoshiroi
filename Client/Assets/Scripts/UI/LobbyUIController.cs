@@ -22,6 +22,7 @@ public class LobbyUIController : MonoBehaviour
         });
         BtnEnterBattle.onClick.AddListener(() =>
         {
+            SoundManager.Instance.Clear();
             LoadingScenController.LoadScene(sceneName);
         });
 
