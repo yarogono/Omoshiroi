@@ -13,8 +13,8 @@ enum MsgId {
 	S_DESPAWN = 5;
 	C_MOVE = 6;
 	S_MOVE = 7;
-	C_HP_DAMAGE = 8;
-	S_HP_DAMAGE = 9;
+	C_CHANGE_HP = 8;
+	S_CHANGE_HP = 9;
 	C_AIM = 10;
 	S_AIM = 11;
 	C_BATTLE = 12;
@@ -59,19 +59,15 @@ message S_Despawn {
 	repeated int32 objectIds = 1;
 }
 
-message S_HpDamage {
-	int32 objectId = 1;
-	int32 currentHp = 2;
-	int32 maxHp = 3;
-	int32 changeAmount = 4;
+message C_ChangeHp {
+	int32 currentHp = 1;
 }
 
-message C_HpDamage {
+message S_ChangeHp {
 	int32 objectId = 1;
 	int32 currentHp = 2;
-	int32 maxHp = 3;
-	int32 changeAmount = 4;
 }
+
 
 message C_Move {
 	int32 state = 1;
