@@ -37,7 +37,6 @@ public class PilotSync : SyncModule
         };
 
         NetworkManager.Instance.Send(movePacket);
-        Debug.Log($"Pilot Move {velInfo}");
     }
 
     public void SendC_AimPacket(int state, Vector3 velInfo)
@@ -82,7 +81,6 @@ public class PilotSync : SyncModule
             VelInfo = VelInfo
         };
         NetworkManager.Instance.Send(battlePacket);
-        Debug.Log($"Pilot Battle {velInfo}");
     }
 
     public void SendC_AttackPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo)
@@ -109,6 +107,5 @@ public class PilotSync : SyncModule
             VelInfo = VelInfo
         };
         NetworkManager.Instance.Send(attackPacket);
-        Debug.Log($"Pilot Attack {velInfo}");
     }
 }
