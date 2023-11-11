@@ -9,8 +9,6 @@ public partial class PacketHandler
     {
         S_EnterGame enterGamePacket = packet as S_EnterGame;
 
-        Debug.Log($"Packet {packet.Descriptor} is Online");
-
         ObjectManager.Instance.Add(enterGamePacket.Player, pilotPlayer: true);
     }
 
@@ -124,7 +122,6 @@ public partial class PacketHandler
 
     public static void S_AimHandler(PacketSession session, IMessage packet)
     {
-        Debug.Log($"Call AimHander");
         S_Aim aimPacket = packet as S_Aim;
 
         GameObject gameObject = ObjectManager.Instance.FindById(aimPacket.ObjectId);
@@ -142,7 +139,6 @@ public partial class PacketHandler
         if (cloneSync == null)
             return;
 
-        Debug.Log($"Call AimHander Done");
         cloneSync.CallAimEvent(aimPacket.State, aimPacket.VelInfo);
     }
 
