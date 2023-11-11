@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MergeScene/MergeProtoType.unity
     guid: ba60ae15a45335e49afdd92e2106f44b
+  - enabled: 1
+    path: Assets/Scenes/BattleGroundScene.unity
+    guid: 7fcc8bb58d78a1a42b6bbc458f6b2244
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 603e7c641c9e51744bb429d15ac5af0d, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 00fcc890c45e910458d7f57fc24bb0f7, type: 2}
