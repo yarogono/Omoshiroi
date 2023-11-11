@@ -22,10 +22,10 @@ class PacketHandler
         Console.WriteLine($"Enter User : {packetPlayer.Name} plyer");
         Player player = ObjectManager.Instance.Add<Player>();
         {
-            player.Info.Name = $"Player_{player.Id}";
+            player.Info.Name = enterGamePacket.Player.Name;
             player.Info.PosInfo = packetPlayer.PosInfo;
 
-            StatInfo stat = null;
+            StatInfo stat = enterGamePacket.Player.StatInfo;
             player.Stat.MergeFrom(stat);
 
             player.Session = clientSession;
