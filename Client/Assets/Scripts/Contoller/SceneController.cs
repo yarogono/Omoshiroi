@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class SceneController : MonoBehaviour
 {
     [SerializeField]
-    private string sceneName = "InventoryBackup";
+    private string sceneName ;
     [SerializeField]
     private Button BtnChangeScene;
 
@@ -16,18 +16,18 @@ public class SceneController : MonoBehaviour
         SoundManager.Instance.Play("BGM1", eSoundType.Bgm);
 
         BtnChangeScene.onClick.AddListener(() =>
-        {          
+        {
             //login테스트
-            AccountLoginReq req = new AccountLoginReq() { AccountPassword = "12345",AccountName = "12345" };
+            AccountLoginReq req = new AccountLoginReq() { AccountPassword = "12345", AccountName = "12345" };
             AccountLoginRes newRes = null;
             WebManager.Instance.SendPostRequest<AccountLoginRes>("account/login", req, res =>
-            {           
-                
+            {
+
                 newRes = res;
-                items= newRes.Items;
-                Debug.Log( newRes);
+                items = newRes.Items;
+                Debug.Log(newRes);
             });
-            LoadingScenController.LoadScene(sceneName);
+            LoadingScenController.LoadScene( sceneName);
         });
     }
   
