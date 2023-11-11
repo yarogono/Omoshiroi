@@ -38,7 +38,6 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 pilotSync = gameObject.GetComponent<PilotSync>();
                 pilotSync.Id = info.ObjectId;
                 pilotSync.PosInfo = info.PosInfo;
-                pilotSync.StatInfo = info.StatInfo;
                 pilotSync.State = info.State;
             }
             else
@@ -56,7 +55,6 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
                 cloneSync.PosInfo = info.PosInfo;
-                cloneSync.StatInfo = info.StatInfo;
                 cloneSync.State = info.State;
                 cloneSync.CallMoveEvent(cloneSync.State, cloneSync.PosInfo, cloneSync.VelInfo);
             }

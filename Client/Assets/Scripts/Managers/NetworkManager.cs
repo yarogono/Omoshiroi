@@ -43,14 +43,6 @@ public class NetworkManager : CustomSingleton<NetworkManager>
             PosY = 1.58f,
             PosZ = 0
         };
-        enterGamePacket.Player.StatInfo = new StatInfo
-        {
-            Level = 1,
-            Hp = 100,
-            MaxHp = 100,
-            Attack = 10,
-            Speed = 10
-        };
 
         Send(enterGamePacket);
     }

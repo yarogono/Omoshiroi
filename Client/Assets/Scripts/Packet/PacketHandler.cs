@@ -84,7 +84,7 @@ public partial class PacketHandler
 
         CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
 
-        // stats.MaxHp = changeHpPacket.MaxHp;
+        stats.Hp = changeHpPacket.CurrentHp;
     }
 
     public static void S_AimHandler(PacketSession session, IMessage packet)

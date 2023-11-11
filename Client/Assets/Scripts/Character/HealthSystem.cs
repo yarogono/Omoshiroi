@@ -9,9 +9,12 @@ public class HealthSystem : MonoBehaviour
     DataContainer dataContainer;
     public CharacterStats stats;
 
+    PilotSync Sync;
+
     private void Awake()
     {
         stats = dataContainer.Stats;
+        Sync = GetComponent<PilotSync>();
     }
 
     public void TakeDamage(int changeAmount)
@@ -29,6 +32,7 @@ public class HealthSystem : MonoBehaviour
         else { }
 
         stats.Hp = remain;
+        Sync.SendC_ChangeHpPacket(stats.Hp);
     }
 
     public void TakeRecovery(int changeAmount)
@@ -46,5 +50,6 @@ public class HealthSystem : MonoBehaviour
         else { }
 
         stats.Hp = remain;
+        Sync.SendC_ChangeHpPacket(stats.Hp);
     }
 }
