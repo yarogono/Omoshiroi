@@ -108,7 +108,8 @@ public class SyncModule : MonoBehaviour
     public TextMeshPro TestText3;
     public TextMeshPro TestText4;
     public TextMeshPro TestText5;
-    public GameObject healthPointBar;
+
+    public RectTransform healthBar;
 
     private void Start()
     {
@@ -128,10 +129,6 @@ public class SyncModule : MonoBehaviour
         TestText4.text = $"AtkPower : {stats.AtkPower}";
         TestText5.text = $"State : {State}";
 
-        healthPointBar.GetComponent<RectTransform>().localScale = new Vector3(
-            50.0f / stats.MaxHp,
-            0,
-            0
-        );
+        healthBar.sizeDelta = new Vector2(stats.Hp / stats.MaxHp, 0);
     }
 }
