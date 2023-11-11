@@ -28,6 +28,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     // Start is called before the first frame update
     private void Start()
     {
+        Debug.Log($"피직스 머시기 여부 : {Physics.queriesHitTriggers}");
         ItemList = new Dictionary<int, InventoryItem>();
 
         Dictionary<int, InventoryItem> items = inventorySO.GetCurrentInventoryState();
@@ -55,8 +56,10 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     {
         ItemList = items;
     }
+
     private void OnMouseDown()
     {
+        Debug.Log("열려라 파밍박스");
         if (/*Vector3.Distance(this.transform.position, 플레이어.transform.position) < 20*/ true)
         {
             SendFarmingBoxOpen();
