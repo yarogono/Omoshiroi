@@ -973,7 +973,7 @@ MonoBehaviour:
   - <Type>k__BackingField: 101
     Prefab: {fileID: 8802409681851811528, guid: 385a06e46d4a8a74ab79411b129108ff, type: 3}
     PoolSize: 20
-  ObjPoolRoot: {fileID: 0}
+  ObjPoolRoot: {fileID: 678922225}
   TargetLayer:
     serializedVersion: 2
     m_Bits: 32768
