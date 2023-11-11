@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
+    [field: SerializeField]
+    DataContainer dataContainer;
+    public CharacterStats stats;
+
     public int Id { get; set; }
 
     public string Name { get; set; }
@@ -150,6 +154,11 @@ public class SyncModule : MonoBehaviour
             0,
             0
         );
+    }
+
+    private void Start()
+    {
+        stats = dataContainer.Stats;
     }
 
     protected virtual void Update()
