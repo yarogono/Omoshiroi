@@ -276,7 +276,7 @@ MonoBehaviour:
   BtnReadyToBattle: {fileID: 359921277}
   BtnEnterBattle: {fileID: 841338623}
   UIReadyToBattle: {fileID: 504667145}
-  sceneName: MergeProtoType
+  sceneName: BattleGroundScene
 --- !u!4 &63040774
 Transform:
   m_ObjectHideFlags: 0
