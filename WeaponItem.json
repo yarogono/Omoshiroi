@@ -1,0 +1,32 @@
+{
+  "weaponItems": [
+    {
+      "icon": "",
+      "objectPrefab": "",
+      "id": "100001",
+      "name": "칼",
+      "description": "칼이다.",
+      "itemType": "1",
+      "hp": "10",
+      "def": "10",
+      "atkSpeed": "10",
+      "atk": "10",
+      "critRate": "10",
+      "critPower": "10"
+    },
+    {
+      "icon": "",
+      "objectPrefab": "",
+      "id": "100002",
+      "name": "도끼",
+      "description": "도끼다.",
+      "itemType": "1",
+      "hp": "20",
+      "def": "20",
+      "atkSpeed": "20",
+      "atk": "20",
+      "critRate": "20",
+      "critPower": "20"
+    }
+  ]
+} 
