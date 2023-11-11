@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [System.Serializable]
 public class CharacterStats
 {
-    [field: SerializeField] public CharacterBaseStats cbs { get; private set; }
+    [field: SerializeField]
+    public CharacterBaseStats cbs { get; private set; }
 
-    private int maxHp;
+    private int level;
     private int hp;
+    private int maxHp;
     private int def;
     private float atkSpeed;
     private int atkPower;
@@ -17,28 +20,75 @@ public class CharacterStats
     private float runMultipiler;
     private float dodgeTime;
 
-    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
-    public int Hp 
-    { 
-        get { return hp; } 
-        set 
-        {
-            if (value > MaxHp) { hp = MaxHp; return; }
-            hp = value;
-        } 
+    public int Level
+    {
+        get { return level; }
+        set { level = value; }
     }
-    public int Def { get { return def; } set { def = value; } }
-    public float AtkSpeed { get { return atkSpeed; } set { atkSpeed = value; } }
-    public int AtkPower { get { return atkPower; } set { atkPower = value; } }
-    public int CritRate { get { return critRate; } set { critRate = value; } }
-    public float CritPower { get { return critPower; } set { critPower = value; } }
-    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
-    public float RunMultipiler { get { return runMultipiler; } set { runMultipiler = value; } }
-    public float DodgeTime { get { return dodgeTime; } set { dodgeTime = value; } }
+
+    public int MaxHp
+    {
+        get { return maxHp; }
+        set { maxHp = value; }
+    }
+    public int Hp
+    {
+        get { return hp; }
+        set
+        {
+            if (value > MaxHp)
+            {
+                hp = MaxHp;
+                return;
+            }
+            hp = value;
+        }
+    }
+    public int Def
+    {
+        get { return def; }
+        set { def = value; }
+    }
+    public float AtkSpeed
+    {
+        get { return atkSpeed; }
+        set { atkSpeed = value; }
+    }
+    public int AtkPower
+    {
+        get { return atkPower; }
+        set { atkPower = value; }
+    }
+    public int CritRate
+    {
+        get { return critRate; }
+        set { critRate = value; }
+    }
+    public float CritPower
+    {
+        get { return critPower; }
+        set { critPower = value; }
+    }
+    public float MoveSpeed
+    {
+        get { return moveSpeed; }
+        set { moveSpeed = value; }
+    }
+    public float RunMultipiler
+    {
+        get { return runMultipiler; }
+        set { runMultipiler = value; }
+    }
+    public float DodgeTime
+    {
+        get { return dodgeTime; }
+        set { dodgeTime = value; }
+    }
 
     public void Initialize()
     {
-        MaxHp = cbs.BaseHP; Hp = MaxHp;
+        MaxHp = cbs.BaseHP;
+        Hp = MaxHp;
         Def = cbs.BaseDEF;
         AtkSpeed = cbs.BaseAttackSpeed;
         AtkPower = cbs.BaseAttackPower;
@@ -48,7 +98,17 @@ public class CharacterStats
         RunMultipiler = cbs.BaseRunMultiplier;
     }
 
-    public void SetCharacterStats(int maxHp, int hp, int def, float atkSpeed, int atkPower, int critRate, float critPower, float moveSpeed, float runMulipiler)
+    public void SetCharacterStats(
+        int maxHp,
+        int hp,
+        int def,
+        float atkSpeed,
+        int atkPower,
+        int critRate,
+        float critPower,
+        float moveSpeed,
+        float runMulipiler
+    )
     {
         MaxHp = maxHp;
         Hp = hp;
