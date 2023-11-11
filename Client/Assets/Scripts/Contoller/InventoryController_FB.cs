@@ -262,6 +262,8 @@ namespace Inventory
                 UpdateInventories();
 
                 OnClosed?.Invoke();
+
+                farmingBox.SendFarmingBoxClose();
                 //playerInput.CanControl = true;
             }
         }
