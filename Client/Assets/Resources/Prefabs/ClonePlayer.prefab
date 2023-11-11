@@ -743,6 +743,8 @@ MonoBehaviour:
     _main: {fileID: 3072282686292334073}
     _weapon: {fileID: 5277609655161961382}
   <Health>k__BackingField: {fileID: 0}
+  TestEquipItem:
+  - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
 --- !u!114 &3387555981660624464
 MonoBehaviour:
   m_ObjectHideFlags: 0
