@@ -9,8 +9,6 @@ public partial class PacketHandler
     {
         S_EnterGame enterGamePacket = packet as S_EnterGame;
 
-        Debug.Log($"Packet {packet.Descriptor} is Online");
-
         ObjectManager.Instance.Add(enterGamePacket.Player, pilotPlayer: true);
     }
 
@@ -53,12 +51,7 @@ public partial class PacketHandler
         if (ObjectManager.Instance.pilotSync.Id == movePacket.ObjectId)
             return;
 
-        SyncModule syncModule = gameObject.GetComponent<SyncModule>();
-        if (syncModule == null)
-            return;
-
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
         // cloneSync.State = movePacket.State;
@@ -124,25 +117,19 @@ public partial class PacketHandler
 
     public static void S_AimHandler(PacketSession session, IMessage packet)
     {
-        Debug.Log($"Call AimHander");
         S_Aim aimPacket = packet as S_Aim;
 
         GameObject gameObject = ObjectManager.Instance.FindById(aimPacket.ObjectId);
 
         if (gameObject == null)
-        {
             return;
-        }
+
         if (ObjectManager.Instance.pilotSync.Id == aimPacket.ObjectId)
-        {
-            return;
-        }
-
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
             return;
 
-        Debug.Log($"Call AimHander Done");
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
+            return;
+
         cloneSync.CallAimEvent(aimPacket.State, aimPacket.VelInfo);
     }
 
@@ -161,8 +148,7 @@ public partial class PacketHandler
             return;
         }
 
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
         cloneSync.CallBattleEvent(
@@ -188,8 +174,7 @@ public partial class PacketHandler
             return;
         }
 
-        CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
-        if (cloneSync == null)
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
         cloneSync.CallAttackEvent(

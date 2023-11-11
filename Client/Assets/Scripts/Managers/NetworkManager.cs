@@ -36,14 +36,21 @@ public class NetworkManager : CustomSingleton<NetworkManager>
         );
 
         C_EnterGame enterGamePacket = new C_EnterGame { Player = new ObjectInfo() };
-        enterGamePacket.Player.Name = "test";
+        enterGamePacket.Player.Name = "BAEINHO";
         enterGamePacket.Player.PosInfo = new PositionInfo()
         {
             PosX = 0,
             PosY = 1.58f,
             PosZ = 0
         };
-        enterGamePacket.Player.StatInfo = null;
+        enterGamePacket.Player.StatInfo = new StatInfo
+        {
+            Level = 1,
+            Hp = 100,
+            MaxHp = 100,
+            Attack = 10,
+            Speed = 10
+        };
 
         Send(enterGamePacket);
     }
@@ -51,12 +58,16 @@ public class NetworkManager : CustomSingleton<NetworkManager>
     void Update()
     {
         List<PacketMessage> list = PacketQueue.Instance.PopAll();
-        foreach (PacketMessage packet in list)
+
+        if (list.Count != 0)
         {
-            Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(
-                packet.Id
-            );
-            handler?.Invoke(_session, packet.Message);
+            foreach (PacketMessage packet in list)
+            {
+                Action<PacketSession, IMessage> handler = PacketManager.Instance.GetPacketHandler(
+                    packet.Id
+                );
+                handler?.Invoke(_session, packet.Message);
+            }
         }
     }
 

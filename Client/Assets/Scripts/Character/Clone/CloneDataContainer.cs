@@ -9,6 +9,11 @@ public class CloneDataContainer : DataContainer
 
     private CombineCloneStatemachine _stateMachine;
 
+
+    [Header("테스트용 착용아이템")]
+    [SerializeField]
+    private BaseItem[] TestEquipItem;
+
     private void Awake()
     {
         Movement = GetComponent<CloneMovement>();
@@ -24,6 +29,9 @@ public class CloneDataContainer : DataContainer
 
         if (Equipments == null)
             Equipments = new EquipSystem();
+
+        foreach (var item in TestEquipItem)
+            Equipments.Equip(item);
 
         _stateMachine = new CombineCloneStatemachine(this);
         SpriteRotator.Register(this);

@@ -50,7 +50,7 @@ class PacketHandler
         if (room == null)
             return;
 
-        Console.WriteLine($"ID: {player.Id}  X: {movePacket.PosInfo.PosX} Y: {movePacket.PosInfo.PosY} Z : {movePacket.PosInfo.PosZ}");
+        //Console.WriteLine($"ID: {player.Id}  X: {movePacket.PosInfo.PosX} Y: {movePacket.PosInfo.PosY} Z : {movePacket.PosInfo.PosZ}");
         room.Push(room.HandleMove, player, movePacket);
     }
 
@@ -102,6 +102,12 @@ class PacketHandler
         Player player = clientSession.MyPlayer;
         if (player == null)
             return;
+
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.HandleAim, player, aimPacket);
     }
 
     public static void C_BattleHandler(PacketSession session, IMessage packet)
@@ -115,6 +121,12 @@ class PacketHandler
         Player player = clientSession.MyPlayer;
         if (player == null)
             return;
+
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.HandleBattle, player, battlePacket);
     }
 
     public static void C_AttackHandler(PacketSession session, IMessage packet)
@@ -129,6 +141,11 @@ class PacketHandler
         if (player == null)
             return;
 
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.HandleAttack, player, attackPacket);
     }
 
 

@@ -8,7 +8,7 @@ public class LobbyUIController : MonoBehaviour
     [SerializeField] private Button BtnReadyToBattle;
     [SerializeField] private Button BtnEnterBattle;
     [SerializeField] private GameObject UIReadyToBattle;
-
+    [SerializeField] private string sceneName;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class LobbyUIController : MonoBehaviour
         });
         BtnEnterBattle.onClick.AddListener(() =>
         {
-            // 전투 진입 관련 코드 
+            LoadingScenController.LoadScene(sceneName);
         });
 
     }
