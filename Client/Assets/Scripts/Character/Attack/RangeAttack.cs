@@ -19,9 +19,8 @@ public class RangeAttack : BaseAttack
 
     public override void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
-
+        Launch();
         base.Initalize(attackInfo, dataContainer, tag);
-
     }
     private void Start()
     {
