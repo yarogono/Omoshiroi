@@ -220,19 +220,11 @@ namespace Inventory
             }
         }
 
-        private void OnMouseDown()
-        {
-            if (/*Vector3.Distance(this.transform.position, 플레이어.transform.position) < 20*/ true)
-            {
-                OnOpened();
-                OpenInventoryUI();
-            }
-        }
 
         /// <summary>
         /// 플레이어 인벤토리 정보에 보관함 인벤토리 정보를 덧붙여서 관리하도록 해야 한다.
         /// </summary>
-        private void OpenInventoryUI()
+        public void OpenInventoryUI()
         {
             if (inventoryUI.isActiveAndEnabled == false)
             {
