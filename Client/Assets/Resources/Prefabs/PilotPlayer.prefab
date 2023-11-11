@@ -609,7 +609,7 @@ Transform:
   - {fileID: 978295493833038405}
   - {fileID: 4266409554630449268}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7564447416552305516
 MonoBehaviour:
@@ -688,7 +688,7 @@ MonoBehaviour:
     _weapon: {fileID: 2129740198666870522}
   <Health>k__BackingField: {fileID: 0}
   TestEquipItem:
-  - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
+  - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
 --- !u!114 &-6892137914046388612
 MonoBehaviour:
   m_ObjectHideFlags: 0
