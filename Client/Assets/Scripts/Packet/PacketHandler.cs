@@ -62,57 +62,29 @@ public partial class PacketHandler
     }
 
     /// <summary>
-    /// 서버에서 받아온 [오브젝트 ID, 최대 체력과 피격 직전 현재 체력, 체력 변동량] 데이터를 이용해 작업을 수행하는 핸들러.
-    /// 해당 오브젝트를 식별하고, 그 오브젝트의 체력 상황을 데이터대로 갱신해주면 된다.
-    /// </summary>
-    /// <param name="session"></param>
-    /// <param name="packet"></param>
-    public static void S_HpDamageHandler(PacketSession session, IMessage packet)
-    {
-        S_HpDamage damagePacket = packet as S_HpDamage;
-
-        GameObject gameObject = ObjectManager.Instance.FindById(damagePacket.ObjectId);
-
-        if (gameObject == null)
-        {
-            return;
-        }
-        if (ObjectManager.Instance.pilotSync.Id == damagePacket.ObjectId)
-        {
-            return;
-        }
-
-        CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
-
-        stats.MaxHp = damagePacket.MaxHp;
-        stats.Hp = damagePacket.CurrentHp - damagePacket.ChangeAmount;
-    }
-
-    /// <summary>
     /// 서버에서 받아온 [오브젝트 ID, 최대 체력과 회복 직전 현재 체력, 체력 변동량] 데이터를 이용해 작업을 수행하는 핸들러.
     /// 해당 오브젝트를 식별하고, 그 오브젝트의 체력 상황을 데이터대로 갱신해주면 된다.
     /// </summary>
     /// <param name="session"></param>
     /// <param name="packet"></param>
-    public static void S_HpRecoveryHandler(PacketSession session, IMessage packet)
+    public static void S_ChangeHpHandler(PacketSession session, IMessage packet)
     {
-        S_HpDamage damagePacket = packet as S_HpDamage;
+        S_ChangeHp changeHpPacket = packet as S_ChangeHp;
 
-        GameObject gameObject = ObjectManager.Instance.FindById(damagePacket.ObjectId);
+        GameObject gameObject = ObjectManager.Instance.FindById(changeHpPacket.ObjectId);
 
         if (gameObject == null)
         {
             return;
         }
-        if (ObjectManager.Instance.pilotSync.Id == damagePacket.ObjectId)
+        if (ObjectManager.Instance.pilotSync.Id == changeHpPacket.ObjectId)
         {
             return;
         }
 
         CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
 
-        stats.MaxHp = damagePacket.MaxHp;
-        stats.Hp = damagePacket.CurrentHp + damagePacket.ChangeAmount;
+        // stats.MaxHp = changeHpPacket.MaxHp;
     }
 
     public static void S_AimHandler(PacketSession session, IMessage packet)

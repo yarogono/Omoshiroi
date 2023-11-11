@@ -111,6 +111,6 @@ public class PilotSync : SyncModule
 
     public void SendC_ChangeHpPacket(int hp)
     {
-        // NetworkManager.Instance.Send();
+        // C_ChangeHp
     }
 }
