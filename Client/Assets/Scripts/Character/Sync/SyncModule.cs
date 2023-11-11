@@ -130,23 +130,30 @@ public class SyncModule : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    public TextMeshPro checkIdTest;
-    public TextMeshPro checkPositionX;
-    public TextMeshPro checkPositionY;
-    public TextMeshPro checkPositionZ;
-    public TextMeshPro checkStateTest;
+    public TextMeshPro TestText1;
+    public TextMeshPro TestText2;
+    public TextMeshPro TestText3;
+    public TextMeshPro TestText4;
+    public TextMeshPro TestText5;
+    public GameObject healthPointBar;
 
-    public void DrawTestInfo()
+    public void DrawInfo()
     {
-        checkIdTest.text = $"ID : {Id}";
-        checkPositionX.text = $"Ser_X : {PosInfo.PosX} | Cli_X : {transform.position.x}";
-        checkPositionY.text = $"Ser_Y : {PosInfo.PosY} | Cli_Y : {transform.position.y}";
-        checkPositionZ.text = $"Ser_Z : {PosInfo.PosZ} | Cli_Z : {transform.position.z}";
-        checkStateTest.text = $"State : {State}";
+        TestText1.text = $"PlayerName : {Name}";
+        TestText2.text = $"Level : {StatInfo.Level}";
+        TestText3.text = $"MaxHp : {StatInfo.MaxHp}";
+        TestText4.text = $"Attack : {StatInfo.Attack}";
+        TestText5.text = $"State : {State}";
+
+        healthPointBar.GetComponent<RectTransform>().localScale = new Vector3(
+            StatInfo.Hp / StatInfo.MaxHp,
+            0,
+            0
+        );
     }
 
     protected virtual void Update()
     {
-        DrawTestInfo();
+        DrawInfo();
     }
 }
