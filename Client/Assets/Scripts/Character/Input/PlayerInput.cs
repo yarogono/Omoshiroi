@@ -17,7 +17,7 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 {
     public ThirdPersonController InputActions { get; private set; }
 
-#if TEST_PC
+#if TEST_PC || UNITY_EDITOR
     public ThirdPersonController.TestActions TestActions { get; private set; }
 #else
     public ThirdPersonController.PlayerActions PlayerActions { get; private set; }
@@ -84,7 +84,7 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
 
         InputActions = new ThirdPersonController();
 
-#if TEST_PC
+#if TEST_PC || UNITY_EDITOR
         TestActions = InputActions.Test;
         TestActions.AddCallbacks(this);
 #else

@@ -1,15 +1,32 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Data
 {
-    #region WeaponItem
-    [Serializable]
-    public class WeaponItem
+    #region ItemData
+    public class ItemData
     {
+        public Sprite icon;
+        public GameObject objectPrefab;
         public int id;
         public string name;
-        public int damage;
+        public string desciption;
+        public eItemType itemType;
+        public int maxStack;
+        public bool isStackable;
+    }
+
+    #region WeaponItem
+    [Serializable]
+    public class WeaponItem : ItemData
+    {
+        public int hp;
+        public int def;
+        public float atkSpeed;
+        public int atk;
+        public int critRate;
+        public float critPower;
     }
 
     [Serializable]
@@ -27,6 +44,10 @@ namespace Data
         }
     }
     #endregion
+
+    #endregion
+
+
 
     #region FarmingBoxInventory
     [Serializable]

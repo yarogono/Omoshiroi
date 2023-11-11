@@ -51,25 +51,29 @@ public class RangeAttack : BaseAttack
 
         if (!other.CompareTag(_makerTag))
         {
-
-            var Data = other.GetComponent<DataContainer>();
-            var HealthData = Data.Health;
-            APDatar = Data.Stats.AtkPower;
-
-            CharacterMovement movement = other.GetComponent<CharacterMovement>();  //데이터컨테이너로 캐싱 
-            if (Data != null)
+            if (other.gameObject.layer == (other.gameObject.layer & AttackManager.Instance.TargetLayer))
             {
-                //넉백을위한 Vector3계산
-                impact = (other.gameObject.transform.position - transform.position).normalized * knockBackPower;
-                ApplyDamage(HealthData);
-                //넉백             
-                movement.AddImpact(impact);
+
+                var Data = other.GetComponent<DataContainer>();
+                var HealthData = Data.Health;
+                APDatar = Data.Stats.AtkPower;
+
+                CharacterMovement movement = other.GetComponent<CharacterMovement>();  //데이터컨테이너로 캐싱 
+                if (Data != null)
+                {
+                    //넉백을위한 Vector3계산
+                    impact = (other.gameObject.transform.position - transform.position).normalized * knockBackPower;
+                    ApplyDamage(HealthData);
+                    //넉백             
+                    movement.AddImpact(impact);
+
+                }
+                else
+                {
+                    Debug.LogError("Component null");
+                }
+                this.gameObject.SetActive(false);
             }
-            else
-            {
-                Debug.LogError("Component null");
-            }
-            this.gameObject.SetActive(false);
         }
     }
 

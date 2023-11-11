@@ -11,10 +11,21 @@ public interface ILoader<Key, Value>
     Dictionary<Key, Value> MakeDict();
 }
 
+/// <summary>
+/// 아이템 ID 명명 규칙 : 첫 숫자로 아이템의 종류를 나타낸다. 이는 eItemType 를 참고할 것. 
+/// </summary>
 public class DataManager : CustomSingleton<DataManager>
 {
     public Dictionary<int, WeaponItem> WeaponItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
     public Dictionary<int, FBInventory> FBInventoryDict { get; private set; } = new Dictionary<int, FBInventory>();
+
+    //아래의 Dictionary 들은 검색용으로 만든 임시 자료형이다.
+    public Dictionary<int, WeaponItem> MagicItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
+    public Dictionary<int, WeaponItem> RuneItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
+    public Dictionary<int, WeaponItem> ResourceItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
+    public Dictionary<int, WeaponItem> ConsumableItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
+    public Dictionary<int, WeaponItem> SkinItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
+
 
     private void Awake()
     {

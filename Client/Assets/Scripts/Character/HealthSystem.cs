@@ -35,7 +35,6 @@ public class HealthSystem : MonoBehaviour
     /// </summary>
     public void TakeDamage(int changeAmount)
     {
-      
         int remain = stats.Hp - changeAmount;
 
         if(remain <= 0)
