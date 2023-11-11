@@ -37,7 +37,7 @@ public class UIController: MonoBehaviour
 
     private void Update()
     {
-        HandlerHp();
+       //HandlerHp();
     }
 
     public  void HandlerHp()
