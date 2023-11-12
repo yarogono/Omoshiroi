@@ -15,29 +15,21 @@ namespace Server.Game.Object
             Info.StatInfo = Stat;
         }
 
-        public virtual void HpDamage(C_HpDamage hpDamagePacket)
+        public virtual void HpDamage(C_ChangeHp changeHpPacket)
         {
-            if (Room == null)
-                return;
 
-            int maxHp = hpDamagePacket.MaxHp;
-            int currentHp = hpDamagePacket.CurrentHp;
-            int objectId = hpDamagePacket.ObjectId;
-            int changeAmount = hpDamagePacket.ChangeAmount;
+            int currentHp = changeHpPacket.CurrentHp;
 
-            int damagedHp = Math.Max(Stat.Hp -= changeAmount, 0);
-
-            if (damagedHp != currentHp)
+            if (currentHp > 0)
                 return;
 
             Stat.Hp = currentHp;
-            Info.StatInfo.MaxHp = maxHp;
 
-            S_HpDamage resHpDamagePacket = new S_HpDamage();
-            resHpDamagePacket.ObjectId = objectId;
-            resHpDamagePacket.CurrentHp = Stat.Hp;
+            S_ChangeHp resChangeHpPacket = new S_ChangeHp();
+            resChangeHpPacket.ObjectId = Id;
+            resChangeHpPacket.CurrentHp = Stat.Hp;
 
-            Room.Broadcast(resHpDamagePacket, objectId);
+            Room.Broadcast(resChangeHpPacket, Id);
         }
 
         public virtual void OnDead(GameObject attacker)

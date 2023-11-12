@@ -28,6 +28,7 @@ namespace Server
             DataManager.LoadData();
 
             GameRoom room = RoomManager.Instance.Add(1);
+            room.Init();
             TickRoom(room, 50);
 
             string host = Dns.GetHostName();

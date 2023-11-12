@@ -50,7 +50,6 @@ class PacketHandler
         if (room == null)
             return;
 
-        //Console.WriteLine($"ID: {player.Id}  X: {movePacket.PosInfo.PosX} Y: {movePacket.PosInfo.PosY} Z : {movePacket.PosInfo.PosZ}");
         room.Push(room.HandleMove, player, movePacket);
     }
 
@@ -73,9 +72,9 @@ class PacketHandler
         room.Push(room.LeaveGame, leaveGamePacket.PlayerId);
     }
 
-    public static void C_HpDamageHandler(PacketSession session, IMessage packet)
+    public static void C_ChangeHpHandler(PacketSession session, IMessage packet)
     {
-        C_HpDamage hpDamagePacket = (C_HpDamage)packet;
+        C_ChangeHp hpDamagePacket = (C_ChangeHp)packet;
         ClientSession clientSession = (ClientSession)session;
 
         if (hpDamagePacket == null)
@@ -85,7 +84,8 @@ class PacketHandler
         if (player == null)
             return;
 
-        if (player.Id != clientSession.MyPlayer.Id)
+        GameRoom room = player.Room;
+        if (room == null) 
             return;
 
         player.HpDamage(hpDamagePacket);
@@ -161,6 +161,28 @@ class PacketHandler
         if (player == null)
             return;
 
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        FarmingBox farmingBox = room.FindFarmingBox(farmingBoxOpenPacket.FarmingBoxId);
+        if (farmingBox == null)
+            return;
+
+        if (farmingBox.IsOpen == true)
+            return;
+
+        S_FarmingBoxOpen resFarmingBoxOpenPacket = new S_FarmingBoxOpen();
+        resFarmingBoxOpenPacket.FarmingBoxId = farmingBox.Id;
+        resFarmingBoxOpenPacket.IsOpen = farmingBox.IsOpen;
+
+        foreach (FarmingBoxItem item in farmingBox.items)
+            resFarmingBoxOpenPacket.Items.Add(item);
+
+        player.Session.Send(resFarmingBoxOpenPacket);
+
+        if (farmingBox.IsOpen == false)
+            farmingBox.IsOpen = true;
     }
 
 
@@ -176,5 +198,20 @@ class PacketHandler
         if (player == null)
             return;
 
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        int farmingBoxId = farmingBoxClosePacket.FarmingBoxId;
+        FarmingBox farmingBox = room.FindFarmingBox(farmingBoxId);
+        if (farmingBox == null)
+            return;
+
+        farmingBox.items.Clear();
+        foreach (var item in farmingBoxClosePacket.Items)
+            farmingBox.items.Add(item);
+
+        if (farmingBox.IsOpen == true)
+            farmingBox.IsOpen = false;
     }
 }

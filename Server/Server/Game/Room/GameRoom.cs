@@ -10,11 +10,14 @@ namespace Server.Game.Room
         public int RoomId { get; set; }
 
         Dictionary<int, Player> _players = new Dictionary<int, Player>();
+        Dictionary<int, FarmingBox> _farmingBox = new Dictionary<int, FarmingBox>();
 
-
-        public void Init(int mapId)
+        public void Init()
         {
-            //EnterGame(monster);
+            FarmingBox farmingBox = ObjectManager.Instance.Add<FarmingBox>();
+            farmingBox.items.Add(new FarmingBoxItem() { ItemId = 10001, Quantity = 2 });
+            farmingBox.items.Add(new FarmingBoxItem() { ItemId = 10001, Quantity = 1 });
+            _farmingBox.Add(farmingBox.Id, farmingBox);
         }
 
         // 누군가 주기적으로 호출해줘야 한다
@@ -55,6 +58,11 @@ namespace Server.Game.Room
 
                 {
                     S_FarmingBoxSpawn farmingBoxSpawnPacket = new S_FarmingBoxSpawn();
+                    ObjectInfo objectInfo = new ObjectInfo();
+                    objectInfo.PosInfo = new PositionInfo() { PosX = 2, PosY = 0, PosZ = 2 };
+                    farmingBoxSpawnPacket.BoxInfos.Add(objectInfo);
+
+                    Broadcast(farmingBoxSpawnPacket);
                 }
             }
 
@@ -165,6 +173,14 @@ namespace Server.Game.Room
             }
 
             return null;
+        }
+
+        public FarmingBox FindFarmingBox(int farmingBoxId)
+        {
+            FarmingBox findFarmingBox = null;
+            _farmingBox.TryGetValue(farmingBoxId, out findFarmingBox);
+
+            return findFarmingBox;
         }
 
         public void Broadcast(IMessage packet)
