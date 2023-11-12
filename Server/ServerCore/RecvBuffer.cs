@@ -33,7 +33,7 @@
             }
             else
             {
-                Array.Copy(_buffer.Array, _buffer.Offset + _readPos, _buffer.Array, _buffer.Offset, dataSize);
+                Buffer.BlockCopy(_buffer.Array, _buffer.Offset + _readPos, _buffer.Array, _buffer.Offset, dataSize);
                 _readPos = 0;
                 _writePos = dataSize;
             }
