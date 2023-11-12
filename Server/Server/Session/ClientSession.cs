@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net.Sockets;
-using System.Threading;
-using System.Threading.Tasks;
-using ServerCore;
+﻿using ServerCore;
 using System.Net;
 using Google.Protobuf.Protocol;
 using Google.Protobuf;
@@ -18,15 +12,20 @@ namespace Server
 		public Player MyPlayer { get; set; }
 		public int SessionId { get; set; }
 
-		public void Send(IMessage packet)
+
+        private const int SizeOffset = 0;
+        private const int MsgIdOffset = 2;
+        private const int HeaderSize = 4;
+
+        public void Send(IMessage packet)
 		{
 			string msgName = packet.Descriptor.Name.Replace("_", string.Empty);
 			MsgId msgId = (MsgId)Enum.Parse(typeof(MsgId), msgName);
             ushort size = (ushort)packet.CalculateSize();
             byte[] sendBuffer = new byte[size + 4];
-            Array.Copy(BitConverter.GetBytes((ushort)(size + 4)), 0, sendBuffer, 0, sizeof(ushort));
-            Array.Copy(BitConverter.GetBytes((ushort)msgId), 0, sendBuffer, 2, sizeof(ushort));
-            Array.Copy(packet.ToByteArray(), 0, sendBuffer, 4, size);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)(size + HeaderSize)), 0, sendBuffer, SizeOffset, sizeof(ushort));
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)msgId), 0, sendBuffer, MsgIdOffset, sizeof(ushort));
+            Buffer.BlockCopy(packet.ToByteArray(), 0, sendBuffer, HeaderSize, size);
 
             Send(new ArraySegment<byte>(sendBuffer));
         }
