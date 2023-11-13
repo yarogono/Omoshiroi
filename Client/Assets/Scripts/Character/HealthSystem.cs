@@ -49,6 +49,7 @@ public class HealthSystem : MonoBehaviour
         }
         else { }
 
+        UIController.Instance.HandlerHp(stats.Hp,stats.MaxHp);
         stats.Hp = remain;
         Sync.SendC_ChangeHpPacket(stats.Hp);
     }

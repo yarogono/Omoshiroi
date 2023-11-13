@@ -12,6 +12,8 @@ namespace Inventory
 
     public class InventoryController : MonoBehaviour
     {
+        [SerializeField]
+        GameObject Charicter;
 
       
         [SerializeField]
@@ -144,7 +146,7 @@ namespace Inventory
             IItemAction itemAction = inventoryItem.item as IItemAction;
             if (itemAction != null)
             {
-               itemAction.PerformAction(gameObject);
+               itemAction.PerformAction(Charicter); //
              
                 if (inventoryData.GetItemAt(itemIndex).IsEmpty)
                 {
