@@ -91,13 +91,13 @@ public class CharacterStats
         Level = SyncModule.StatInfo.Level;
         MaxHp = SyncModule.StatInfo.MaxHp;
         Hp = SyncModule.StatInfo.Hp;
-        // Def = cbs.BaseDEF;
-        // AtkSpeed = cbs.BaseAttackSpeed;
+        Def = 1;
+        AtkSpeed = 1;
         AtkPower = SyncModule.StatInfo.Attack;
-        // CritRate = cbs.BaseCriticalRate;
-        // CritPower = cbs.BaseCriticalPower;
+        CritRate = 1;
+        CritPower = 1;
         MoveSpeed = SyncModule.StatInfo.Speed;
-        // RunMultipiler = cbs.BaseRunMultiplier;
+        RunMultipiler = 2;
     }
 
     public void SetCharacterStats(

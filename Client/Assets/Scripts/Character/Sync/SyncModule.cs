@@ -153,8 +153,6 @@ public class SyncModule : MonoBehaviour
         TestText4.text = $"AtkPower : {stats.AtkPower}";
         TestText5.text = $"State : {State}";
 
-        // healthBar.sizeDelta = new Vector2(stats.Hp / stats.MaxHp, 0);
-
         healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
     }
 }
