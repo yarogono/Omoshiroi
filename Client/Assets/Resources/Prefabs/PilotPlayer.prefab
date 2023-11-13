@@ -105,8 +105,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5980317487935585845}
+  m_Children: []
   m_Father: {fileID: 4266409554630449268}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -668,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Stats>k__BackingField:
-    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
+    <SyncModule>k__BackingField: {fileID: 0}
   <AnimationData>k__BackingField:
     groundParameterName: '@Ground'
     idleParameterName: Idle
@@ -688,6 +687,7 @@ MonoBehaviour:
     _main: {fileID: 9084180165033504933}
     _weapon: {fileID: 2129740198666870522}
   <Health>k__BackingField: {fileID: 0}
+  <SyncModule>k__BackingField: {fileID: 0}
   TestEquipItem:
   - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
 --- !u!114 &-6892137914046388612
@@ -702,12 +702,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623297b9daf8f4935a51edb75ca38800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 5980317487935585845}
   TestText1: {fileID: 3839627925965679978}
   TestText2: {fileID: 1173170477804780311}
   TestText3: {fileID: 1508650048031691851}
   TestText4: {fileID: 9064988855251638690}
   TestText5: {fileID: 6544799625722215884}
-  healthBar: {fileID: 5980317487935585845}
 --- !u!114 &2438545737654347830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,6 +1003,7 @@ RectTransform:
   m_Children:
   - {fileID: 5399563742465882395}
   - {fileID: 7811652966112220963}
+  - {fileID: 5980317487935585845}
   m_Father: {fileID: 1088871691251878795}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
@@ -1168,7 +1169,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7811652966112220963}
+  m_Father: {fileID: 4266409554630449268}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}

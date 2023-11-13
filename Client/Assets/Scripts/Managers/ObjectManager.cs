@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObjectManager : CustomSingleton<ObjectManager>
 {
     public PilotSync pilotSync { get; set; }
-    Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
+    readonly Dictionary<int, GameObject> _objects = new();
 
     public static GameObjectType GetObjectTypeById(int id)
     {
@@ -20,11 +20,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
         if (objectType == GameObjectType.Player)
         {
-            Vector3 S_Position = new Vector3(
-                info.PosInfo.PosX,
-                info.PosInfo.PosY,
-                info.PosInfo.PosZ
-            );
+            Vector3 S_Position = new(info.PosInfo.PosX, info.PosInfo.PosY, info.PosInfo.PosZ);
 
             if (pilotPlayer)
             {
@@ -37,7 +33,9 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 pilotSync = gameObject.GetComponent<PilotSync>();
                 pilotSync.Id = info.ObjectId;
+                pilotSync.Name = info.Name;
                 pilotSync.PosInfo = info.PosInfo;
+                pilotSync.StatInfo = info.StatInfo;
                 pilotSync.State = info.State;
             }
             else
@@ -54,7 +52,9 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
+                cloneSync.Name = info.Name;
                 cloneSync.PosInfo = info.PosInfo;
+                cloneSync.StatInfo = info.StatInfo;
                 cloneSync.State = info.State;
                 cloneSync.CallMoveEvent(cloneSync.State, cloneSync.PosInfo, cloneSync.VelInfo);
             }
