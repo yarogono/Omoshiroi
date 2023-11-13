@@ -37,7 +37,10 @@ public class CharacterIdleState : CharacterGroundState
             if (_stateMachine.Character.Controller.velocity.sqrMagnitude > 0)
                 _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
             else
+            {
                 _stoped = true;
+                _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, Vector3.zero);
+            }
             _needUpdate = false;
         }
     }
