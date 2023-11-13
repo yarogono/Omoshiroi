@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterStats
 {
     [field: SerializeField]
-    public CharacterBaseStats cbs { get; private set; }
+    public SyncModule SyncModule { get; private set; }
 
     private int level;
     private int hp;
@@ -16,9 +16,10 @@ public class CharacterStats
     private int atkPower;
     private int critRate;
     private float critPower;
-    private float moveSpeed;
     private float runMultipiler;
+
     private float dodgeTime;
+    private float moveSpeed;
 
     public int Level
     {
@@ -85,17 +86,18 @@ public class CharacterStats
         set { dodgeTime = value; }
     }
 
-    public void Initialize()
+    public void UpdateStats()
     {
-        MaxHp = cbs.BaseHP;
-        Hp = MaxHp;
-        Def = cbs.BaseDEF;
-        AtkSpeed = cbs.BaseAttackSpeed;
-        AtkPower = cbs.BaseAttackPower;
-        CritRate = cbs.BaseCriticalRate;
-        CritPower = cbs.BaseCriticalPower;
-        MoveSpeed = cbs.BaseMoveSpeed;
-        RunMultipiler = cbs.BaseRunMultiplier;
+        Level = SyncModule.StatInfo.Level;
+        MaxHp = SyncModule.StatInfo.MaxHp;
+        Hp = SyncModule.StatInfo.Hp;
+        // Def = cbs.BaseDEF;
+        // AtkSpeed = cbs.BaseAttackSpeed;
+        AtkPower = SyncModule.StatInfo.Attack;
+        // CritRate = cbs.BaseCriticalRate;
+        // CritPower = cbs.BaseCriticalPower;
+        MoveSpeed = SyncModule.StatInfo.Speed;
+        // RunMultipiler = cbs.BaseRunMultiplier;
     }
 
     public void SetCharacterStats(

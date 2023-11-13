@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class DataContainer : MonoBehaviour
 {
-    [SerializeField]
     public Inventory1 Inven { get; }
 
     [field: SerializeField]
@@ -25,4 +24,7 @@ public class DataContainer : MonoBehaviour
 
     [field: SerializeField]
     public HealthSystem Health { get; protected set; }
+
+    [field: SerializeField]
+    public SyncModule SyncModule { get; protected set; }
 }

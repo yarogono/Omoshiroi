@@ -82,9 +82,9 @@ public partial class PacketHandler
             return;
         }
 
-        CharacterStats stats = gameObject.GetComponent<DataContainer>().Stats;
+        SyncModule syncModule = gameObject.GetComponent<SyncModule>();
 
-        stats.Hp = changeHpPacket.CurrentHp;
+        syncModule.StatInfo.Hp = changeHpPacket.CurrentHp;
     }
 
     public static void S_AimHandler(PacketSession session, IMessage packet)
