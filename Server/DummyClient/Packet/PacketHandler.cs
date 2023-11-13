@@ -54,4 +54,29 @@ class PacketHandler
     {
 
     }
+
+    internal static void S_AimHandler(PacketSession session, IMessage packet)
+    {
+
+    }
+
+    internal static void S_BattleHandler(PacketSession session, IMessage packet)
+    {
+
+    }
+
+    internal static void S_AttackHandler(PacketSession session, IMessage packet)
+    {
+
+    }
+
+    internal static void S_FarmingBoxSpawnHandler(PacketSession session, IMessage packet)
+    {
+
+    }
+
+    internal static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
+    {
+
+    }
 }

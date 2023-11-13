@@ -6,7 +6,7 @@ using Server;
 using ServerCore;
 
 
-class PacketHandler
+partial class PacketHandler
 {
     public static void C_EnterGameHandler(PacketSession session, IMessage packet)
     {
@@ -50,7 +50,6 @@ class PacketHandler
         if (room == null)
             return;
 
-        //Console.WriteLine($"ID: {player.Id}  X: {movePacket.PosInfo.PosX} Y: {movePacket.PosInfo.PosY} Z : {movePacket.PosInfo.PosZ}");
         room.Push(room.HandleMove, player, movePacket);
     }
 
@@ -73,9 +72,9 @@ class PacketHandler
         room.Push(room.LeaveGame, leaveGamePacket.PlayerId);
     }
 
-    public static void C_HpDamageHandler(PacketSession session, IMessage packet)
+    public static void C_ChangeHpHandler(PacketSession session, IMessage packet)
     {
-        C_HpDamage hpDamagePacket = (C_HpDamage)packet;
+        C_ChangeHp hpDamagePacket = (C_ChangeHp)packet;
         ClientSession clientSession = (ClientSession)session;
 
         if (hpDamagePacket == null)
@@ -85,7 +84,8 @@ class PacketHandler
         if (player == null)
             return;
 
-        if (player.Id != clientSession.MyPlayer.Id)
+        GameRoom room = player.Room;
+        if (room == null) 
             return;
 
         player.HpDamage(hpDamagePacket);
@@ -146,35 +146,5 @@ class PacketHandler
             return;
 
         room.Push(room.HandleAttack, player, attackPacket);
-    }
-
-
-    public static void C_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
-    {
-        C_FarmingBoxOpen farmingBoxOpenPacket = (C_FarmingBoxOpen)packet;
-        ClientSession clientSession = (ClientSession)session;
-
-        if (farmingBoxOpenPacket == null)
-            return;
-
-        Player player = clientSession.MyPlayer;
-        if (player == null)
-            return;
-
-    }
-
-
-    public static void C_FarmingBoxCloseHandler(PacketSession session, IMessage packet)
-    {
-        C_FarmingBoxClose farmingBoxClosePacket = (C_FarmingBoxClose)packet;
-        ClientSession clientSession = (ClientSession)session;
-
-        if (farmingBoxClosePacket == null)
-            return;
-
-        Player player = clientSession.MyPlayer;
-        if (player == null)
-            return;
-
     }
 }
