@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf;
+using Google.Protobuf.Collections;
 using Google.Protobuf.Protocol;
 using Server.Game.Object;
 using System;
@@ -10,11 +11,14 @@ namespace Server.Game.Room
         public int RoomId { get; set; }
 
         Dictionary<int, Player> _players = new Dictionary<int, Player>();
+        Dictionary<int, FarmingBox> _farmingBox = new Dictionary<int, FarmingBox>();
 
-
-        public void Init(int mapId)
+        public void Init()
         {
-            //EnterGame(monster);
+            FarmingBox farmingBox = ObjectManager.Instance.Add<FarmingBox>();
+            farmingBox.items.Add(new FarmingBoxItem() { ItemId = 10001, Quantity = 2 });
+            farmingBox.items.Add(new FarmingBoxItem() { ItemId = 10001, Quantity = 1 });
+            _farmingBox.Add(farmingBox.Id, farmingBox);
         }
 
         // 누군가 주기적으로 호출해줘야 한다
@@ -55,6 +59,11 @@ namespace Server.Game.Room
 
                 {
                     S_FarmingBoxSpawn farmingBoxSpawnPacket = new S_FarmingBoxSpawn();
+                    ObjectInfo objectInfo = new ObjectInfo();
+                    objectInfo.PosInfo = new PositionInfo() { PosX = 2, PosY = 0, PosZ = 2 };
+                    farmingBoxSpawnPacket.BoxInfos.Add(objectInfo);
+
+                    Broadcast(farmingBoxSpawnPacket);
                 }
             }
 
@@ -167,6 +176,14 @@ namespace Server.Game.Room
             return null;
         }
 
+        public FarmingBox FindFarmingBox(int farmingBoxId)
+        {
+            FarmingBox findFarmingBox = null;
+            _farmingBox.TryGetValue(farmingBoxId, out findFarmingBox);
+
+            return findFarmingBox;
+        }
+
         public void Broadcast(IMessage packet)
         {
             foreach (Player p in _players.Values)
@@ -182,6 +199,43 @@ namespace Server.Game.Room
                 if (p.Id != exceptPlayerId)
                     p.Session.Send(packet);
             }
+        }
+
+        internal void FarmingBoxOpen(Player player, int farmingBoxId)
+        {
+            FarmingBox farmingBox = FindFarmingBox(farmingBoxId);
+            if (farmingBox == null)
+                return;
+
+            if (farmingBox.IsOpen == true)
+                return;
+
+            S_FarmingBoxOpen resFarmingBoxOpenPacket = new S_FarmingBoxOpen();
+            resFarmingBoxOpenPacket.FarmingBoxId = farmingBox.Id;
+            resFarmingBoxOpenPacket.IsOpen = farmingBox.IsOpen;
+
+            foreach (FarmingBoxItem item in farmingBox.items)
+                resFarmingBoxOpenPacket.Items.Add(item);
+
+            player.Session.Send(resFarmingBoxOpenPacket);
+
+            if (farmingBox.IsOpen == false)
+                farmingBox.IsOpen = true;
+        }
+
+        internal void FarmingBoxClose(C_FarmingBoxClose farmingBoxClosePacket)
+        {
+            int farmingBoxId = farmingBoxClosePacket.FarmingBoxId;
+            FarmingBox farmingBox = FindFarmingBox(farmingBoxId);
+            if (farmingBox == null)
+                return;
+
+            farmingBox.items.Clear();
+            foreach (var item in farmingBoxClosePacket.Items)
+                farmingBox.items.Add(item);
+
+            if (farmingBox.IsOpen == true)
+                farmingBox.IsOpen = false;
         }
     }
 }
