@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterWalkState : CharacterGroundState
 {
+    private bool _needSend;
     public CharacterWalkState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -21,16 +22,26 @@ public class CharacterWalkState : CharacterGroundState
         base.Exit();
         StopAnimation(_stateMachine.Character.AnimationData.WalkParameterHash);
     }
+    public override void Update()
+    {
+        base.Update();
+        if (_needSend)
+        {
+            _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+            _needSend = false;
+        }
 
+    }
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+        if (!_needSend)
+            _needSend = true;
     }
 
     protected override void RunEvent(bool isRun)
     {
-        if(isRun)
+        if (isRun)
         {
             _stateMachine.ChangeState(eStateType.Run);
         }

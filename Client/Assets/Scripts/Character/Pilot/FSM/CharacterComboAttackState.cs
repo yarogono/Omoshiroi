@@ -7,7 +7,7 @@ public class CharacterComboAttackState : CharacterAttackState
     private bool alreadyAppliedForce;
     private bool alreadyApplyCombo;
     private AttackInfo attackInfo;
-
+    private bool _needUpdate;
     public CharacterComboAttackState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -69,7 +69,8 @@ public class CharacterComboAttackState : CharacterAttackState
         {
             if (normalizedTime >= attackInfo.ForceTransitionTime)
                 TryApplyForce();
-            //_stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+            if (_needUpdate)
+                _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.ComboAttack, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
         }
         else
         {
@@ -91,9 +92,8 @@ public class CharacterComboAttackState : CharacterAttackState
             _stateMachine.ChangeState(eStateType.None);
         else
         {
-            float normalizedTime = GetNormalizedTime(_stateMachine.Character.Animator, _stateMachine.LayerInAnimator, "Attack");
-            if (normalizedTime < 1f)
-                _stateMachine.Character.Sync?.SendC_BattlePacket((int)eStateType.Attack, normalizedTime, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+            if (!_needUpdate)
+                _needUpdate = true;
         }
     }
 

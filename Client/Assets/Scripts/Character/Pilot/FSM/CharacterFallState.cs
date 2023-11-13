@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterFallState : CharacterAirState
 {
     private eStateType _nextState;
+    private bool _needSend;
     public CharacterFallState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -19,7 +20,7 @@ public class CharacterFallState : CharacterAirState
         _nextState = _stateMachine.previousStateType;
 
         StartAnimation(_stateMachine.Character.AnimationData.FallParameterHash);
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)eStateType.Fall, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
     }
 
     public override void Exit()
@@ -39,12 +40,18 @@ public class CharacterFallState : CharacterAirState
             _stateMachine.ChangeState(_nextState);
             return;
         }
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)eStateType.Fall, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+        if (_needSend)
+        {
+            _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+            _needSend = false;
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        if (!_needSend)
+            _needSend = true;
     }
 
     protected override void RunEvent(bool isRun)
