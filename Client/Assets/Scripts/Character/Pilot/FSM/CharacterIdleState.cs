@@ -32,7 +32,7 @@ public class CharacterIdleState : CharacterGroundState
     public override void Update()
     {
         base.Update();
-        if (_needUpdate && _stoped)
+        if (_needUpdate && !_stoped)
         {
             if (_stateMachine.Character.Controller.velocity.sqrMagnitude > 0)
                 _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
