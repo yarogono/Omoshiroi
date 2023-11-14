@@ -123,6 +123,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     /// </summary>
     private void SendFarmingBoxOpen()
     {
+        Debug.Log("C_FarmingBoxOpen 패킷 전송");
         C_FarmingBoxOpen fbOpenPacket = new C_FarmingBoxOpen();
         fbOpenPacket.FarmingBoxId = ObjectId;
 
@@ -134,6 +135,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     /// </summary>
     public void SendFarmingBoxClose()
     {
+        Debug.Log("C_FarmingBoxClose 패킷 전송");
         C_FarmingBoxClose fbClosePacket = new C_FarmingBoxClose();
         fbClosePacket.FarmingBoxId = this.gameObject.GetInstanceID(); fbClosePacket.PlayerId = ObjectId;
         FarmingBoxItem fbItem = new FarmingBoxItem();
@@ -153,6 +155,7 @@ public partial class PacketHandler
 {
     public static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
     {
+        Debug.Log("서버에서 S_FarmingBoxOpen 패킷 받아옴");
         S_FarmingBoxOpen FBPacket = packet as S_FarmingBoxOpen;
 
         GameObject gameObject = ObjectManager.Instance.FindById(FBPacket.FarmingBoxId);
@@ -175,10 +178,9 @@ public partial class PacketHandler
 
         RepeatedField<ObjectInfo> FBSpawnInfos = FBPacket.BoxInfos;
 
-        GameObject farmingBox;
-
         foreach (ObjectInfo fb in FBSpawnInfos)
         {
+            Debug.Log($"Object ID ({fb.ObjectId}) 생성 시도 중...");
             //원래는 Instantiate 할 것이 아니라, ObjectPool 에서 관리하면서 SetActive 설정하는 식이 되어야 할 것임.
             //현재는 테스트용으로 별개의 Spawner 를 두고서 Instantiate 하도록 만듦.
             //ObejctID 를 별도로 설정할 수 있는지 모르겠음. 클라이언트 측 객체에도 ObjectID 에 대응되는 멤버변수가 필요하다 생각됨.
@@ -192,7 +194,7 @@ public partial class PacketHandler
 
             //farmingBox.SetActive(true);
 
-            BattleFieldObjectSpawner.instance.SpawnFarmingBox(new Vector3(fb.PosInfo.PosX, fb.PosInfo.PosY, fb.PosInfo.PosZ));
+            BattleFieldObjectSpawner.instance.SpawnFarmingBox(fb.ObjectId, new Vector3(fb.PosInfo.PosX, fb.PosInfo.PosY, fb.PosInfo.PosZ));
         }
     }
 }
