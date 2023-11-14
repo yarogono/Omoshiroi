@@ -5,60 +5,50 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    [field: SerializeField]
-    DataContainer dataContainer;
-    public CharacterStats stats;
-
-    PilotSync Sync;
+    private CharacterStats Stats;
+    private PilotSync Sync;
 
     private void Awake()
     {
-        //stats = dataContainer.Stats;
-        Sync = GetComponent<PilotSync>();
-
-    }
-
-    private void Start()
-    {
-        stats = dataContainer.Stats;
+        Stats = gameObject.GetComponent<DataContainer>().Stats;
+        Sync = gameObject.GetComponent<PilotSync>();
     }
 
     public void TakeDamage(int changeAmount)
-    {    
-        int remain = stats.Hp - changeAmount;
+    {
+        int remain = Stats.Hp - changeAmount;
 
         if (remain <= 0)
         {
             //플레이어 사망 또는 무언가를 처리하는 부분
         }
-        else if (stats.MaxHp < remain)
+        else if (Stats.MaxHp < remain)
         {
             //최대 체력을 초과한 치유 시 처리 부분
         }
         else { }
 
-        stats.Hp = remain;
-        UIController.Instance.HandlerHp(stats.MaxHp, stats.Hp);
-        Sync.SendC_ChangeHpPacket(stats.Hp);
-        
+        Stats.Hp = remain;
+        UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp);
+        Sync.SendC_ChangeHpPacket(Stats.Hp);
     }
 
     public void TakeRecovery(int changeAmount)
     {
-        int remain = stats.Hp + changeAmount;
+        int remain = Stats.Hp + changeAmount;
 
         if (remain <= 0)
         {
             //플레이어 사망 또는 무언가를 처리하는 부분
         }
-        else if (stats.MaxHp < remain)
+        else if (Stats.MaxHp < remain)
         {
             //최대 체력을 초과한 치유 시 처리 부분
         }
         else { }
 
-        UIController.Instance.HandlerHp(stats.Hp,stats.MaxHp);
-        stats.Hp = remain;
-        Sync.SendC_ChangeHpPacket(stats.Hp);
+        UIController.Instance.HandlerHp(Stats.Hp, Stats.MaxHp);
+        Stats.Hp = remain;
+        Sync.SendC_ChangeHpPacket(Stats.Hp);
     }
 }
