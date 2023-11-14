@@ -9,8 +9,13 @@ public class UIController: CustomSingleton<UIController>
 
     LeaveGame leaveGame;
     public  Button BtnLeavGame;
+    public Transform UIRoot;
+    public Button BtnInventory;
+    public Button BtnCancel;
 
-  
+    public GameObject InventoryUI;
+
+
 
     private void Start()
     {
@@ -34,8 +39,7 @@ public class UIController: CustomSingleton<UIController>
 
     void init()
     {
-        Instantiate(HpBar);
-
+        Instantiate(InventoryUI, UIRoot);
     }
 
 
