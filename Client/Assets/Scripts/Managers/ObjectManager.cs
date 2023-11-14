@@ -41,6 +41,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 pilotSync.PosInfo = info.PosInfo;
                 pilotSync.StatInfo = info.StatInfo;
                 pilotSync.State = info.State;
+                pilotSync.InitCharacterStats();
             }
             else
             {
