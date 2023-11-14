@@ -28,7 +28,7 @@ public class CharacterAimState : BaseState
 
     public override void PhysicsUpdate()
     {
-        if (!CheckGround())
+        if (_stateMachine.combineStateMachine.GetCurrentStateType(0) == eStateType.Fall || _stateMachine.combineStateMachine.GetCurrentStateType(0) == eStateType.Dodge)
             _stateMachine.ChangeState(eStateType.None);
     }
 

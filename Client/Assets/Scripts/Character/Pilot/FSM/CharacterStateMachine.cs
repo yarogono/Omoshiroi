@@ -9,6 +9,7 @@ public class CharacterStateMachine : StateMachine
     public CharacterMovement Movement { get; }
     public float CharacterSpeedMultiflier { get => Character.Stats.RunMultipiler; }
     public float CharacterBaseSpeed { get => Character.Stats.MoveSpeed; }
+    public CombineStateMachine combineStateMachine { get; }
 
     // State Info
     public float MovementSpeedMultiflier
@@ -22,12 +23,13 @@ public class CharacterStateMachine : StateMachine
     public int LayerInAnimator { get; }
     public Vector3 AttackDirection { get; set; }
 
-    public CharacterStateMachine(CharacterDataContainer character, int layerInAnimator)
+    public CharacterStateMachine(CombineStateMachine combine, CharacterDataContainer character, int layerInAnimator)
     {
         Character = character;
         InputActions = character.InputActions;
         if (character.Movement != null)
             Movement = character.Movement;
         LayerInAnimator = layerInAnimator;
+        combineStateMachine = combine;
     }
 }

@@ -35,13 +35,16 @@ public class CharacterWalkState : CharacterGroundState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        if (_stateMachine.combineStateMachine.GetCurrentStateType(1) == eStateType.None && _isRunning)
+            _stateMachine.ChangeState(eStateType.Run);
         if (!_needSend)
             _needSend = true;
     }
 
     protected override void RunEvent(bool isRun)
     {
-        if (isRun)
+        base.RunEvent(isRun);
+        if (_isRunning && _stateMachine.combineStateMachine.GetCurrentStateType(1) == eStateType.None)
         {
             _stateMachine.ChangeState(eStateType.Run);
         }
