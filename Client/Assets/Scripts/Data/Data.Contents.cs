@@ -31,8 +31,6 @@ namespace Data
     [Serializable]
     public class MagicItem : BaseMagic
     {
-        public float range;
-        public AttackData attackData;
     }
 
     [Serializable]
