@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmingBoxSpawner : MonoBehaviour
+public class BattleFieldObjectSpawner : MonoBehaviour
 {
-    public static FarmingBoxSpawner instance;
+    public static BattleFieldObjectSpawner instance;
     public GameObject farmingBox;
 
     private void Awake()
@@ -14,6 +14,7 @@ public class FarmingBoxSpawner : MonoBehaviour
 
     public void SpawnFarmingBox(Vector3 pos)
     {
-        Instantiate(farmingBox, pos, Quaternion.Euler(0,0,0));
+        GameObject fb = Instantiate(farmingBox, pos, Quaternion.Euler(0,0,0));
+        fb.SetActive(true);
     }
 }
