@@ -764,10 +764,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623297b9daf8f4935a51edb75ca38800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 5980317487935585845}
   dataContainer: {fileID: 0}
   stats:
     <cbs>k__BackingField: {fileID: 0}
-  healthBar: {fileID: 5980317487935585845}
   TestText1: {fileID: 3839627925965679978}
   TestText2: {fileID: 1173170477804780311}
   TestText3: {fileID: 1508650048031691851}
