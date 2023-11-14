@@ -12,11 +12,12 @@ namespace Inventory
 
     public class InventoryController : MonoBehaviour
     {
+        [SerializeField]
+        GameObject Charicter;
 
       
         [SerializeField]
         private List<InventoryItem> ItemList = new List<InventoryItem>();
-
         [SerializeField]
         private UIInventoryPage inventoryUI;
 
@@ -25,23 +26,24 @@ namespace Inventory
 
         public List<InventoryItem> initialItems = new List<InventoryItem>();
    
-        public Button BtnInventory;
+       
 
-        public Button BtnCancel;
-
-        UIInventoryPage _inventorypage;
+       
 
 
         private void Awake()
         {
+          
            
         }
         private void Start()
         {
+
+           
             PrepareUI();
 
             AddItemsFromServer(SceneController.items);
-            BtnInventory.onClick.AddListener(() =>
+            UIController.Instance.BtnInventory.onClick.AddListener(() =>
             {
                 if (inventoryUI.isActiveAndEnabled == false)
                 {
@@ -60,7 +62,7 @@ namespace Inventory
                 }
             });
 
-            BtnCancel.onClick.AddListener(() =>
+            UIController.Instance.BtnCancel.onClick.AddListener(() =>
             {
                 inventoryUI.Hide();
             });
@@ -144,7 +146,7 @@ namespace Inventory
             IItemAction itemAction = inventoryItem.item as IItemAction;
             if (itemAction != null)
             {
-               itemAction.PerformAction(gameObject);
+               itemAction.PerformAction(Charicter); // 소비아이템 사용 
              
                 if (inventoryData.GetItemAt(itemIndex).IsEmpty)
                 {

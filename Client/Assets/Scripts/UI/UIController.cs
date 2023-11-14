@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController: MonoBehaviour
+public class UIController: CustomSingleton<UIController>
 {
     public Slider HpBar;
 
-    private float MaxHp;
-     private float CurHp;
     LeaveGame leaveGame;
     public  Button BtnLeavGame;
-    [SerializeField] private DataContainer dataContainer;
+    public Transform UIRoot;
+    public Button BtnInventory;
+    public Button BtnCancel;
+
+    public GameObject InventoryUI;
 
 
-   
+
     private void Start()
     {
-        InitHpbar(dataContainer);
+        init();
 
         leaveGame = GetComponent<LeaveGame>();
 
@@ -32,26 +34,26 @@ public class UIController: MonoBehaviour
                 Debug.LogError("Component null");
             }
         });
+       
+    }
+
+    void init()
+    {
+        Instantiate(InventoryUI, UIRoot);
     }
 
 
-    private void Update()
+    public  void HandlerHp(float MaxHp ,float CurHp)
     {
-       //HandlerHp();
-    }
-
-    public  void HandlerHp()
-    {
-        //MaxHp = (float)dataContainer.Health.stats.MaxHp;
-        //CurHp = (float)dataContainer.Health.stats.Hp;
+        Debug.Log(MaxHp);
         HpBar.value = Mathf.Lerp(HpBar.value, (float)CurHp / (float)MaxHp, Time.deltaTime * 10);
+        Debug.Log(CurHp);
     }
 
-    public void InitHpbar(DataContainer dataContainer)
+    public void InitHpbar(float MaxHp, float CurHp)
     {
-        
-        //MaxHp = (float)dataContainer.Health.stats.MaxHp;
-        //CurHp = (float)dataContainer.Health.stats.Hp;
+
         HpBar.value = CurHp / MaxHp;
     }
+   
 }

@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac6b864f71c859e4d8d54dc062f337be, type: 3}
-  m_Name: Bag
+  m_Name: Potion
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 616442665, guid: b216e219fe97ed9479e9b76889837dfc, type: 3}
+  itemIcon: {fileID: 21300000, guid: c4767f548b169934aa4cd57008a057ed, type: 3}
   objectPrefab: {fileID: 0}
   itemID: 200001
-  itemName: Bag
-  description: Bag
+  itemName: Potion
+  description: reagain 10Health
   itemType: 4
   maxStack: 99
   isStackable: 1
-  modifiersData: []
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: d74f311619209a94f88f5eb126308738, type: 2}
+    value: 10
