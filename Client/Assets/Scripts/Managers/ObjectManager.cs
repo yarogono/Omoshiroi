@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObjectManager : CustomSingleton<ObjectManager>
 {
     public PilotSync pilotSync { get; set; }
-    Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
+    readonly Dictionary<int, GameObject> _objects = new();
 
     public static GameObjectType GetObjectTypeById(int id)
     {
@@ -20,11 +20,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
         if (objectType == GameObjectType.Player)
         {
-            Vector3 S_Position = new Vector3(
-                info.PosInfo.PosX,
-                info.PosInfo.PosY,
-                info.PosInfo.PosZ
-            );
+            Vector3 S_Position = new(info.PosInfo.PosX, info.PosInfo.PosY, info.PosInfo.PosZ);
 
             if (pilotPlayer)
             {
@@ -35,9 +31,15 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
+                // TODO
+                // 추후에 RestAPI 통신을 통해 받아온 스탯 (Clone과 공유하지 않는)과
+                // Packet 통신으로 받아온 스탯 (Clone과 공유하는) 을 결합할 예정
+
                 pilotSync = gameObject.GetComponent<PilotSync>();
                 pilotSync.Id = info.ObjectId;
+                pilotSync.Name = info.Name;
                 pilotSync.PosInfo = info.PosInfo;
+                pilotSync.StatInfo = info.StatInfo;
                 pilotSync.State = info.State;
             }
             else
@@ -52,9 +54,14 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 _objects.Add(info.ObjectId, gameObject);
 
+                // TODO
+                // Packet 통신으로 받아온 스탯만 결합할 예정
+
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
+                cloneSync.Name = info.Name;
                 cloneSync.PosInfo = info.PosInfo;
+                cloneSync.StatInfo = info.StatInfo;
                 cloneSync.State = info.State;
                 cloneSync.CallMoveEvent(cloneSync.State, cloneSync.PosInfo, cloneSync.VelInfo);
             }
