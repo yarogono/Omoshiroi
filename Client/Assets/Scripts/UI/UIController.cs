@@ -45,6 +45,7 @@ public class UIController: CustomSingleton<UIController>
 
     public  void HandlerHp(float MaxHp ,float CurHp)
     {
+        Debug.Log(MaxHp);
         HpBar.value = Mathf.Lerp(HpBar.value, (float)CurHp / (float)MaxHp, Time.deltaTime * 10);
         Debug.Log(CurHp);
     }

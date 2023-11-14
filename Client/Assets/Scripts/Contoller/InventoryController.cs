@@ -18,7 +18,7 @@ namespace Inventory
       
         [SerializeField]
         private List<InventoryItem> ItemList = new List<InventoryItem>();
-      
+        [SerializeField]
         private UIInventoryPage inventoryUI;
 
         [SerializeField]
@@ -39,7 +39,7 @@ namespace Inventory
         private void Start()
         {
 
-            inventoryUI = UIController.Instance.InventoryUI.gameObject.GetComponent<UIInventoryPage>();
+           
             PrepareUI();
 
             AddItemsFromServer(SceneController.items);
@@ -146,7 +146,7 @@ namespace Inventory
             IItemAction itemAction = inventoryItem.item as IItemAction;
             if (itemAction != null)
             {
-               itemAction.PerformAction(gameObject); // 소비아이템 사용 
+               itemAction.PerformAction(Charicter); // 소비아이템 사용 
              
                 if (inventoryData.GetItemAt(itemIndex).IsEmpty)
                 {

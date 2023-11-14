@@ -13,12 +13,18 @@ public class HealthSystem : MonoBehaviour
 
     private void Awake()
     {
-        stats = dataContainer.Stats;
+        //stats = dataContainer.Stats;
         Sync = GetComponent<PilotSync>();
+
+    }
+
+    private void Start()
+    {
+        stats = dataContainer.Stats;
     }
 
     public void TakeDamage(int changeAmount)
-    {
+    {    
         int remain = stats.Hp - changeAmount;
 
         if (remain <= 0)
@@ -32,7 +38,9 @@ public class HealthSystem : MonoBehaviour
         else { }
 
         stats.Hp = remain;
+        UIController.Instance.HandlerHp(stats.MaxHp, stats.Hp);
         Sync.SendC_ChangeHpPacket(stats.Hp);
+        
     }
 
     public void TakeRecovery(int changeAmount)
