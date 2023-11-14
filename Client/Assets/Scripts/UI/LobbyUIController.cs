@@ -32,4 +32,9 @@ public class LobbyUIController : MonoBehaviour
         UIReadyToBattle.SetActive(false);    
     }
 
+    public void OpenOption()
+    {
+        var ui = UIManager.Instance.ShowUI<UIOption>();
+    }
+
 }
