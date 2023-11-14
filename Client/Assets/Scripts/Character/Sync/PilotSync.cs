@@ -50,7 +50,7 @@ public class PilotSync : SyncModule
             VelZ = velInfo.z,
         };
 
-        C_Aim aimPacket = new C_Aim { State = State, VelInfo = VelInfo };
+        C_Aim aimPacket = new() { State = State, VelInfo = VelInfo };
         NetworkManager.Instance.Send(aimPacket);
     }
 
@@ -66,6 +66,7 @@ public class PilotSync : SyncModule
             PosY = posInfo.y,
             PosZ = posInfo.z
         };
+
         VelInfo = new VelocityInfo
         {
             VelX = velInfo.x,
@@ -73,13 +74,15 @@ public class PilotSync : SyncModule
             VelZ = velInfo.z,
         };
 
-        C_Battle battlePacket = new C_Battle
-        {
-            State = State,
-            AnimTime = animTime,
-            PosInfo = PosInfo,
-            VelInfo = VelInfo
-        };
+        C_Battle battlePacket =
+            new()
+            {
+                State = State,
+                AnimTime = animTime,
+                PosInfo = PosInfo,
+                VelInfo = VelInfo
+            };
+
         NetworkManager.Instance.Send(battlePacket);
     }
 
@@ -111,7 +114,7 @@ public class PilotSync : SyncModule
 
     public void SendC_ChangeHpPacket(int currentHp)
     {
-        C_ChangeHp changeHpPacket = new C_ChangeHp { CurrentHp = currentHp };
+        C_ChangeHp changeHpPacket = new() { CurrentHp = currentHp };
         NetworkManager.Instance.Send(changeHpPacket);
     }
 }
