@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterComboAttackState : CharacterAttackState
@@ -84,6 +82,10 @@ public class CharacterComboAttackState : CharacterAttackState
             _stateMachine.Character.transform.position,
             _stateMachine.AttackDirection
         );
+
+        // DateTime dateTime = System.DateTime.Now;
+        // Debug.Log($"{dateTime.Ticks / 10000 % 1000000000}");
+
         _stateMachine.Character.Sync?.SendC_AttackPacket(
             ComboIndex,
             _stateMachine.Character.transform.position,
