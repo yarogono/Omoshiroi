@@ -105,6 +105,12 @@ public class CombineCloneStatemachine
         AttackManager.Instance.RqAttack(comboIndex, _stateMachine[0].Clone, position, direction);
     }
 
+    public void CloneMakeAttackAreaEvent(int comboIndex, Vector3 position, Vector3 direction)
+    {
+        // 공격 생성
+        AttackManager.Instance.RqAttack(comboIndex, _stateMachine[0].Clone, position, direction);
+    }
+
     public void CloneMoveEvent(int state, Vector3 posInfo, Vector3 velInfo)
     {
         // 걷기, 달리기, 낙하
@@ -125,11 +131,24 @@ public class CombineCloneStatemachine
         }
     }
 
+    public void CloneDodgeEvent(int state, Vector3 posInfo, Vector3 velInfo)
+    {
+        // 회피 애니메이션 시작
+        if (_stateMachine[0].currentStateType != eStateType.Dodge)
+            ChangeState(eStateType.Dodge);
+    }
+
+    public void CloneComboAttackEvent(int comboindex, Vector3 posInfo, Vector3 dirInfo)
+    {
+        // 공격 애니메이션 시작
+        if (_stateMachine[1].currentStateType != eStateType.ComboAttack)
+            ChangeState(eStateType.ComboAttack);
+    }
+
     public void CloneAimEvent(int state, Vector3 velInfo)
     {
-        // 조준
-        eStateType type = (eStateType)state;
-        if (_stateMachine[1].currentStateType != type)
-            ChangeState(type);
+        // 조준 애니메이션 시작
+        if (_stateMachine[1].currentStateType != eStateType.Aim)
+            ChangeState(eStateType.Aim);
     }
 }
