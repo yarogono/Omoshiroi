@@ -9,7 +9,9 @@ public class CloneSync : SyncModule
     public event Action<int, Vector3, Vector3> OnMoveEvent;
     public event Action<int, Vector3> OnAimEvent;
     public event Action<int, float, Vector3, Vector3> OnBattleEvent;
-    public event Action<int, Vector3, Vector3> OnAttackEvent;
+    public event Action<int, Vector3, Vector3> OnMakeAttackAreaEvent;
+    public event Action<int, Vector3, Vector3> OnComboAttackEvent;
+    public event Action<Vector3, Vector3> OnDodgeEvent;
 
     protected override void Update()
     {
@@ -43,12 +45,29 @@ public class CloneSync : SyncModule
             ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
             ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
         );
-        Debug.Log($"Clone Battle ({animTime}) ({velInfo.VelX},{velInfo.VelY},{velInfo.VelZ})");
     }
 
-    public void CallAttackEvent(int comboIndex, PositionInfo posInfo, VelocityInfo velInfo)
+    // TODO : Protocol 수정 이후 CallBattleEvent 삭제
+    public void CallComboAttackEvent(int comboindex, PositionInfo posInfo, DirectionInfo dirInfo)
     {
-        OnAttackEvent?.Invoke(
+        OnComboAttackEvent?.Invoke(
+            ComboIndex,
+            ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
+            ToVector3(dirInfo.DirX, dirInfo.DirY, dirInfo.DirZ)
+        );
+    }
+
+    public void CallDodgeEvent(PositionInfo posInfo, VelocityInfo velInfo)
+    {
+        OnDodgeEvent?.Invoke(
+            ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
+            ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)
+        );
+    }
+
+    public void CallMakeAttackAreaEvent(int comboIndex, PositionInfo posInfo, VelocityInfo velInfo)
+    {
+        OnMakeAttackAreaEvent?.Invoke(
             comboIndex,
             ToVector3(posInfo.PosX, posInfo.PosY, posInfo.PosZ),
             ToVector3(velInfo.VelX, velInfo.VelY, velInfo.VelZ)

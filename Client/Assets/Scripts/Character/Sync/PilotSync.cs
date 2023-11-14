@@ -86,6 +86,43 @@ public class PilotSync : SyncModule
         NetworkManager.Instance.Send(battlePacket);
     }
 
+    // TODO : Protocol 수정 이후 SendC_BattlePacket 삭제
+    // public void SendC_ComboAttackPacket(int comboIndex, Vector3 posInfo, Vector3 dirInfo)
+    // {
+    //     ComboIndex = comboIndex;
+
+    //     PosInfo = new PositionInfo
+    //     {
+    //         PosX = posInfo.x,
+    //         PosY = posInfo.y,
+    //         PosZ = posInfo.z
+    //     };
+
+    //     DirInfo = new DirectionInfo
+    //     {
+    //         DirX = dirInfo.x,
+    //         DirY = dirInfo.y,
+    //         DirZ = dirInfo.z
+    //     };
+    // }
+
+    // public void SendC_DodgePacket(Vector3 posInfo, Vector3 velInfo)
+    // {
+    //     PosInfo = new PositionInfo
+    //     {
+    //         PosX = posInfo.x,
+    //         PosY = posInfo.y,
+    //         PosZ = posInfo.z
+    //     };
+
+    //     VelInfo = new VelocityInfo
+    //     {
+    //         VelX = velInfo.x,
+    //         VelY = velInfo.y,
+    //         VelZ = velInfo.z,
+    //     };
+    // }
+
     public void SendC_AttackPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo)
     {
         ComboIndex = comboIndex;

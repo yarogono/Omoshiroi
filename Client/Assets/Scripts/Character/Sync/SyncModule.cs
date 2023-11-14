@@ -93,11 +93,6 @@ public class SyncModule : MonoBehaviour
         }
     }
 
-    public Vector3 PosInfoToVec3
-    {
-        get { return new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ); }
-    }
-
     private readonly VelocityInfo _velInfo = new();
     public VelocityInfo VelInfo
     {
@@ -107,15 +102,30 @@ public class SyncModule : MonoBehaviour
             if (_velInfo.Equals(value))
                 return;
 
-            VelInfo.VelX = value.VelX;
-            VelInfo.VelY = value.VelY;
-            VelInfo.VelZ = value.VelZ;
+            _velInfo.VelX = value.VelX;
+            _velInfo.VelY = value.VelY;
+            _velInfo.VelZ = value.VelZ;
         }
     }
 
     public Vector3 ToVector3(float x, float y, float z)
     {
         return new Vector3(x, y, z);
+    }
+
+    public DirectionInfo _dirInfo = new();
+    public DirectionInfo DirInfo
+    {
+        get { return _dirInfo; }
+        set
+        {
+            if (_dirInfo.Equals(value))
+                return;
+
+            _dirInfo.DirX = value.DirX;
+            _dirInfo.DirY = value.DirY;
+            _dirInfo.DirZ = value.DirZ;
+        }
     }
 
     public RectTransform healthBar;

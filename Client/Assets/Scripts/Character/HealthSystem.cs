@@ -8,10 +8,9 @@ public class HealthSystem : MonoBehaviour
     private CharacterStats Stats;
     private PilotSync Sync;
 
-    private void Awake()
+    private void Start()
     {
         Stats = gameObject.GetComponent<DataContainer>().Stats;
-        Sync = gameObject.GetComponent<PilotSync>();
     }
 
     public void TakeDamage(int changeAmount)
