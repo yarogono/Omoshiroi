@@ -28,8 +28,8 @@ enum MsgId {
 	C_FARMING_BOX_CLOSE = 20;
 	S_PING = 21;
 	C_PONG = 22;
-	C_Dodge = 23;
-	S_Dodge = 24;
+	C_DODGE = 23;
+	S_DODGE = 24;
 }
 
 enum GameObjectType {

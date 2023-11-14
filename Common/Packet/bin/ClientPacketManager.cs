@@ -48,7 +48,9 @@ class PacketManager
 		_onRecv.Add((ushort)MsgId.SFarmingBoxOpen, MakePacket<S_FarmingBoxOpen>);
 		_handler.Add((ushort)MsgId.SFarmingBoxOpen, PacketHandler.S_FarmingBoxOpenHandler);		
 		_onRecv.Add((ushort)MsgId.SPing, MakePacket<S_Ping>);
-		_handler.Add((ushort)MsgId.SPing, PacketHandler.S_PingHandler);
+		_handler.Add((ushort)MsgId.SPing, PacketHandler.S_PingHandler);		
+		_onRecv.Add((ushort)MsgId.SDodge, MakePacket<S_Dodge>);
+		_handler.Add((ushort)MsgId.SDodge, PacketHandler.S_DodgeHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
