@@ -12,13 +12,10 @@ namespace Inventory
 
     public class InventoryController : MonoBehaviour
     {
-        //[SerializeField]
-        //GameObject Charicter;
 
 
         [SerializeField]
         private List<InventoryItem> ItemList = new List<InventoryItem>();
-        //[SerializeField]
         private UIInventoryPage inventoryUI;
 
         [SerializeField]
@@ -31,16 +28,13 @@ namespace Inventory
 
 
 
-        private void Awake()
-        {
 
-
-        }
         private void Start()
         {
 
             inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>();
-            UIController.Instance.InventoryUI = inventoryUI.gameObject;
+            UIController.Instance.InventoryUI = inventoryUI.gameObject;          
+            UIController.Instance.InventoryUI.SetActive(false);
             UIController.Instance.BtnCancel = inventoryUI.CancleBtn;
 
             PrepareUI();

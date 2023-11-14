@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
-    CharacterStats stats;
+   public CharacterStats stats;
 
     public int Id { get; set; }
 

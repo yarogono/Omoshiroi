@@ -20,7 +20,7 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
-        stats = dataContainer.Stats;
+        stats = dataContainer.Stats.SyncModule.stats;
     }
 
     public void TakeDamage(int changeAmount)
@@ -57,7 +57,7 @@ public class HealthSystem : MonoBehaviour
         }
         else { }
 
-        UIController.Instance.HandlerHp(stats.Hp,stats.MaxHp);
+        UIController.Instance.HandlerHp(stats.MaxHp,stats.Hp);
         stats.Hp = remain;
         Sync.SendC_ChangeHpPacket(stats.Hp);
     }
