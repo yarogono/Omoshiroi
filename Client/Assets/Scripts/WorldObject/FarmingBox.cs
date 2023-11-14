@@ -19,10 +19,12 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     [SerializeField] private InventoryController_FB inventoryController;
 
     private Collider farmingBoxCollider;
-    private Ray ray;
+    
 
     public Dictionary<int, InventoryItem> ItemList { get; private set; }
     public int InventorySize { get { return inventorySize; } private set { inventorySize = value; } }
+
+
 
     public Action OnOpened;
     public Action OnClosed;
@@ -152,10 +154,14 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
         fbClose.FarmingBoxId = this.gameObject.GetInstanceID(); fbClose.PlayerId = 0; //C_FarmingBoxClose.Items 는 ADD 로 세팅한다. 플레이어가 먹은 아이템에 대한 정보만 보내도록 한다.
     }
 
+    /// <summary>
+    /// FarmingBox 가 부착된 오브젝트 클릭/터치 시 서버와 통신하고 파밍박스를 연다. 누군가가 열어보는 중이라면 열 수 없다.
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerDown(PointerEventData eventData)
     {
         SendFarmingBoxOpen();
-        inventoryController.OpenInventoryUI();
+        //inventoryController.OpenInventoryUI();
     }
 }
 
