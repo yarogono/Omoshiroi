@@ -154,7 +154,7 @@ public partial class PacketHandler
 
     public static void S_MakeAttackAreaHandler(PacketSession session, IMessage packet)
     {
-        S_MakeAttackArea makeAttackAreaPacket = packet as S_Attack;
+        S_MakeAttackArea makeAttackAreaPacket = packet as S_MakeAttackArea;
 
         GameObject gameObject = ObjectManager.Instance.FindById(makeAttackAreaPacket.ObjectId);
 
