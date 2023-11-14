@@ -41,4 +41,14 @@ public class DataManager : CustomSingleton<DataManager>
         TextAsset textAsset = Resources.Load<TextAsset>($"Prefabs/Data/{path}");
         return JsonUtility.FromJson<Loader>(textAsset.text);
     }
+
+    //public BaseItem FindItem(int itemId)
+    //{
+    //    BaseItem baseItem;
+    //    ItemData itemData;
+
+    //    if (ConsumableItemDict.TryGetValue(itemId, out (WeaponItem)itemData)) { return dataManager.ConsumableItemDict.; }
+
+    //    return baseItem;
+    //}
 }
