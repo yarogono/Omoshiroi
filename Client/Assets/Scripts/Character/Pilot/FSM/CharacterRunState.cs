@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class CharacterRunState : CharacterWalkState
 {
-    public bool IsRun { get; private set; }
     public CharacterRunState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
     }
     public override void Enter()
     {
         _stateMachine.MovementSpeedMultiflier = _stateMachine.CharacterSpeedMultiflier;
-        IsRun = true;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.RunParameterHash);
         _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
@@ -23,12 +21,16 @@ public class CharacterRunState : CharacterWalkState
         base.Exit();
         StopAnimation(_stateMachine.Character.AnimationData.RunParameterHash);
     }
-
+    public override void PhysicsUpdate()
+    {
+        if (_stateMachine.combineStateMachine.GetCurrentStateType(1) != eStateType.None)
+            _stateMachine.ChangeState(eStateType.Walk);
+    }
     protected override void RunEvent(bool isRun)
     {
+        base.RunEvent(isRun);
         if (!isRun)
         {
-            IsRun = false;
             _stateMachine.ChangeState(eStateType.Walk);
         }
     }

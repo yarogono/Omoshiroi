@@ -131,17 +131,12 @@ public class SyncModule : MonoBehaviour
         stats = gameObject.GetComponent<DataContainer>().Stats;
     }
 
-    protected virtual void Start()
-    {
-        InitCharacterStats();
-    }
-
     protected virtual void Update()
     {
         DrawInfo();
     }
 
-    protected virtual void InitCharacterStats()
+    public void InitCharacterStats()
     {
         // TODO
         // 추후에 ObjectManager.cs TODO 작업이 끝나면

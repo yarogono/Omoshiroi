@@ -6,9 +6,7 @@ using UnityEngine.Rendering;
 
 public class CharacterIdleState : CharacterGroundState
 {
-    private bool _isRun;
     private bool _needUpdate;
-    private bool _stoped;
     public CharacterIdleState(CharacterStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -16,11 +14,9 @@ public class CharacterIdleState : CharacterGroundState
 
     public override void Enter()
     {
-        _isRun = false;
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.IdleParameterHash);
         _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
-        _stoped = false;
     }
 
     public override void Exit()
@@ -32,13 +28,14 @@ public class CharacterIdleState : CharacterGroundState
     public override void Update()
     {
         base.Update();
-        if (_needUpdate && !_stoped)
+        if (_needUpdate)
         {
             if (_stateMachine.Character.Controller.velocity.sqrMagnitude > 0)
+            {
                 _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+            }
             else
             {
-                _stoped = true;
                 _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, Vector3.zero);
             }
             _needUpdate = false;
@@ -48,7 +45,7 @@ public class CharacterIdleState : CharacterGroundState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (!_needUpdate && !_stoped)
+        if (!_needUpdate && _stateMachine.Character.Controller.velocity.sqrMagnitude > 0)
             _needUpdate = true;
     }
 
@@ -57,7 +54,7 @@ public class CharacterIdleState : CharacterGroundState
         base.MoveEvent(direction);
         if (direction != Vector2.zero)
         {
-            if (_isRun)
+            if (_isRunning && _stateMachine.combineStateMachine.GetCurrentStateType(1) == eStateType.None)
                 _stateMachine.ChangeState(eStateType.Run);
             else
                 _stateMachine.ChangeState(eStateType.Walk);
@@ -66,7 +63,7 @@ public class CharacterIdleState : CharacterGroundState
 
     protected override void RunEvent(bool isRun)
     {
-        _isRun = isRun;
+        base.RunEvent(isRun);
     }
 
     protected override void DodgeEvent()
