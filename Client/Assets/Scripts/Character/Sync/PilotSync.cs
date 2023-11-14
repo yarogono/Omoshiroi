@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Google.Protobuf.Protocol;
-using System;
 
 public class PilotSync : SyncModule
 {

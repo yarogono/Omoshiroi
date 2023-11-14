@@ -115,6 +115,7 @@ public partial class PacketHandler
         {
             return;
         }
+
         if (ObjectManager.Instance.pilotSync.Id == comboAttackPacket.ObjectId)
         {
             return;

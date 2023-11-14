@@ -57,7 +57,6 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 // TODO
                 // Packet 통신으로 받아온 스탯만 결합할 예정
-
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
                 cloneSync.Name = info.Name;
