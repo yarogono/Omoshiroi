@@ -31,12 +31,17 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 gameObject.name = info.Name;
                 _objects.Add(info.ObjectId, gameObject);
 
+                // TODO
+                // 추후에 RestAPI 통신을 통해 받아온 스탯 (Clone과 공유하지 않는)과
+                // Packet 통신으로 받아온 스탯 (Clone과 공유하는) 을 결합할 예정
+
                 pilotSync = gameObject.GetComponent<PilotSync>();
                 pilotSync.Id = info.ObjectId;
                 pilotSync.Name = info.Name;
                 pilotSync.PosInfo = info.PosInfo;
                 pilotSync.StatInfo = info.StatInfo;
                 pilotSync.State = info.State;
+                pilotSync.InitCharacterStats();
             }
             else
             {
@@ -49,6 +54,9 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 );
 
                 _objects.Add(info.ObjectId, gameObject);
+
+                // TODO
+                // Packet 통신으로 받아온 스탯만 결합할 예정
 
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;

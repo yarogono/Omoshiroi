@@ -23,8 +23,6 @@ public class CloneDataContainer : DataContainer
 
     void Start()
     {
-        Stats.UpdateStats();
-
         if (Equipments == null)
             Equipments = new EquipSystem();
 

@@ -4,7 +4,7 @@ using UnityEngine;
 public class BaseState : IState
 {
     protected CharacterStateMachine _stateMachine;
-
+    static protected bool _isRunning;
     public BaseState(CharacterStateMachine stateMachine)
     {
         _stateMachine = stateMachine;
@@ -54,6 +54,7 @@ public class BaseState : IState
     protected virtual void RunEvent(bool isRun)
     {
         // 달리기
+        _isRunning = isRun;
     }
 
     protected virtual void MoveEvent(Vector2 direction)
