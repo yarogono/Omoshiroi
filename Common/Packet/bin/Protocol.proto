@@ -17,10 +17,10 @@ enum MsgId {
 	S_CHANGE_HP = 9;
 	C_AIM = 10;
 	S_AIM = 11;
-	C_BATTLE = 12;
-	S_BATTLE = 13;
-	C_ATTACK = 14;
-	S_ATTACK = 15;
+	C_COMBO_ATTACK = 12;
+	S_COMBO_ATTACK = 13;
+	C_MAKE_ATTACK_AREA = 14;
+	S_MAKE_ATTACK_AREA = 15;
 	S_DIE = 16;
 	S_FARMING_BOX_SPAWN = 17;
 	C_FARMING_BOX_OPEN = 18;
@@ -111,7 +111,7 @@ message S_ComboAttack {
 	int32 objectId = 1;
 	int32 comboIndex = 2;
 	PositionInfo posInfo = 3;
-	VelocityInfo velInfo = 4;
+	DirectionInfo dirInfo = 4;
 }
 
 message C_Dodge {

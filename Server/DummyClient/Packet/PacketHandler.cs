@@ -60,12 +60,12 @@ class PacketHandler
 
     }
 
-    internal static void S_BattleHandler(PacketSession session, IMessage packet)
+    internal static void S_ComboAttackHandler(PacketSession session, IMessage packet)
     {
 
     }
 
-    internal static void S_AttackHandler(PacketSession session, IMessage packet)
+    internal static void S_MakeAttackAreaHandler(PacketSession session, IMessage packet)
     {
 
     }
@@ -84,6 +84,11 @@ class PacketHandler
     }
 
     internal static void S_PingHandler(PacketSession session, IMessage packet)
+    {
+
+    }
+
+    internal static void S_DodgeHandler(PacketSession session, IMessage packet)
     {
 
     }
