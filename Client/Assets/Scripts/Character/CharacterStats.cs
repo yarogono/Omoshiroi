@@ -9,29 +9,20 @@ public class CharacterStats
     public SyncModule SyncModule { get; private set; }
 
     private int level;
-    private int hp;
-    private int maxHp;
-    private int def;
-    private float atkSpeed;
-    private int atkPower;
-    private int critRate;
-    private float critPower;
-    private float runMultipiler;
-
-    private float dodgeTime;
-    private float moveSpeed;
-
     public int Level
     {
         get { return level; }
         set { level = value; }
     }
 
+    private int maxHp;
     public int MaxHp
     {
         get { return maxHp; }
         set { maxHp = value; }
     }
+
+    private int hp;
     public int Hp
     {
         get { return hp; }
@@ -45,59 +36,61 @@ public class CharacterStats
             hp = value;
         }
     }
+
+    private int def;
     public int Def
     {
         get { return def; }
         set { def = value; }
     }
+
+    private float atkSpeed;
     public float AtkSpeed
     {
         get { return atkSpeed; }
         set { atkSpeed = value; }
     }
+
+    private int atkPower;
     public int AtkPower
     {
         get { return atkPower; }
         set { atkPower = value; }
     }
+
+    private int critRate;
     public int CritRate
     {
         get { return critRate; }
         set { critRate = value; }
     }
+
+    private float critPower;
     public float CritPower
     {
         get { return critPower; }
         set { critPower = value; }
     }
+
+    private float moveSpeed;
     public float MoveSpeed
     {
         get { return moveSpeed; }
         set { moveSpeed = value; }
     }
+
+    private float runMultipiler;
     public float RunMultipiler
     {
         get { return runMultipiler; }
         set { runMultipiler = value; }
     }
+
+    private float dodgeTime;
     public float DodgeTime
     {
         get { return dodgeTime; }
         set { dodgeTime = value; }
-    }
-
-    public void UpdateStats()
-    {
-        Level = SyncModule.StatInfo.Level;
-        MaxHp = SyncModule.StatInfo.MaxHp;
-        Hp = SyncModule.StatInfo.Hp;
-        Def = 1;
-        AtkSpeed = 1;
-        AtkPower = SyncModule.StatInfo.Attack;
-        CritRate = 1;
-        CritPower = 1;
-        MoveSpeed = SyncModule.StatInfo.Speed;
-        RunMultipiler = 2;
     }
 
     public void SetCharacterStats(
