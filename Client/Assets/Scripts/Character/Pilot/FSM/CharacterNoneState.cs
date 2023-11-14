@@ -17,7 +17,7 @@ public class CharacterNoneState : BaseState
 
     protected override void AimEvent(Vector2 direction)
     {
-        if (CheckGround())
+        if (_stateMachine.combineStateMachine.GetCurrentStateType(0) != eStateType.Fall)
         {
             if (direction.magnitude >= 100f)
                 _stateMachine.ChangeState(eStateType.Aim);
@@ -27,7 +27,7 @@ public class CharacterNoneState : BaseState
 
     protected override void AttackEvent(Vector2 direction)
     {
-        if (CheckGround())
+        if (_stateMachine.combineStateMachine.GetCurrentStateType(0) != eStateType.Fall)
             _stateMachine.ChangeState(eStateType.ComboAttack);
     }
 }

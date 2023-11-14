@@ -121,7 +121,7 @@ public class CombineCloneStatemachine
         {
             if (_stateMachine[0].currentStateType != type && _stateMachine[1].currentStateType != type)
                 ChangeState(type);
-            SetAnimation(type, animTime);
+            //SetAnimation(type, animTime);
         }
     }
 

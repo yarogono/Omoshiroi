@@ -56,8 +56,7 @@ public class CharacterFallState : CharacterAirState
 
     protected override void RunEvent(bool isRun)
     {
-        if (isRun)
-            _nextState = eStateType.Run;
+        base.RunEvent(isRun);
     }
 
     protected override void MoveEvent(Vector2 direction)
@@ -67,7 +66,9 @@ public class CharacterFallState : CharacterAirState
             _nextState = eStateType.Idle;
         else
         {
-            if (_nextState != eStateType.Run)
+            if (_isRunning)
+                _nextState = eStateType.Run;
+            else
                 _nextState = eStateType.Walk;
         }
     }

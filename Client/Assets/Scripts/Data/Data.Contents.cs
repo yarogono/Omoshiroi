@@ -32,14 +32,36 @@ namespace Data
     [Serializable]
     public class WeaponItemData : ILoader<int, WeaponItem>
     {
-        public List<WeaponItem> WeaponItems = new List<WeaponItem>();
+        public List<WeaponItem> items = new List<WeaponItem>();
 
 
         public Dictionary<int, WeaponItem> MakeDict()
         {
             Dictionary<int, WeaponItem> dict = new Dictionary<int, WeaponItem>();
-            foreach (WeaponItem skill in WeaponItems)
-                dict.Add(skill.id, skill);
+            foreach (WeaponItem item in items)
+                dict.Add(item.id, item);
+            return dict;
+        }
+    }
+    #endregion
+
+    #region MagicItem
+    [Serializable]
+    public class MagicItem : ItemData
+    {
+    }
+
+    [Serializable]
+    public class MagicItemData : ILoader<int, MagicItem>
+    {
+        public List<MagicItem> items = new List<MagicItem>();
+
+
+        public Dictionary<int, MagicItem> MakeDict()
+        {
+            Dictionary<int, MagicItem> dict = new Dictionary<int, MagicItem>();
+            foreach (MagicItem item in items)
+                dict.Add(item.id, item);
             return dict;
         }
     }

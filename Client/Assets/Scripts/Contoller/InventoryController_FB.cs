@@ -222,7 +222,7 @@ namespace Inventory
 
 
         /// <summary>
-        /// 플레이어 인벤토리 정보에 보관함 인벤토리 정보를 덧붙여서 관리하도록 해야 한다.
+        /// 파밍 UI 를 연다.
         /// </summary>
         public void OpenInventoryUI()
         {
