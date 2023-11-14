@@ -124,7 +124,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975190517360250185}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -133,7 +133,7 @@ RectTransform:
   - {fileID: 6587342374338555923}
   - {fileID: 8073877862234764124}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -196,6 +196,7 @@ MonoBehaviour:
   itemDescription: {fileID: 4174477010467926821}
   mouseFollower: {fileID: 8557922516052104389}
   actionPanel: {fileID: 7958851657504529042}
+  CancleBtn: {fileID: 789725410406262395}
 --- !u!1 &2060543718423090962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,7 +1605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
-  item: {fileID: 0}
+  item: {fileID: 2643972568681602757}
 --- !u!1 &6965333955393828871
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2429,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5491452169906501503}
   m_SourcePrefab: {fileID: 100100000, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
+--- !u!114 &2643972568681602757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1226340929728962863, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
+  m_PrefabInstance: {fileID: 3870159566782119914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437387020463360332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c099d96d7dd4ea4cac7a3369f7a23ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2907243542151664127 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2156391924886351381, guid: cb10cc7ce3c704e4b8a8a80c3a94663c, type: 3}
