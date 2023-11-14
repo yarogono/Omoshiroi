@@ -22,9 +22,9 @@ public class NetworkManager : CustomSingleton<NetworkManager>
         string host = Dns.GetHostName();
         IPHostEntry ipHost = Dns.GetHostEntry(host);
         IPAddress ipAddr = IPAddress.Parse(ConfigManager.Config.gameServerIpAddr);
-        IPEndPoint endPoint = new IPEndPoint(ipAddr, ConfigManager.Config.gameServerPort);
+        IPEndPoint endPoint = new(ipAddr, ConfigManager.Config.gameServerPort);
 
-        Connector connector = new Connector();
+        Connector connector = new();
 
         connector.Connect(
             endPoint,
@@ -35,13 +35,22 @@ public class NetworkManager : CustomSingleton<NetworkManager>
             1
         );
 
-        C_EnterGame enterGamePacket = new C_EnterGame { Player = new ObjectInfo() };
-        enterGamePacket.Player.Name = "BAEINHO";
+        C_EnterGame enterGamePacket = new() { Player = new ObjectInfo() };
+        enterGamePacket.Player.Name = "Test_Player";
         enterGamePacket.Player.PosInfo = new PositionInfo()
         {
             PosX = 0,
             PosY = 1.58f,
             PosZ = 0
+        };
+
+        enterGamePacket.Player.StatInfo = new StatInfo()
+        {
+            Level = 99,
+            Hp = 100,
+            MaxHp = 100,
+            Attack = 20,
+            Speed = 2
         };
 
         Send(enterGamePacket);
@@ -76,7 +85,7 @@ public class NetworkManager : CustomSingleton<NetworkManager>
 
         int id = pilotPlayerController.Id;
 
-        C_LeaveGame leaveGamePacket = new C_LeaveGame { PlayerId = id };
+        C_LeaveGame leaveGamePacket = new() { PlayerId = id };
 
         Send(leaveGamePacket);
     }
