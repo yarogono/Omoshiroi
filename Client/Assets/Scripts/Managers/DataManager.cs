@@ -42,13 +42,18 @@ public class DataManager : CustomSingleton<DataManager>
         return JsonUtility.FromJson<Loader>(textAsset.text);
     }
 
-    //public BaseItem FindItem(int itemId)
-    //{
-    //    BaseItem baseItem;
-    //    ItemData itemData;
+    public BaseItem FindItem(int itemId)
+    {
+        BaseItem item;
 
-    //    if (ConsumableItemDict.TryGetValue(itemId, out (WeaponItem)itemData)) { return dataManager.ConsumableItemDict.; }
+        item = WeaponItemDict[itemId]; if (item != null) { return item; }
+        item = MagicItemDict[itemId]; if (item != null) { return item; }
+        item = RuneItemDict[itemId]; if (item != null) { return item; }
+        item = ResourceItemDict[itemId]; if (item != null) { return item; }
+        item = ConsumableItemDict[itemId]; if (item != null) { return item; }
+        item = SkinItemDict[itemId]; if (item != null) { return item; }
 
-    //    return baseItem;
-    //}
+        Debug.Log($"ItemID ({itemId}) 는 존재하지 않는 아이템입니다.");
+        return null;
+    }
 }
