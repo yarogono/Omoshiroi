@@ -11,6 +11,11 @@ public class PilotSync : SyncModule
         base.Update();
     }
 
+    protected override void InitCharacterStats()
+    {
+        base.InitCharacterStats();
+    }
+
     public void SendC_MovePacket(int state, Vector3 posInfo, Vector3 velInfo)
     {
         State = state;

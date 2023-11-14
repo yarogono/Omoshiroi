@@ -1,7 +1,9 @@
 using Google.Protobuf.Protocol;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class SyncModule : MonoBehaviour
@@ -124,11 +126,14 @@ public class SyncModule : MonoBehaviour
     public TextMeshPro TestText4;
     public TextMeshPro TestText5;
 
-    private void Start()
+    protected virtual void Awake()
     {
         stats = gameObject.GetComponent<DataContainer>().Stats;
+    }
 
-        UpdateStats();
+    protected virtual void Start()
+    {
+        InitCharacterStats();
     }
 
     protected virtual void Update()
@@ -136,13 +141,21 @@ public class SyncModule : MonoBehaviour
         DrawInfo();
     }
 
-    private void UpdateStats()
+    protected virtual void InitCharacterStats()
     {
+        // TODO
+        // 추후에 ObjectManager.cs TODO 작업이 끝나면
+        // PilotSync.cs에서 해당 메서드를 오버라이드 하는 식으로 작업할 예정
         stats.Level = StatInfo.Level;
         stats.MaxHp = StatInfo.MaxHp;
         stats.Hp = StatInfo.Hp;
+        stats.Def = 1;
+        stats.AtkSpeed = 1;
         stats.AtkPower = StatInfo.Attack;
+        stats.CritRate = 1;
+        stats.CritPower = 1;
         stats.MoveSpeed = StatInfo.Speed;
+        stats.RunMultipiler = 2;
     }
 
     private void DrawInfo()
