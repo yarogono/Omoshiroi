@@ -170,4 +170,10 @@ public partial class PacketHandler
     // /// 받아오는 별다른 내용이 없으므로, 딱히 처리할 내용도 없을 듯 하다.
     // /// </summary>
     // public static void S_FarmingBoxCloseHandler(PacketSession session, IMessage packet) { }
+
+    public static void S_PingHandler(PacketSession session, IMessage packet) 
+    {
+        C_Pong pongPacket = new C_Pong();
+        NetworkManager.Instance.Send(pongPacket);
+    }
 }
