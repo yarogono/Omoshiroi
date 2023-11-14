@@ -12,6 +12,11 @@ using Google.Protobuf.Collections;
 /// <summary>
 /// 테스트가 용이하도록 임의대로 아이템 스폰을 자체적인 SO 로 관리하도록 해 두었음.
 /// </summary>
+/// 
+
+/// 파밍박스 인벤토리 데이터 요청 패킷을 생성, 서버 측으로 보낸다. 이후, 서버에서 이에 대한 응답을 받아왔다면 
+/// S_FarmingBoxOpenHandler => OpenBox 순서로 실행되며 파밍박스를 열지 말지 결정하게 된다.
+
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerDownHandler
 {
     [SerializeField] private int inventorySize;
@@ -23,8 +28,6 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
 
     public Dictionary<int, InventoryItem> ItemList { get; private set; }
     public int InventorySize { get { return inventorySize; } private set { inventorySize = value; } }
-
-
 
     public Action OnOpened;
     public Action OnClosed;
@@ -47,14 +50,6 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
 
         inventoryController = GetComponent<InventoryController_FB>();
         farmingBoxCollider = GetComponent<Collider>();
-
-        //ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //Physics.Raycast(ray, out RaycastHit hit);
-
-        //if (hit.collider != null && hit.collider == farmingBoxCollider)
-        //    Debug.Log($"Raycast {hit.collider.name}");
-        //else
-        //    Debug.Log("No Collide");
     }
 
     // Update is called once per frame
@@ -72,6 +67,16 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     public void SetItemList(Dictionary<int, InventoryItem> items)
     {
         ItemList = items;
+    }
+
+    /// <summary>
+    /// FarmingBox 를 여는 트리거. FarmingBox 가 부착된 오브젝트 클릭/터치 시 작동한다.
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        SendFarmingBoxOpen();
+        //inventoryController.OpenInventoryUI();
     }
 
     /// <summary>
@@ -95,7 +100,25 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     {
         Debug.Log("파밍박스 인벤토리 데이터 받아옴");
         RepeatedField<FarmingBoxItem> items = FBData.Items;
-        InventoryItem inventoryItem;
+
+        Dictionary<int, InventoryItem> fbItems = new Dictionary<int, InventoryItem>();
+
+        InventoryItem inven;
+
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            //ItemID 로 BaseItem 을 구하고, 파밍박스 인벤토리에 추가한다.
+            inven = new InventoryItem();
+            //inven.item = 
+            inven.quantity = items[i].Quantity;
+
+            fbItems.Add(i, inven);
+        }
+
+        //각 FarmingBox 의 itemId 를 이용해 InventoryItem 타입으로 가공한다.
+
+        //이를 Dictionary 형태로 변경한다.
 
         for (int i = 0; i < items.Count; i++)
         {
@@ -139,30 +162,42 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     }
 
     /// <summary>
-    /// 현재 FarmingBox 의 object ID 를 함께 보내게 될 텐데, 이걸 어떻게 알 수 있는가?
+    /// 파밍박스 인벤토리 데이터 요청 패킷을 생성, 서버 측으로 보낸다. 이후, 서버에서 이에 대한 응답을 받아왔다면 
+    /// S_FarmingBoxOpenHandler => OpenBox 순서로 실행되며 파밍박스를 열지 말지 결정하게 된다.
     /// </summary>
-    /// <param name="items"></param>
     private void SendFarmingBoxOpen()
     {
-        C_FarmingBoxOpen fbOpen = new C_FarmingBoxOpen();
-        fbOpen.FarmingBoxId = 0;
-    }
+        C_FarmingBoxOpen fbOpenPacket = new C_FarmingBoxOpen();
+        fbOpenPacket.FarmingBoxId = ObjectId;
 
-    public void SendFarmingBoxClose()
-    {
-        C_FarmingBoxClose fbClose = new C_FarmingBoxClose();
-        fbClose.FarmingBoxId = this.gameObject.GetInstanceID(); fbClose.PlayerId = 0; //C_FarmingBoxClose.Items 는 ADD 로 세팅한다. 플레이어가 먹은 아이템에 대한 정보만 보내도록 한다.
+        NetworkManager.Instance.Send(fbOpenPacket);
     }
 
     /// <summary>
-    /// FarmingBox 가 부착된 오브젝트 클릭/터치 시 서버와 통신하고 파밍박스를 연다. 누군가가 열어보는 중이라면 열 수 없다.
+    /// 서버 측의 파밍박스 인벤토리 데이터 갱신 요청 패킷을 생성, 서버 측으로 보낸다. 서버는 별도의 응답을 하지 않는다.
     /// </summary>
-    /// <param name="eventData"></param>
-    public void OnPointerDown(PointerEventData eventData)
+    public void SendFarmingBoxClose()
     {
-        SendFarmingBoxOpen();
-        //inventoryController.OpenInventoryUI();
+        C_FarmingBoxClose fbClosePacket = new C_FarmingBoxClose();
+        fbClosePacket.FarmingBoxId = this.gameObject.GetInstanceID(); fbClosePacket.PlayerId = ObjectId;
+        FarmingBoxItem fbItem = new FarmingBoxItem();
+        InventoryItem invenItem;
+        foreach (KeyValuePair<int, InventoryItem> item in ItemList)
+        {
+            invenItem = item.Value;
+            fbItem.ItemId = invenItem.item.ItemID; fbItem.Quantity = invenItem.quantity;
+            fbClosePacket.Items.Add(fbItem);
+        }
+
+        NetworkManager.Instance.Send(fbClosePacket);
     }
+
+    //private BaseItem FindItem(int itemId)
+    //{
+    //    DataManager dataManager = DataManager.Instance;
+    //    BaseItem item;
+    //    if (dataManager.ConsumableItemDict.TryGetValue(itemId, out item)) { return dataManager.ConsumableItemDict.; }
+    //}
 }
 
 public partial class PacketHandler
@@ -173,8 +208,10 @@ public partial class PacketHandler
 
         GameObject gameObject = ObjectManager.Instance.FindById(FBPacket.FarmingBoxId);
 
+        //해당 ID 를 가지는 파밍박스가 존재하지 않는다면 작동하지 않는다.
         if(gameObject == null)
         {
+            Debug.Log("존재하지 않는 FarmingBox 입니다.");
             return;
         }
 
