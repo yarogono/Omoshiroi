@@ -52,11 +52,6 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
         farmingBoxCollider = GetComponent<Collider>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     /// <summary>
     /// 이 보관함의 인벤토리에서 아이템을 가져갈 때 마다 호출 될 예정.
     /// </summary>
@@ -96,6 +91,10 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
         inventoryController.OpenInventoryUI();
     }
 
+    /// <summary>
+    /// 서버에서 받아온 패킷으로 FarmingBox 인벤토리를 갱신한다.
+    /// </summary>
+    /// <param name="FBData">서버에서 받아온 패킷</param>
     private void SetFBItems(S_FarmingBoxOpen FBData)
     {
         Debug.Log("파밍박스 인벤토리 데이터 받아옴");
@@ -104,61 +103,18 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
         Dictionary<int, InventoryItem> fbItems = new Dictionary<int, InventoryItem>();
 
         InventoryItem inven;
-
+        DataManager dataManager = DataManager.Instance;
 
         for (int i = 0; i < items.Count; i++)
         {
-            //ItemID 로 BaseItem 을 구하고, 파밍박스 인벤토리에 추가한다.
             inven = new InventoryItem();
-            //inven.item = 
+            inven.item = dataManager.FindItem(items[i].ItemId);
             inven.quantity = items[i].Quantity;
 
             fbItems.Add(i, inven);
         }
 
-        //각 FarmingBox 의 itemId 를 이용해 InventoryItem 타입으로 가공한다.
-
-        //이를 Dictionary 형태로 변경한다.
-
-        for (int i = 0; i < items.Count; i++)
-        {
-            //ItemID 로 BaseItem 을 구하고, 파밍박스 인벤토리에 추가한다.
-
-        }
-        //BaseItem item;
-        //DataManager dataManager = DataManager.Instance;
-        //Data.ItemData itemData = dataManager.;
-
-        //for()
-
-        //switch (itemData.id)
-        //{
-        //    case eItemType.Good:
-        //        {
-        //            break;
-        //        }
-        //    case eItemType.Good:
-        //        {
-        //            break;
-        //        }
-        //    case eItemType.Good:
-        //        {
-        //            break;
-        //        }
-        //    case eItemType.Good:
-        //        {
-        //            break;
-        //        }
-        //    case eItemType.Good:
-        //        {
-        //            break;
-        //        }
-        //}
-
-        //if (dataManager.WeaponItemDict.ContainsKey(itemId)) { itemData = dataManager.WeaponItemDict[itemId]; }
-
-
-        //return item;
+        ItemList = fbItems;
     }
 
     /// <summary>
@@ -191,13 +147,6 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
 
         NetworkManager.Instance.Send(fbClosePacket);
     }
-
-    //private BaseItem FindItem(int itemId)
-    //{
-    //    DataManager dataManager = DataManager.Instance;
-    //    BaseItem item;
-    //    if (dataManager.ConsumableItemDict.TryGetValue(itemId, out item)) { return dataManager.ConsumableItemDict.; }
-    //}
 }
 
 public partial class PacketHandler
