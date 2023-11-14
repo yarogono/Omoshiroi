@@ -1,7 +1,7 @@
 ﻿using Server.Data;
+using Server.Game;
 using Server.Game.Room;
 using ServerCore;
-using System;
 using System.Net;
 
 namespace Server
@@ -10,6 +10,16 @@ namespace Server
     {
         static Listener _listener = new Listener();
         static List<System.Timers.Timer> _timers = new List<System.Timers.Timer>();
+
+        static void GameLogicTask()
+        {
+            while (true)
+            {
+                GameLogic.Instance.Update();
+                Thread.Sleep(0);
+            }
+        }
+
 
         static void TickRoom(GameRoom room, int tick = 100)
         {
@@ -27,7 +37,7 @@ namespace Server
             ConfigManager.LoadConfig();
             DataManager.LoadData();
 
-            GameRoom room = RoomManager.Instance.Add(1);
+            GameRoom room = GameLogic.Instance.Add();
             room.Init();
             TickRoom(room, 50);
 
@@ -39,14 +49,9 @@ namespace Server
             _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Listening...");
 
-            //FlushRoom();
-            //JobTimer.Instance.Push(FlushRoom);
-
-            while (true)
-            {
-                //JobTimer.Instance.Flush();
-                Thread.Sleep(100);
-            }
+            // GameLogic
+            Thread.CurrentThread.Name = "GameLogic";
+            GameLogicTask();
         }
     }
 }

@@ -13,6 +13,39 @@ namespace Server
 		public int SessionId { get; set; }
 
 
+        #region Ping Pong Check
+        long _pingpongTick = 0;
+        public void Ping()
+        {
+            if (_pingpongTick > 0)
+            {
+                long delta = (System.Environment.TickCount64 - _pingpongTick);
+                if (delta > 30 * 1000)
+                {
+                    Console.WriteLine("Disconnected by PingCheck");
+                    Disconnect();
+                    return;
+                }
+            }
+            else if (_pingpongTick == 0)
+            {
+                Console.WriteLine("Disconnected by PingCheck : No Response");
+                Disconnect();
+                return;
+            }
+
+            S_Ping pingPacket = new S_Ping();
+            Send(pingPacket);
+
+            GameLogic.Instance.PushAfter(60000, Ping);
+        }
+
+        public void HandlePong()
+        {
+            _pingpongTick = System.Environment.TickCount64;
+        }
+        #endregion
+
         private const int SizeOffset = 0;
         private const int MsgIdOffset = 2;
         private const int HeaderSize = 4;
@@ -33,6 +66,8 @@ namespace Server
 		public override void OnConnected(EndPoint endPoint)
 		{
 			Console.WriteLine($"OnConnected : {endPoint}");
+
+            GameLogic.Instance.PushAfter(60000, Ping);
         }
 
 		public override void OnRecvPacket(ArraySegment<byte> buffer)
@@ -45,7 +80,7 @@ namespace Server
 			if (MyPlayer == null)
 				return;
 
-			GameRoom room = RoomManager.Instance.Find(1);
+			GameRoom room = GameLogic.Instance.Find(1);
 			room.Push(room.LeaveGame, MyPlayer.Info.ObjectId);
 
             SessionManager.Instance.Remove(this);

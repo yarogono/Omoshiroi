@@ -15,7 +15,7 @@ partial class PacketHandler
 
         Player sessionPlayer = clientSession.MyPlayer;
 
-        GameRoom room = Server.RoomManager.Instance.Find(1);
+        GameRoom room = GameLogic.Instance.Find(1);
 
         var packetPlayer = enterGamePacket.Player;
 
@@ -146,5 +146,12 @@ partial class PacketHandler
             return;
 
         room.Push(room.HandleAttack, player, attackPacket);
+    }
+
+
+    public static void C_PongHandler(PacketSession session, IMessage packet)
+    {
+        ClientSession clientSession = (ClientSession)session;
+        clientSession.HandlePong();
     }
 }

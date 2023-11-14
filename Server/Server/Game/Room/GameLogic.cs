@@ -1,16 +1,28 @@
-﻿using Server.Game.Room;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Server
+namespace Server.Game.Room
 {
-    public class RoomManager
+    public class GameLogic : JobSerializer
     {
-        public static RoomManager Instance { get; } = new RoomManager();
+        public static GameLogic Instance { get; } = new GameLogic();
 
         object _lock = new object();
         Dictionary<int, GameRoom> _rooms = new Dictionary<int, GameRoom>();
         int _roomId = 1;
 
-        public GameRoom Add(int mapId)
+        public void Update()
+        {
+            Flush();
+
+            foreach (GameRoom room in _rooms.Values)
+            {
+                room.Update();
+            }
+        }
+
+        public GameRoom Add()
         {
             GameRoom gameRoom = new GameRoom();
 
