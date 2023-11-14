@@ -6,19 +6,9 @@ using System;
 
 public class PilotSync : SyncModule
 {
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     protected override void Update()
     {
         base.Update();
-    }
-
-    protected override void InitCharacterStats()
-    {
-        base.InitCharacterStats();
     }
 
     public void SendC_MovePacket(int state, Vector3 posInfo, Vector3 velInfo)
