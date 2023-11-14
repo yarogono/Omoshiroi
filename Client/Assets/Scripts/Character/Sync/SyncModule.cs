@@ -131,8 +131,6 @@ public class SyncModule : MonoBehaviour
         InitCharacterStats();
     }
 
-    protected virtual void Start() { }
-
     protected virtual void Update()
     {
         DrawInfo();
