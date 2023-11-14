@@ -9,7 +9,6 @@ public class CloneDataContainer : DataContainer
 
     private CombineCloneStatemachine _stateMachine;
 
-
     [Header("테스트용 착용아이템")]
     [SerializeField]
     private BaseItem[] TestEquipItem;
@@ -24,8 +23,7 @@ public class CloneDataContainer : DataContainer
 
     void Start()
     {
-        if (Stats.cbs != null)
-            Stats.Initialize();
+        Stats.UpdateStats();
 
         if (Equipments == null)
             Equipments = new EquipSystem();
@@ -36,8 +34,4 @@ public class CloneDataContainer : DataContainer
         _stateMachine = new CombineCloneStatemachine(this);
         SpriteRotator.Register(this);
     }
-
-    void Update() { }
-
-    private void FixedUpdate() { }
 }

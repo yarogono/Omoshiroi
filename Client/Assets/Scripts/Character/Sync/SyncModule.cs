@@ -10,9 +10,20 @@ public class SyncModule : MonoBehaviour
 
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    private string _name = string.Empty;
+    public string Name
+    {
+        get { return _name; }
+        set
+        {
+            if (!_name.Equals(string.Empty))
+                return;
 
-    int _state;
+            _name = value;
+        }
+    }
+
+    private int _state;
     public int State
     {
         get { return _state; }
@@ -25,7 +36,7 @@ public class SyncModule : MonoBehaviour
         }
     }
 
-    float _animTime;
+    private float _animTime;
     public float AnimTime
     {
         get { return _animTime; }
@@ -38,7 +49,7 @@ public class SyncModule : MonoBehaviour
         }
     }
 
-    int _comboIndex;
+    private int _comboIndex;
     public int ComboIndex
     {
         get { return _comboIndex; }
@@ -51,19 +62,21 @@ public class SyncModule : MonoBehaviour
         }
     }
 
+    private readonly StatInfo _statInfo = new();
     public StatInfo StatInfo
     {
+        get { return _statInfo; }
         set
         {
-            stats.Level = value.Level;
-            stats.Hp = value.Hp;
-            stats.MaxHp = value.MaxHp;
-            stats.AtkPower = value.Attack;
-            stats.MoveSpeed = value.Speed;
+            _statInfo.Level = value.Level;
+            _statInfo.Hp = value.Hp;
+            _statInfo.MaxHp = value.MaxHp;
+            _statInfo.Attack = value.Attack;
+            _statInfo.Speed = value.Speed;
         }
     }
 
-    PositionInfo _posInfo = new PositionInfo();
+    private readonly PositionInfo _posInfo = new();
     public PositionInfo PosInfo
     {
         get { return _posInfo; }
@@ -83,7 +96,7 @@ public class SyncModule : MonoBehaviour
         get { return new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ); }
     }
 
-    VelocityInfo _velInfo = new VelocityInfo();
+    private readonly VelocityInfo _velInfo = new();
     public VelocityInfo VelInfo
     {
         get { return _velInfo; }
@@ -103,17 +116,19 @@ public class SyncModule : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
+    public RectTransform healthBar;
+
     public TextMeshPro TestText1;
     public TextMeshPro TestText2;
     public TextMeshPro TestText3;
     public TextMeshPro TestText4;
     public TextMeshPro TestText5;
 
-    public RectTransform healthBar;
-
     private void Start()
     {
         stats = gameObject.GetComponent<DataContainer>().Stats;
+
+        UpdateStats();
     }
 
     protected virtual void Update()
@@ -121,14 +136,23 @@ public class SyncModule : MonoBehaviour
         DrawInfo();
     }
 
-    public void DrawInfo()
+    private void UpdateStats()
+    {
+        stats.Level = StatInfo.Level;
+        stats.MaxHp = StatInfo.MaxHp;
+        stats.Hp = StatInfo.Hp;
+        stats.AtkPower = StatInfo.Attack;
+        stats.MoveSpeed = StatInfo.Speed;
+    }
+
+    private void DrawInfo()
     {
         TestText1.text = $"PlayerName : {Name}";
         TestText2.text = $"Level : {stats.Level}";
-        TestText3.text = $"Hp / MaxHP: {stats.Hp} / {stats.MaxHp} | {stats.Hp / stats.MaxHp}";
+        TestText3.text = $"Hp / MaxHP : {stats.Hp} / {stats.MaxHp}";
         TestText4.text = $"AtkPower : {stats.AtkPower}";
         TestText5.text = $"State : {State}";
 
-        healthBar.sizeDelta = new Vector2(stats.Hp / stats.MaxHp, 0);
+        healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
     }
 }
