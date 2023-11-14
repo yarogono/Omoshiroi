@@ -33,6 +33,13 @@ namespace DummyClient
             enterGamePacket.Player.PosInfo = new PositionInfo() { PosX = 0, PosY = 0 };
 
             Send(enterGamePacket);
+
+            Thread.Sleep(1000);
+
+            C_FarmingBoxOpen farmingBoxOpen = new C_FarmingBoxOpen();
+            farmingBoxOpen.FarmingBoxId = 50331648;
+
+            Send(farmingBoxOpen);
         }
 
         public override void OnDisconnected(EndPoint endPoint)
