@@ -20,11 +20,11 @@ public class DataManager : CustomSingleton<DataManager>
     public Dictionary<int, FBInventory> FBInventoryDict { get; private set; } = new Dictionary<int, FBInventory>();
 
     //아래의 Dictionary 들은 검색용으로 만든 임시 자료형이다.
-    public Dictionary<int, WeaponItem> MagicItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> RuneItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> ResourceItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> ConsumableItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> SkinItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
+    public Dictionary<int, MagicItem> MagicItemDict { get; private set; } = new Dictionary<int, MagicItem>();
+    public Dictionary<int, RuneItem> RuneItemDict { get; private set; } = new Dictionary<int, RuneItem>();
+    public Dictionary<int, ResourceItem> ResourceItemDict { get; private set; } = new Dictionary<int, ResourceItem>();
+    public Dictionary<int, ConsumableItem> ConsumableItemDict { get; private set; } = new Dictionary<int, ConsumableItem>();
+    public Dictionary<int, SkinItem> SkinItemDict { get; private set; } = new Dictionary<int, SkinItem>();
 
 
     private void Awake()
@@ -42,13 +42,18 @@ public class DataManager : CustomSingleton<DataManager>
         return JsonUtility.FromJson<Loader>(textAsset.text);
     }
 
-    //public BaseItem FindItem(int itemId)
-    //{
-    //    BaseItem baseItem;
-    //    ItemData itemData;
+    public BaseItem FindItem(int itemId)
+    {
+        BaseItem item;
 
-    //    if (ConsumableItemDict.TryGetValue(itemId, out (WeaponItem)itemData)) { return dataManager.ConsumableItemDict.; }
+        item = WeaponItemDict[itemId]; if (item != null) { return item; }
+        item = MagicItemDict[itemId]; if (item != null) { return item; }
+        item = RuneItemDict[itemId]; if (item != null) { return item; }
+        item = ResourceItemDict[itemId]; if (item != null) { return item; }
+        item = ConsumableItemDict[itemId]; if (item != null) { return item; }
+        item = SkinItemDict[itemId]; if (item != null) { return item; }
 
-    //    return baseItem;
-    //}
+        Debug.Log($"ItemID ({itemId}) 는 존재하지 않는 아이템입니다.");
+        return null;
+    }
 }

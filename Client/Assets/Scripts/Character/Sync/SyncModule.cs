@@ -8,7 +8,9 @@ using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
-   public CharacterStats stats;
+
+    private CharacterStats stats;
+
 
     public int Id { get; set; }
 
@@ -155,12 +157,15 @@ public class SyncModule : MonoBehaviour
 
     private void DrawInfo()
     {
-        TestText1.text = $"PlayerName : {Name}";
-        TestText2.text = $"Level : {stats.Level}";
-        TestText3.text = $"Hp / MaxHP : {stats.Hp} / {stats.MaxHp}";
-        TestText4.text = $"AtkPower : {stats.AtkPower}";
-        TestText5.text = $"State : {State}";
+        if (stats.Hp != 0 && stats.MaxHp != 0)
+        {
+            TestText1.text = $"PlayerName : {Name}";
+            TestText2.text = $"Level : {stats.Level}";
+            TestText3.text = $"Hp / MaxHP : {stats.Hp} / {stats.MaxHp} | {stats.Hp / stats.MaxHp}";
+            TestText4.text = $"AtkPower : {stats.AtkPower}";
+            TestText5.text = $"State : {State}";
 
-        healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
+            healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
+        }
     }
 }

@@ -64,6 +64,7 @@ public class ObjectManager : CustomSingleton<ObjectManager>
                 cloneSync.PosInfo = info.PosInfo;
                 cloneSync.StatInfo = info.StatInfo;
                 cloneSync.State = info.State;
+                cloneSync.InitCharacterStats();
                 cloneSync.CallMoveEvent(cloneSync.State, cloneSync.PosInfo, cloneSync.VelInfo);
             }
         }

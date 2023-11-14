@@ -29,8 +29,8 @@ class PacketManager
 		_handler.Add((ushort)MsgId.CLeaveGame, PacketHandler.C_LeaveGameHandler);		
 		_onRecv.Add((ushort)MsgId.CMove, MakePacket<C_Move>);
 		_handler.Add((ushort)MsgId.CMove, PacketHandler.C_MoveHandler);		
-		_onRecv.Add((ushort)MsgId.CHpDamage, MakePacket<C_HpDamage>);
-		_handler.Add((ushort)MsgId.CHpDamage, PacketHandler.C_HpDamageHandler);		
+		_onRecv.Add((ushort)MsgId.CChangeHp, MakePacket<C_ChangeHp>);
+		_handler.Add((ushort)MsgId.CChangeHp, PacketHandler.C_ChangeHpHandler);		
 		_onRecv.Add((ushort)MsgId.CAim, MakePacket<C_Aim>);
 		_handler.Add((ushort)MsgId.CAim, PacketHandler.C_AimHandler);		
 		_onRecv.Add((ushort)MsgId.CBattle, MakePacket<C_Battle>);
@@ -40,7 +40,9 @@ class PacketManager
 		_onRecv.Add((ushort)MsgId.CFarmingBoxOpen, MakePacket<C_FarmingBoxOpen>);
 		_handler.Add((ushort)MsgId.CFarmingBoxOpen, PacketHandler.C_FarmingBoxOpenHandler);		
 		_onRecv.Add((ushort)MsgId.CFarmingBoxClose, MakePacket<C_FarmingBoxClose>);
-		_handler.Add((ushort)MsgId.CFarmingBoxClose, PacketHandler.C_FarmingBoxCloseHandler);
+		_handler.Add((ushort)MsgId.CFarmingBoxClose, PacketHandler.C_FarmingBoxCloseHandler);		
+		_onRecv.Add((ushort)MsgId.CPong, MakePacket<C_Pong>);
+		_handler.Add((ushort)MsgId.CPong, PacketHandler.C_PongHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
