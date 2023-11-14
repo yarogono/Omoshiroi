@@ -8,9 +8,16 @@ public class HealthSystem : MonoBehaviour
     private CharacterStats Stats;
     private PilotSync Sync;
 
+    private void Awake()
+    {
+        //stats = dataContainer.Stats;
+        Sync = GetComponent<PilotSync>();
+    }
+
     private void Start()
     {
         Stats = gameObject.GetComponent<DataContainer>().Stats;
+        Sync = gameObject.GetComponent<PilotSync>();
     }
 
     public void TakeDamage(int changeAmount)
@@ -46,7 +53,7 @@ public class HealthSystem : MonoBehaviour
         }
         else { }
 
-        UIController.Instance.HandlerHp(Stats.Hp, Stats.MaxHp);
+        UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp);
         Stats.Hp = remain;
         Sync.SendC_ChangeHpPacket(Stats.Hp);
     }

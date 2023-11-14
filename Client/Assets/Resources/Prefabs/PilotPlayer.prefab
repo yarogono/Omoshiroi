@@ -646,6 +646,8 @@ GameObject:
   - component: {fileID: 884507993187292007}
   - component: {fileID: 7838802115554181109}
   - component: {fileID: 6819789151499577018}
+  - component: {fileID: -6061231490757486417}
+  - component: {fileID: 1497797058147586633}
   m_Layer: 15
   m_Name: PilotPlayer
   m_TagString: Pilot
@@ -671,7 +673,7 @@ Transform:
   - {fileID: 978295493833038405}
   - {fileID: 4266409554630449268}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7564447416552305516
 MonoBehaviour:
@@ -764,10 +766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623297b9daf8f4935a51edb75ca38800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 5980317487935585845}
-  dataContainer: {fileID: 0}
   stats:
-    <cbs>k__BackingField: {fileID: 0}
+    <SyncModule>k__BackingField: {fileID: 0}
+  healthBar: {fileID: 5980317487935585845}
   TestText1: {fileID: 3839627925965679978}
   TestText2: {fileID: 1173170477804780311}
   TestText3: {fileID: 1508650048031691851}
@@ -863,6 +864,36 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6061231490757486417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f57fe3a3cfa58d24680ed3cce429a68b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemList: []
+  inventoryData: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
+  initialItems: []
+--- !u!114 &1497797058147586633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb821abce43f7b3459730718da9a5c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataContainer: {fileID: 7681882675822388626}
+  stats:
+    <SyncModule>k__BackingField: {fileID: -6892137914046388612}
 --- !u!1 &3473660453654353437
 GameObject:
   m_ObjectHideFlags: 0

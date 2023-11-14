@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
+
     private CharacterStats stats;
+
 
     public int Id { get; set; }
 

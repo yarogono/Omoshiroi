@@ -37,7 +37,7 @@ namespace Server
             S_Ping pingPacket = new S_Ping();
             Send(pingPacket);
 
-            GameLogic.Instance.PushAfter(5000, Ping);
+            GameLogic.Instance.PushAfter(30000, Ping);
         }
 
         public void HandlePong()
@@ -57,9 +57,9 @@ namespace Server
             MsgId msgId = (MsgId)Enum.Parse(typeof(MsgId), msgName);
             ushort size = (ushort)packet.CalculateSize();
             byte[] sendBuffer = new byte[size + 4];
-            Buffer.BlockCopy(BitConverter.GetBytes((ushort)(size + 4)), 0, sendBuffer, 0, sizeof(ushort));
-            Buffer.BlockCopy(BitConverter.GetBytes((ushort)msgId), 0, sendBuffer, 2, sizeof(ushort));
-            Buffer.BlockCopy(packet.ToByteArray(), 0, sendBuffer, 4, size);
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)(size + HeaderSize)), 0, sendBuffer, SizeOffset, sizeof(ushort));
+            Buffer.BlockCopy(BitConverter.GetBytes((ushort)msgId), 0, sendBuffer, MsgIdOffset, sizeof(ushort));
+            Buffer.BlockCopy(packet.ToByteArray(), 0, sendBuffer, HeaderSize, size);
 
             lock (_lock)
             {
@@ -95,7 +95,7 @@ namespace Server
 		{
 			Console.WriteLine($"OnConnected : {endPoint}");
 
-            GameLogic.Instance.PushAfter(5000, Ping);
+            GameLogic.Instance.PushAfter(30000, Ping);
         }
 
 		public override void OnRecvPacket(ArraySegment<byte> buffer)

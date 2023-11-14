@@ -72,10 +72,18 @@ class PacketHandler
 
     internal static void S_FarmingBoxSpawnHandler(PacketSession session, IMessage packet)
     {
+        S_FarmingBoxSpawn farmingBoxSpawn = new S_FarmingBoxSpawn();
 
     }
 
     internal static void S_FarmingBoxOpenHandler(PacketSession session, IMessage packet)
+    {
+        S_FarmingBoxOpen farmingBoxOpen = (S_FarmingBoxOpen)packet;
+
+
+    }
+
+    internal static void S_PingHandler(PacketSession session, IMessage packet)
     {
 
     }

@@ -19,7 +19,7 @@ public class UIController: CustomSingleton<UIController>
 
     private void Start()
     {
-        init();
+        
 
         leaveGame = GetComponent<LeaveGame>();
 
@@ -35,11 +35,6 @@ public class UIController: CustomSingleton<UIController>
             }
         });
        
-    }
-
-    void init()
-    {
-        Instantiate(InventoryUI, UIRoot);
     }
 
 
