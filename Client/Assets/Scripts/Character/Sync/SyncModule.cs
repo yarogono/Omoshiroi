@@ -128,13 +128,10 @@ public class SyncModule : MonoBehaviour
 
     protected virtual void Awake()
     {
-        stats = gameObject.GetComponent<DataContainer>().Stats;
-    }
-
-    protected virtual void Start()
-    {
         InitCharacterStats();
     }
+
+    protected virtual void Start() { }
 
     protected virtual void Update()
     {
@@ -146,6 +143,7 @@ public class SyncModule : MonoBehaviour
         // TODO
         // 추후에 ObjectManager.cs TODO 작업이 끝나면
         // PilotSync.cs에서 해당 메서드를 오버라이드 하는 식으로 작업할 예정
+        stats = gameObject.GetComponent<DataContainer>().Stats;
         stats.Level = StatInfo.Level;
         stats.MaxHp = StatInfo.MaxHp;
         stats.Hp = StatInfo.Hp;
