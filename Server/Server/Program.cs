@@ -20,16 +20,18 @@ namespace Server
             }
         }
 
-
-        static void TickRoom(GameRoom room, int tick = 100)
+        static void NetworkTask()
         {
-            var timer = new System.Timers.Timer();
-            timer.Interval = tick;
-            timer.Elapsed += ((s, e) => { room.Update(); });
-            timer.AutoReset = true;
-            timer.Enabled = true;
+            while (true)
+            {
+                List<ClientSession> sessions = SessionManager.Instance.GetSessions();
+                foreach (ClientSession session in sessions)
+                {
+                    session.FlushSend();
+                }
 
-            _timers.Add(timer);
+                Thread.Sleep(0);
+            }
         }
 
         static void Main(string[] args)
@@ -37,9 +39,12 @@ namespace Server
             ConfigManager.LoadConfig();
             DataManager.LoadData();
 
-            GameRoom room = GameLogic.Instance.Add();
-            room.Init();
-            TickRoom(room, 50);
+            GameLogic.Instance.Push(() =>
+            { 
+                GameRoom room = GameLogic.Instance.Add();
+                room.Init(); 
+            });
+            
 
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
@@ -48,6 +53,13 @@ namespace Server
 
             _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Listening...");
+
+            // NetworkTask
+            {
+                Thread t = new Thread(NetworkTask);
+                t.Name = "Network Send";
+                t.Start();
+            }
 
             // GameLogic
             Thread.CurrentThread.Name = "GameLogic";
