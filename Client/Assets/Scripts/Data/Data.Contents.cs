@@ -45,10 +45,12 @@ namespace Data
     }
     #endregion
 
-    #region MagicItem
+    #region SkinItem
     [Serializable]
     public class MagicItem : ItemData
     {
+        public float range;
+        public AttackData attackData;
     }
 
     [Serializable]
@@ -56,11 +58,98 @@ namespace Data
     {
         public List<MagicItem> items = new List<MagicItem>();
 
-
         public Dictionary<int, MagicItem> MakeDict()
         {
             Dictionary<int, MagicItem> dict = new Dictionary<int, MagicItem>();
             foreach (MagicItem item in items)
+                dict.Add(item.id, item);
+            return dict;
+        }
+    }
+    #endregion
+
+    #region RuneItem
+    [Serializable]
+    public class RuneItem : ItemData
+    {
+    }
+
+    [Serializable]
+    public class RuneItemData : ILoader<int, RuneItem>
+    {
+        public List<RuneItem> items = new List<RuneItem>();
+
+
+        public Dictionary<int, RuneItem> MakeDict()
+        {
+            Dictionary<int, RuneItem> dict = new Dictionary<int, RuneItem>();
+            foreach (RuneItem item in items)
+                dict.Add(item.id, item);
+            return dict;
+        }
+    }
+    #endregion
+
+    #region ResourceItem
+    [Serializable]
+    public class ResourceItem : ItemData
+    {
+    }
+
+    [Serializable]
+    public class ResourceItemData : ILoader<int, ResourceItem>
+    {
+        public List<ResourceItem> items = new List<ResourceItem>();
+
+
+        public Dictionary<int, ResourceItem> MakeDict()
+        {
+            Dictionary<int, ResourceItem> dict = new Dictionary<int, ResourceItem>();
+            foreach (ResourceItem item in items)
+                dict.Add(item.id, item);
+            return dict;
+        }
+    }
+    #endregion
+
+    #region ConsumableItem
+    [Serializable]
+    public class ConsumableItem : ItemData
+    {
+    }
+
+    [Serializable]
+    public class ConsumableItemData : ILoader<int, ConsumableItem>
+    {
+        public List<ConsumableItem> items = new List<ConsumableItem>();
+
+
+        public Dictionary<int, ConsumableItem> MakeDict()
+        {
+            Dictionary<int, ConsumableItem> dict = new Dictionary<int, ConsumableItem>();
+            foreach (ConsumableItem item in items)
+                dict.Add(item.id, item);
+            return dict;
+        }
+    }
+    #endregion
+
+    #region SkinItem
+    [Serializable]
+    public class SkinItem : ItemData
+    {
+    }
+
+    [Serializable]
+    public class SkinItemData : ILoader<int, SkinItem>
+    {
+        public List<SkinItem> items = new List<SkinItem>();
+
+
+        public Dictionary<int, SkinItem> MakeDict()
+        {
+            Dictionary<int, SkinItem> dict = new Dictionary<int, SkinItem>();
+            foreach (SkinItem item in items)
                 dict.Add(item.id, item);
             return dict;
         }
