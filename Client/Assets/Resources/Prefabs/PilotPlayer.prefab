@@ -105,7 +105,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5980317487935585845}
   m_Father: {fileID: 4266409554630449268}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -486,6 +487,8 @@ GameObject:
   - component: {fileID: 6512405951364919538}
   - component: {fileID: 3229680276495624399}
   - component: {fileID: 7822232555172900303}
+  - component: {fileID: 306885719407692037}
+  - component: {fileID: 8682133733180640648}
   m_Layer: 15
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -567,6 +570,66 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2783407816970436849}
   m_Enabled: 1
+--- !u!114 &306885719407692037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783407816970436849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
+--- !u!114 &8682133733180640648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783407816970436849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &3119228395594561357
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Stats>k__BackingField:
-    <SyncModule>k__BackingField: {fileID: 0}
+    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
   <AnimationData>k__BackingField:
     groundParameterName: '@Ground'
     idleParameterName: Idle
@@ -687,7 +750,6 @@ MonoBehaviour:
     _main: {fileID: 9084180165033504933}
     _weapon: {fileID: 2129740198666870522}
   <Health>k__BackingField: {fileID: 0}
-  <SyncModule>k__BackingField: {fileID: 0}
   TestEquipItem:
   - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
 --- !u!114 &-6892137914046388612
@@ -702,12 +764,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 623297b9daf8f4935a51edb75ca38800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 5980317487935585845}
+  dataContainer: {fileID: 0}
+  stats:
+    <cbs>k__BackingField: {fileID: 0}
   TestText1: {fileID: 3839627925965679978}
   TestText2: {fileID: 1173170477804780311}
   TestText3: {fileID: 1508650048031691851}
   TestText4: {fileID: 9064988855251638690}
   TestText5: {fileID: 6544799625722215884}
+  healthBar: {fileID: 5980317487935585845}
 --- !u!114 &2438545737654347830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1003,7 +1068,6 @@ RectTransform:
   m_Children:
   - {fileID: 5399563742465882395}
   - {fileID: 7811652966112220963}
-  - {fileID: 5980317487935585845}
   m_Father: {fileID: 1088871691251878795}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
@@ -1169,7 +1233,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4266409554630449268}
+  m_Father: {fileID: 7811652966112220963}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}

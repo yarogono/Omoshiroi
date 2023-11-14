@@ -12,12 +12,14 @@ using Google.Protobuf.Collections;
 /// <summary>
 /// 테스트가 용이하도록 임의대로 아이템 스폰을 자체적인 SO 로 관리하도록 해 두었음.
 /// </summary>
-public class FarmingBox : BattleFieldObject, ILootable, IInteractable
+public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerDownHandler
 {
     [SerializeField] private int inventorySize;
     [SerializeField] private InventorySO inventorySO;
     [SerializeField] private InventoryController_FB inventoryController;
-    private Collider farminBoxCollider;
+
+    private Collider farmingBoxCollider;
+    private Ray ray;
 
     public Dictionary<int, InventoryItem> ItemList { get; private set; }
     public int InventorySize { get { return inventorySize; } private set { inventorySize = value; } }
@@ -25,10 +27,13 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     public Action OnOpened;
     public Action OnClosed;
 
+    private void Awake()
+    {
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log($"피직스 머시기 여부 : {Physics.queriesHitTriggers}");
         ItemList = new Dictionary<int, InventoryItem>();
 
         Dictionary<int, InventoryItem> items = inventorySO.GetCurrentInventoryState();
@@ -39,11 +44,21 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
         }
 
         inventoryController = GetComponent<InventoryController_FB>();
-        farminBoxCollider = GetComponent<Collider>();
+        farmingBoxCollider = GetComponent<Collider>();
+
+        //ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Physics.Raycast(ray, out RaycastHit hit);
+
+        //if (hit.collider != null && hit.collider == farmingBoxCollider)
+        //    Debug.Log($"Raycast {hit.collider.name}");
+        //else
+        //    Debug.Log("No Collide");
     }
 
     // Update is called once per frame
-    void Update() { }
+    void Update()
+    {
+    }
 
     /// <summary>
     /// 이 보관함의 인벤토리에서 아이템을 가져갈 때 마다 호출 될 예정.
@@ -55,15 +70,6 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     public void SetItemList(Dictionary<int, InventoryItem> items)
     {
         ItemList = items;
-    }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("열려라 파밍박스");
-        if (/*Vector3.Distance(this.transform.position, 플레이어.transform.position) < 20*/ true)
-        {
-            SendFarmingBoxOpen();
-        }
     }
 
     /// <summary>
@@ -143,7 +149,13 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable
     public void SendFarmingBoxClose()
     {
         C_FarmingBoxClose fbClose = new C_FarmingBoxClose();
-        fbClose.FarmingBoxId = this.gameObject.GetInstanceID(); fbClose.PlayerId = 0; //C_FarmingBoxClose.Items 는 get; 으로 설정되어 있어 set 이 불가능한 상태이다.
+        fbClose.FarmingBoxId = this.gameObject.GetInstanceID(); fbClose.PlayerId = 0; //C_FarmingBoxClose.Items 는 ADD 로 세팅한다. 플레이어가 먹은 아이템에 대한 정보만 보내도록 한다.
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        SendFarmingBoxOpen();
+        inventoryController.OpenInventoryUI();
     }
 }
 
@@ -188,7 +200,7 @@ public partial class PacketHandler
 
             //farmingBox.SetActive(true);
 
-            FarmingBoxSpawner.instance.SpawnFarmingBox(new Vector3(fb.PosInfo.PosX, fb.PosInfo.PosY, fb.PosInfo.PosZ));
+            BattleFieldObjectSpawner.instance.SpawnFarmingBox(new Vector3(fb.PosInfo.PosX, fb.PosInfo.PosY, fb.PosInfo.PosZ));
         }
     }
 }
