@@ -58,12 +58,17 @@ namespace Server.Game.Room
                 }
 
                 {
-                    S_FarmingBoxSpawn farmingBoxSpawnPacket = new S_FarmingBoxSpawn();
-                    ObjectInfo objectInfo = new ObjectInfo();
-                    objectInfo.PosInfo = new PositionInfo() { PosX = 2, PosY = 0, PosZ = 2 };
-                    farmingBoxSpawnPacket.BoxInfos.Add(objectInfo);
 
-                    Broadcast(farmingBoxSpawnPacket);
+                    foreach (var item  in _farmingBox)
+                    {
+                        S_FarmingBoxSpawn farmingBoxSpawnPacket = new S_FarmingBoxSpawn();
+                        ObjectInfo objectInfo = new ObjectInfo();
+                        objectInfo.PosInfo = new PositionInfo() { PosX = 2, PosY = 0, PosZ = 2 };
+                        objectInfo.ObjectId = item.Key;
+                        farmingBoxSpawnPacket.BoxInfos.Add(objectInfo);
+
+                        Broadcast(farmingBoxSpawnPacket);
+                    }
                 }
             }
 
