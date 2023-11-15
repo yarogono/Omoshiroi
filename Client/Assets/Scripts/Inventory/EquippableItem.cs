@@ -4,13 +4,24 @@ using UnityEngine;
 
 
 [CreateAssetMenu]
-public class EquippableItem : BaseItem, IDestroyableItem, IItemAction
+public class EquippableItem : BaseItem, IDestroyableItem, IItemAction, IEquippable
 {
     public string ActionName => "Equip";
 
-  
-    public bool PerformAction(GameObject character)
+    public void Dequip(CharacterDataContainer cdc)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Equip(CharacterDataContainer cdc)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool PerformAction(GameObject character)
+    {
+       
+        Debug.Log("장착");
+        return true;
     }
 }

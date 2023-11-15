@@ -7,30 +7,15 @@ using UnityEngine;
 public  class EdibleItemSo : BaseItem, IDestroyableItem, IItemAction
 {
     [SerializeField]
-    private List<ModifierData> modifiersData = new List<ModifierData>();
+    private List<ModifierData> modifiersData = new List<ModifierData>();//소비템 효과를 추가할수있는 데이터 리스트 
 
 
-    public string ActionName
-    {
-        get
-        {
-            if (itemType==eItemType.Consumable )
-            {
-                return "consume";
-            }
-            else if(itemType == eItemType.Weapon)
-            {
-                return "equip";
-            }
-            else
-            {
-                return "undefined"; // or handle the undefined case appropriately
-            }
+    public string ActionName => "Consume";
 
-        }
-    }
     public bool PerformAction(GameObject character)
     {
+
+        Debug.Log("소비템");
         foreach (ModifierData data in modifiersData)
         {
             data.statModifier.AffectCharacter(character, data.value);
