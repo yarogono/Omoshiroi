@@ -10,7 +10,40 @@ namespace AccountServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var app = BuilderSetting(builder);
 
+            WebApplicationSetting(app);
+            app.Run();
+        }
+
+        private static void WebApplicationSetting(WebApplication app)
+        {
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            UseSwagger(app);
+
+            app.UseForwardedHeaders();
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllers();
+        }
+
+        private static WebApplication BuilderSetting(WebApplicationBuilder builder)
+        {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                                                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                                                 .AddJsonFile("config.json")
@@ -37,32 +70,7 @@ namespace AccountServer
             builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                                        .AddEnvironmentVariables();
 
-            var app = builder.Build();
-
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseHttpsRedirection();
-            }
-
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
-
-            UseSwagger(app);
-
-            app.UseForwardedHeaders();
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapControllers();
-
-            app.Run();
+            return builder.Build();
         }
 
         private static void UseSwagger(WebApplication app)

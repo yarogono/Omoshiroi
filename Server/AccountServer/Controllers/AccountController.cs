@@ -18,6 +18,7 @@ namespace AccountServer.Controllers
         }
 
 
+        [HttpGet]
         [Route("signup")]
         public IActionResult Signup()
         {
