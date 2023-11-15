@@ -142,30 +142,44 @@ namespace Server.Game.Room
             Broadcast(resAimPacket, playerId);
         }
 
-        public void HandleBattle(Player player, C_Battle battlePacket)
+        public void HandleComboAttack(Player player, C_ComboAttack comboAttackPacket)
         {
             int playerId = player.Id;
-            PositionInfo posInfo = battlePacket.PosInfo;
-            VelocityInfo velInfo = battlePacket.VelInfo;
+            int comboIndex = comboAttackPacket.ComboIndex;
+            PositionInfo posInfo = comboAttackPacket.PosInfo;
+            DirectionInfo dirInfo = comboAttackPacket.DirInfo;
             
-
-            S_Battle resBattle = new S_Battle() { ObjectId = playerId, AnimTime = battlePacket.AnimTime, State = battlePacket.State};
+            S_ComboAttack resBattle = new S_ComboAttack() { ObjectId = playerId, ComboIndex = comboIndex };
             resBattle.PosInfo = new PositionInfo() { PosX = posInfo.PosX, PosY = posInfo.PosY, PosZ = posInfo.PosZ };
-            resBattle.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
+            resBattle.DirInfo = new DirectionInfo() { DirX = dirInfo.DirX, DirY = dirInfo.DirY, DirZ = dirInfo.DirZ };
             Broadcast(resBattle, playerId);
         }
 
-        public void HandleAttack(Player player, C_Attack attackPacket)
+        public void HandleMakeAttackArea(Player player, C_MakeAttackArea makeAttackAreaPacket)
         {
             int playerId = player.Id;
-            PositionInfo posInfo = attackPacket.PosInfo;
-            VelocityInfo velInfo = attackPacket.VelInfo;
+            int comboIndex = makeAttackAreaPacket.ComboIndex;
+            PositionInfo posInfo = makeAttackAreaPacket.PosInfo;
+            VelocityInfo velInfo = makeAttackAreaPacket.VelInfo;
 
-            S_Attack resAttack = new S_Attack() { ObjectId = playerId, ComboIndex = attackPacket.ComboIndex };
-            resAttack.PosInfo = new PositionInfo() { PosX = posInfo.PosX, PosY = posInfo.PosY, PosZ = posInfo.PosZ };
-            resAttack.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
+            S_MakeAttackArea resMakeAttackArea = new S_MakeAttackArea() { ObjectId = playerId, ComboIndex = comboIndex };
+            resMakeAttackArea.PosInfo = new PositionInfo() { PosX = posInfo.PosX, PosY = posInfo.PosY, PosZ = posInfo.PosZ };
+            resMakeAttackArea.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
 
-            Broadcast(resAttack, playerId);
+            Broadcast(resMakeAttackArea, playerId);
+        }
+
+        public void HandleDodge(Player player, C_Dodge dodgePacket)
+        {
+            int playerId = player.Id;
+            PositionInfo posInfo = dodgePacket.PosInfo;
+            VelocityInfo velInfo = dodgePacket.VelInfo;
+
+            S_Dodge resDodgePacket = new S_Dodge() { ObjectId = playerId };
+            resDodgePacket.PosInfo = new PositionInfo() { PosX = posInfo.PosX, PosY = posInfo.PosY, PosZ = posInfo.PosZ };
+            resDodgePacket.VelInfo = new VelocityInfo() { VelX = velInfo.VelX, VelY = velInfo.VelY, VelZ = velInfo.VelZ };
+
+            Broadcast(resDodgePacket, playerId);
         }
 
 

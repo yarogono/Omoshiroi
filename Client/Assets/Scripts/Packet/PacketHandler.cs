@@ -105,17 +105,18 @@ public partial class PacketHandler
         cloneSync.CallAimEvent(aimPacket.State, aimPacket.VelInfo);
     }
 
-    public static void S_BattleHandler(PacketSession session, IMessage packet)
+    public static void S_ComboAttackHandler(PacketSession session, IMessage packet)
     {
-        S_Battle battlePacket = packet as S_Battle;
+        S_ComboAttack comboAttackPacket = packet as S_ComboAttack;
 
-        GameObject gameObject = ObjectManager.Instance.FindById(battlePacket.ObjectId);
+        GameObject gameObject = ObjectManager.Instance.FindById(comboAttackPacket.ObjectId);
 
         if (gameObject == null)
         {
             return;
         }
-        if (ObjectManager.Instance.pilotSync.Id == battlePacket.ObjectId)
+
+        if (ObjectManager.Instance.pilotSync.Id == comboAttackPacket.ObjectId)
         {
             return;
         }
@@ -123,25 +124,24 @@ public partial class PacketHandler
         if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
-        cloneSync.CallBattleEvent(
-            battlePacket.State,
-            battlePacket.AnimTime,
-            battlePacket.PosInfo,
-            battlePacket.VelInfo
+        cloneSync.CallComboAttackEvent(
+            comboAttackPacket.ComboIndex,
+            comboAttackPacket.PosInfo,
+            comboAttackPacket.DirInfo
         );
     }
 
-    public static void S_AttackHandler(PacketSession session, IMessage packet)
+    public static void S_DodgeHandler(PacketSession session, IMessage packet)
     {
-        S_Attack attackPacket = packet as S_Attack;
+        S_Dodge dodgePacket = packet as S_Dodge;
 
-        GameObject gameObject = ObjectManager.Instance.FindById(attackPacket.ObjectId);
+        GameObject gameObject = ObjectManager.Instance.FindById(dodgePacket.ObjectId);
 
         if (gameObject == null)
         {
             return;
         }
-        if (ObjectManager.Instance.pilotSync.Id == attackPacket.ObjectId)
+        if (ObjectManager.Instance.pilotSync.Id == dodgePacket.ObjectId)
         {
             return;
         }
@@ -149,10 +149,31 @@ public partial class PacketHandler
         if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
             return;
 
-        cloneSync.CallAttackEvent(
-            attackPacket.ComboIndex,
-            attackPacket.PosInfo,
-            attackPacket.VelInfo
+        cloneSync.CallDodgeEvent(dodgePacket.PosInfo, dodgePacket.VelInfo);
+    }
+
+    public static void S_MakeAttackAreaHandler(PacketSession session, IMessage packet)
+    {
+        S_MakeAttackArea makeAttackAreaPacket = packet as S_MakeAttackArea;
+
+        GameObject gameObject = ObjectManager.Instance.FindById(makeAttackAreaPacket.ObjectId);
+
+        if (gameObject == null)
+        {
+            return;
+        }
+        if (ObjectManager.Instance.pilotSync.Id == makeAttackAreaPacket.ObjectId)
+        {
+            return;
+        }
+
+        if (!gameObject.TryGetComponent<CloneSync>(out var cloneSync))
+            return;
+
+        cloneSync.CallMakeAttackAreaEvent(
+            makeAttackAreaPacket.ComboIndex,
+            makeAttackAreaPacket.PosInfo,
+            makeAttackAreaPacket.VelInfo
         );
     }
 
@@ -171,7 +192,7 @@ public partial class PacketHandler
     // /// </summary>
     // public static void S_FarmingBoxCloseHandler(PacketSession session, IMessage packet) { }
 
-    public static void S_PingHandler(PacketSession session, IMessage packet) 
+    public static void S_PingHandler(PacketSession session, IMessage packet)
     {
         C_Pong pongPacket = new C_Pong();
         NetworkManager.Instance.Send(pongPacket);

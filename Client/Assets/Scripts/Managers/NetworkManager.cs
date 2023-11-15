@@ -43,7 +43,6 @@ public class NetworkManager : CustomSingleton<NetworkManager>
             PosY = 1.58f,
             PosZ = 0
         };
-
         enterGamePacket.Player.StatInfo = new StatInfo()
         {
             Level = 99,
