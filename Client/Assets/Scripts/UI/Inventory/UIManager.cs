@@ -21,11 +21,11 @@ public class UIManager : PlainSingleton<UIManager>
     {
         get
         {
-            if (_canvas == null)
-                if (GameObject.Find("_UI").TryGetComponent(out _canvas))
-                    return _canvas;
-                else
-                    return null;
+            //if (_canvas == null)
+            //    if (GameObject.Find("_UI").TryGetComponent(out _canvas))
+            //        return _canvas;
+            //    else
+            //        return null;
             return _canvas;
         }
         set
@@ -66,7 +66,12 @@ public class UIManager : PlainSingleton<UIManager>
         {
             HideList.Remove(open);
             if (root == null)
-                open.transform.SetParent(UIRoot.transform);
+            {
+                if (UIRoot != null)
+                    open.transform.SetParent(UIRoot.transform);
+                else
+                    open.transform.parent = null;
+            }
             else
                 open.transform.SetParent(root);
 
@@ -85,7 +90,12 @@ public class UIManager : PlainSingleton<UIManager>
         {
             GameObject obj;
             if (root == null)
-                obj = GameObject.Instantiate(prefab, UIRoot.transform);
+            {
+                if (UIRoot != null)
+                    obj = GameObject.Instantiate(prefab, UIRoot.transform);
+                else
+                    obj = GameObject.Instantiate(prefab);
+            }
             else
                 obj = GameObject.Instantiate(prefab, root);
             var uiClass = obj.GetComponent<UIBase>();
