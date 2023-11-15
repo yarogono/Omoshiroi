@@ -51,7 +51,7 @@ public class CloneMovement : MonoBehaviour
     {
         gameObject.TryGetComponent<CloneSync>(out _sync);
         _sync.OnMoveEvent += NetworkInput;
-        _sync.OnBattleEvent += Battle;
+        //_sync.OnBattleEvent += Battle;
     }
 
     private void Battle(int state, float animTime, Vector3 posInfo, Vector3 velInfo)
