@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class MeleeAttack : BaseAttack
 {
-    [SerializeField] private float speed = 1f; // 공격의 속도
-    [SerializeField] private float lifeTime = 0.3f; // 공격이 존재할 수 있는 시간
+    [SerializeField]
+    private float speed = 1f; // 공격의 속도
+
+    [SerializeField]
+    private float lifeTime = 0.3f; // 공격이 존재할 수 있는 시간
     private List<GameObject> _obstacle;
 
     private void Awake()
@@ -32,7 +35,7 @@ public class MeleeAttack : BaseAttack
 
     public override void ApplyDamage(HealthSystem health)
     {
-        Damage = _data.Stats.AtkPower;
+        Damage = _data.Stats.Atk;
         // 구체적인 대미지 계산을 맡기기
         // Stats에 대미지 계산 메소드를 만든다.
         // Damage = dataContainer.Stats.GetDamage(health);
@@ -52,10 +55,16 @@ public class MeleeAttack : BaseAttack
     {
         if (!other.CompareTag(_makerTag))
         {
-            if (other.gameObject.layer == (other.gameObject.layer & AttackManager.Instance.TargetLayer))
+            if (
+                other.gameObject.layer
+                == (other.gameObject.layer & AttackManager.Instance.TargetLayer)
+            )
             {
                 // Ray를 쏴서 처음 물체가 other 경우에만 대미지
-                Ray ray = new Ray(gameObject.transform.position, other.gameObject.transform.position - gameObject.transform.position);
+                Ray ray = new Ray(
+                    gameObject.transform.position,
+                    other.gameObject.transform.position - gameObject.transform.position
+                );
 #if UNITY_EDITOR
                 Gizmos.DrawRay(ray);
 #endif

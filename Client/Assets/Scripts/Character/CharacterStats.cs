@@ -7,20 +7,29 @@ using UnityEngine;
 public class CharacterStats
 {
     private int level;
+    private int maxHp;
+    private int hp;
+    private int def;
+    private int atk;
+    private float atkSpeed;
+    private int critRate;
+    private float critDamage;
+    private float moveSpeed;
+    private float runMultiplier;
+    private float dodgeTime;
+
     public int Level
     {
         get { return level; }
         set { level = value; }
     }
 
-    private int maxHp;
     public int MaxHp
     {
         get { return maxHp; }
         set { maxHp = value; }
     }
 
-    private int hp;
     public int Hp
     {
         get { return hp; }
@@ -35,56 +44,48 @@ public class CharacterStats
         }
     }
 
-    private int def;
     public int Def
     {
         get { return def; }
         set { def = value; }
     }
 
-    private float atkSpeed;
     public float AtkSpeed
     {
         get { return atkSpeed; }
         set { atkSpeed = value; }
     }
 
-    private int atkPower;
-    public int AtkPower
+    public int Atk
     {
-        get { return atkPower; }
-        set { atkPower = value; }
+        get { return atk; }
+        set { atk = value; }
     }
 
-    private int critRate;
     public int CritRate
     {
         get { return critRate; }
         set { critRate = value; }
     }
 
-    private float critPower;
-    public float CritPower
+    public float CritDamage
     {
-        get { return critPower; }
-        set { critPower = value; }
+        get { return critDamage; }
+        set { critDamage = value; }
     }
 
-    private float moveSpeed;
     public float MoveSpeed
     {
         get { return moveSpeed; }
         set { moveSpeed = value; }
     }
 
-    private float runMultipiler;
-    public float RunMultipiler
+    public float RunMultiplier
     {
-        get { return runMultipiler; }
-        set { runMultipiler = value; }
+        get { return runMultiplier; }
+        set { runMultiplier = value; }
     }
 
-    private float dodgeTime;
     public float DodgeTime
     {
         get { return dodgeTime; }
@@ -96,21 +97,21 @@ public class CharacterStats
         int hp,
         int def,
         float atkSpeed,
-        int atkPower,
+        int atk,
         int critRate,
-        float critPower,
+        float critDamage,
         float moveSpeed,
-        float runMulipiler
+        float runMuliplier
     )
     {
         MaxHp = maxHp;
         Hp = hp;
         Def = def;
         AtkSpeed = atkSpeed;
-        AtkPower = atkPower;
+        Atk = atk;
         CritRate = critRate;
-        CritPower = critPower;
+        CritDamage = critDamage;
         MoveSpeed = moveSpeed;
-        RunMultipiler = runMulipiler;
+        RunMultiplier = runMuliplier;
     }
 }

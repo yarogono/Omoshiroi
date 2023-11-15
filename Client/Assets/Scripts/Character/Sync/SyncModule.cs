@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
-
     private CharacterStats stats;
-
 
     public int Id { get; set; }
 
@@ -154,11 +152,11 @@ public class SyncModule : MonoBehaviour
         stats.Hp = StatInfo.Hp;
         stats.Def = 1;
         stats.AtkSpeed = 1;
-        stats.AtkPower = StatInfo.Attack;
+        stats.Atk = StatInfo.Attack;
         stats.CritRate = 1;
-        stats.CritPower = 1;
+        stats.CritDamage = 1;
         stats.MoveSpeed = StatInfo.Speed;
-        stats.RunMultipiler = 2;
+        stats.RunMultiplier = 2;
     }
 
     private void DrawInfo()
@@ -168,7 +166,7 @@ public class SyncModule : MonoBehaviour
             TestText1.text = $"PlayerName : {Name}";
             TestText2.text = $"Level : {stats.Level}";
             TestText3.text = $"Hp / MaxHP : {stats.Hp} / {stats.MaxHp} | {stats.Hp / stats.MaxHp}";
-            TestText4.text = $"AtkPower : {stats.AtkPower}";
+            TestText4.text = $"AtkPower : {stats.Atk}";
             TestText5.text = $"State : {State}";
 
             healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
