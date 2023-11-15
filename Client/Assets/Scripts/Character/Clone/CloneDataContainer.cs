@@ -18,10 +18,11 @@ public class CloneDataContainer : DataContainer
         Movement = GetComponent<CloneMovement>();
         Animator = GetComponent<Animator>();
         Sync = GetComponent<CloneSync>();
+
         AnimationData.Initialize();
     }
 
-    void Start()
+    private void Start()
     {
         if (Equipments == null)
             Equipments = new EquipSystem();

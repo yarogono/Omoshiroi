@@ -10,19 +10,19 @@ public class BaseAttack : MonoBehaviour
     protected DataContainer _data;
     protected AttackInfo _attackInfo;
 
-    public void AddActAtDisable(Action action) { _actAtDisable += action; }
+    public void AddActAtDisable(Action action)
+    {
+        _actAtDisable += action;
+    }
 
-    public virtual void Initalize(AttackInfo attackInfo , DataContainer dataContainer, string tag)
+    public virtual void Initalize(AttackInfo attackInfo, DataContainer dataContainer, string tag)
     {
         _makerTag = tag;
         _data = dataContainer;
         // Damage = ....
     }
 
-    public virtual void ApplyDamage(HealthSystem healthSystem)
-    {
-
-    }
+    public virtual void ApplyDamage(HealthSystem healthSystem) { }
 
     private void OnDisable()
     {

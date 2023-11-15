@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class RangeAttack : BaseAttack
 {
-    [SerializeField] private float speed = 10f; // 공격의 속도
-    [SerializeField] private float knockBackPower = 5f; // 공격의 속도
-    [SerializeField] private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
+    [SerializeField]
+    private float speed = 10f; // 공격의 속도
+
+    [SerializeField]
+    private float knockBackPower = 5f; // 공격의 속도
+
+    [SerializeField]
+    private float lifeTime = 5f; // 공격이 존재할 수 있는 시간
 
     int APDatar;
     Vector3 impact;
+
     private void Update()
     {
         // 매 프레임마다 공격을 전방으로 이동시킴
@@ -22,17 +27,13 @@ public class RangeAttack : BaseAttack
         Launch();
         base.Initalize(attackInfo, dataContainer, tag);
     }
-    private void Start()
-    {
 
-    }
+    private void Start() { }
+
     public void Launch()
     {
-
-
         // 공격생명주기
         Invoke(nameof(Deactivate), lifeTime);
-
     }
 
     private void Deactivate()
@@ -50,22 +51,25 @@ public class RangeAttack : BaseAttack
 
         if (!other.CompareTag(_makerTag))
         {
-            if (other.gameObject.layer == (other.gameObject.layer & AttackManager.Instance.TargetLayer))
+            if (
+                other.gameObject.layer
+                == (other.gameObject.layer & AttackManager.Instance.TargetLayer)
+            )
             {
-
                 var Data = other.GetComponent<DataContainer>();
                 var HealthData = Data.Health;
-                APDatar = Data.Stats.AtkPower;
+                APDatar = Data.Stats.Atk;
 
-                CharacterMovement movement = other.GetComponent<CharacterMovement>();  //데이터컨테이너로 캐싱 
+                CharacterMovement movement = other.GetComponent<CharacterMovement>(); //데이터컨테이너로 캐싱
                 if (Data != null)
                 {
                     //넉백을위한 Vector3계산
-                    impact = (other.gameObject.transform.position - transform.position).normalized * knockBackPower;
+                    impact =
+                        (other.gameObject.transform.position - transform.position).normalized
+                        * knockBackPower;
                     ApplyDamage(HealthData);
-                    //넉백             
+                    //넉백
                     movement.AddImpact(impact);
-
                 }
                 else
                 {
@@ -76,7 +80,6 @@ public class RangeAttack : BaseAttack
         }
     }
 
-
     public override void ApplyDamage(HealthSystem healthSystem)
     {
         // Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
@@ -84,6 +87,4 @@ public class RangeAttack : BaseAttack
         // Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
         gameObject.SetActive(false);
     }
-
 }
-
