@@ -23,6 +23,7 @@ public class CharacterDataContainer : DataContainer
         InputActions = GetComponent<BaseInput>();
         Animator = GetComponent<Animator>();
         Sync = GetComponent<PilotSync>();
+
         AnimationData.Initialize();
     }
 

@@ -12,43 +12,75 @@ public interface ILoader<Key, Value>
 }
 
 /// <summary>
-/// 아이템 ID 명명 규칙 : 첫 숫자로 아이템의 종류를 나타낸다. 이는 eItemType 를 참고할 것. 
+/// 아이템 ID 명명 규칙 : 첫 숫자로 아이템의 종류를 나타낸다. 이는 eItemType 를 참고할 것.
 /// </summary>
 public class DataManager : CustomSingleton<DataManager>
 {
-    public Dictionary<int, WeaponItem> WeaponItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, FBInventory> FBInventoryDict { get; private set; } = new Dictionary<int, FBInventory>();
+    public Dictionary<int, WeaponItem> WeaponItemDict { get; private set; } = new();
+    public Dictionary<int, FBInventory> FBInventoryDict { get; private set; } = new();
 
     //아래의 Dictionary 들은 검색용으로 만든 임시 자료형이다.
-    public Dictionary<int, WeaponItem> MagicItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> RuneItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> ResourceItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> ConsumableItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-    public Dictionary<int, WeaponItem> SkinItemDict { get; private set; } = new Dictionary<int, WeaponItem>();
-
+    public Dictionary<int, MagicItem> MagicItemDict { get; private set; } = new();
+    public Dictionary<int, RuneItem> RuneItemDict { get; private set; } = new();
+    public Dictionary<int, ResourceItem> ResourceItemDict { get; private set; } = new();
+    public Dictionary<int, ConsumableItem> ConsumableItemDict { get; private set; } = new();
+    public Dictionary<int, SkinItem> SkinItemDict { get; private set; } = new();
 
     private void Awake()
     {
         WeaponItemDict = LoadJson<Data.WeaponItemData, int, WeaponItem>("WeaponItem").MakeDict();
-        FBInventoryDict = LoadJson<Data.FarmingBoxInventoryData, int, FBInventory>("FarmingBoxInventory").MakeDict();
+        FBInventoryDict = LoadJson<Data.FarmingBoxInventoryData, int, FBInventory>(
+                "FarmingBoxInventory"
+            )
+            .MakeDict();
     }
 
     /// <summary>
     /// json 파일의 내용을 읽어온다.
     /// </summary>
-    Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
+    Loader LoadJson<Loader, Key, Value>(string path)
+        where Loader : ILoader<Key, Value>
     {
         TextAsset textAsset = Resources.Load<TextAsset>($"Prefabs/Data/{path}");
         return JsonUtility.FromJson<Loader>(textAsset.text);
     }
 
-    //public BaseItem FindItem(int itemId)
-    //{
-    //    BaseItem baseItem;
-    //    ItemData itemData;
+    public BaseItem FindItem(int itemId)
+    {
+        BaseItem item;
 
-    //    if (ConsumableItemDict.TryGetValue(itemId, out (WeaponItem)itemData)) { return dataManager.ConsumableItemDict.; }
+        item = WeaponItemDict[itemId];
+        if (item != null)
+        {
+            return item;
+        }
+        item = MagicItemDict[itemId];
+        if (item != null)
+        {
+            return item;
+        }
+        item = RuneItemDict[itemId];
+        if (item != null)
+        {
+            return item;
+        }
+        item = ResourceItemDict[itemId];
+        if (item != null)
+        {
+            return item;
+        }
+        item = ConsumableItemDict[itemId];
+        if (item != null)
+        {
+            return item;
+        }
+        item = SkinItemDict[itemId];
+        if (item != null)
+        {
+            return item;
+        }
 
-    //    return baseItem;
-    //}
+        Debug.Log($"ItemID ({itemId}) 는 존재하지 않는 아이템입니다.");
+        return null;
+    }
 }

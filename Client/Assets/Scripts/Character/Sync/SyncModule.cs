@@ -1,14 +1,12 @@
 using Google.Protobuf.Protocol;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
-    CharacterStats stats;
+
+    private CharacterStats stats;
+
 
     public int Id { get; set; }
 
@@ -93,11 +91,6 @@ public class SyncModule : MonoBehaviour
         }
     }
 
-    public Vector3 PosInfoToVec3
-    {
-        get { return new Vector3(PosInfo.PosX, PosInfo.PosY, PosInfo.PosZ); }
-    }
-
     private readonly VelocityInfo _velInfo = new();
     public VelocityInfo VelInfo
     {
@@ -107,15 +100,30 @@ public class SyncModule : MonoBehaviour
             if (_velInfo.Equals(value))
                 return;
 
-            VelInfo.VelX = value.VelX;
-            VelInfo.VelY = value.VelY;
-            VelInfo.VelZ = value.VelZ;
+            _velInfo.VelX = value.VelX;
+            _velInfo.VelY = value.VelY;
+            _velInfo.VelZ = value.VelZ;
         }
     }
 
     public Vector3 ToVector3(float x, float y, float z)
     {
         return new Vector3(x, y, z);
+    }
+
+    public DirectionInfo _dirInfo = new();
+    public DirectionInfo DirInfo
+    {
+        get { return _dirInfo; }
+        set
+        {
+            if (_dirInfo.Equals(value))
+                return;
+
+            _dirInfo.DirX = value.DirX;
+            _dirInfo.DirY = value.DirY;
+            _dirInfo.DirZ = value.DirZ;
+        }
     }
 
     public RectTransform healthBar;
@@ -155,12 +163,15 @@ public class SyncModule : MonoBehaviour
 
     private void DrawInfo()
     {
-        TestText1.text = $"PlayerName : {Name}";
-        TestText2.text = $"Level : {stats.Level}";
-        TestText3.text = $"Hp / MaxHP : {stats.Hp} / {stats.MaxHp}";
-        TestText4.text = $"AtkPower : {stats.AtkPower}";
-        TestText5.text = $"State : {State}";
+        if (stats.Hp != 0 && stats.MaxHp != 0)
+        {
+            TestText1.text = $"PlayerName : {Name}";
+            TestText2.text = $"Level : {stats.Level}";
+            TestText3.text = $"Hp / MaxHP : {stats.Hp} / {stats.MaxHp} | {stats.Hp / stats.MaxHp}";
+            TestText4.text = $"AtkPower : {stats.AtkPower}";
+            TestText5.text = $"State : {State}";
 
-        healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
+            healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
+        }
     }
 }

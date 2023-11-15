@@ -37,16 +37,20 @@ class PacketManager
 		_handler.Add((ushort)MsgId.SChangeHp, PacketHandler.S_ChangeHpHandler);		
 		_onRecv.Add((ushort)MsgId.SAim, MakePacket<S_Aim>);
 		_handler.Add((ushort)MsgId.SAim, PacketHandler.S_AimHandler);		
-		_onRecv.Add((ushort)MsgId.SBattle, MakePacket<S_Battle>);
-		_handler.Add((ushort)MsgId.SBattle, PacketHandler.S_BattleHandler);		
-		_onRecv.Add((ushort)MsgId.SAttack, MakePacket<S_Attack>);
-		_handler.Add((ushort)MsgId.SAttack, PacketHandler.S_AttackHandler);		
+		_onRecv.Add((ushort)MsgId.SComboAttack, MakePacket<S_ComboAttack>);
+		_handler.Add((ushort)MsgId.SComboAttack, PacketHandler.S_ComboAttackHandler);		
+		_onRecv.Add((ushort)MsgId.SMakeAttackArea, MakePacket<S_MakeAttackArea>);
+		_handler.Add((ushort)MsgId.SMakeAttackArea, PacketHandler.S_MakeAttackAreaHandler);		
 		_onRecv.Add((ushort)MsgId.SDie, MakePacket<S_Die>);
 		_handler.Add((ushort)MsgId.SDie, PacketHandler.S_DieHandler);		
 		_onRecv.Add((ushort)MsgId.SFarmingBoxSpawn, MakePacket<S_FarmingBoxSpawn>);
 		_handler.Add((ushort)MsgId.SFarmingBoxSpawn, PacketHandler.S_FarmingBoxSpawnHandler);		
 		_onRecv.Add((ushort)MsgId.SFarmingBoxOpen, MakePacket<S_FarmingBoxOpen>);
-		_handler.Add((ushort)MsgId.SFarmingBoxOpen, PacketHandler.S_FarmingBoxOpenHandler);
+		_handler.Add((ushort)MsgId.SFarmingBoxOpen, PacketHandler.S_FarmingBoxOpenHandler);		
+		_onRecv.Add((ushort)MsgId.SPing, MakePacket<S_Ping>);
+		_handler.Add((ushort)MsgId.SPing, PacketHandler.S_PingHandler);		
+		_onRecv.Add((ushort)MsgId.SDodge, MakePacket<S_Dodge>);
+		_handler.Add((ushort)MsgId.SDodge, PacketHandler.S_DodgeHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

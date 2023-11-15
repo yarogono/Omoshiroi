@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterStats
 {
-    [field: SerializeField]
-    public SyncModule SyncModule { get; private set; }
-
     private int level;
     public int Level
     {

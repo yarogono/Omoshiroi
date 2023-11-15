@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Google.Protobuf.Protocol;
-using System;
 
 public class PilotSync : SyncModule
 {
@@ -54,39 +51,7 @@ public class PilotSync : SyncModule
         NetworkManager.Instance.Send(aimPacket);
     }
 
-    public void SendC_BattlePacket(int state, float animTime, Vector3 posInfo, Vector3 velInfo)
-    {
-        State = state;
-
-        AnimTime = animTime;
-
-        PosInfo = new PositionInfo
-        {
-            PosX = posInfo.x,
-            PosY = posInfo.y,
-            PosZ = posInfo.z
-        };
-
-        VelInfo = new VelocityInfo
-        {
-            VelX = velInfo.x,
-            VelY = velInfo.y,
-            VelZ = velInfo.z,
-        };
-
-        C_Battle battlePacket =
-            new()
-            {
-                State = State,
-                AnimTime = animTime,
-                PosInfo = PosInfo,
-                VelInfo = VelInfo
-            };
-
-        NetworkManager.Instance.Send(battlePacket);
-    }
-
-    public void SendC_AttackPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo)
+    public void SendC_ComboAttackPacket(int comboIndex, Vector3 posInfo, Vector3 dirInfo)
     {
         ComboIndex = comboIndex;
 
@@ -96,6 +61,43 @@ public class PilotSync : SyncModule
             PosY = posInfo.y,
             PosZ = posInfo.z
         };
+
+        DirInfo = new DirectionInfo
+        {
+            DirX = dirInfo.x,
+            DirY = dirInfo.y,
+            DirZ = dirInfo.z
+        };
+    }
+
+    public void SendC_DodgePacket(Vector3 posInfo, Vector3 velInfo)
+    {
+        PosInfo = new PositionInfo
+        {
+            PosX = posInfo.x,
+            PosY = posInfo.y,
+            PosZ = posInfo.z
+        };
+
+        VelInfo = new VelocityInfo
+        {
+            VelX = velInfo.x,
+            VelY = velInfo.y,
+            VelZ = velInfo.z,
+        };
+    }
+
+    public void SendC_MakeAttackAreaPacket(int comboIndex, Vector3 posInfo, Vector3 velInfo)
+    {
+        ComboIndex = comboIndex;
+
+        PosInfo = new PositionInfo
+        {
+            PosX = posInfo.x,
+            PosY = posInfo.y,
+            PosZ = posInfo.z
+        };
+
         VelInfo = new VelocityInfo
         {
             VelX = velInfo.x,
@@ -103,13 +105,14 @@ public class PilotSync : SyncModule
             VelZ = velInfo.z,
         };
 
-        C_Attack attackPacket = new C_Attack
+        C_MakeAttackArea makeAttackAreaPacket = new C_MakeAttackArea
         {
             ComboIndex = ComboIndex,
             PosInfo = PosInfo,
             VelInfo = VelInfo
         };
-        NetworkManager.Instance.Send(attackPacket);
+
+        NetworkManager.Instance.Send(makeAttackAreaPacket);
     }
 
     public void SendC_ChangeHpPacket(int currentHp)

@@ -17,15 +17,19 @@ enum MsgId {
 	S_CHANGE_HP = 9;
 	C_AIM = 10;
 	S_AIM = 11;
-	C_BATTLE = 12;
-	S_BATTLE = 13;
-	C_ATTACK = 14;
-	S_ATTACK = 15;
+	C_COMBO_ATTACK = 12;
+	S_COMBO_ATTACK = 13;
+	C_MAKE_ATTACK_AREA = 14;
+	S_MAKE_ATTACK_AREA = 15;
 	S_DIE = 16;
 	S_FARMING_BOX_SPAWN = 17;
 	C_FARMING_BOX_OPEN = 18;
 	S_FARMING_BOX_OPEN = 19;
 	C_FARMING_BOX_CLOSE = 20;
+	S_PING = 21;
+	C_PONG = 22;
+	C_DODGE = 23;
+	S_DODGE = 24;
 }
 
 enum GameObjectType {
@@ -98,28 +102,34 @@ message S_Aim {
 	VelocityInfo velInfo = 3;
 }
 
-message C_Battle {
-	int32 state = 1;
-	float animTime = 2;
-	PositionInfo posInfo = 3;
-	VelocityInfo velInfo = 4;
-}
-
-message S_Battle {
-	int32 objectId = 1;
-	int32 state = 2;
-	float animTime = 3;
-	PositionInfo posInfo = 4;
-	VelocityInfo velInfo = 5;
-}
-
-message C_Attack {
+message C_ComboAttack {
 	int32 comboIndex = 1;
+	PositionInfo posInfo = 2;
+	DirectionInfo dirInfo = 3;
+}
+message S_ComboAttack {
+	int32 objectId = 1;
+	int32 comboIndex = 2;
+	PositionInfo posInfo = 3;
+	DirectionInfo dirInfo = 4;
+}
+
+message C_Dodge {
+	PositionInfo posInfo = 1;
+	VelocityInfo velInfo = 2;
+}
+message S_Dodge {
+	int32 objectId = 1;
 	PositionInfo posInfo = 2;
 	VelocityInfo velInfo = 3;
 }
 
-message S_Attack {
+message C_MakeAttackArea {
+	int32 comboIndex = 1;
+	PositionInfo posInfo = 2;
+	VelocityInfo velInfo = 3;
+}
+message S_MakeAttackArea {
 	int32 objectId = 1;
 	int32 comboIndex = 2;
 	PositionInfo posInfo = 3;
@@ -144,6 +154,12 @@ message C_FarmingBoxClose {
 	int32 playerId = 1;
     int32 farmingBoxId = 2;
 	repeated FarmingBoxItem items = 3;
+}
+
+message S_Ping {
+}
+
+message C_Pong {
 }
 
 message ObjectInfo {

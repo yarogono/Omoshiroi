@@ -13,35 +13,34 @@ namespace Inventory
     public class InventoryController : MonoBehaviour
     {
 
-      
-        [SerializeField]
-        private List<InventoryItem> ItemList = new List<InventoryItem>();
 
         [SerializeField]
+        private List<InventoryItem> ItemList = new List<InventoryItem>();
         private UIInventoryPage inventoryUI;
 
         [SerializeField]
         private InventorySO inventoryData;
 
         public List<InventoryItem> initialItems = new List<InventoryItem>();
-   
-        public Button BtnInventory;
-
-        public Button BtnCancel;
-
-        UIInventoryPage _inventorypage;
 
 
-        private void Awake()
-        {
-           
-        }
+
+
+
+
+
         private void Start()
         {
+
+            inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>();
+            UIController.Instance.InventoryUI = inventoryUI.gameObject;          
+            UIController.Instance.InventoryUI.SetActive(false);
+            UIController.Instance.BtnCancel = inventoryUI.CancleBtn;
+
             PrepareUI();
 
             AddItemsFromServer(SceneController.items);
-            BtnInventory.onClick.AddListener(() =>
+            UIController.Instance.BtnInventory.onClick.AddListener(() =>
             {
                 if (inventoryUI.isActiveAndEnabled == false)
                 {
@@ -60,7 +59,7 @@ namespace Inventory
                 }
             });
 
-            BtnCancel.onClick.AddListener(() =>
+            UIController.Instance.BtnCancel.onClick.AddListener(() =>
             {
                 inventoryUI.Hide();
             });
@@ -78,7 +77,7 @@ namespace Inventory
                 // 서버 아이템 ID와 일치하는 ItemList의 아이템을 찾습니다
                 InventoryItem foundItem = ItemList.Find(item => item.item.ItemID == serverItem.TemplateId);
                 if (foundItem.item != null)
-                {                                     
+                {
                     Debug.Log(serverItem + "순회");
                     // 아이템을 찾았다면, 새 인스턴스를 생성하고 수량을 설정합니다
                     InventoryItem newItem = new InventoryItem(); // 새로운 InventoryItem 인스턴스를 만듭니다
@@ -88,7 +87,7 @@ namespace Inventory
 
                 }
             }
-            
+
         }
         //private void PrepareInventoryData()//인베토리 데이터가 바뀔때 호출 
         //{
@@ -107,7 +106,7 @@ namespace Inventory
             inventoryUI.ResetAllItems();//인벤토리데이터 업데이트 할때 한번초기화 
             foreach (var item in inventoryState)
             {
-                inventoryUI.UpdateData(item.Key, item.Value.item.ItemIcon,item.Value.quantity);
+                inventoryUI.UpdateData(item.Key, item.Value.item.ItemIcon, item.Value.quantity);
             }
         }
 
@@ -144,13 +143,13 @@ namespace Inventory
             IItemAction itemAction = inventoryItem.item as IItemAction;
             if (itemAction != null)
             {
-               itemAction.PerformAction(gameObject);
-             
+                itemAction.PerformAction(gameObject); // 소비아이템 사용 
+
                 if (inventoryData.GetItemAt(itemIndex).IsEmpty)
                 {
                     inventoryUI.ResetSelection();
                 }
-                    
+
             }
 
             IDestroyableItem destroyableItem = inventoryItem.item as IDestroyableItem;
@@ -167,7 +166,7 @@ namespace Inventory
             {
                 return;
             }
-                
+
             inventoryUI.CreateDraggedItem(inventoryItem.item.ItemIcon, inventoryItem.quantity);
         }
 
@@ -185,14 +184,14 @@ namespace Inventory
                 return;
             }
             BaseItem item = inventoryItem.item;
-            
-            if(item.ItemType == eItemType.Weapon)
+
+            if (item.ItemType == eItemType.Weapon)
             {
                 inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.Description}", item.Description);
             }
             else
             {
-                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);           
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);
             }
             //----------  액션패널
             IItemAction itemAction = inventoryItem.item as IItemAction;
@@ -210,7 +209,7 @@ namespace Inventory
             }
         }
 
-    
+
 
     }
 }
