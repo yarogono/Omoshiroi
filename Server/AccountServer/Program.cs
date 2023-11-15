@@ -27,6 +27,8 @@ namespace AccountServer
                 options.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
 
+            builder.Services.AddSwaggerGen();
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddMvc().AddRazorRuntimeCompilation();
 
@@ -47,6 +49,8 @@ namespace AccountServer
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 
+            UseSwagger(app);
+
             app.UseForwardedHeaders();
 
             app.UseHttpsRedirection();
@@ -59,6 +63,16 @@ namespace AccountServer
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static void UseSwagger(WebApplication app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
         }
     }
 }

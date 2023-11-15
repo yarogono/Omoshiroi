@@ -57,13 +57,13 @@ public class ObjectManager : CustomSingleton<ObjectManager>
 
                 // TODO
                 // Packet 통신으로 받아온 스탯만 결합할 예정
-
                 CloneSync cloneSync = gameObject.GetComponent<CloneSync>();
                 cloneSync.Id = info.ObjectId;
                 cloneSync.Name = info.Name;
                 cloneSync.PosInfo = info.PosInfo;
                 cloneSync.StatInfo = info.StatInfo;
                 cloneSync.State = info.State;
+                cloneSync.InitCharacterStats();
                 cloneSync.CallMoveEvent(cloneSync.State, cloneSync.PosInfo, cloneSync.VelInfo);
             }
         }
@@ -79,6 +79,12 @@ public class ObjectManager : CustomSingleton<ObjectManager>
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// 클라이언트의 경우, 자체적인 ObjectId 를 탐색하는 것이 아니라 서버 측에서 받아온 ObjectId 를 저장한 
+    /// BattleFieldObject.ObjectId 를 탐색하도록 수정할 필요가 있어 보인다.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public GameObject FindById(int id)
     {
         _objects.TryGetValue(id, out GameObject gameObject);

@@ -15,7 +15,6 @@ partial class PacketHandler
 
         Player sessionPlayer = clientSession.MyPlayer;
 
-        GameRoom room = Server.RoomManager.Instance.Find(1);
 
         var packetPlayer = enterGamePacket.Player;
 
@@ -33,7 +32,11 @@ partial class PacketHandler
 
         clientSession.MyPlayer = player;
 
-        room.Push(room.EnterGame, player);
+        GameLogic.Instance.Push(() => 
+        { 
+            GameRoom room = GameLogic.Instance.Find(1);
+            room.Push(room.EnterGame, player);
+        });
     }
 
 
@@ -110,12 +113,12 @@ partial class PacketHandler
         room.Push(room.HandleAim, player, aimPacket);
     }
 
-    public static void C_BattleHandler(PacketSession session, IMessage packet)
+    public static void C_ComboAttackHandler(PacketSession session, IMessage packet)
     {
-        C_Battle battlePacket = (C_Battle)packet;
+        C_ComboAttack comboAttackPacket = (C_ComboAttack)packet;
         ClientSession clientSession = (ClientSession)session;
 
-        if (battlePacket == null)
+        if (comboAttackPacket == null)
             return;
 
         Player player = clientSession.MyPlayer;
@@ -126,15 +129,15 @@ partial class PacketHandler
         if (room == null)
             return;
 
-        room.Push(room.HandleBattle, player, battlePacket);
+        room.Push(room.HandleComboAttack, player, comboAttackPacket);
     }
 
-    public static void C_AttackHandler(PacketSession session, IMessage packet)
+    public static void C_MakeAttackAreaHandler(PacketSession session, IMessage packet)
     {
-        C_Attack attackPacket = (C_Attack)packet;
+        C_MakeAttackArea makeAttackAreaPacket = (C_MakeAttackArea)packet;
         ClientSession clientSession = (ClientSession)session;
 
-        if (attackPacket == null)
+        if (makeAttackAreaPacket == null)
             return;
 
         Player player = clientSession.MyPlayer;
@@ -145,6 +148,31 @@ partial class PacketHandler
         if (room == null)
             return;
 
-        room.Push(room.HandleAttack, player, attackPacket);
+        room.Push(room.HandleMakeAttackArea, player, makeAttackAreaPacket);
+    }
+
+    public static void C_PongHandler(PacketSession session, IMessage packet)
+    {
+        ClientSession clientSession = (ClientSession)session;
+        clientSession.HandlePong();
+    }
+
+    public static void C_DodgeHandler(PacketSession session, IMessage packet)
+    {
+        C_Dodge dodgePacket = (C_Dodge)packet;
+        ClientSession clientSession = (ClientSession)session;
+
+        if (dodgePacket == null) 
+            return;
+
+        Player player = clientSession.MyPlayer;
+        if (player == null)
+            return;
+
+        GameRoom room = player.Room;
+        if (room == null)
+            return;
+
+        room.Push(room.HandleDodge, player, dodgePacket);
     }
 }

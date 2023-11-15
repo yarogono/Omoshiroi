@@ -33,14 +33,18 @@ class PacketManager
 		_handler.Add((ushort)MsgId.CChangeHp, PacketHandler.C_ChangeHpHandler);		
 		_onRecv.Add((ushort)MsgId.CAim, MakePacket<C_Aim>);
 		_handler.Add((ushort)MsgId.CAim, PacketHandler.C_AimHandler);		
-		_onRecv.Add((ushort)MsgId.CBattle, MakePacket<C_Battle>);
-		_handler.Add((ushort)MsgId.CBattle, PacketHandler.C_BattleHandler);		
-		_onRecv.Add((ushort)MsgId.CAttack, MakePacket<C_Attack>);
-		_handler.Add((ushort)MsgId.CAttack, PacketHandler.C_AttackHandler);		
+		_onRecv.Add((ushort)MsgId.CComboAttack, MakePacket<C_ComboAttack>);
+		_handler.Add((ushort)MsgId.CComboAttack, PacketHandler.C_ComboAttackHandler);		
+		_onRecv.Add((ushort)MsgId.CMakeAttackArea, MakePacket<C_MakeAttackArea>);
+		_handler.Add((ushort)MsgId.CMakeAttackArea, PacketHandler.C_MakeAttackAreaHandler);		
 		_onRecv.Add((ushort)MsgId.CFarmingBoxOpen, MakePacket<C_FarmingBoxOpen>);
 		_handler.Add((ushort)MsgId.CFarmingBoxOpen, PacketHandler.C_FarmingBoxOpenHandler);		
 		_onRecv.Add((ushort)MsgId.CFarmingBoxClose, MakePacket<C_FarmingBoxClose>);
-		_handler.Add((ushort)MsgId.CFarmingBoxClose, PacketHandler.C_FarmingBoxCloseHandler);
+		_handler.Add((ushort)MsgId.CFarmingBoxClose, PacketHandler.C_FarmingBoxCloseHandler);		
+		_onRecv.Add((ushort)MsgId.CPong, MakePacket<C_Pong>);
+		_handler.Add((ushort)MsgId.CPong, PacketHandler.C_PongHandler);		
+		_onRecv.Add((ushort)MsgId.CDodge, MakePacket<C_Dodge>);
+		_handler.Add((ushort)MsgId.CDodge, PacketHandler.C_DodgeHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
