@@ -567,11 +567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemList: []
-  inventoryUI: {fileID: 3427704470537988780}
   inventoryData: {fileID: 11400000, guid: d35e6ae4fe8666149a574619a9045119, type: 2}
   initialItems: []
-  BtnInventory: {fileID: 1805003509}
-  BtnCancel: {fileID: 6255597334478270714}
 --- !u!4 &370557333
 Transform:
   m_ObjectHideFlags: 0
@@ -2631,6 +2628,7 @@ MonoBehaviour:
   itemDescription: {fileID: 8981537772643037885}
   mouseFollower: {fileID: 5690998148565074160}
   actionPanel: {fileID: 7767765795737638639}
+  CancleBtn: {fileID: 0}
 --- !u!114 &3466836888046978975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,7 +2727,7 @@ PrefabInstance:
       objectReference: {fileID: 224359262}
     - target: {fileID: 8381213392927611182, guid: 5492cc15f7cf73a48997a28cb85465b2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 988426049719362966, guid: 5492cc15f7cf73a48997a28cb85465b2, type: 3}
