@@ -67,35 +67,35 @@ namespace AccountServer.Controllers
         [Route("login")]
         public AccountLoginRes Login([FromBody] AccountLoginReq req)
         {
-            AccountDb account = _context.Accounts
-                                .AsNoTracking()
-                                .Where(a => a.AccountName == req.AccountName)
-                                .Include(a => a.Items)
-                                .FirstOrDefault();
+            //AccountDb account = _context.Accounts
+            //                    .AsNoTracking()
+            //                    .Where(a => a.AccountName == req.AccountName)
+            //                    .Include(a => a.Items)
+            //                    .FirstOrDefault();
 
 
             AccountLoginRes res = new AccountLoginRes();
 
-            if (account != null)
-            {
-                string reqPassword =req.AccountPassword;
-                string accountPassword = account.AccountPassword;
-                if (_passwordEncryptor.IsmatchPassword(reqPassword, accountPassword))
-                {
-                    res.IsLoginSucceed = true;
+            //if (account != null)
+            //{
+            //    string reqPassword =req.AccountPassword;
+            //    string accountPassword = account.AccountPassword;
+            //    if (_passwordEncryptor.IsmatchPassword(reqPassword, accountPassword))
+            //    {
+            //        res.IsLoginSucceed = true;
 
-                    ICollection<ItemDb> items = account.Items;
+            //        ICollection<ItemDb> items = account.Items;
 
-                    res.Items = new List<PlayerItemRes>();
-                    foreach (ItemDb item in items)
-                    {
-                        PlayerItemRes playerItemRes = new PlayerItemRes() { Quantity = item.Quantity, TemplateId = item.TemplateId };
-                        res.Items.Add(playerItemRes);
-                    }
+            //        res.Items = new List<PlayerItemRes>();
+            //        foreach (ItemDb item in items)
+            //        {
+            //            PlayerItemRes playerItemRes = new PlayerItemRes() { Quantity = item.Quantity, TemplateId = item.TemplateId };
+            //            res.Items.Add(playerItemRes);
+            //        }
 
-                    return res;
-                }
-            }
+            //        return res;
+            //    }
+            //}
 
             res.IsLoginSucceed = false;
             return res;
