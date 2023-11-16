@@ -21,8 +21,6 @@ public class NPCDataContainer : DataContainer
     private void Awake()
     {
         Controller = GetComponent<CharacterController>();
-        Movement = GetComponent<CharacterMovement>();
-        InputActions = GetComponent<BaseInput>();
         Animator = GetComponent<Animator>();
         Health = GetComponent<HealthSystem>();
         Controller = GetComponent<CharacterController>();
