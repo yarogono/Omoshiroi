@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4879513567182253476
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB8EC\uBF51\uAE30 1\uD68C "
+  m_text: "\uB8EC\uBF51\uAE30 1 \uD68C "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
   m_sharedMaterial: {fileID: -3124778242148821078, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
@@ -3830,7 +3830,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
   m_sharedMaterial: {fileID: -3124778242148821078, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
@@ -4941,8 +4941,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000034332, y: 20.185}
-  m_SizeDelta: {x: 182.88, y: 40.37}
+  m_AnchoredPosition: {x: 12.0476, y: 20.185}
+  m_SizeDelta: {x: 206.9752, y: 40.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2508088211403245562
 CanvasRenderer:
@@ -4972,7 +4972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBB34\uAE30\uBF51\uAE30 1\uD68C "
+  m_text: "\uBB34\uAE30\uBF51\uAE30 10\uD68C "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
   m_sharedMaterial: {fileID: -3124778242148821078, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
@@ -5216,7 +5216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBB34\uAE30\uBF51\uAE30 10\uD68C "
+  m_text: "\uBB34\uAE30\uBF51\uAE30 1 \uD68C "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
   m_sharedMaterial: {fileID: -3124778242148821078, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
@@ -5351,7 +5351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB9C8\uBC95\uBF51\uAE30 1\uD68C "
+  m_text: "\uB9C8\uBC95\uBF51\uAE30 1 \uD68C "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
   m_sharedMaterial: {fileID: -3124778242148821078, guid: bdd8f813444c9794d9ef7f5ff3f35edb, type: 2}
