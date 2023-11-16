@@ -19,8 +19,8 @@ public interface IDroppable
 
 public interface IEquippable
 {
-    public void Equip(CharacterDataContainer cdc);
-    public void Dequip(CharacterDataContainer cdc);
+    public void Equip(DataContainer dataContainer);
+    public void Dequip(DataContainer dataContainer);
 }
 
 public interface IConsumable

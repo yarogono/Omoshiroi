@@ -1,28 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class NPCDataContainer : DataContainer
 {
-    [Header("몬스터 스탯 및 장비")]
-    [SerializeField] private CharacterBaseStats MonsterStats;
-    [SerializeField] private List<BaseItem> MonsterEquipments;
+    public CharacterController Controller { get; private set; }
+    [Header("테스트용 몬스터 스탯 및 장비")]
+    [SerializeField] private CharacterBaseStats _testMonsterStats;
+    [SerializeField] private List<BaseItem> _testMonsterEquipments;
     private void Awake()
     {
         Animator = GetComponent<Animator>();
-        SpriteRotator = GetComponent<CharacterSpriteRotator>();
         Health = GetComponent<HealthSystem>();
-        Equipments = new EquipSystem();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        Controller = GetComponent<CharacterController>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Stats.SetCharacterStats(_testMonsterStats.BaseHP,
+            _testMonsterStats.BaseHP,
+            _testMonsterStats.BaseDEF,
+            _testMonsterStats.BaseAttackSpeed,
+            _testMonsterStats.BaseAttackPower,
+            _testMonsterStats.BaseCriticalRate,
+            _testMonsterStats.BaseCriticalPower,
+            _testMonsterStats.BaseMoveSpeed,
+            _testMonsterStats.BaseRunMultiplier);
+
+        Equipments = new EquipSystem(this);
+
+        AnimationData.Initialize();
+
+        SpriteRotator.Register(this);
     }
 }

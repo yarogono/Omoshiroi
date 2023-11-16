@@ -8,12 +8,12 @@ public class EquippableItem : BaseItem, IDestroyableItem, IItemAction, IEquippab
 {
     public string ActionName => "Equip";
 
-    public void Dequip(CharacterDataContainer cdc)
+    public void Dequip(DataContainer dataContainer)
     {
         throw new System.NotImplementedException();
     }
 
-    public void Equip(CharacterDataContainer cdc)
+    public void Equip(DataContainer dataContainer)
     {
         throw new System.NotImplementedException();
     }

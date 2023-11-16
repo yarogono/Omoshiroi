@@ -35,7 +35,7 @@ public class CharacterDataContainer : DataContainer
     private void Start()
     {
         if (Equipments == null)
-            Equipments = new EquipSystem();
+            Equipments = new EquipSystem(this);
 
         foreach (var item in TestEquipItem)
             Equipments.Equip(item);

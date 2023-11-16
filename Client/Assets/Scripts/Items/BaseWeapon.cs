@@ -30,9 +30,9 @@ public class BaseWeapon : BaseItem, IEquippable, IDroppable
     [Tooltip("크리티컬 피해 증가량")]
     protected float weaponCP;
 
-    public void Equip(CharacterDataContainer cdc)
+    public void Equip(DataContainer dataContainer)
     {
-        CharacterStats cs = cdc.Stats;
+        CharacterStats cs = dataContainer.Stats;
         cs.SetCharacterStats(
             cs.MaxHp + weaponHP,
             cs.Hp + weaponHP,
@@ -46,9 +46,9 @@ public class BaseWeapon : BaseItem, IEquippable, IDroppable
         );
     }
 
-    public void Dequip(CharacterDataContainer cdc)
+    public void Dequip(DataContainer dataContainer)
     {
-        CharacterStats cs = cdc.Stats;
+        CharacterStats cs = dataContainer.Stats;
         cs.SetCharacterStats(
             cs.MaxHp - weaponHP,
             cs.Hp - weaponHP,

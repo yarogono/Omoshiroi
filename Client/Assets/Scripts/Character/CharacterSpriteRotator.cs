@@ -23,6 +23,12 @@ public class CharacterSpriteRotator
         _weaponBase = _weapon.transform.position;
     }
 
+    public void Register(NPCDataContainer container)
+    {
+        _weaponBase = _weapon.transform.position;
+        // TODO
+        // Get Information about direcction or update 
+    }
     private void MoveInput(Vector2 direction)
     {
         RotateMain(direction);
