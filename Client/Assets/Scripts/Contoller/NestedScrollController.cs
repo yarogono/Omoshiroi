@@ -6,9 +6,6 @@ using UnityEngine.EventSystems;
 public class NestedScrollController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Scrollbar scrollbar;
-    public Transform contentTr;
-
-    public Slider tabSlider;
     public RectTransform[] BtnRect, BtnImageRect;
 
     const int SIZE = 3;
@@ -65,52 +62,23 @@ public class NestedScrollController : MonoBehaviour, IBeginDragHandler, IDragHan
    
     }
 
-  
-
-
     void Update()
     {
-        tabSlider.value = scrollbar.value;
-
+       
         if (!isDrag)
         {
             scrollbar.value = Mathf.Lerp(scrollbar.value, targetPos, 0.1f);
 
             // 목표 버튼은 크기가 커짐
-            for (int i = 0; i < SIZE; i++) BtnRect[i].sizeDelta = new Vector2(i == targetIndex ? 360 : 180, BtnRect[i].sizeDelta.y);
-        }
-
-
-        if (Time.time < 0.1f) return;
-
-        for (int i = 0; i < SIZE; i++)
-        {
-            // 버튼 아이콘이 부드럽게 버튼의 중앙으로 이동, 크기는 1, 텍스트 비활성화
-            Vector3 BtnTargetPos = BtnRect[i].anchoredPosition3D;
-            Vector3 BtnTargetScale = Vector3.one;
-            bool textActive = false;
-
-            // 선택한 버튼 아이콘은 약간 위로 올리고, 크기도 키우고, 텍스트도 활성화
-            if (i == targetIndex)
-            {
-                BtnTargetPos.y = -23f;
-                BtnTargetScale = new Vector3(1.2f, 1.2f, 1);
-                textActive = true;
-            }
-
-            BtnImageRect[i].anchoredPosition3D = Vector3.Lerp(BtnImageRect[i].anchoredPosition3D, BtnTargetPos, 0.25f);
-            BtnImageRect[i].localScale = Vector3.Lerp(BtnImageRect[i].localScale, BtnTargetScale, 0.25f);
-            BtnImageRect[i].transform.GetChild(0).gameObject.SetActive(textActive);
-        }
+            for (int i = 0; i < SIZE; i++) BtnRect[i].sizeDelta = new Vector2(i == targetIndex ? 1080 : 540, BtnRect[i].sizeDelta.y);
+        }      
     }
-
 
     public void TabClick(int n)
     {
         curPos = SetPos();
         targetIndex = n;
-        targetPos = pos[n];
-    
+        targetPos = pos[n];    
     }
 
 }
