@@ -10,36 +10,12 @@ namespace AccountServer
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             var app = BuilderSetting(builder);
 
             WebApplicationSetting(app);
+
             app.Run();
-        }
-
-        private static void WebApplicationSetting(WebApplication app)
-        {
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseHttpsRedirection();
-            }
-
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
-
-            UseSwagger(app);
-
-            app.UseForwardedHeaders();
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapControllers();
         }
 
         private static WebApplication BuilderSetting(WebApplicationBuilder builder)
@@ -71,6 +47,32 @@ namespace AccountServer
                                        .AddEnvironmentVariables();
 
             return builder.Build();
+        }
+
+        private static void WebApplicationSetting(WebApplication app)
+        {
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            UseSwagger(app);
+
+            app.UseForwardedHeaders();
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllers();
         }
 
         private static void UseSwagger(WebApplication app)
