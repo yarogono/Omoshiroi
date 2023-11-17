@@ -53,7 +53,7 @@ public class CharacterStateMachine : StateMachine
         int layerInAnimator)
     {
         Character = container;
-        //InputActions = container.InputActions;
+        InputActions = container.InputActions;
         LayerInAnimator = layerInAnimator;
         combineStateMachine = combine;
         Controller = container.Controller;
