@@ -82,7 +82,7 @@ public class LobbyUIController : MonoBehaviour
     //{
     //    btnStore.onClick.AddListener(() =>
     //    {
-    //        StartUILoading(uiStore, uiMainLobby); // 메소드 이름 변경 및 오타 수정
+    //        StartUILoading(uiStore, uiMainLobby); 
     //    });
     //}
 
@@ -91,7 +91,7 @@ public class LobbyUIController : MonoBehaviour
     //    var ui = UIManager.Instance.ShowUI<UIOption>();
     //}
 
-    //public void StartUILoading(GameObject openUI, GameObject closeUI) // 메소드 이름 변경 및 오타 수정
+    //public void StartUILoading(GameObject openUI, GameObject closeUI) 
     //{
     //    if (lobbyLoading != null)
     //    {
