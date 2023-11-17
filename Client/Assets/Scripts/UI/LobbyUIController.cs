@@ -19,6 +19,7 @@ public class LobbyUIController : MonoBehaviour
 
     private void Init()
     {
+        SetActiveWithCheck(UIPage[0], true);
         for (int i = 1; i < UIPage.Length; i++)
         {
             SetActiveWithCheck(UIPage[i], false);
