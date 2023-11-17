@@ -31,7 +31,7 @@ public class CharacterDodgeState : BaseState
             _stateMachine.Controller.velocity
         );
         // 무적 적용
-
+        _stateMachine.Character.Health.IsDodge = true;
     }
 
     public override void Exit()
@@ -61,6 +61,7 @@ public class CharacterDodgeState : BaseState
             if (normalizedTime > duration)
             {
                 // 무적 풀기
+                _stateMachine.Character.Health.IsDodge = false;
             }
         }
         else

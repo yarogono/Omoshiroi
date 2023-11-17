@@ -67,7 +67,8 @@ public class RangeAttack : BaseAttack
                     impact =
                         (other.gameObject.transform.position - transform.position).normalized
                         * knockBackPower;
-                    ApplyDamage(HealthData);
+                    if (ApplyDamage(HealthData))
+                        return;
                     //넉백
                     movement?.AddImpact(impact);
                 }
@@ -80,11 +81,16 @@ public class RangeAttack : BaseAttack
         }
     }
 
-    public override void ApplyDamage(HealthSystem healthSystem)
+    public override bool ApplyDamage(HealthSystem healthSystem)
     {
         // Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
-        healthSystem.TakeDamage(APDatar);
         // Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
-        gameObject.SetActive(false);
+        if (healthSystem.TakeDamage(APDatar))
+        {
+            gameObject.SetActive(false);
+            return true;
+        }
+        else
+            return false;
     }
 }
