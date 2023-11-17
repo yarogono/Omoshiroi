@@ -22,6 +22,7 @@ public class NPCDataContainer : DataContainer
     private NPCAIController npcAIController;
 
     private CombineStateMachine stateMachine;
+    public NPCInput InputActions { get; private set; }
 
     /// <summary>
     /// CombineStateMachine 을 그대로 사용하되, Input 에 대한 사항만 바꾸어주면 된다.
@@ -36,6 +37,7 @@ public class NPCDataContainer : DataContainer
         Animator = GetComponent<Animator>();
         Health = GetComponent<HealthSystem>();
         npcAIController = GetComponent<NPCAIController>();
+        InputActions = GetComponent<NPCInput>();
 
         stateMachine = new CombineStateMachine(this);
 
@@ -66,6 +68,7 @@ public class NPCDataContainer : DataContainer
     private void Update()
     {
         stateMachine.Update();
+        NPCAI?.UpdateAIState();
     }
 
     private void FixedUpdate()

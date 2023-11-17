@@ -214,7 +214,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Test",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -225,7 +225,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Test",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -236,7 +236,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Test",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -247,7 +247,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Test",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -269,7 +269,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PointerControl",
+                    "groups": "Test",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -280,7 +280,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PointerControl",
+                    "groups": "Test",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -302,7 +302,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Test",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -313,7 +313,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Test",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -324,7 +324,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Test",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -335,7 +335,7 @@
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PointerControl",
+                    "groups": "Test",
                     "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -346,7 +346,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "PointerControl",
+                    "groups": "Test",
                     "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -361,6 +361,22 @@
             "devices": [
                 {
                     "devicePath": "<Pointer>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Test",
+            "bindingGroup": "Test",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": false,
                     "isOR": false
                 }
