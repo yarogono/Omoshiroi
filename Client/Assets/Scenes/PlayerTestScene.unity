@@ -1186,6 +1186,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1985599301610708945, guid: 92817a63422a1234ca6853aa64a1fd3d, type: 3}
+      propertyPath: SetDodge
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3119228395594561357, guid: 92817a63422a1234ca6853aa64a1fd3d, type: 3}
       propertyPath: m_Name
       value: TestNPC

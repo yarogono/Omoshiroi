@@ -18,6 +18,8 @@ public class NPCDataContainer : DataContainer
     [Header("테스트용 몬스터 스탯 및 장비")]
     [SerializeField] private CharacterBaseStats _testMonsterStats;
     [SerializeField] private List<BaseItem> _testMonsterEquipments;
+    [Header("테스트용 몬스터 회피")]
+    [SerializeField] private bool SetDodge;
 
     private NPCAIController npcAIController;
 
@@ -63,6 +65,8 @@ public class NPCDataContainer : DataContainer
 
         AnimationData.Initialize();
         SpriteRotator.Register(this);
+
+        Health.IsDodge = SetDodge;
     }
 
     private void Update()
