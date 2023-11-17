@@ -1,0 +1,15 @@
+{"stats" : [
+    {
+        "StatID" : 1,
+        "Level" : 1,
+        "MaxHp" : 100,
+        "Def" : 1,
+        "Atk" : 20,
+        "atkSpeed" : 1,
+        "CritRate" : 0.15,
+        "CritDamage" : 1,
+        "MoveSpeed" : 2,
+        "RunMultiplier" : 2,
+        "DodgeTime" : 1
+    }
+]}
