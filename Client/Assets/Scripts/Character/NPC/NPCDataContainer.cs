@@ -66,6 +66,7 @@ public class NPCDataContainer : DataContainer
     private void Update()
     {
         stateMachine.Update();
+        NPCAI.UpdateAIState();
     }
 
     private void FixedUpdate()
