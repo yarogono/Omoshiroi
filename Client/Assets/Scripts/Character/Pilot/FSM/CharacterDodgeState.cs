@@ -26,9 +26,9 @@ public class CharacterDodgeState : BaseState
         alreadyAppliedForce = false;
         _nextState = _stateMachine.previousStateType;
         StartAnimation(_stateMachine.Character.AnimationData.DodgeParameterHash);
-        _stateMachine.Character.Sync?.SendC_DodgePacket(
+        _stateMachine.Sync?.SendC_DodgePacket(
             _stateMachine.Character.transform.position,
-            _stateMachine.Character.Controller.velocity
+            _stateMachine.Controller.velocity
         );
     }
 
@@ -52,9 +52,9 @@ public class CharacterDodgeState : BaseState
                 TryApplyForce();
             }
             if (_needUpdate)
-                _stateMachine.Character.Sync?.SendC_DodgePacket(
+                _stateMachine.Sync?.SendC_DodgePacket(
                     _stateMachine.Character.transform.position,
-                    _stateMachine.Character.Controller.velocity
+                    _stateMachine.Controller.velocity
                 );
         }
         else

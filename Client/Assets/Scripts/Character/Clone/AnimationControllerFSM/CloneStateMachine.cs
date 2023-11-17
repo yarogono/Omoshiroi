@@ -47,11 +47,17 @@ public class CombineCloneStatemachine
         _stateMachine[1].AddState(eStateType.None, new CloneNoneState(_stateMachine[1]));
         _stateMachine[1].ChangeState(eStateType.None);
 
-        clone.Sync.OnMoveEvent += CloneMoveEvent;
-        clone.Sync.OnAimEvent += CloneAimEvent;
-        clone.Sync.OnComboAttackEvent += CloneComboAttackEvent;
-        clone.Sync.OnMakeAttackAreaEvent += CloneMakeAttackAreaEvent;
-        clone.Sync.OnDodgeEvent += CloneDodgeEvent;
+        if (clone.Sync != null)
+            SyncInit(clone.Sync);
+    }
+
+    public void SyncInit(CloneSync sync)
+    {
+        sync.OnMoveEvent += CloneMoveEvent;
+        sync.OnAimEvent += CloneAimEvent;
+        sync.OnComboAttackEvent += CloneComboAttackEvent;
+        sync.OnMakeAttackAreaEvent += CloneMakeAttackAreaEvent;
+        sync.OnDodgeEvent += CloneDodgeEvent;
     }
 
     public void Update()
