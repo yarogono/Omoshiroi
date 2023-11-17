@@ -26,6 +26,7 @@ public class RangeAttack : BaseAttack
     {
         Launch();
         base.Initalize(attackInfo, dataContainer, tag);
+        APDatar = _data.Stats.Atk;
     }
 
     private void Start() { }
@@ -55,9 +56,11 @@ public class RangeAttack : BaseAttack
             {
                 var Data = other.GetComponent<DataContainer>();
                 var HealthData = Data.Health;
-                APDatar = Data.Stats.Atk;
+                //APDatar = Data.Stats.Atk;
 
-                CharacterMovement movement = other.GetComponent<CharacterMovement>(); //데이터컨테이너로 캐싱
+                CharacterMovement movement = null;
+                if (other.CompareTag(AttackManager.Instance.PlayerTag))
+                    movement = (Data as CharacterDataContainer).Movement;/*other.GetComponent<CharacterMovement>(); //데이터컨테이너로 캐싱*/
                 if (Data != null)
                 {
                     //넉백을위한 Vector3계산
@@ -72,7 +75,7 @@ public class RangeAttack : BaseAttack
                 {
                     Debug.LogError("Component null");
                 }
-                this.gameObject.SetActive(false);
+                //this.gameObject.SetActive(false);
             }
         }
     }

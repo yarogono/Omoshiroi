@@ -30,6 +30,7 @@ public class AttackManager : CustomSingleton<AttackManager>
     [SerializeField]
     private GameObject ObjPoolRoot;
     public LayerMask TargetLayer;
+    public string PlayerTag;
 
     public void RqAttack(int ComboIndex, DataContainer dataContainer, Vector3 position, Vector3 direction)
     {

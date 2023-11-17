@@ -16,12 +16,12 @@ public class CharacterDodgeState : BaseState
     public CharacterDodgeState(CharacterStateMachine stateMachine)
         : base(stateMachine)
     {
-        duration = _stateMachine.Character.Stats.DodgeTime;
     }
 
     public override void Enter()
     {
         base.Enter();
+        duration = _stateMachine.Character.Stats.DodgeTime;
         passedTime = 0.1f;
         alreadyAppliedForce = false;
         _nextState = _stateMachine.previousStateType;
@@ -30,6 +30,8 @@ public class CharacterDodgeState : BaseState
             _stateMachine.Character.transform.position,
             _stateMachine.Controller.velocity
         );
+        // 무적 적용
+
     }
 
     public override void Exit()
@@ -56,6 +58,10 @@ public class CharacterDodgeState : BaseState
                     _stateMachine.Character.transform.position,
                     _stateMachine.Controller.velocity
                 );
+            if (normalizedTime > duration)
+            {
+                // 무적 풀기
+            }
         }
         else
         {
