@@ -19,6 +19,7 @@ public class NPCDataContainer : DataContainer
     [SerializeField] private CharacterBaseStats _testMonsterStats;
     [SerializeField] private List<BaseItem> _testMonsterEquipments;
     [SerializeField] private HealthSystem healthSystem;
+    [SerializeField] public GameObject dropItem;
 
     private NPCAIController npcAIController;
 
@@ -35,8 +36,6 @@ public class NPCDataContainer : DataContainer
     /// </summary>
     public NPCAIController NPCAI { get { return npcAIController; } private set { npcAIController = value; } }
     public CombineStateMachine StateMachine { get { return stateMachine; } private set { stateMachine = value; } }
-
-    public HealthSystem Health { get { return healthSystem; } private set { healthSystem = value; } }
 
     private void Awake()
     {
@@ -70,7 +69,7 @@ public class NPCDataContainer : DataContainer
 
         AnimationData.Initialize();
         SpriteRotator.Register(this);
-        Health.OnDead += () => { isDead = true; Debug.Log("사망 상태. 더이상 상태를 갱신하지 않음."); };
+        Health.OnDead += () => { isDead = true; Instantiate(dropItem); Debug.Log("사망 상태. 더이상 상태를 갱신하지 않음."); };
     }
 
     private void Update()
@@ -90,6 +89,7 @@ public class NPCDataContainer : DataContainer
 
     private void OnEnable()
     {
+        Instantiate(dropItem);
         isDead = false;
         Debug.Log("부활. 다시 상태를 갱신함.");
     }
