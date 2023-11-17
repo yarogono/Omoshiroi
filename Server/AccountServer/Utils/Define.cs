@@ -7,5 +7,11 @@
             Faile,
             Success,
         }
+
+        public enum LoginType
+        {
+            Guest,
+            Google,
+        }
     }
 }
