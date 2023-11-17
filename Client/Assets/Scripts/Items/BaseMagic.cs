@@ -11,11 +11,11 @@ public class BaseMagic : BaseItem, IEquippable
     //[SerializeField] private Animation anime;
     [SerializeField] protected AttackData attackData;
 
-    public void Equip(CharacterDataContainer cdc)
+    public void Equip(DataContainer dataContainer)
     {
     }
 
-    public void Dequip(CharacterDataContainer cdc)
+    public void Dequip(DataContainer dataContainer)
     {
     }
 

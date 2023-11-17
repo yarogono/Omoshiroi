@@ -9,13 +9,53 @@ namespace AccountServer.DB
         [Key]
         public int AccountId { get; set; }
 
-        [Required(ErrorMessage = "AccountName를 입력하세요.")]
         public string AccountName { get; set; }
 
-        [Required(ErrorMessage = "AccountPassword를 입력하세요.")]
         public string AccountPassword { get; set; }
 
+        [ForeignKey("PlayerId")]
+        public PlayerDb Player { get; set; }
+    }
+
+    [Table("Player")]
+    public class PlayerDb
+    {
+        [Key]
+        public int PlayerId { get; set; }
+
+        public string PlayerName { get; set; }
+
+        [ForeignKey("PlayerStatId")]
+        public PlayerStatDb PlayerStat { get; set; }
+
         public ICollection<ItemDb> Items { get; set; }
+    }
+
+    [Table("Player_Stat")]
+    public class PlayerStatDb
+    {
+        [Key]
+        public int PlayerStatId { get; set; }
+
+        public int Level { get; set; }
+
+        public int MaxHp { get; set; }
+        
+        public int Hp { get; set; }
+
+        public int Atk { get; set; }
+
+        public float AtkSpeed { get; set; }
+
+        public int CritRate { get; set; }
+
+        public float CritDamage { get; set; }
+
+        public float MoveSpeed { get; set; }
+
+        public float RunMultiplier { get; set; }
+
+        public float DodgeTime { get; set; }
     }
 
 
@@ -28,5 +68,10 @@ namespace AccountServer.DB
         public int TemplateId { get; set; }
 
         public int Quantity { get; set; }
+
+        public string ItemName { get; set; }
+
+        [ForeignKey("PlayerId")]
+        public PlayerDb Player { get; set; }
     }
 }

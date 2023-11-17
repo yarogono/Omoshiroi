@@ -172,7 +172,7 @@ public partial class PacketHandler
         if (gameObject == null)
         {
             Debug.Log("존재하지 않는 FarmingBox 입니다.");
-            return;
+            //return;
         }
 
         FarmingBox farmingBox = gameObject.GetComponent<FarmingBox>();
