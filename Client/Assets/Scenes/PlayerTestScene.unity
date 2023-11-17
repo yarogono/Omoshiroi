@@ -441,11 +441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PoolItem:
-  - <Type>k__BackingField: 1
-    Prefab: {fileID: 1526888661764172773, guid: 57a2281f028258f48b88df5306e70e1a, type: 3}
-    PoolSize: 2
-  - <Type>k__BackingField: 2
-    Prefab: {fileID: 1526888661764172773, guid: c9a83f2382d700a4c9f5c3b2cc04fe87, type: 3}
+  - <Type>k__BackingField: 101
+    Prefab: {fileID: 8802409681851811528, guid: 385a06e46d4a8a74ab79411b129108ff, type: 3}
     PoolSize: 2
   ObjPoolRoot: {fileID: 1816330788}
   TargetLayer:
@@ -2113,10 +2110,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 884507993187292007, guid: 70469078667f23f4b989efb16d95d539, type: 3}
-      propertyPath: m_UIInputModule
-      value: 
-      objectReference: {fileID: 1621908072}
     - target: {fileID: 1088871691251878795, guid: 70469078667f23f4b989efb16d95d539, type: 3}
       propertyPath: m_RootOrder
       value: 1

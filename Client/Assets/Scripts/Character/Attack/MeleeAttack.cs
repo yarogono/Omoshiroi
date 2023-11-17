@@ -55,10 +55,7 @@ public class MeleeAttack : BaseAttack
     {
         if (!other.CompareTag(_makerTag))
         {
-            if (
-                other.gameObject.layer
-                == (other.gameObject.layer & AttackManager.Instance.TargetLayer)
-            )
+            if ((1 << other.gameObject.layer) == (1 << other.gameObject.layer & AttackManager.Instance.TargetLayer.value))
             {
                 // Ray를 쏴서 처음 물체가 other 경우에만 대미지
                 Ray ray = new Ray(
