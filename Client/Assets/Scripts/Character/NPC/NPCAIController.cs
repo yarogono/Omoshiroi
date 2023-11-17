@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class NPCAIController : MonoBehaviour
 {
-    
+
     //길찾기용 컴포넌트
     [SerializeField] private NavMeshAgent agent;
 
@@ -14,7 +14,7 @@ public class NPCAIController : MonoBehaviour
     [SerializeField] private List<Vector3> destinations;
 
     [SerializeField] private float characterRadiusMultiplier = 1.5f;
-    [SerializeField] private float minWanderDistance = 5f; 
+    [SerializeField] private float minWanderDistance = 5f;
     [SerializeField] private float maxWanderDistance = 15f;
     [SerializeField] private float detectDistance = 10f;
 
@@ -31,7 +31,7 @@ public class NPCAIController : MonoBehaviour
 
     public Vector2 ViewDirection { get { return viewDirection; } private set { viewDirection = value; } }
     public Vector2 AimDirection { get { return aimDirection; } private set { aimDirection = value; } }
-
+    public Vector3 CurDestination { get { return curDestination; } private set { curDestination = value; } }
 
     private void Awake()
     {
@@ -41,8 +41,7 @@ public class NPCAIController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        curDestination = GetNextDestination();
-        agent.destination = curDestination;
+        GetNextDestination();
     }
 
     // Update is called once per frame
@@ -53,28 +52,32 @@ public class NPCAIController : MonoBehaviour
         {
             if(destinations.Count <= 0)
             {
-                curDestination = GetWanderLocation();
-                agent.destination = curDestination;
+                GetWanderLocation();
                 return;
             }
+
+            GetNextDestination();
         }
     }
 
     //배회 상태일 때 최소, 최대 배회 범위를 기반으로 랜덤한 다음 목적지 좌표를 반환한다.
-    Vector3 GetWanderLocation()
+    private void GetWanderLocation()
     {
         NavMeshHit hit;
 
         //지정된 범위 내에서 생성한 다음 목적지를 hit 에 지정.
         NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
-        Debug.Log($"목적지 설정 : ({hit.position})");
-        return hit.position;
+        CurDestination = hit.position;
+        Debug.Log($"목적지 설정 : {hit.position}");
+        agent.destination = curDestination;
     }
 
     //목적지 리스트에서 랜덤한 다음 목적지 좌표를 반환한다.
-    Vector3 GetNextDestination()
+    private void GetNextDestination()
     {
         int index = Random.Range(0, destinations.Count);
-        return destinations[index];
+        CurDestination = destinations[index];
+        Debug.Log($"목적지 설정 : {CurDestination}");
+        agent.destination = curDestination;
     }
 }
