@@ -28,12 +28,16 @@ public class CharacterDataContainer : DataContainer
         InputActions = GetComponent<PlayerInput>();
         Animator = GetComponent<Animator>();
         Sync = GetComponent<PilotSync>();
+        Health = GetComponent<HealthSystem>();
 
         AnimationData.Initialize();
     }
 
     private void Start()
     {
+        // 플래이어 HP 화면 표시 연결
+        Stats.OnHpChange += () => { UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp); };
+
         if (Equipments == null)
             Equipments = new EquipSystem(this);
 
