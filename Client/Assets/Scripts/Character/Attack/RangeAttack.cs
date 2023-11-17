@@ -66,7 +66,7 @@ public class RangeAttack : BaseAttack
                         * knockBackPower;
                     ApplyDamage(HealthData);
                     //넉백
-                    movement.AddImpact(impact);
+                    movement?.AddImpact(impact);
                 }
                 else
                 {

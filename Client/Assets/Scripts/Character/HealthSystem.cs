@@ -36,7 +36,7 @@ public class HealthSystem : MonoBehaviour
 
         Stats.Hp = remain;
         UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp);
-        Sync.SendC_ChangeHpPacket(Stats.Hp);
+        Sync?.SendC_ChangeHpPacket(Stats.Hp);
     }
 
     public void TakeRecovery(int changeAmount)
@@ -55,6 +55,6 @@ public class HealthSystem : MonoBehaviour
 
         UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp);
         Stats.Hp = remain;
-        Sync.SendC_ChangeHpPacket(Stats.Hp);
+        Sync?.SendC_ChangeHpPacket(Stats.Hp);
     }
 }
