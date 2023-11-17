@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 8184939915586637863}
   - component: {fileID: 1436121803325848172}
   - component: {fileID: 6764992448378519913}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: HealthBarForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 3973616634051827380}
   - component: {fileID: 8769144685691669676}
   - component: {fileID: 3093326539683989207}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 8630663994904477348}
   m_Layer: 15
   m_Name: AITest
-  m_TagString: Pilot
+  m_TagString: TestNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1126,7 +1126,7 @@ Transform:
   - {fileID: 8185807653502800713}
   - {fileID: 7790415191331713284}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8367951252217533015
 Animator:
@@ -1194,7 +1194,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!65 &6312969749856047265
@@ -1244,14 +1244,14 @@ MonoBehaviour:
     comboIndexParameterName: Combo
     GroundLayer:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 896
   <SpriteRotator>k__BackingField:
     _main: {fileID: 3331291140637838908}
     _weapon: {fileID: 7909343574846182647}
   _testMonsterStats: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
   _testMonsterEquipments:
   - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
-  healthSystem: {fileID: 8630663994904477348}
+  SetDodge: 0
   dropItem: {fileID: 3381096233716014029, guid: b51714c310a88db4aa724f2d432b4bd3, type: 3}
 --- !u!114 &1513099493461568663
 MonoBehaviour:
@@ -1786,7 +1786,7 @@ GameObject:
   - component: {fileID: 3733639005455857143}
   - component: {fileID: 2621822328406020180}
   - component: {fileID: 8146026326077142801}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: HealthBarBackward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1862,7 +1862,7 @@ GameObject:
   - component: {fileID: 5212905687696748038}
   - component: {fileID: 3216228719745737498}
   - component: {fileID: 6749649715195917472}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: HealthBarEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
