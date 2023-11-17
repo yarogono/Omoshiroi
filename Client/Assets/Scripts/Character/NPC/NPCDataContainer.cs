@@ -92,7 +92,6 @@ public class NPCDataContainer : DataContainer
 
     private void OnEnable()
     {
-        Instantiate(dropItem);
         isDead = false;
         Debug.Log("부활. 다시 상태를 갱신함.");
     }
