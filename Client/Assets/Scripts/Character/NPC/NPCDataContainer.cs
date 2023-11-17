@@ -18,11 +18,16 @@ public class NPCDataContainer : DataContainer
     [Header("테스트용 몬스터 스탯 및 장비")]
     [SerializeField] private CharacterBaseStats _testMonsterStats;
     [SerializeField] private List<BaseItem> _testMonsterEquipments;
+    private NPCAIController npcAIController;
+
+    public NPCAIController NPCAI { get { return npcAIController; } private set { npcAIController = value; } }
+
     private void Awake()
     {
         Controller = GetComponent<CharacterController>();
         Animator = GetComponent<Animator>();
         Health = GetComponent<HealthSystem>();
+        npcAIController = GetComponent<NPCAIController>();
         // 추후에 서버로 AI를 옮기면 SyncModule에 대한 참조도 필요함.
 
         if (_testMonsterStats != null)
