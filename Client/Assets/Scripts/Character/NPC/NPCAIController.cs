@@ -54,6 +54,7 @@ public class NPCAIController : MonoBehaviour
     private Vector3 curDestination;
     private GameObject target;
     private Collider collider;
+    private CombineStateMachine csm;
 
     private float characterRadius;
 
@@ -84,6 +85,7 @@ public class NPCAIController : MonoBehaviour
         AIState = eAIStateType.Wait;
         Agent.updateRotation = false;
         collider = GetComponent<Collider>();
+        csm = dataContainer.StateMachine;
     }
 
     //private void Start()
@@ -127,7 +129,7 @@ public class NPCAIController : MonoBehaviour
     {
         if(AIState == eAIStateType.Wait)
         {
-            Invoke("SetWanderState", 2f);
+            Invoke("SetWanderState", 1f);
             AIState = eAIStateType.Idle;
         }
     }
@@ -152,6 +154,7 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void ChaseState()
     {
+
         SetNextDestination(target.transform.position);
 
         //추적 대상이 추적 범위를 벗어났다면 배회 상태로 전환
