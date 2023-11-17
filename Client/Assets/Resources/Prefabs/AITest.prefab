@@ -1126,7 +1126,7 @@ Transform:
   - {fileID: 8185807653502800713}
   - {fileID: 7790415191331713284}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8367951252217533015
 Animator:
@@ -1252,7 +1252,7 @@ MonoBehaviour:
   _testMonsterEquipments:
   - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
   SetDodge: 0
-  dropItem: {fileID: 3381096233716014029, guid: b51714c310a88db4aa724f2d432b4bd3, type: 3}
+  dropItem: {fileID: 40958384021902749, guid: 9459a01f2fea0744186cfabf183dab61, type: 3}
 --- !u!114 &1513099493461568663
 MonoBehaviour:
   m_ObjectHideFlags: 0
