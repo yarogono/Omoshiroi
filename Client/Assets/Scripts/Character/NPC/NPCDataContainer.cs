@@ -20,10 +20,14 @@ public class NPCDataContainer : DataContainer
     [SerializeField] private List<BaseItem> _testMonsterEquipments;
     [Header("테스트용 몬스터 회피")]
     [SerializeField] private bool SetDodge;
+    [SerializeField] public GameObject dropItem;
 
     private NPCAIController npcAIController;
 
     private CombineStateMachine stateMachine;
+
+    private bool isDead = false;
+
     public NPCInput InputActions { get; private set; }
 
     /// <summary>
@@ -32,6 +36,7 @@ public class NPCDataContainer : DataContainer
     /// 이에 따라 StateMachine 을 조작하도록 하면 될 것이다.
     /// </summary>
     public NPCAIController NPCAI { get { return npcAIController; } private set { npcAIController = value; } }
+    public CombineStateMachine StateMachine { get { return stateMachine; } private set { stateMachine = value; } }
 
     private void Awake()
     {
@@ -65,6 +70,7 @@ public class NPCDataContainer : DataContainer
 
         AnimationData.Initialize();
         SpriteRotator.Register(this);
+        Health.OnDead += () => { isDead = true; Instantiate(dropItem); Debug.Log("사망 상태. 더이상 상태를 갱신하지 않음."); };
 
         Health.IsDodge = SetDodge;
     }
@@ -72,12 +78,23 @@ public class NPCDataContainer : DataContainer
     private void Update()
     {
         stateMachine.Update();
-        NPCAI?.UpdateAIState();
+
+        if (!isDead)
+        {
+            NPCAI?.UpdateAIState();
+        }
     }
 
     private void FixedUpdate()
     {
         stateMachine.PhysicsUpdate();
+    }
+
+    private void OnEnable()
+    {
+        Instantiate(dropItem);
+        isDead = false;
+        Debug.Log("부활. 다시 상태를 갱신함.");
     }
 
     //Vector3 GetFleeLocation()

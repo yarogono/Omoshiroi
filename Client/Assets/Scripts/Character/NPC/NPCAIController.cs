@@ -54,11 +54,14 @@ public class NPCAIController : MonoBehaviour
     private Vector3 curDestination;
     private GameObject target;
     private Collider collider;
+    private CombineStateMachine csm;
 
     private float characterRadius;
 
     private eStateType state;
     private eAIStateType aiState;
+
+    private bool isRun = false;
 
     public List<Vector3> WanderDestinations { get { return wanderDestinations; } private set { wanderDestinations = value; } }
     public NavMeshAgent Agent { get { return agent; } private set { agent = value; } }
@@ -84,6 +87,7 @@ public class NPCAIController : MonoBehaviour
         AIState = eAIStateType.Wait;
         Agent.updateRotation = false;
         collider = GetComponent<Collider>();
+        csm = dataContainer.StateMachine;
     }
 
     //private void Start()
@@ -105,6 +109,8 @@ public class NPCAIController : MonoBehaviour
 
     public void UpdateAIState()
     {
+        if (AIState != eAIStateType.Chase) { isRun = false; }
+
         Debug.Log($"AIState : {AIState}");
         switch (AIState)
         {
@@ -127,7 +133,9 @@ public class NPCAIController : MonoBehaviour
     {
         if(AIState == eAIStateType.Wait)
         {
-            Invoke("SetWanderState", 2f);
+            //멈춘 상태에서의 애니메이션 재생
+            dataContainer.InputActions.CallMoveEvent(Vector2.zero);
+            Invoke("SetWanderState", 1f);
             AIState = eAIStateType.Idle;
         }
     }
@@ -138,6 +146,8 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void WanderState()
     {
+        dataContainer.InputActions.CallMoveEvent(new Vector2(dataContainer.Controller.velocity.x, dataContainer.Controller.velocity.z));
+
         //목표 지점에 도달했다면 대기 상태로 전환
         if (IsArrived())
         {
@@ -152,7 +162,13 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void ChaseState()
     {
+
         SetNextDestination(target.transform.position);
+
+        dataContainer.InputActions.CallRunEvent(isRun);
+
+        if (!isRun) { isRun = true; }
+        
 
         //추적 대상이 추적 범위를 벗어났다면 배회 상태로 전환
         if (Vector3.Distance(transform.position, curDestination) > chaseDistance)
@@ -177,6 +193,8 @@ public class NPCAIController : MonoBehaviour
     private void AttackState()
     {
         SetNextDestination(target.transform.position);
+        dataContainer.InputActions.CallAimEvent(new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z));
+        dataContainer.InputActions.CallAttackEvent(new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z));
 
         //추적 대상이 공격 범위를 벗어났다면 추적 상태로 전환
         if (Vector3.Distance(transform.position, curDestination) > attackDistance)
