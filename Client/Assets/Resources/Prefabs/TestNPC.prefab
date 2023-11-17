@@ -128,9 +128,10 @@ GameObject:
   - component: {fileID: 6819789151499577018}
   - component: {fileID: 344471059937254796}
   - component: {fileID: 1985599301610708945}
+  - component: {fileID: 1289266625105990789}
   m_Layer: 15
   m_Name: TestNPC
-  m_TagString: Pilot
+  m_TagString: TestNPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +151,7 @@ Transform:
   - {fileID: 1928497838679130253}
   - {fileID: 2389127606293479906}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7838802115554181109
 Animator:
@@ -241,8 +242,20 @@ MonoBehaviour:
   <SpriteRotator>k__BackingField:
     _main: {fileID: 716459490717881349}
     _weapon: {fileID: 8278003473079523384}
-  _testMonsterStats: {fileID: 0}
+  _testMonsterStats: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
   _testMonsterEquipments: []
+--- !u!114 &1289266625105990789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3119228395594561357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1e0f7aaf9d739409b65d5b4507b12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3341134605525835870
 GameObject:
   m_ObjectHideFlags: 0
