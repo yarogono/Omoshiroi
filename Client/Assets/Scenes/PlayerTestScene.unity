@@ -266,6 +266,7 @@ MonoBehaviour:
   TargetLayer:
     serializedVersion: 2
     m_Bits: 32768
+  PlayerTag: Pilot
 --- !u!4 &564236289
 Transform:
   m_ObjectHideFlags: 0

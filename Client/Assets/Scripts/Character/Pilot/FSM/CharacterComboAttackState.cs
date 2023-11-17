@@ -13,7 +13,6 @@ public class CharacterComboAttackState : CharacterAttackState
     public override void Enter()
     {
         base.Enter();
-        StartAnimation(_stateMachine.Character.AnimationData.ComboAttackParameterHash);
 
         alreadyApplyCombo = false;
         alreadyAppliedForce = false;
@@ -30,11 +29,14 @@ public class CharacterComboAttackState : CharacterAttackState
             _stateMachine.Character.transform.position,
             _stateMachine.Controller.velocity
         );
+        _stateMachine.Character.Animator.speed = _stateMachine.Character.Stats.AtkSpeed;
+        StartAnimation(_stateMachine.Character.AnimationData.ComboAttackParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
+        _stateMachine.Character.Animator.speed = 1.0f;
         StopAnimation(_stateMachine.Character.AnimationData.ComboAttackParameterHash);
 
         if (!alreadyApplyCombo)

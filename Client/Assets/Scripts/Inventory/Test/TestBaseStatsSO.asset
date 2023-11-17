@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseHP: 100
   _baseDEF: 1
-  _baseAttackSpeed: 1
+  _baseAttackSpeed: 2
   _baseAttackPower: 20
   _baseCriticalRate: 1
   _baseCriticalPower: 1

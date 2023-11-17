@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
@@ -8,6 +9,7 @@ public class HealthSystem : MonoBehaviour
     public event Action OnDead;
     private CharacterStats Stats;
     private PilotSync Sync;
+    public bool IsDodge { get; set; }
 
     private void Awake()
     {
@@ -21,8 +23,11 @@ public class HealthSystem : MonoBehaviour
         Sync = gameObject.GetComponent<PilotSync>();
     }
 
-    public void TakeDamage(int changeAmount)
+    public bool TakeDamage(int changeAmount)
     {
+        if (IsDodge)
+            return false;
+
         int remain = Stats.Hp - changeAmount;
 
         if (remain <= 0)
@@ -40,6 +45,7 @@ public class HealthSystem : MonoBehaviour
         Stats.Hp = remain;
         //UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp);
         Sync?.SendC_ChangeHpPacket(Stats.Hp);
+        return true;
     }
 
     public void TakeRecovery(int changeAmount)
