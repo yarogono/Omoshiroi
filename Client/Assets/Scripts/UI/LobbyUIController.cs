@@ -10,7 +10,21 @@ public class LobbyUIController : MonoBehaviour
     delegate void UIAction();
 
 
-   
+
+    private void Start()
+    {
+        Init();
+    }
+
+
+    private void Init()
+    {
+        for (int i = 1; i < UIPage.Length; i++)
+        {
+            SetActiveWithCheck(UIPage[i], false);
+        }
+    }
+
     public void ChangePage(int numBtn)
     {
         for (int i = 0; i < UIPage.Length; i++)
