@@ -108,6 +108,7 @@ public class NPCAIController : MonoBehaviour
         Debug.Log($"AIState : {AIState}");
         switch (AIState)
         {
+            case eAIStateType.Idle: { WaitState(); break; }
             case eAIStateType.Wait: { WaitState(); break; }
             case eAIStateType.Wander: { WanderState(); break; }
             case eAIStateType.Chase: { ChaseState(); break; }
@@ -124,8 +125,11 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void WaitState()
     {
-        CurDestination = this.transform.position;
-        Invoke("SetWanderState", 2000f);
+        if(AIState == eAIStateType.Wait)
+        {
+            Invoke("SetWanderState", 2f);
+            AIState = eAIStateType.Idle;
+        }
     }
 
     /// <summary>
@@ -158,7 +162,7 @@ public class NPCAIController : MonoBehaviour
         }
 
         //추적 대상이 공격 범위 안쪽으로 들어왔다면 공격 상태로 전환
-        if (Vector3.Distance(transform.position, curDestination) > attackDistance)
+        if (Vector3.Distance(transform.position, curDestination) < attackDistance)
         {
             Debug.Log("Trying Attack!!!");
             AIState = eAIStateType.Attack;
@@ -175,7 +179,7 @@ public class NPCAIController : MonoBehaviour
         SetNextDestination(target.transform.position);
 
         //추적 대상이 공격 범위를 벗어났다면 추적 상태로 전환
-        if (Vector3.Distance(transform.position, curDestination) < attackDistance)
+        if (Vector3.Distance(transform.position, curDestination) > attackDistance)
         {
             AIState = eAIStateType.Chase;
             return;
@@ -210,6 +214,7 @@ public class NPCAIController : MonoBehaviour
     {
         int index = Random.Range(0, WanderDestinations.Count);
         SetNextDestination(WanderDestinations[index]);
+        AIState = eAIStateType.Wander;
     }
 
     /// <summary>
