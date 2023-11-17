@@ -56,6 +56,15 @@ public enum eStateType
     Aim,
 }
 
+public enum eAIStateType
+{
+    Wait,
+    Wander,
+    Chase,
+    Search,
+    Runaway
+}
+
 public enum eSoundType
 {
     Bgm,
