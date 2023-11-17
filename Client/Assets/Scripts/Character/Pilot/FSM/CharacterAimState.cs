@@ -14,7 +14,7 @@ public class CharacterAimState : BaseState
         _stateMachine.MovementSpeedMultiflier = 0.5f;
 
         StartAnimation(_stateMachine.Character.AnimationData.AimParameterHash);
-        _stateMachine.Character.Sync?.SendC_AimPacket((int)eStateType.Aim, _stateMachine.AttackDirection);
+        _stateMachine.Sync?.SendC_AimPacket((int)eStateType.Aim, _stateMachine.AttackDirection);
     }
 
     public override void Exit()
@@ -38,7 +38,7 @@ public class CharacterAimState : BaseState
             _stateMachine.ChangeState(eStateType.None);
         else
         {
-            _stateMachine.Character.Sync?.SendC_AimPacket((int)eStateType.Aim, _stateMachine.AttackDirection);
+            _stateMachine.Sync?.SendC_AimPacket((int)eStateType.Aim, _stateMachine.AttackDirection);
             base.AimEvent(direction);
         }
     }

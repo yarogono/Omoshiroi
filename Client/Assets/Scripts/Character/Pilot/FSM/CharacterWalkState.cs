@@ -14,7 +14,7 @@ public class CharacterWalkState : CharacterGroundState
     {
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.WalkParameterHash);
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+        _stateMachine.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Controller.velocity);
     }
 
     public override void Exit()
@@ -27,7 +27,7 @@ public class CharacterWalkState : CharacterGroundState
         base.Update();
         if (_needSend)
         {
-            _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+            _stateMachine.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Controller.velocity);
             _needSend = false;
         }
 

@@ -16,7 +16,7 @@ public class CharacterIdleState : CharacterGroundState
     {
         base.Enter();
         StartAnimation(_stateMachine.Character.AnimationData.IdleParameterHash);
-        _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+        _stateMachine.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Controller.velocity);
     }
 
     public override void Exit()
@@ -30,13 +30,13 @@ public class CharacterIdleState : CharacterGroundState
         base.Update();
         if (_needUpdate)
         {
-            if (_stateMachine.Character.Controller.velocity.sqrMagnitude > 0)
+            if (_stateMachine.Controller.velocity.sqrMagnitude > 0)
             {
-                _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Character.Controller.velocity);
+                _stateMachine.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, _stateMachine.Controller.velocity);
             }
             else
             {
-                _stateMachine.Character.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, Vector3.zero);
+                _stateMachine.Sync?.SendC_MovePacket((int)_stateMachine.currentStateType, _stateMachine.Character.transform.position, Vector3.zero);
             }
             _needUpdate = false;
         }
@@ -45,7 +45,7 @@ public class CharacterIdleState : CharacterGroundState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (!_needUpdate && _stateMachine.Character.Controller.velocity.sqrMagnitude > 0)
+        if (!_needUpdate && _stateMachine.Controller.velocity.sqrMagnitude > 0)
             _needUpdate = true;
     }
 
