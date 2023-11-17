@@ -111,7 +111,7 @@ public class NPCAIController : MonoBehaviour
     {
         if (AIState != eAIStateType.Chase) { isRun = false; }
 
-        Debug.Log($"AIState : {AIState}");
+        //Debug.Log($"AIState : {AIState}");
         switch (AIState)
         {
             case eAIStateType.Idle: { WaitState(); break; }
@@ -224,7 +224,7 @@ public class NPCAIController : MonoBehaviour
     private void SetNextDestination(Vector3 next)
     {
         CurDestination = next;
-        Debug.Log($"목적지 설정 : {CurDestination}");
+        //Debug.Log($"목적지 설정 : {CurDestination}");
         agent.destination = curDestination;
     }
 

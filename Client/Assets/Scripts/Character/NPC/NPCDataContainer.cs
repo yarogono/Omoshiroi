@@ -18,7 +18,8 @@ public class NPCDataContainer : DataContainer
     [Header("테스트용 몬스터 스탯 및 장비")]
     [SerializeField] private CharacterBaseStats _testMonsterStats;
     [SerializeField] private List<BaseItem> _testMonsterEquipments;
-    [SerializeField] private HealthSystem healthSystem;
+    [Header("테스트용 몬스터 회피")]
+    [SerializeField] private bool SetDodge;
     [SerializeField] public GameObject dropItem;
 
     private NPCAIController npcAIController;
@@ -70,6 +71,8 @@ public class NPCDataContainer : DataContainer
         AnimationData.Initialize();
         SpriteRotator.Register(this);
         Health.OnDead += () => { isDead = true; Instantiate(dropItem); Debug.Log("사망 상태. 더이상 상태를 갱신하지 않음."); };
+
+        Health.IsDodge = SetDodge;
     }
 
     private void Update()
