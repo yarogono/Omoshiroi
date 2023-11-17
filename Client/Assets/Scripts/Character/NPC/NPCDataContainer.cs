@@ -23,7 +23,6 @@ public class NPCDataContainer : DataContainer
         Controller = GetComponent<CharacterController>();
         Animator = GetComponent<Animator>();
         Health = GetComponent<HealthSystem>();
-        Controller = GetComponent<CharacterController>();
         // 추후에 서버로 AI를 옮기면 SyncModule에 대한 참조도 필요함.
 
         if (_testMonsterStats != null)
