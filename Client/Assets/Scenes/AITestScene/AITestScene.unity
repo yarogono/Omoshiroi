@@ -1515,7 +1515,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215ba670082fc1943a547c1e8222859a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
+  targets:
+  - {x: 10, y: 1, z: -7}
+  - {x: -10, y: 1, z: 7}
+  - {x: 0, y: 1, z: 0}
+  - {x: 4, y: 1, z: 7}
   agent: {fileID: 786643532}
   minWanderDistance: 5
   maxWanderDistance: 10
@@ -6144,6 +6148,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f487a0779dadccf43803254455562606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Stats>k__BackingField:
+    level: 0
+    maxHp: 0
+    hp: 0
+    def: 0
+    atk: 0
+    atkSpeed: 0
+    critRate: 0
+    critDamage: 0
+    moveSpeed: 0
+    runMultiplier: 0
+    dodgeTime: 0
+  <Animator>k__BackingField: {fileID: 0}
   <AnimationData>k__BackingField:
     groundParameterName: '@Ground'
     idleParameterName: Idle
@@ -6157,13 +6174,26 @@ MonoBehaviour:
     comboAttackParameterName: ComboAttack
     comboIndexParameterName: Combo
     GroundLayer:
-      serializedVersion: 2
       m_Bits: 0
-  <SpriteRotator>k__BackingField:
-    _main: {fileID: 0}
-    _weapon: {fileID: 0}
+    <GroundParameterHash>k__BackingField: 0
+    <IdleParameterHash>k__BackingField: 0
+    <WalkParameterHash>k__BackingField: 0
+    <RunParameterHash>k__BackingField: 0
+    <DodgeParameterHash>k__BackingField: 0
+    <AirParameterHash>k__BackingField: 0
+    <FallParameterHash>k__BackingField: 0
+    <AimParameterHash>k__BackingField: 0
+    <AttackParameterHash>k__BackingField: 0
+    <ComboAttackParameterHash>k__BackingField: 0
+    <ComboIndexParameterHash>k__BackingField: 0
+  <SpriteRotator>k__BackingField: {_main: {fileID: 0}, _weapon: {fileID: 0}, _weaponBase: {x: 0, y: 0, z: 0}}
   <Health>k__BackingField: {fileID: 4764674306552055884}
   <SyncModule>k__BackingField: {fileID: 8542358044568665209}
+  <Controller>k__BackingField: {fileID: 0}
+  <Movement>k__BackingField: {fileID: 0}
+  <InputActions>k__BackingField: {fileID: 0}
+  <Sync>k__BackingField: {fileID: 0}
+  aiState: 0
   agent: {fileID: 9051955732534914378}
   destinations:
   - {x: 5, y: 1, z: 2}
