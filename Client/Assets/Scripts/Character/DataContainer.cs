@@ -22,9 +22,9 @@ public class DataContainer : MonoBehaviour
     [field: SerializeField]
     public CharacterSpriteRotator SpriteRotator { get; protected set; }
 
-    [field: SerializeField]
+    //[field: SerializeField]
     public HealthSystem Health { get; protected set; }
 
-    [field: SerializeField]
+    //[field: SerializeField]
     public SyncModule SyncModule { get; protected set; }
 }

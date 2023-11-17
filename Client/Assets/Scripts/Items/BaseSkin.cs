@@ -5,11 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BaseSkinSO", menuName = "Item/BaseSkinSO")]
 public class BaseSkin : BaseItem, IEquippable
 {
-    public void Equip(CharacterDataContainer cdc)
+    public void Equip(DataContainer dataContainer)
     {
     }
 
-    public void Dequip(CharacterDataContainer cdc)
+    public void Dequip(DataContainer dataContainer)
     {
     }
 }

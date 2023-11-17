@@ -15,6 +15,11 @@ public class CharacterDataContainer : DataContainer
     [Header("테스트용 착용아이템")]
     [SerializeField]
     private BaseItem[] TestEquipItem;
+    [Header("테스트용 스탯")]
+    [SerializeField]
+    private bool isApply;
+    [SerializeField]
+    private CharacterBaseStats TestStats;
 
     private void Awake()
     {
@@ -30,13 +35,19 @@ public class CharacterDataContainer : DataContainer
     private void Start()
     {
         if (Equipments == null)
-            Equipments = new EquipSystem();
+            Equipments = new EquipSystem(this);
 
         foreach (var item in TestEquipItem)
             Equipments.Equip(item);
 
         stateMachine = new CombineStateMachine(this);
         SpriteRotator.Register(this);
+
+        if (isApply && TestStats != null)
+        {
+            Stats.SetCharacterStats(TestStats.BaseHP, TestStats.BaseHP, TestStats.BaseDEF, TestStats.BaseAttackSpeed, TestStats.BaseAttackPower,
+                TestStats.BaseCriticalRate, TestStats.BaseCriticalPower, TestStats.BaseMoveSpeed, TestStats.BaseRunMultiplier);
+        }
     }
 
     void Update()
