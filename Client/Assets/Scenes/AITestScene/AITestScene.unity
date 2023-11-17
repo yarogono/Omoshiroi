@@ -1385,7 +1385,9 @@ GameObject:
   - component: {fileID: 786643533}
   - component: {fileID: 786643532}
   - component: {fileID: 786643531}
+  - component: {fileID: 786643537}
   - component: {fileID: 786643536}
+  - component: {fileID: 786643538}
   m_Layer: 15
   m_Name: AITest
   m_TagString: Pilot
@@ -1412,7 +1414,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &786643532
 NavMeshAgent:
@@ -1515,17 +1517,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215ba670082fc1943a547c1e8222859a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataContainer: {fileID: 786643537}
   agent: {fileID: 786643532}
-  destinations:
-  - {x: 10, y: 1, z: -7}
+  wanderDestinations:
+  - {x: 7, y: 1, z: -3}
   - {x: -10, y: 1, z: 7}
-  - {x: 0, y: 1, z: 0}
-  - {x: -5, y: 1, z: 3}
-  - {x: 5, y: 1, z: 0}
+  - {x: 3, y: 1, z: -7}
+  - {x: 0, y: 1, z: 7}
   characterRadiusMultiplier: 3
   minWanderDistance: 5
   maxWanderDistance: 10
   detectDistance: 3
+  chaseDistance: 15
+  attackDistance: 5
+--- !u!114 &786643537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786643530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c25ab26653c9dc49b3f975893d53e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AnimationData>k__BackingField:
+    groundParameterName: '@Ground'
+    idleParameterName: Idle
+    walkParameterName: Walk
+    runParameterName: Run
+    dodgeParameterName: Dodge
+    airParameterName: '@Air'
+    fallParameterName: Fall
+    aimParameterName: '@Aim'
+    attackParameterName: '@Attack'
+    comboAttackParameterName: ComboAttack
+    comboIndexParameterName: Combo
+    GroundLayer:
+      serializedVersion: 2
+      m_Bits: 0
+  <SpriteRotator>k__BackingField:
+    _main: {fileID: 945174521}
+    _weapon: {fileID: 2060380916}
+  _testMonsterStats: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
+  _testMonsterEquipments:
+  - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
+--- !u!114 &786643538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786643530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1e0f7aaf9d739409b65d5b4507b12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &805088824
 GameObject:
   m_ObjectHideFlags: 0
