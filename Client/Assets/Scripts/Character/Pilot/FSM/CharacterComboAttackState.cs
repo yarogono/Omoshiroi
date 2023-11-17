@@ -25,10 +25,10 @@ public class CharacterComboAttackState : CharacterAttackState
             _stateMachine.Character.AnimationData.ComboIndexParameterHash,
             ComboIndex
         );
-        _stateMachine.Character.Sync?.SendC_ComboAttackPacket(
+        _stateMachine.Sync?.SendC_ComboAttackPacket(
             ComboIndex,
             _stateMachine.Character.transform.position,
-            _stateMachine.Character.Controller.velocity
+            _stateMachine.Controller.velocity
         );
     }
 
@@ -85,7 +85,7 @@ public class CharacterComboAttackState : CharacterAttackState
         // DateTime dateTime = System.DateTime.Now;
         // Debug.Log($"{dateTime.Ticks / 10000 % 1000000000}");
 
-        _stateMachine.Character.Sync?.SendC_MakeAttackAreaPacket(
+        _stateMachine.Sync?.SendC_MakeAttackAreaPacket(
             ComboIndex,
             _stateMachine.Character.transform.position,
             _stateMachine.AttackDirection
@@ -106,10 +106,10 @@ public class CharacterComboAttackState : CharacterAttackState
             if (normalizedTime >= attackInfo.ForceTransitionTime)
                 TryApplyForce();
             if (_needUpdate)
-                _stateMachine.Character.Sync?.SendC_ComboAttackPacket(
+                _stateMachine.Sync?.SendC_ComboAttackPacket(
                     ComboIndex,
                     _stateMachine.Character.transform.position,
-                    _stateMachine.Character.Controller.velocity
+                    _stateMachine.Controller.velocity
                 );
         }
         else
