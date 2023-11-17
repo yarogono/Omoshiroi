@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class NPCAIController : MonoBehaviour
 {
+    //해당 컨트롤러를 가지는 객체의 데이터 컨테이너
+    [SerializeField] private NPCDataContainer dataContainer;
 
     //길찾기용 컴포넌트
     [SerializeField] private NavMeshAgent agent;
@@ -18,10 +20,14 @@ public class NPCAIController : MonoBehaviour
     [SerializeField] private float maxWanderDistance = 15f;
     [SerializeField] private float detectDistance = 10f;
 
+    private Animator animator;
     private Vector2 viewDirection = new Vector2();
     private Vector2 aimDirection = new Vector2();
     private Vector3 curDestination;
+
     private float characterRadius;
+
+    private eStateType state;
 
     public List<Vector3> Destinations { get { return destinations; } private set { destinations = value; } }
     public NavMeshAgent Agent { get { return agent; } private set { agent = value; } }
@@ -33,9 +39,13 @@ public class NPCAIController : MonoBehaviour
     public Vector2 AimDirection { get { return aimDirection; } private set { aimDirection = value; } }
     public Vector3 CurDestination { get { return curDestination; } private set { curDestination = value; } }
 
+    public eStateType State { get { return state; } private set { state = value; } }
+
     private void Awake()
     {
         characterRadius = agent.radius * characterRadiusMultiplier;
+        animator = dataContainer.Animator;
+        State = eStateType.Idle;
     }
 
     // Start is called before the first frame update
@@ -47,6 +57,8 @@ public class NPCAIController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+
+
         //현재 목적지에 매우 근접했다면 새 목적지를 설정한다.
         if (Vector3.Distance(transform.position, curDestination) < characterRadius)
         {

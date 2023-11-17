@@ -18,6 +18,7 @@ public class NPCDataContainer : DataContainer
     [Header("테스트용 몬스터 스탯 및 장비")]
     [SerializeField] private CharacterBaseStats _testMonsterStats;
     [SerializeField] private List<BaseItem> _testMonsterEquipments;
+
     private NPCAIController npcAIController;
 
     public NPCAIController NPCAI { get { return npcAIController; } private set { npcAIController = value; } }
@@ -49,7 +50,6 @@ public class NPCDataContainer : DataContainer
         }
 
         AnimationData.Initialize();
-
         SpriteRotator.Register(this);
     }
 
