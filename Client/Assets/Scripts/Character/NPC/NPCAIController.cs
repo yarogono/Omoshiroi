@@ -46,11 +46,14 @@ public class NPCAIController : MonoBehaviour
     [SerializeField] private float minWanderDistance = 5f;
     [SerializeField] private float maxWanderDistance = 15f;
     [SerializeField] private float detectDistance = 10f;
+    [SerializeField] private float chaseDistance = 15f;
+    [SerializeField] private float attackDistance = 5f;
 
     private Vector2 viewDirection = new Vector2();
     private Vector2 aimDirection = new Vector2();
     private Vector3 curDestination;
     private GameObject target;
+    private Collider collider;
 
     private float characterRadius;
 
@@ -62,6 +65,8 @@ public class NPCAIController : MonoBehaviour
     public float MinWanderDistance { get { return minWanderDistance; } private set { minWanderDistance = value; } }
     public float MaxWanderDistance { get { return maxWanderDistance; } private set { maxWanderDistance = value; } }
     public float DetectDistance { get { return detectDistance; } private set { detectDistance = value; } }
+    public float ChaseDistance { get { return chaseDistance; } private set { chaseDistance = value; } }
+    public float AttackDistance { get { return attackDistance; } private set { attackDistance = value; } }
 
     public Vector2 ViewDirection { get { return viewDirection; } private set { viewDirection = value; } }
     public Vector2 AimDirection { get { return aimDirection; } private set { aimDirection = value; } }
@@ -77,17 +82,38 @@ public class NPCAIController : MonoBehaviour
         characterRadius = agent.radius * characterRadiusMultiplier;
         State = eStateType.Idle;
         AIState = eAIStateType.Wait;
+        Agent.updateRotation = false;
+        collider = GetComponent<Collider>();
     }
+
+    //private void Start()
+    //{
+    //    int index = Random.Range(0, WanderDestinations.Count);
+    //    SetNextDestination(WanderDestinations[index]);
+    //}
+
+    //private void Update()
+    //{
+    //    if (IsArrived())
+    //    {
+    //        //목표 지점에 도달했다면 대기 상태로 진입하는 내용
+
+    //        int index = Random.Range(0, WanderDestinations.Count);
+    //        SetNextDestination(WanderDestinations[index]);
+    //    }
+    //}
 
     public void UpdateAIState()
     {
+        Debug.Log($"AIState : {AIState}");
         switch (AIState)
         {
-            case eAIStateType.Wait: { Wait(); break; }
-            case eAIStateType.Wander: { Wander(); break; }
-            case eAIStateType.Chase: { Chase(); break; }
-            case eAIStateType.Search: { Search(); break; }
-            case eAIStateType.Runaway: { Runaway(); break; }
+            case eAIStateType.Wait: { WaitState(); break; }
+            case eAIStateType.Wander: { WanderState(); break; }
+            case eAIStateType.Chase: { ChaseState(); break; }
+            case eAIStateType.Attack: { AttackState(); break; }
+            case eAIStateType.Search: { SearchState(); break; }
+            case eAIStateType.Runaway: { RunawayState(); break; }
             default: { break; }
         }
     }
@@ -96,68 +122,82 @@ public class NPCAIController : MonoBehaviour
     /// 대기 상태: 배회 상태에서 현재 목표 지점까지 도달했을 때 랜덤한 시간 동안 아무 것도 하지 않고 제자리에 머무른다. 
     /// 별다른 트리거 없이 지정된 시간이 경과하면 배회 상태로 진입한다.(base 의 통상 상태를 유지한다)
     /// </summary>
-    private void Wait()
+    private void WaitState()
     {
-        Debug.Log($"AIState : {AIState}");
+        CurDestination = this.transform.position;
+        Invoke("SetWanderState", 2000f);
     }
 
     /// <summary>
     /// 배회 상태: 별다른 트리거가 없다면, 지정된 목표 지점들 중 하나를 선택하여 해당 위치까지 이동한다. 
     /// 목표 지점에 도달했다면 대기 상태로 진입한다.(base 의 걷기 상태를 유지한다)
     /// </summary>
-    private void Wander()
+    private void WanderState()
     {
-        //탐지 범위 내에 적이 있다면 추적 상태로 변경 후 return 하는 내용
-
+        //목표 지점에 도달했다면 대기 상태로 전환
         if (IsArrived())
         {
-            //목표 지점에 도달했다면 대기 상태로 진입하는 내용
-
-            int index = Random.Range(0, WanderDestinations.Count);
-            SetNextDestination(WanderDestinations[index]);
+            AIState = eAIStateType.Wait;
         }
-
-        Debug.Log($"AIState : {AIState}");
     }
 
     /// <summary>
     /// 추적 상태: 적대 대상을 확실하게 감지했을 때(일단은 일정 범위 내에 들어왔을 때 한정) 이 상태가 된다. 적대 대상의 위치를 목표 지점으로 지정하고,
-    /// 지속적으로 목표 지점을 갱신하며 접근한다. 적대 대상이 공격 범위 내에 들어왔다면 공격을 시도한다.
+    /// 지속적으로 목표 지점을 갱신하며 접근한다. 적대 대상이 공격 범위 내에 들어왔다면 공격 상태로 전환한다.
     /// (적대 대상에게 다가갈 때는 base 의 달리기 상태를 유지한다.)
-    /// (적대 대상과 가까워졌을 때는 base 의 조준 - 공격 상태를 유지한다. 거리가 멀어지면 이를 반복한다)
     /// </summary>
-    private void Chase()
+    private void ChaseState()
     {
-        //추적 대상과 어느 정도 멀어졌다면 방황 상태로 변경 후 return 하는 내용
-
         SetNextDestination(target.transform.position);
 
-        if (IsArrived())
+        //추적 대상이 추적 범위를 벗어났다면 배회 상태로 전환
+        if (Vector3.Distance(transform.position, curDestination) > chaseDistance)
         {
-            int index = Random.Range(0, WanderDestinations.Count);
-            SetNextDestination(WanderDestinations[index]);
+            LostTarget();
+            return;
         }
-        Debug.Log($"AIState : {AIState}");
+
+        //추적 대상이 공격 범위 안쪽으로 들어왔다면 공격 상태로 전환
+        if (Vector3.Distance(transform.position, curDestination) > attackDistance)
+        {
+            Debug.Log("Trying Attack!!!");
+            AIState = eAIStateType.Attack;
+            return;
+        }
+    }
+
+    /// <summary>
+    /// 공격 상태: 적대 대상에게 공격을 시도한다.
+    /// (적대 대상 방향으로 base 의 조준 - 공격 상태를 유지한다. 대상이 공격 범위를 벗어나면 추적 상태로 전환한다)
+    /// </summary>
+    private void AttackState()
+    {
+        SetNextDestination(target.transform.position);
+
+        //추적 대상이 공격 범위를 벗어났다면 추적 상태로 전환
+        if (Vector3.Distance(transform.position, curDestination) < attackDistance)
+        {
+            AIState = eAIStateType.Chase;
+            return;
+        }
     }
 
     /// <summary>
     /// 수색 상태. 추후 검토할 것
     /// </summary>
-    private void Search()
+    private void SearchState()
     {
-        Debug.Log($"AIState : {AIState}");
     }
 
     /// <summary>
     /// 도망 상태. 추후 검토할 것
     /// </summary>
-    private void Runaway()
+    private void RunawayState()
     {
-        Debug.Log($"AIState : {AIState}");
     }
 
     /// <summary>
-    /// 목적지 리스트에서 랜덤한 다음 목적지 좌표를 지정한다.
+    /// 다음 목적지 좌표를 지정한다.
     /// </summary>
     private void SetNextDestination(Vector3 next)
     {
@@ -166,18 +206,60 @@ public class NPCAIController : MonoBehaviour
         agent.destination = curDestination;
     }
 
-    /// <summary>
-    /// 적 감지 시 호출. 대상을 설정하고 추적 상태가 되도록 한다.
-    /// </summary>
-    private void DetectEnemy(GameObject enemy)
+    private void SetWanderState()
     {
+        int index = Random.Range(0, WanderDestinations.Count);
+        SetNextDestination(WanderDestinations[index]);
+    }
+
+    /// <summary>
+    /// Collider 를 추적 범위로 이용한다. 범위 내에 들어온 대상이 플레이어라면 추적 상태로 전환한다.
+    /// </summary>
+    private void OnTriggerEnter(Collider other)
+    {
+        //추적 대상이 없을 때 대상이 플레이어라면
+        if (target == null && other.gameObject.CompareTag("Player"))
+        {
+            DetectTarget(other.gameObject);
+        }
+    }
+
+    ///// <summary>
+    ///// 현재 추적 대상이 Collider 범위에서 나갔다면 배회 상태로 전환한다.
+    ///// </summary>
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player") && other.gameObject == target)
+    //    {
+    //        LostTarget();
+    //        Debug.Log("Target Losted!!!");
+    //    }
+    //}
+
+    /// <summary>
+    /// 추적 대상을 설정하고 추적 상태가 되도록 한다.
+    /// </summary>
+    public void DetectTarget(GameObject enemy)
+    {
+        Debug.Log("Target detected!!!");
         Target = enemy;
-        SetNextDestination(enemy.transform.position);
+        dataContainer.Stats.MoveSpeed *= dataContainer.Stats.RunMultiplier;
         aiState = eAIStateType.Chase;
     }
 
     /// <summary>
-    /// 현재 목적지에 매우 근접했다면 true, 아니면 false;
+    /// 추적 대상을 해제하고 배회 상태가 되도록 한다.
+    /// </summary>
+    public void LostTarget()
+    {
+        Debug.Log("Target Lost!!!");
+        Target = null;
+        dataContainer.Stats.MoveSpeed /= dataContainer.Stats.RunMultiplier;
+        aiState = eAIStateType.Wander;
+    }
+
+    /// <summary>
+    /// 현재 목적지에 매우 근접했다면 true, 아니면 false
     /// </summary>
     private bool IsArrived()
     {
@@ -186,6 +268,15 @@ public class NPCAIController : MonoBehaviour
             return true;
         }
 
+        return false;
+    }
+
+    /// <summary>
+    /// 추적 대상이 추적 한계치보다 멀리 있다면 true, 아니면 false
+    /// </summary>
+    /// <returns></returns>
+    private bool IsTooFar()
+    {
         return false;
     }
 }

@@ -61,6 +61,7 @@ public enum eAIStateType
     Wait,
     Wander,
     Chase,
+    Attack,
     Search,
     Runaway
 }
