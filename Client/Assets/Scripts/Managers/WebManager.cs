@@ -75,7 +75,7 @@ public class WebManager : CustomSingleton<WebManager>
         if (obj != null)
         {
             string queryString = ObjectToQueryString(obj);
-            sendUrl = String.Concat(sendUrl, queryString);
+            sendUrl = String.Concat(sendUrl, "?", queryString);
         }
 
         using var uwr = UnityWebRequest.Get(sendUrl);
