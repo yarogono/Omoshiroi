@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class LoginSceneController : MonoBehaviour
 {
+    private bool IsLoginSucceed;
+
     // 추후에 게스트 로그인 기능 구현 후 삭제 예정
     [SerializeField] private Button buttonBae;
     [SerializeField] private Button buttonIm;
@@ -33,44 +35,41 @@ public class LoginSceneController : MonoBehaviour
         PlayerLoginRes newRes = null;
 
         WebManager.Instance.SendPostRequest<PlayerLoginRes>("player/login", req, res =>
+        {
+            if (res != null)
             {
                 newRes = res;
 
-                DataManager.Instance.PlayerId = newRes.PlayerId;
+                DataManager.Instance.PlayerId = res.PlayerId;
 
-                if (newRes.IsLoginSucceed == true)
-                {
-                    Debug.Log($"{req} Request Success");
+                IsLoginSucceed = res.IsLoginSucceed;
 
-                    SetIntialPlayerStats(playerId);
-                }
-                else
-                {
-                    Debug.Log($"{req} Request Failed");
-                }
-            });
+                // SetIntialPlayerStats를 여기서 호출
+                SetIntialPlayerStats(playerId);
+            }
+            else
+            {
+                Debug.LogError("PlayerLoginRes 객체가 null입니다.");
+            }
+        });
     }
 
     private void SetIntialPlayerStats(int playerId)
     {
-        // DataManager.Instance.Stats
-
         GetPlayerStatReq req = new() { PlayerId = playerId };
         PlayerStatRes newRes = null;
 
         WebManager.Instance.SendGetRequest<PlayerStatRes>("player/stat", req, res =>
         {
-            newRes = res;
-            Debug.Log($"{res.Atk}");
-
-            // if (newRes == null)
-            // {
-            //     Debug.Log($"{req} Request Failed");
-            // }
-            // else
-            // {
-            //     Debug.Log($"{req} Request Success");
-            // }
+            if (res != null)
+            {
+                newRes = res;
+                Debug.Log($"{res.Atk}");
+            }
+            else
+            {
+                Debug.LogError("PlayerStatRes 객체가 null입니다.");
+            }
         });
     }
 }
