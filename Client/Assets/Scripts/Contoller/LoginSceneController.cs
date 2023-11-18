@@ -14,7 +14,6 @@ public class LoginSceneController : MonoBehaviour
     [SerializeField] private Button buttonChae;
 
     [SerializeField] private Button BtnChangeScene;
-
     private void Start()
     {
         SetTempGuestLogin();
@@ -64,7 +63,7 @@ public class LoginSceneController : MonoBehaviour
             if (res != null)
             {
                 newRes = res;
-                Debug.Log($"{res.Atk}");
+                Debug.Log($"{res}");
             }
             else
             {
