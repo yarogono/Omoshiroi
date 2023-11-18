@@ -8,7 +8,6 @@ public class WebManager : CustomSingleton<WebManager>
 {
     private string _restApiUrl;
 
-
     private void Awake()
     {
         ConfigManager.LoadConfig();
@@ -46,23 +45,21 @@ public class WebManager : CustomSingleton<WebManager>
             jsonBytes = Encoding.UTF8.GetBytes(jsonStr);
         }
 
-        using (var uwr = new UnityWebRequest(sendUrl, method))
+        using var uwr = new UnityWebRequest(sendUrl, method);
+        uwr.uploadHandler = new UploadHandlerRaw(jsonBytes);
+        uwr.downloadHandler = new DownloadHandlerBuffer();
+        uwr.SetRequestHeader("Content-Type", "application/json");
+
+        yield return uwr.SendWebRequest();
+
+        if (uwr.result == UnityWebRequest.Result.ProtocolError)
         {
-            uwr.uploadHandler = new UploadHandlerRaw(jsonBytes);
-            uwr.downloadHandler = new DownloadHandlerBuffer();
-            uwr.SetRequestHeader("Content-Type", "application/json");
-
-            yield return uwr.SendWebRequest();
-
-            if (uwr.result == UnityWebRequest.Result.ProtocolError)
-            {
-                Debug.Log($"Request Error : {uwr.error}");
-            }
-            else
-            {
-                T resObj = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(uwr.downloadHandler.text);
-                res.Invoke(resObj);
-            }
+            Debug.Log($"Request Error : {uwr.error}");
+        }
+        else
+        {
+            T resObj = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(uwr.downloadHandler.text);
+            res.Invoke(resObj);
         }
     }
 }

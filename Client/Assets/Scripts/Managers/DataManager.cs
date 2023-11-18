@@ -14,16 +14,17 @@ public interface ILoader<Key, Value>
 
 public class DataManager : CustomSingleton<DataManager>
 {
-	public Dictionary<int, Stat> Stats { get; private set; } = new();
+	public List<PlayerItemRes> items = new();
+	public int PlayerId = 0;
+	public Stat Stats { get; private set; } = new();
 	public Dictionary<int, Rune> Runes { get; private set; } = new();
 	public Dictionary<int, Weapon> Weapons { get; private set; } = new();
 	public Dictionary<int, FarmingBox> FarmingBoxes { get; private set; } = new();
 
 	private void Awake()
 	{
-		Stats = LoadJson<StatData, int, Stat>("Stat").MakeDictionary();
-		Debug.Log($"{Stats[1].MaxHp}");
-		// FarmingBoxes = LoadJson<Data.FarmingBoxData, int, FarmingBox>("FarmingBoxInventory").MakeDictionary();
+		Stats = JsonUtility.FromJson<Stat>(Resources.Load<TextAsset>($"Data/Stat").text);
+		// FarmingBoxes = LoadJson<ILoader<int, FarmingBox>, int, FarmingBox>("FarmingBoxInventory").MakeDictionary();
 	}
 
 	Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
@@ -51,4 +52,15 @@ public class DataManager : CustomSingleton<DataManager>
 		Debug.Log($"ItemID ({itemId}) 는 존재하지 않는 아이템입니다.");
 		return null;
 	}
+
+	// public T FindItem<T>(int itemId, Dictionary<int, T> dictionary) where T : BaseItem
+	// {
+	// 	if (dictionary.TryGetValue(itemId, out T item))
+	// 	{
+	// 		return item;
+	// 	}
+
+	// 	Debug.Log($"ItemID ({itemId})는 존재하지 않습니다.");
+	// 	return null;
+	// }
 }

@@ -90,19 +90,5 @@ namespace Data
 		public float RunMultiplier;
 		public float DodgeTime;
 	}
-
-	[Serializable]
-	public class StatData : ILoader<int, Stat>
-	{
-		public List<Stat> stats = new();
-
-		public Dictionary<int, Stat> MakeDictionary()
-		{
-			Dictionary<int, Stat> dict = new();
-			foreach (Stat stat in stats)
-				dict.Add(stat.StatID, stat);
-			return dict;
-		}
-	}
 	#endregion
 }

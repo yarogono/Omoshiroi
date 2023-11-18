@@ -39,7 +39,7 @@ namespace Inventory
 
             PrepareUI();
 
-            AddItemsFromServer(SceneController.items);
+            AddItemsFromServer(DataManager.Instance.items);
             UIController.Instance.BtnInventory.onClick.AddListener(() =>
             {
                 if (inventoryUI.isActiveAndEnabled == false)
