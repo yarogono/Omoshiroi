@@ -8,6 +8,12 @@ public class WebManager : CustomSingleton<WebManager>
 {
     private string _restApiUrl;
 
+    // 각 요청 메서드에 대한 독립적인 변수 추가
+    private bool IsSendingPostRequest = false;
+    private bool IsSendingGetRequest = false;
+    private bool IsSendingDeleteRequest = false;
+    private bool IsSendingUpdateRequest = false;
+
     private void Awake()
     {
         ConfigManager.LoadConfig();
@@ -16,25 +22,41 @@ public class WebManager : CustomSingleton<WebManager>
 
     public void SendPostRequest<T>(string url, object obj, Action<T> res)
     {
-        StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbPOST, obj, res));
+        if (!IsSendingPostRequest)
+        {
+            IsSendingPostRequest = true;
+            StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbPOST, obj, res, () => IsSendingPostRequest = false));
+        }
     }
 
     public void SendGetRequest<T>(string url, object obj, Action<T> res)
     {
-        StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbGET, obj, res));
+        if (!IsSendingGetRequest)
+        {
+            IsSendingGetRequest = true;
+            StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbGET, obj, res, () => IsSendingGetRequest = false));
+        }
     }
 
     public void SendDeleteRequest<T>(string url, object obj, Action<T> res)
     {
-        StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbDELETE, obj, res));
+        if (!IsSendingDeleteRequest)
+        {
+            IsSendingDeleteRequest = true;
+            StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbDELETE, obj, res, () => IsSendingDeleteRequest = false));
+        }
     }
 
     public void SendUpdateRequest<T>(string url, object obj, Action<T> res)
     {
-        StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbPUT, obj, res));
+        if (!IsSendingUpdateRequest)
+        {
+            IsSendingUpdateRequest = true;
+            StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbPUT, obj, res, () => IsSendingUpdateRequest = false));
+        }
     }
 
-    IEnumerator CoSendWebRequest<T>(string url, string method, object obj, Action<T> res)
+    IEnumerator CoSendWebRequest<T>(string url, string method, object obj, Action<T> res, Action onComplete)
     {
         string sendUrl = $"{_restApiUrl}/{url}";
 
@@ -58,8 +80,35 @@ public class WebManager : CustomSingleton<WebManager>
         }
         else
         {
-            T resObj = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(uwr.downloadHandler.text);
-            res.Invoke(resObj);
+            string responseText = uwr.downloadHandler.text;
+            Debug.Log($"Server Response: {responseText}");
+
+            if (string.IsNullOrEmpty(responseText))
+            {
+                throw new Exception("Empty server response.");
+            }
+
+            try
+            {
+                T resObj = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText);
+
+                if (resObj != null)
+                {
+                    Debug.Log($"PlayerStatRes: {resObj.ToString()}");
+                    res.Invoke(resObj);
+                }
+                else
+                {
+                    Debug.LogError("resObj 객체가 null입니다.");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Exception during deserialization: {e.Message}");
+            }
         }
+
+        // 요청이 완료되면 onComplete 실행
+        onComplete?.Invoke();
     }
 }
