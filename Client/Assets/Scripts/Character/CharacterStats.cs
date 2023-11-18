@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 [System.Serializable]
 public class CharacterStats
 {
+    public event Action OnHpChange;
+
     private int level;
     private int maxHp;
     private int hp;
@@ -36,11 +39,10 @@ public class CharacterStats
         set
         {
             if (value > MaxHp)
-            {
                 hp = MaxHp;
-                return;
-            }
-            hp = value;
+            else
+                hp = value;
+            OnHpChange?.Invoke();
         }
     }
 

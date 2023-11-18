@@ -22,7 +22,7 @@ public class BaseAttack : MonoBehaviour
         // Damage = ....
     }
 
-    public virtual void ApplyDamage(HealthSystem healthSystem) { }
+    public virtual bool ApplyDamage(HealthSystem healthSystem) { return false; }
 
     private void OnDisable()
     {

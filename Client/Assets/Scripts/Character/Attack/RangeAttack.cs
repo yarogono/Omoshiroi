@@ -26,6 +26,7 @@ public class RangeAttack : BaseAttack
     {
         Launch();
         base.Initalize(attackInfo, dataContainer, tag);
+        APDatar = _data.Stats.Atk;
     }
 
     private void Start() { }
@@ -51,40 +52,45 @@ public class RangeAttack : BaseAttack
 
         if (!other.CompareTag(_makerTag))
         {
-            if (
-                other.gameObject.layer
-                == (other.gameObject.layer & AttackManager.Instance.TargetLayer)
-            )
+            if ((1 << other.gameObject.layer) == (1 << other.gameObject.layer & AttackManager.Instance.TargetLayer.value))
             {
                 var Data = other.GetComponent<DataContainer>();
                 var HealthData = Data.Health;
-                APDatar = Data.Stats.Atk;
+                //APDatar = Data.Stats.Atk;
 
-                CharacterMovement movement = other.GetComponent<CharacterMovement>(); //데이터컨테이너로 캐싱
+                CharacterMovement movement = null;
+                if (other.CompareTag(AttackManager.Instance.PlayerTag))
+                    movement = (Data as CharacterDataContainer).Movement;/*other.GetComponent<CharacterMovement>(); //데이터컨테이너로 캐싱*/
                 if (Data != null)
                 {
                     //넉백을위한 Vector3계산
                     impact =
                         (other.gameObject.transform.position - transform.position).normalized
                         * knockBackPower;
-                    ApplyDamage(HealthData);
+                    if (ApplyDamage(HealthData))
+                        return;
                     //넉백
-                    movement.AddImpact(impact);
+                    movement?.AddImpact(impact);
                 }
                 else
                 {
                     Debug.LogError("Component null");
                 }
-                this.gameObject.SetActive(false);
+                //this.gameObject.SetActive(false);
             }
         }
     }
 
-    public override void ApplyDamage(HealthSystem healthSystem)
+    public override bool ApplyDamage(HealthSystem healthSystem)
     {
         // Debug.Log("피격전 체력:"+healthSystem.stats.Hp);
-        healthSystem.TakeDamage(APDatar);
         // Debug.Log("피격후 체력:"+healthSystem.stats.Hp);
-        gameObject.SetActive(false);
+        if (healthSystem.TakeDamage(APDatar))
+        {
+            gameObject.SetActive(false);
+            return true;
+        }
+        else
+            return false;
     }
 }

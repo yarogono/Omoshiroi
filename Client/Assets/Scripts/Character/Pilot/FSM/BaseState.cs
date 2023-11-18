@@ -132,7 +132,7 @@ public class BaseState : IState
 
     protected bool CheckGround()
     {
-        if (_stateMachine.Character.Controller.isGrounded) return true;
+        if (_stateMachine.Controller.isGrounded) return true;
 
         Ray downRay = new Ray(_stateMachine.Character.transform.position, Vector3.down);
 

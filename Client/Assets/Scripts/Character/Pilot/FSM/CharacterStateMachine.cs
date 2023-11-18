@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class CharacterStateMachine : StateMachine
 {
     // Character Info
-    public CharacterDataContainer Character { get; }
+    public DataContainer Character { get; }
     public BaseInput InputActions { get; }
     public CharacterMovement Movement { get; }
+    public PilotSync Sync { get; }
+    public CharacterController Controller { get; }
     public float CharacterSpeedMultiflier
     {
         get => Character.Stats.RunMultiplier;
@@ -36,9 +39,23 @@ public class CharacterStateMachine : StateMachine
     {
         Character = character;
         InputActions = character.InputActions;
-        if (character.Movement != null)
-            Movement = character.Movement;
         LayerInAnimator = layerInAnimator;
         combineStateMachine = combine;
+        Controller = character.Controller;
+
+        Sync = character.Sync;
+        if (character.Movement != null)
+            Movement = character.Movement;
+    }
+
+    public CharacterStateMachine(CombineStateMachine combine,
+        NPCDataContainer container,
+        int layerInAnimator)
+    {
+        Character = container;
+        InputActions = container.InputActions;
+        LayerInAnimator = layerInAnimator;
+        combineStateMachine = combine;
+        Controller = container.Controller;
     }
 }

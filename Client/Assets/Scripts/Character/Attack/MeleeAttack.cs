@@ -33,16 +33,16 @@ public class MeleeAttack : BaseAttack
         _obstacle.Clear();
     }
 
-    public override void ApplyDamage(HealthSystem health)
+    public override bool ApplyDamage(HealthSystem health)
     {
         Damage = _data.Stats.Atk;
         // 구체적인 대미지 계산을 맡기기
         // Stats에 대미지 계산 메소드를 만든다.
         // Damage = dataContainer.Stats.GetDamage(health);
         // base.ApplyDamage(health);
-        health.TakeDamage(Damage);
+        return health.TakeDamage(Damage);
         // TakeDamage에서 방어력에 따라서 입는 대미지를 줄인다.
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         // TODO
         // 피격음 재생
     }
@@ -55,19 +55,13 @@ public class MeleeAttack : BaseAttack
     {
         if (!other.CompareTag(_makerTag))
         {
-            if (
-                other.gameObject.layer
-                == (other.gameObject.layer & AttackManager.Instance.TargetLayer)
-            )
+            if ((1 << other.gameObject.layer) == (1 << other.gameObject.layer & AttackManager.Instance.TargetLayer.value))
             {
                 // Ray를 쏴서 처음 물체가 other 경우에만 대미지
                 Ray ray = new Ray(
                     gameObject.transform.position,
                     other.gameObject.transform.position - gameObject.transform.position
                 );
-#if UNITY_EDITOR
-                Gizmos.DrawRay(ray);
-#endif
                 if (Physics.Raycast(ray, out RaycastHit hitInfo))
                 {
                     if (hitInfo.collider.gameObject.Equals(other.gameObject))

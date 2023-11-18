@@ -13,7 +13,6 @@ public class CharacterComboAttackState : CharacterAttackState
     public override void Enter()
     {
         base.Enter();
-        StartAnimation(_stateMachine.Character.AnimationData.ComboAttackParameterHash);
 
         alreadyApplyCombo = false;
         alreadyAppliedForce = false;
@@ -25,16 +24,19 @@ public class CharacterComboAttackState : CharacterAttackState
             _stateMachine.Character.AnimationData.ComboIndexParameterHash,
             ComboIndex
         );
-        _stateMachine.Character.Sync?.SendC_ComboAttackPacket(
+        _stateMachine.Sync?.SendC_ComboAttackPacket(
             ComboIndex,
             _stateMachine.Character.transform.position,
-            _stateMachine.Character.Controller.velocity
+            _stateMachine.Controller.velocity
         );
+        _stateMachine.Character.Animator.speed = _stateMachine.Character.Stats.AtkSpeed;
+        StartAnimation(_stateMachine.Character.AnimationData.ComboAttackParameterHash);
     }
 
     public override void Exit()
     {
         base.Exit();
+        _stateMachine.Character.Animator.speed = 1.0f;
         StopAnimation(_stateMachine.Character.AnimationData.ComboAttackParameterHash);
 
         if (!alreadyApplyCombo)
@@ -60,20 +62,6 @@ public class CharacterComboAttackState : CharacterAttackState
         if (alreadyAppliedForce)
             return;
         alreadyAppliedForce = true;
-        if (_stateMachine.Movement == null)
-            return;
-        Vector3 newDir = new Vector3()
-        {
-            x = _stateMachine.AttackDirection.normalized.x,
-            z = _stateMachine.AttackDirection.normalized.y,
-            y = 0.0f
-        };
-
-        if (attackInfo.AttackType < eAttackType.Range)
-            _stateMachine.Movement?.AddImpact(
-                newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier,
-                0.1f
-            );
 
         AttackManager.Instance.RqAttack(
             ComboIndex,
@@ -82,10 +70,24 @@ public class CharacterComboAttackState : CharacterAttackState
             _stateMachine.AttackDirection
         );
 
+        Vector3 newDir = new Vector3()
+        {
+            x = _stateMachine.AttackDirection.normalized.x,
+            z = _stateMachine.AttackDirection.normalized.y,
+            y = 0.0f
+        };
+        if (_stateMachine.Movement == null)
+            return;
+        if (attackInfo.AttackType < eAttackType.Range)
+            _stateMachine.Movement?.AddImpact(
+                newDir * _stateMachine.CharacterBaseSpeed * _stateMachine.CharacterSpeedMultiflier,
+                0.1f
+            );
+
         // DateTime dateTime = System.DateTime.Now;
         // Debug.Log($"{dateTime.Ticks / 10000 % 1000000000}");
 
-        _stateMachine.Character.Sync?.SendC_MakeAttackAreaPacket(
+        _stateMachine.Sync?.SendC_MakeAttackAreaPacket(
             ComboIndex,
             _stateMachine.Character.transform.position,
             _stateMachine.AttackDirection
@@ -106,10 +108,10 @@ public class CharacterComboAttackState : CharacterAttackState
             if (normalizedTime >= attackInfo.ForceTransitionTime)
                 TryApplyForce();
             if (_needUpdate)
-                _stateMachine.Character.Sync?.SendC_ComboAttackPacket(
+                _stateMachine.Sync?.SendC_ComboAttackPacket(
                     ComboIndex,
                     _stateMachine.Character.transform.position,
-                    _stateMachine.Character.Controller.velocity
+                    _stateMachine.Controller.velocity
                 );
         }
         else

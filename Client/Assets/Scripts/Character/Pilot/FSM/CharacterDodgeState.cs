@@ -16,20 +16,22 @@ public class CharacterDodgeState : BaseState
     public CharacterDodgeState(CharacterStateMachine stateMachine)
         : base(stateMachine)
     {
-        duration = _stateMachine.Character.Stats.DodgeTime;
     }
 
     public override void Enter()
     {
         base.Enter();
+        duration = _stateMachine.Character.Stats.DodgeTime;
         passedTime = 0.1f;
         alreadyAppliedForce = false;
         _nextState = _stateMachine.previousStateType;
         StartAnimation(_stateMachine.Character.AnimationData.DodgeParameterHash);
-        _stateMachine.Character.Sync?.SendC_DodgePacket(
+        _stateMachine.Sync?.SendC_DodgePacket(
             _stateMachine.Character.transform.position,
-            _stateMachine.Character.Controller.velocity
+            _stateMachine.Controller.velocity
         );
+        // 무적 적용
+        _stateMachine.Character.Health.IsDodge = true;
     }
 
     public override void Exit()
@@ -52,10 +54,15 @@ public class CharacterDodgeState : BaseState
                 TryApplyForce();
             }
             if (_needUpdate)
-                _stateMachine.Character.Sync?.SendC_DodgePacket(
+                _stateMachine.Sync?.SendC_DodgePacket(
                     _stateMachine.Character.transform.position,
-                    _stateMachine.Character.Controller.velocity
+                    _stateMachine.Controller.velocity
                 );
+            if (normalizedTime > duration)
+            {
+                // 무적 풀기
+                _stateMachine.Character.Health.IsDodge = false;
+            }
         }
         else
         {

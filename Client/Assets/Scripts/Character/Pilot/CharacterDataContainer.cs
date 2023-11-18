@@ -7,7 +7,7 @@ public class CharacterDataContainer : DataContainer
 {
     public CharacterController Controller { get; private set; }
     public CharacterMovement Movement { get; private set; }
-    public BaseInput InputActions { get; private set; }
+    public PlayerInput InputActions { get; private set; }
     public PilotSync Sync { get; private set; }
 
     private CombineStateMachine stateMachine;
@@ -25,15 +25,19 @@ public class CharacterDataContainer : DataContainer
     {
         Controller = GetComponent<CharacterController>();
         Movement = GetComponent<CharacterMovement>();
-        InputActions = GetComponent<BaseInput>();
+        InputActions = GetComponent<PlayerInput>();
         Animator = GetComponent<Animator>();
         Sync = GetComponent<PilotSync>();
+        Health = GetComponent<HealthSystem>();
 
         AnimationData.Initialize();
     }
 
     private void Start()
     {
+        // 플래이어 HP 화면 표시 연결
+        Stats.OnHpChange += () => { UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp); };
+
         if (Equipments == null)
             Equipments = new EquipSystem(this);
 

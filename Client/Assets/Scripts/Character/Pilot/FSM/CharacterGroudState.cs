@@ -27,7 +27,7 @@ public class CharacterGroundState : BaseState
         // 이거 잘 작동하는지 확인이 필요함
         if (
             !CheckGround()
-            && Mathf.Abs(_stateMachine.Character.Controller.velocity.y)
+            && Mathf.Abs(_stateMachine.Controller.velocity.y)
                 > Mathf.Abs(Physics.gravity.y * Time.fixedDeltaTime)
         )
         {

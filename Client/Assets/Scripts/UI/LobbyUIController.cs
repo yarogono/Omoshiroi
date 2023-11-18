@@ -10,7 +10,22 @@ public class LobbyUIController : MonoBehaviour
     delegate void UIAction();
 
 
-   
+
+    private void Start()
+    {
+        Init();
+    }
+
+
+    private void Init()
+    {
+        SetActiveWithCheck(UIPage[0], true);
+        for (int i = 1; i < UIPage.Length; i++)
+        {
+            SetActiveWithCheck(UIPage[i], false);
+        }
+    }
+
     public void ChangePage(int numBtn)
     {
         for (int i = 0; i < UIPage.Length; i++)
@@ -68,7 +83,7 @@ public class LobbyUIController : MonoBehaviour
     //{
     //    btnStore.onClick.AddListener(() =>
     //    {
-    //        StartUILoading(uiStore, uiMainLobby); // 메소드 이름 변경 및 오타 수정
+    //        StartUILoading(uiStore, uiMainLobby); 
     //    });
     //}
 
@@ -77,7 +92,7 @@ public class LobbyUIController : MonoBehaviour
     //    var ui = UIManager.Instance.ShowUI<UIOption>();
     //}
 
-    //public void StartUILoading(GameObject openUI, GameObject closeUI) // 메소드 이름 변경 및 오타 수정
+    //public void StartUILoading(GameObject openUI, GameObject closeUI) 
     //{
     //    if (lobbyLoading != null)
     //    {
