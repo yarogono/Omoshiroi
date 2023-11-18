@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SyncModule : MonoBehaviour
 {
-    private CharacterStats stats;
+    DataContainer dataContainer;
+    CharacterStats characterStats;
 
     public int Id { get; set; }
 
@@ -132,9 +133,10 @@ public class SyncModule : MonoBehaviour
     public TextMeshPro TestText4;
     public TextMeshPro TestText5;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
-        stats = gameObject.GetComponent<DataContainer>().Stats;
+        dataContainer = GetComponent<DataContainer>();
+        characterStats = dataContainer.Stats;
     }
 
     protected virtual void Update()
@@ -147,29 +149,30 @@ public class SyncModule : MonoBehaviour
         // TODO
         // 추후에 ObjectManager.cs TODO 작업이 끝나면
         // PilotSync.cs에서 해당 메서드를 오버라이드 하는 식으로 작업할 예정
-        stats.Level = StatInfo.Level;
-        stats.MaxHp = StatInfo.MaxHp;
-        stats.Hp = StatInfo.Hp;
-        stats.Def = 1;
-        stats.AtkSpeed = 1;
-        stats.Atk = StatInfo.Attack;
-        stats.CritRate = 1;
-        stats.CritDamage = 1;
-        stats.MoveSpeed = StatInfo.Speed;
-        stats.RunMultiplier = 2;
+        characterStats.Level = StatInfo.Level;
+        characterStats.MaxHp = StatInfo.MaxHp;
+        characterStats.Hp = StatInfo.Hp;
+        characterStats.Def = 1;
+        characterStats.AtkSpeed = 1;
+        characterStats.Atk = StatInfo.Attack;
+        characterStats.CritRate = 1;
+        characterStats.CritDamage = 1;
+        characterStats.MoveSpeed = StatInfo.Speed;
+        characterStats.RunMultiplier = 2;
     }
 
     private void DrawInfo()
     {
-        if (stats.Hp != 0 && stats.MaxHp != 0)
+        if (characterStats.Hp != 0 && characterStats.MaxHp != 0)
         {
             TestText1.text = $"PlayerName : {Name}";
-            TestText2.text = $"Level : {stats.Level}";
-            TestText3.text = $"Hp / MaxHP : {stats.Hp} / {stats.MaxHp} | {stats.Hp / stats.MaxHp}";
-            TestText4.text = $"AtkPower : {stats.Atk}";
+            TestText2.text = $"Level : {characterStats.Level}";
+            TestText3.text =
+                $"Hp / MaxHP : {characterStats.Hp} / {characterStats.MaxHp} | {characterStats.Hp / characterStats.MaxHp}";
+            TestText4.text = $"AtkPower : {characterStats.Atk}";
             TestText5.text = $"State : {State}";
 
-            healthBar.localScale = new Vector3(stats.Hp / stats.MaxHp, 1, 1);
+            healthBar.localScale = new Vector3(characterStats.Hp / characterStats.MaxHp, 1, 1);
         }
     }
 }

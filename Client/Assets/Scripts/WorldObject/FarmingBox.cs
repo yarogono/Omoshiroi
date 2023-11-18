@@ -12,29 +12,35 @@ using Google.Protobuf.Collections;
 /// <summary>
 /// 테스트가 용이하도록 임의대로 아이템 스폰을 자체적인 SO 로 관리하도록 해 두었음.
 /// </summary>
-/// 
+///
 
-/// 파밍박스 인벤토리 데이터 요청 패킷을 생성, 서버 측으로 보낸다. 이후, 서버에서 이에 대한 응답을 받아왔다면 
+/// 파밍박스 인벤토리 데이터 요청 패킷을 생성, 서버 측으로 보낸다. 이후, 서버에서 이에 대한 응답을 받아왔다면
 /// S_FarmingBoxOpenHandler => OpenBox 순서로 실행되며 파밍박스를 열지 말지 결정하게 된다.
 
 public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerDownHandler
 {
-    [SerializeField] private int inventorySize;
-    [SerializeField] private InventorySO inventorySO;
-    [SerializeField] private InventoryController_FB inventoryController;
+    [SerializeField]
+    private int inventorySize;
+
+    [SerializeField]
+    private InventorySO inventorySO;
+
+    [SerializeField]
+    private InventoryController_FB inventoryController;
 
     private Collider farmingBoxCollider;
-    
 
     public Dictionary<int, InventoryItem> ItemList { get; private set; }
-    public int InventorySize { get { return inventorySize; } private set { inventorySize = value; } }
+    public int InventorySize
+    {
+        get { return inventorySize; }
+        private set { inventorySize = value; }
+    }
 
     public Action OnOpened;
     public Action OnClosed;
 
-    private void Awake()
-    {
-    }
+    private void Awake() { }
 
     // Start is called before the first frame update
     private void Start()
@@ -71,12 +77,12 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     public void OnPointerDown(PointerEventData eventData)
     {
         SendFarmingBoxOpen();
-        //inventoryController.OpenInventoryUI();
+        inventoryController.OpenInventoryUI();
     }
 
     /// <summary>
     /// 서버에서 받아온 [farmingBoxID, isOpen, farmingBoxInventory] 데이터를 이용해 작업을 수행한다.
-    /// 해당하는 파밍박스를 식별하고, isOpen 이 true 라면 파밍박스를 열 수 없음을 알리고 종료, false 라면 파밍박스 인벤토리를 데이터대로 갱신해주면 된다. 
+    /// 해당하는 파밍박스를 식별하고, isOpen 이 true 라면 파밍박스를 열 수 없음을 알리고 종료, false 라면 파밍박스 인벤토리를 데이터대로 갱신해주면 된다.
     /// </summary>
     public void OpenBox(S_FarmingBoxOpen FBData)
     {
@@ -118,7 +124,7 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     }
 
     /// <summary>
-    /// 파밍박스 인벤토리 데이터 요청 패킷을 생성, 서버 측으로 보낸다. 이후, 서버에서 이에 대한 응답을 받아왔다면 
+    /// 파밍박스 인벤토리 데이터 요청 패킷을 생성, 서버 측으로 보낸다. 이후, 서버에서 이에 대한 응답을 받아왔다면
     /// S_FarmingBoxOpenHandler => OpenBox 순서로 실행되며 파밍박스를 열지 말지 결정하게 된다.
     /// </summary>
     private void SendFarmingBoxOpen()
@@ -137,13 +143,15 @@ public class FarmingBox : BattleFieldObject, ILootable, IInteractable, IPointerD
     {
         Debug.Log("C_FarmingBoxClose 패킷 전송");
         C_FarmingBoxClose fbClosePacket = new C_FarmingBoxClose();
-        fbClosePacket.FarmingBoxId = this.gameObject.GetInstanceID(); fbClosePacket.PlayerId = ObjectId;
+        fbClosePacket.FarmingBoxId = this.gameObject.GetInstanceID();
+        fbClosePacket.PlayerId = ObjectId;
         FarmingBoxItem fbItem = new FarmingBoxItem();
         InventoryItem invenItem;
         foreach (KeyValuePair<int, InventoryItem> item in ItemList)
         {
             invenItem = item.Value;
-            fbItem.ItemId = invenItem.item.ItemID; fbItem.Quantity = invenItem.quantity;
+            fbItem.ItemId = invenItem.item.ItemID;
+            fbItem.Quantity = invenItem.quantity;
             fbClosePacket.Items.Add(fbItem);
         }
 
@@ -161,7 +169,7 @@ public partial class PacketHandler
         GameObject gameObject = ObjectManager.Instance.FindById(FBPacket.FarmingBoxId);
 
         //해당 ID 를 가지는 파밍박스가 존재하지 않는다면 작동하지 않는다.
-        if(gameObject == null)
+        if (gameObject == null)
         {
             Debug.Log("존재하지 않는 FarmingBox 입니다.");
             //return;
@@ -194,7 +202,10 @@ public partial class PacketHandler
 
             //farmingBox.SetActive(true);
 
-            BattleFieldObjectSpawner.instance.SpawnFarmingBox(fb.ObjectId, new Vector3(fb.PosInfo.PosX, fb.PosInfo.PosY, fb.PosInfo.PosZ));
+            BattleFieldObjectSpawner.instance.SpawnFarmingBox(
+                fb.ObjectId,
+                new Vector3(fb.PosInfo.PosX, fb.PosInfo.PosY, fb.PosInfo.PosZ)
+            );
         }
     }
 }

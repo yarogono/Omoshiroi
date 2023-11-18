@@ -4,166 +4,91 @@ using UnityEngine;
 
 namespace Data
 {
-    #region ItemData
+	#region FarmingBox
+	[Serializable]
+	public class FarmingBoxItem
+	{
+		public int itemId;
+		public int quantity;
+	}
 
-    #region WeaponItem
-    [Serializable]
-    public class WeaponItem : BaseWeapon
-    {
-    }
+	public class FarmingBox
+	{
+		public int farmingBoxId;
+		public List<FarmingBoxItem> farmingBoxItems;
+	}
 
-    [Serializable]
-    public class WeaponItemData : ILoader<int, WeaponItem>
-    {
-        public List<WeaponItem> items = new List<WeaponItem>();
+	public class FarmingBoxData : ILoader<int, FarmingBox>
+	{
+		public List<FarmingBox> farmingBoxes = new();
 
-        public Dictionary<int, WeaponItem> MakeDict()
-        {
-            Dictionary<int, WeaponItem> dict = new Dictionary<int, WeaponItem>();
-            foreach (WeaponItem item in items)
-                dict.Add(item.ItemID, item);
-            return dict;
-        }
-    }
-    #endregion
+		public Dictionary<int, FarmingBox> MakeDictionary()
+		{
+			Dictionary<int, FarmingBox> farmingBoxDictionary = new();
+			foreach (FarmingBox farmingBox in farmingBoxes)
+			{
+				farmingBoxDictionary.Add(farmingBox.farmingBoxId, farmingBox);
+			}
+			return farmingBoxDictionary;
+		}
+	}
+	#endregion
 
-    #region SkinItem
-    [Serializable]
-    public class MagicItem : BaseMagic
-    {
-    }
+	#region ItemData
+	#region Weapon
+	[Serializable]
+	public class Weapon : BaseWeapon { }
 
-    [Serializable]
-    public class MagicItemData : ILoader<int, MagicItem>
-    {
-        public List<MagicItem> items = new List<MagicItem>();
+	[Serializable]
+	public class WeaponData : ILoader<int, Weapon>
+	{
+		public List<Weapon> weapons = new();
 
-        public Dictionary<int, MagicItem> MakeDict()
-        {
-            Dictionary<int, MagicItem> dict = new Dictionary<int, MagicItem>();
-            foreach (MagicItem item in items)
-                dict.Add(item.ItemID, item);
-            return dict;
-        }
-    }
-    #endregion
+		public Dictionary<int, Weapon> MakeDictionary()
+		{
+			Dictionary<int, Weapon> weaponDictionary = new();
+			foreach (Weapon weapon in weapons)
+				weaponDictionary.Add(weapon.ItemID, weapon);
+			return weaponDictionary;
+		}
+	}
+	#endregion
 
-    #region RuneItem
-    [Serializable]
-    public class RuneItem : BaseRune
-    {
-    }
+	#region Rune
+	[Serializable]
+	public class Rune : BaseRune { }
 
-    [Serializable]
-    public class RuneItemData : ILoader<int, RuneItem>
-    {
-        public List<RuneItem> items = new List<RuneItem>();
+	[Serializable]
+	public class RuneData : ILoader<int, Rune>
+	{
+		public List<Rune> runes = new();
 
-        public Dictionary<int, RuneItem> MakeDict()
-        {
-            Dictionary<int, RuneItem> dict = new Dictionary<int, RuneItem>();
-            foreach (RuneItem item in items)
-                dict.Add(item.ItemID, item);
-            return dict;
-        }
-    }
-    #endregion
+		public Dictionary<int, Rune> MakeDictionary()
+		{
+			Dictionary<int, Rune> runeDictionary = new();
+			foreach (Rune rune in runes)
+				runeDictionary.Add(rune.ItemID, rune);
+			return runeDictionary;
+		}
+	}
+	#endregion
+	#endregion
 
-    #region ResourceItem
-    [Serializable]
-    public class ResourceItem : BaseResource
-    {
-    }
-
-    [Serializable]
-    public class ResourceItemData : ILoader<int, ResourceItem>
-    {
-        public List<ResourceItem> items = new List<ResourceItem>();
-
-        public Dictionary<int, ResourceItem> MakeDict()
-        {
-            Dictionary<int, ResourceItem> dict = new Dictionary<int, ResourceItem>();
-            foreach (ResourceItem item in items)
-                dict.Add(item.ItemID, item);
-            return dict;
-        }
-    }
-    #endregion
-
-    #region ConsumableItem
-    [Serializable]
-    public class ConsumableItem : BaseConsumable
-    {
-    }
-
-    [Serializable]
-    public class ConsumableItemData : ILoader<int, ConsumableItem>
-    {
-        public List<ConsumableItem> items = new List<ConsumableItem>();
-
-        public Dictionary<int, ConsumableItem> MakeDict()
-        {
-            Dictionary<int, ConsumableItem> dict = new Dictionary<int, ConsumableItem>();
-            foreach (ConsumableItem item in items)
-                dict.Add(item.ItemID, item);
-            return dict;
-        }
-    }
-    #endregion
-
-    #region SkinItem
-    [Serializable]
-    public class SkinItem : BaseSkin
-    {
-    }
-
-    [Serializable]
-    public class SkinItemData : ILoader<int, SkinItem>
-    {
-        public List<SkinItem> items = new List<SkinItem>();
-
-        public Dictionary<int, SkinItem> MakeDict()
-        {
-            Dictionary<int, SkinItem> dict = new Dictionary<int, SkinItem>();
-            foreach (SkinItem item in items)
-                dict.Add(item.ItemID, item);
-            return dict;
-        }
-    }
-    #endregion
-
-    #endregion
-
-
-
-    #region FarmingBoxInventory
-    [Serializable]
-    public class FBInventoryItem
-    {
-        public int itemId;
-        public int quantity;
-    }
-
-    public class FBInventory
-    {
-        public int inventoryId;
-        public List<FBInventoryItem> inventory;
-    }
-
-    public class FarmingBoxInventoryData : ILoader<int, FBInventory>
-    {
-        public List<FBInventory> fBInventories = new List<FBInventory>();
-
-        public Dictionary<int, FBInventory> MakeDict()
-        {
-            Dictionary<int, FBInventory> dict = new Dictionary<int, FBInventory>();
-            foreach (FBInventory inventory in fBInventories)
-            {
-                dict.Add(inventory.inventoryId, inventory);
-            }
-            return dict;
-        }
-    }
-
-    #endregion
+	#region StatData
+	[Serializable]
+	public class Stat
+	{
+		public int StatID;
+		public int Level;
+		public int MaxHp;
+		public int Def;
+		public int Atk;
+		public float AtkSpeed;
+		public int CritRate;
+		public float CritDamage;
+		public float MoveSpeed;
+		public float RunMultiplier;
+		public float DodgeTime;
+	}
+	#endregion
 }

@@ -292,7 +292,7 @@ Transform:
   - {fileID: 1928497838679130253}
   - {fileID: 2389127606293479906}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7564447416552305516
 MonoBehaviour:
@@ -349,8 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c270f575c1eddf448e94203f49f57cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Stats>k__BackingField:
-    <cbs>k__BackingField: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
   <AnimationData>k__BackingField:
     groundParameterName: '@Ground'
     idleParameterName: Idle
@@ -369,9 +367,10 @@ MonoBehaviour:
   <SpriteRotator>k__BackingField:
     _main: {fileID: 8065987409721138812}
     _weapon: {fileID: 895937083953360931}
-  <Health>k__BackingField: {fileID: 0}
   TestEquipItem:
-  - {fileID: 11400000, guid: d26455d40bf021b4f9858032a38fa375, type: 2}
+  - {fileID: 11400000, guid: 459dacc0d9556d840b008abd0d2d9725, type: 2}
+  isApply: 1
+  TestStats: {fileID: 11400000, guid: ec89490e0b0f2374a8b198d8ffd53efd, type: 2}
 --- !u!114 &4313740379138048596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,10 +408,144 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnMainTouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 32b20964-3d5b-4e4a-a5f5-1c23c9b1710d
+    m_ActionName: Player/MainTouch[/Device Simulator Touchscreen/touch0,/Simulated
+      Touchscreen/touch0,/Device Simulator Touchscreen/touch1,/Simulated Touchscreen/touch1,/Device
+      Simulator Touchscreen/touch2,/Simulated Touchscreen/touch2,/Device Simulator
+      Touchscreen/touch3,/Simulated Touchscreen/touch3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnCancelTouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 263862a3-0b7c-4ec7-a3f6-b24ad4846267
+    m_ActionName: Player/CancelTouch[/Keyboard/escape,/Mouse/backButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnTapTouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b7f632e4-0b9c-4965-b0df-234a7f96c5b6
+    m_ActionName: Player/TapTouch[/Device Simulator Touchscreen/touch0,/Simulated
+      Touchscreen/touch0,/Device Simulator Touchscreen/touch1,/Simulated Touchscreen/touch1,/Device
+      Simulator Touchscreen/touch2,/Simulated Touchscreen/touch2,/Device Simulator
+      Touchscreen/touch3,/Simulated Touchscreen/touch3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5d8b87e1-c016-479e-9f14-af5a57ef3a93
+    m_ActionName: Test/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 44a6a43b-ff49-41d9-8efe-300143afc679
+    m_ActionName: Test/Aim[/Mouse/rightButton,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnFire
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0114cb3d-7e55-4cab-84fa-250bd24b4005
+    m_ActionName: Test/Fire[/Mouse/leftButton,/Mouse/rightButton,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnRun
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fa9bf891-438d-4dc1-9f37-4819bb694c1d
+    m_ActionName: Test/Run[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5397881333417574267}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnDodge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: af5b8061-5edd-4398-ba9f-c88ab675c3de
+    m_ActionName: Test/Dodge[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Test
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!95 &7838802115554181109
@@ -474,9 +607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb821abce43f7b3459730718da9a5c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataContainer: {fileID: 0}
-  stats:
-    <cbs>k__BackingField: {fileID: 0}
 --- !u!1 &3341134605525835870
 GameObject:
   m_ObjectHideFlags: 0

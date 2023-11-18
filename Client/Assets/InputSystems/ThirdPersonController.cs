@@ -236,7 +236,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Test"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -247,7 +247,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Test"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -258,7 +258,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Test"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -269,7 +269,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Test"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -291,7 +291,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PointerControl"",
+                    ""groups"": ""Test"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -302,7 +302,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PointerControl"",
+                    ""groups"": ""Test"",
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -324,7 +324,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Test"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -335,7 +335,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Test"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -346,7 +346,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Test"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -357,7 +357,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PointerControl"",
+                    ""groups"": ""Test"",
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -368,7 +368,7 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PointerControl"",
+                    ""groups"": ""Test"",
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -383,6 +383,22 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
             ""devices"": [
                 {
                     ""devicePath"": ""<Pointer>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Test"",
+            ""bindingGroup"": ""Test"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -606,6 +622,15 @@ public partial class @ThirdPersonController: IInputActionCollection2, IDisposabl
         {
             if (m_PointerControlSchemeIndex == -1) m_PointerControlSchemeIndex = asset.FindControlSchemeIndex("PointerControl");
             return asset.controlSchemes[m_PointerControlSchemeIndex];
+        }
+    }
+    private int m_TestSchemeIndex = -1;
+    public InputControlScheme TestScheme
+    {
+        get
+        {
+            if (m_TestSchemeIndex == -1) m_TestSchemeIndex = asset.FindControlSchemeIndex("Test");
+            return asset.controlSchemes[m_TestSchemeIndex];
         }
     }
     public interface IPlayerActions
