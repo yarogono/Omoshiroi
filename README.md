@@ -1,1 +1,67 @@
 # Omoshiroi
+
+## 프로젝트 소개
+---
+
+멀티 플레이 성장형 액션 어드벤쳐 게임입니다.
+
+
+# 팀원/ 담당 파트
+---
+
+|이름|담당 업무|깃허브 링크|
+|------|---|---|
+|배인호(팀장)|.|[링크](https://github.com/cutlake2000)|
+|송승훈|.|[링크](https://github.com/DoDokang318)|
+|채이환|.|[링크](https://github.com/Hwan007)|
+|조영오|.|[링크](https://github.com/jyo217)|
+|임전혁|.|[링크](https://github.com/yarogono)|
+
+
+# 시연 영상
+---
+
+[![Video Label](http://img.youtube.com/vi/0nAEEoJmCOQ/0.jpg)](https://youtu.be/0nAEEoJmCOQ)
+
+(클릭하면 유튜브 영상 링크로 넘어갑니다.)
+
+
+# 기술 스택
+---
+
+<table>
+	<tr>
+		<th>분류</th>
+		<th>기술</th>
+	</tr>
+	<tr align="center">
+		<td>Language</td>
+		<td><img src="https://img.shields.io/badge/CSharp-purple?style=for-the-badge&logo=csharp&logoColor="></td>
+	</tr>
+	<tr align="center">
+		<td>Game Engine</td>
+		<td><img src="https://img.shields.io/badge/Unity-black?style=for-the-badge&logo=unity&logoColor=white"></td>
+	</tr>
+	<tr align="center">
+		<td>Server</td>
+		<td><img src="https://img.shields.io/badge/ASP.NET Core-blue?style=for-the-badge&logo=.net&logoColor=white"></td>
+	</tr>
+	<tr align="center">
+		<td>DB</td>
+		<td><img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"></td>
+	</tr>
+	<tr align="center">
+		<td>Other</td>
+		<td><img src="https://img.shields.io/badge/Entity Framework Core-purple?style=for-the-badge"><br>
+		    <img src="https://img.shields.io/badge/Nginx-green?style=for-the-badge&logo=nginx&logoColor=white">
+		</td>
+	</tr>
+</table>
+
+<br/>
+
+
+# 아키텍처(Architecture)
+---
+
+
