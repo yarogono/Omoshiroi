@@ -7,6 +7,8 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     public event Action OnDead;
+    public event Action OnDamaged;
+    public event Action OnHealed;
     private CharacterStats Stats;
     private PilotSync Sync;
     public bool IsDodge { get; set; }
@@ -19,13 +21,14 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
-        OnDead +=  UIController.Instance.UIDead;
         Stats = gameObject.GetComponent<DataContainer>().Stats;
         Sync = gameObject.GetComponent<PilotSync>();
     }
 
     public bool TakeDamage(int changeAmount)
     {
+        OnDamaged?.Invoke();
+
         if (IsDodge)
             return false;
 
@@ -51,6 +54,8 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeRecovery(int changeAmount)
     {
+        OnHealed?.Invoke();
+
         int remain = Stats.Hp + changeAmount;
 
         if (remain <= 0)
