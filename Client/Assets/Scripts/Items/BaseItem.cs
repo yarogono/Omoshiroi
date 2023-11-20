@@ -5,22 +5,28 @@ using UnityEngine.UI;
 
 public abstract class BaseItem : ScriptableObject
 {
-    [Header("BaseItemData")]
-    [SerializeField] protected Sprite itemIcon;
-    [SerializeField] protected GameObject objectPrefab;
-    [SerializeField] protected int itemID;
-    [SerializeField] protected string itemName;
-    [SerializeField] protected string description;
-    [SerializeField] protected eItemType itemType;
-    [SerializeField] protected int maxStack;
-    [SerializeField] protected bool isStackable;
+	[Header("BaseItemData")]
+	[SerializeField] protected Sprite itemIcon;
+	public Sprite ItemIcon { get { return itemIcon; } }
 
-    public Sprite ItemIcon { get { return itemIcon; } }
-    public GameObject ObjectPrefab { get { return objectPrefab; } }
-    public int ItemID { get { return itemID; } }
-    public string ItemName { get { return itemName; } }
-    public string Description { get { return description; } }
-    public eItemType ItemType { get { return itemType; } }
-    public int MaxStack { get { return maxStack; } }
-    public bool IsStackable { get { return isStackable; } }
+	[SerializeField] protected GameObject objectPrefab;
+	public GameObject ObjectPrefab { get { return objectPrefab; } }
+
+	[SerializeField] protected int itemID;
+	public int ItemID { get { return itemID; } }
+
+	[SerializeField] protected string itemName;
+	public string ItemName { get { return itemName; } }
+
+	[SerializeField] protected string itemDescription;
+	public string ItemDescription { get { return itemDescription; } }
+
+	[SerializeField] protected eItemType itemType;
+	public eItemType ItemType { get { return itemType; } }
+
+	[SerializeField] protected int itemMaxStack;
+	public int ItemMaxStack { get { return itemMaxStack; } }
+
+	[SerializeField] protected bool isStackable;
+	public bool IsStackable { get { return isStackable; } }
 }

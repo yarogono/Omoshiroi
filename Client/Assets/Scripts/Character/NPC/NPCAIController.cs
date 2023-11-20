@@ -48,6 +48,7 @@ public class NPCAIController : MonoBehaviour
     [SerializeField] private float detectDistance = 10f;
     [SerializeField] private float chaseDistance = 15f;
     [SerializeField] private float attackDistance = 5f;
+    [SerializeField] private float attackDelay = 1f;
 
     private Vector2 viewDirection = new Vector2();
     private Vector2 aimDirection = new Vector2();
@@ -194,7 +195,7 @@ public class NPCAIController : MonoBehaviour
     {
         SetNextDestination(target.transform.position);
         dataContainer.InputActions.CallAimEvent(new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z));
-        dataContainer.InputActions.CallAttackEvent(new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z));
+        Invoke("DoAttack", attackDelay);
 
         //추적 대상이 공격 범위를 벗어났다면 추적 상태로 전환
         if (Vector3.Distance(transform.position, curDestination) > attackDistance)
@@ -238,10 +239,10 @@ public class NPCAIController : MonoBehaviour
     /// <summary>
     /// Collider 를 추적 범위로 이용한다. 범위 내에 들어온 대상이 플레이어라면 추적 상태로 전환한다.
     /// </summary>
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         //추적 대상이 없을 때 대상이 플레이어라면
-        if (target == null && other.gameObject.CompareTag("Player"))
+        if (target == null && other.gameObject.CompareTag("Pilot"))
         {
             DetectTarget(other.gameObject);
         }
@@ -280,6 +281,15 @@ public class NPCAIController : MonoBehaviour
         dataContainer.Stats.MoveSpeed /= dataContainer.Stats.RunMultiplier;
         aiState = eAIStateType.Wander;
     }
+
+    private void DoAttack()
+    {
+        if(aiState == eAIStateType.Attack)
+        {
+            dataContainer.InputActions.CallAttackEvent(new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z));
+        }
+    } 
+
 
     /// <summary>
     /// 현재 목적지에 매우 근접했다면 true, 아니면 false
