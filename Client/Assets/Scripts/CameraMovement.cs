@@ -23,14 +23,13 @@ public class CameraMovement : MonoBehaviour
     public void AttachToPlayer(Transform player)
     {
         _target = player;
-    }
-    private void Start()
-    {
+
         Quaternion quaternion = Quaternion.Euler(Rotate.x, Rotate.y, Rotate.z);
         _offset = new Vector3() { x = 0, y = Offset * Mathf.Sin(Rotate.x * Mathf.PI / 180), z = -Offset * Mathf.Cos(Rotate.x * Mathf.PI / 180) };
         _targetPos = _target.position + _offset;
         transform.SetPositionAndRotation(_targetPos, quaternion);
     }
+
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, _target.position + _offset, ref _dampingVelocity, 1 / Speed);
