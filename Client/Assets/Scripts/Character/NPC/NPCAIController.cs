@@ -56,6 +56,8 @@ public class NPCAIController : MonoBehaviour
     private GameObject target;
     private Collider collider;
     private CombineStateMachine csm;
+    private NPCInput input;
+    private CharacterStats stats;
 
     private float characterRadius;
 
@@ -89,6 +91,8 @@ public class NPCAIController : MonoBehaviour
         Agent.updateRotation = false;
         collider = GetComponent<Collider>();
         csm = dataContainer.StateMachine;
+        input = dataContainer.InputActions;
+        stats = dataContainer.Stats;
     }
 
     //private void Start()
@@ -132,12 +136,12 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void WaitState()
     {
-        if(AIState == eAIStateType.Wait)
+        if(aiState == eAIStateType.Wait)
         {
             //멈춘 상태에서의 애니메이션 재생
-            dataContainer.InputActions.CallMoveEvent(Vector2.zero);
+            input.CallMoveEvent(Vector2.zero);
             Invoke("SetWanderState", 1f);
-            AIState = eAIStateType.Idle;
+            aiState = eAIStateType.Idle;
         }
     }
 
@@ -147,12 +151,13 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void WanderState()
     {
-        dataContainer.InputActions.CallMoveEvent(new Vector2(dataContainer.Controller.velocity.x, dataContainer.Controller.velocity.z));
+        viewDirection = new Vector2(agent.velocity.x, agent.velocity.z);
+        input.CallMoveEvent(viewDirection);
 
         //목표 지점에 도달했다면 대기 상태로 전환
         if (IsArrived())
         {
-            AIState = eAIStateType.Wait;
+            aiState = eAIStateType.Wait;
         }
     }
 
@@ -166,7 +171,7 @@ public class NPCAIController : MonoBehaviour
 
         SetNextDestination(target.transform.position);
 
-        dataContainer.InputActions.CallRunEvent(isRun);
+        input.CallRunEvent(isRun);
 
         if (!isRun) { isRun = true; }
         
@@ -182,7 +187,7 @@ public class NPCAIController : MonoBehaviour
         if (Vector3.Distance(transform.position, curDestination) < attackDistance)
         {
             Debug.Log("Trying Attack!!!");
-            AIState = eAIStateType.Attack;
+            aiState = eAIStateType.Attack;
             return;
         }
     }
@@ -194,13 +199,15 @@ public class NPCAIController : MonoBehaviour
     private void AttackState()
     {
         SetNextDestination(target.transform.position);
-        dataContainer.InputActions.CallAimEvent(new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z));
+
+        aimDirection = new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z);
+        input.CallAimEvent(aimDirection);
         Invoke("DoAttack", attackDelay);
 
         //추적 대상이 공격 범위를 벗어났다면 추적 상태로 전환
         if (Vector3.Distance(transform.position, curDestination) > attackDistance)
         {
-            AIState = eAIStateType.Chase;
+            aiState = eAIStateType.Chase;
             return;
         }
     }
@@ -224,8 +231,8 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void SetNextDestination(Vector3 next)
     {
-        CurDestination = next;
-        //Debug.Log($"목적지 설정 : {CurDestination}");
+        curDestination = next;
+        //Debug.Log($"목적지 설정 : {curDestination}");
         agent.destination = curDestination;
     }
 
@@ -233,7 +240,7 @@ public class NPCAIController : MonoBehaviour
     {
         int index = Random.Range(0, WanderDestinations.Count);
         SetNextDestination(WanderDestinations[index]);
-        AIState = eAIStateType.Wander;
+        aiState = eAIStateType.Wander;
     }
 
     /// <summary>
@@ -266,8 +273,8 @@ public class NPCAIController : MonoBehaviour
     public void DetectTarget(GameObject enemy)
     {
         Debug.Log("Target detected!!!");
-        Target = enemy;
-        dataContainer.Stats.MoveSpeed *= dataContainer.Stats.RunMultiplier;
+        target = enemy;
+        stats.MoveSpeed *= stats.RunMultiplier;
         aiState = eAIStateType.Chase;
     }
 
@@ -277,8 +284,8 @@ public class NPCAIController : MonoBehaviour
     public void LostTarget()
     {
         Debug.Log("Target Lost!!!");
-        Target = null;
-        dataContainer.Stats.MoveSpeed /= dataContainer.Stats.RunMultiplier;
+        target = null;
+        stats.MoveSpeed /= stats.RunMultiplier;
         aiState = eAIStateType.Wander;
     }
 
@@ -286,7 +293,8 @@ public class NPCAIController : MonoBehaviour
     {
         if(aiState == eAIStateType.Attack)
         {
-            dataContainer.InputActions.CallAttackEvent(new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z));
+            aimDirection = new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z);
+            input.CallAttackEvent(aimDirection);
         }
     } 
 
