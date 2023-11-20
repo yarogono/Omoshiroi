@@ -19,7 +19,7 @@ public class UIStore : MonoBehaviour
 
     void Start()
     {
-        GhachaPopup = UIManager.Instance.ShowUI<UIStorePopup>(nameof(UIStorePopup), PopupRoot);
+        GhachaPopup = UIManager.Instance.ShowUI<UIStorePopup>("Lobby/PopupConfirm", PopupRoot);
         GhachaPopup.gameObject.SetActive(false);
     
 

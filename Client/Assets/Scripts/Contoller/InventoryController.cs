@@ -32,7 +32,7 @@ namespace Inventory
         private void Start()
         {
 
-            inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>(UIController.Instance.UIRoot);
+            inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>(null, UIController.Instance.UIRoot);
 
             if (inventoryUI)
             {
@@ -45,7 +45,7 @@ namespace Inventory
                 Debug.LogError("NullinventoryUI");
             }
 
-             PrepareUI();
+            PrepareUI();
 
             AddItemsFromServer(DataManager.Instance.items);
             UIController.Instance.BtnInventory.onClick.AddListener(() =>
