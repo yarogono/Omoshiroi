@@ -4,8 +4,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class UIBase : MonoBehaviour
 {
-    [Header("Font Size\n(0:title, 1:description)")]
-    [SerializeField] protected float[] _baseFontSize;
     protected Action ActAtHide;
     protected Action ActAtClose;
 
