@@ -85,7 +85,7 @@ public class UIManager : PlainSingleton<UIManager>
         if (!_prefabs.ContainsKey(nameof(T)))
         {
             if (prefabPath == null)
-                LoadUIPrefab(typeof(T).Name);
+                LoadUIPrefab(nameof(T));
             else
                 LoadUIPrefab(prefabPath);
         }
