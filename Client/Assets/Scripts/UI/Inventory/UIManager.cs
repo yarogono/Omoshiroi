@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : PlainSingleton<UIManager>
 {
-    private Dictionary<string, GameObject> _prefabs;
+    private Dictionary<Type, GameObject> _prefabs;
     private LinkedList<UIBase> OpenList;
     private LinkedList<UIBase> HideList;
 
@@ -36,7 +36,7 @@ public class UIManager : PlainSingleton<UIManager>
 
     public UIManager()
     {
-        _prefabs = new Dictionary<string, GameObject>();
+        _prefabs = new Dictionary<Type, GameObject>();
         OpenList = new LinkedList<UIBase>();
         HideList = new LinkedList<UIBase>();
         //LoadUIPrefabs();
@@ -82,15 +82,15 @@ public class UIManager : PlainSingleton<UIManager>
             return open;
         }
 
-        if (!_prefabs.ContainsKey(nameof(T)))
+        if (!_prefabs.ContainsKey(typeof(T)))
         {
             if (prefabPath == null)
-                LoadUIPrefab(nameof(T));
+                LoadUIPrefab(typeof(T).ToString());
             else
                 LoadUIPrefab(prefabPath);
         }
 
-        var prefab = _prefabs[nameof(T)];
+        var prefab = _prefabs[typeof(T)];
         if (prefab != null)
         {
             GameObject obj;
@@ -297,8 +297,8 @@ public class UIManager : PlainSingleton<UIManager>
         var obj = Resources.Load<GameObject>(_prefabPath + name);
         if (obj != null)
         {
-            //var type = obj.GetComponent<UIBase>().GetType();
-            _prefabs.Add(obj.name, obj);
+            var type = obj.GetComponent<UIBase>().GetType();
+            _prefabs.Add(type, obj);
             Debug.Log($"{obj.name}({_prefabPath}/{obj.name}) is loaded.");
         }
     }
