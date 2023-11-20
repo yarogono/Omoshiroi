@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2813683567102400726}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,4 +152,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Offset: {x: 0, y: 187, z: -69}
   Rotate: {x: 70, y: 0, z: 0}
-  Speed: 1
+  Speed: 2
