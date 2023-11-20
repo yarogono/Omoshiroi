@@ -26,6 +26,7 @@ public class UIController: MonoBehaviour
 
     private void Start()
     {
+        
         init();
 
         leaveGame = GetComponent<LeaveGame>();
@@ -46,6 +47,10 @@ public class UIController: MonoBehaviour
         {
             Debug.LogError("NullGameOver");
         }
+    }
+    public void UIDead()
+    {
+        GameOver.SetActive(true);
     }
 
     public  void HandlerHp(float MaxHp ,float CurHp)
