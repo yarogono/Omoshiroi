@@ -27,17 +27,8 @@ public class UIController: CustomSingleton<UIController>
 
         BtnLeavGame.onClick.AddListener(() =>
         {
-
-
             LoadingScenController.LoadScene("LobbyScene");
-            //if (leaveGame)
-            //{
-            //    leaveGame.LeaveGameRoom();
-            //}
-            //else
-            //{
-            //    Debug.LogError("Component null");
-            //}
+  
         });
        
     }
