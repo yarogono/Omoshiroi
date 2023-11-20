@@ -147,7 +147,7 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void WanderState()
     {
-        dataContainer.InputActions.CallMoveEvent(new Vector2(dataContainer.Controller.velocity.x, dataContainer.Controller.velocity.z));
+        dataContainer.InputActions.CallMoveEvent(new Vector2(Agent.velocity.x, Agent.velocity.z));
 
         //목표 지점에 도달했다면 대기 상태로 전환
         if (IsArrived())

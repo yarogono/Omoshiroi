@@ -34,7 +34,6 @@ public class CharacterSpriteRotator
 
         container.InputActions.OnAimEvent += AimInput;
         container.InputActions.OnMoveEvent += MoveInput;
-
     }
     private void MoveInput(Vector2 direction)
     {
