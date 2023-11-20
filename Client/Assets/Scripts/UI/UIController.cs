@@ -43,7 +43,14 @@ public class UIController: CustomSingleton<UIController>
     }
     void init()
     {
-        GameOver.SetActive(false);
+        if (GameOver) // GameOver가 할당되었는지 확인
+        {
+            GameOver.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("NullGameOver");
+        }
     }
 
     public  void HandlerHp(float MaxHp ,float CurHp)

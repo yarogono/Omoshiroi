@@ -10,11 +10,6 @@ public enum eQualityType
 
 }
 
-public enum eFPSType
-{
-
-}
-
 public enum eGachaType
 {
 
