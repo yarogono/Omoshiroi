@@ -6478,14 +6478,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec7201f4e7418b44848dd8c671f4dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GhachaPopup: {fileID: 0}
-  PopupRoot: {fileID: 0}
-  BtnWeapone1Ghacha: {fileID: 0}
-  BtnWeapone10Ghacha: {fileID: 0}
-  BtnMagic1Ghacha: {fileID: 0}
-  BtnMagic10Ghacha: {fileID: 0}
-  BtnRune1Ghacha: {fileID: 0}
-  BtnRune10Ghacha: {fileID: 0}
+  GhachaPopup: {fileID: 3486728491601848034, guid: 3ae900d86344c4a4ea3bfa442416d35e, type: 3}
+  PopupRoot: {fileID: 7270487278901133911}
+  BtnWeapone1Ghacha: {fileID: 1395268644802271290}
+  BtnWeapone10Ghacha: {fileID: 3752740866147587266}
+  BtnMagic1Ghacha: {fileID: 9086198021836446689}
+  BtnMagic10Ghacha: {fileID: 9081285550653154595}
+  BtnRune1Ghacha: {fileID: 5839550440945268070}
+  BtnRune10Ghacha: {fileID: 5782668005645105558}
 --- !u!224 &8811781989635839865
 RectTransform:
   m_ObjectHideFlags: 0

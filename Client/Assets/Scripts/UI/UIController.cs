@@ -53,7 +53,7 @@ public class UIController: MonoBehaviour
     }
     void init()
     {
-        if (GameOver) // GameOver가 할당되었는지 확인
+        if (GameOver != null) // GameOver가 할당되었는지 확인
         {
             GameOver.SetActive(false);
         }
