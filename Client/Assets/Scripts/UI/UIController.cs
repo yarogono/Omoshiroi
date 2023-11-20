@@ -17,6 +17,10 @@ public class UIController: CustomSingleton<UIController>
 
     public GameObject InventoryUI;
 
+    private void Awake()
+    {
+        Instance = this;
+    } 
 
 
     private void Start()
