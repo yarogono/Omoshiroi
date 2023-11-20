@@ -31,6 +31,8 @@ public class CharacterDataContainer : DataContainer
         Health = GetComponent<HealthSystem>();
 
         AnimationData.Initialize();
+
+        CameraMovement.Instance.AttachToPlayer(transform);
     }
 
     private void Start()
