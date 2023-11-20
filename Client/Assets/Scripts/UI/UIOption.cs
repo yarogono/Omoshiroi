@@ -12,6 +12,12 @@ public class UIOption : UIBase
     
     [SerializeField] private List<Toggle> _Language;
 
+    private RectTransform _self;
+    private void Awake()
+    {
+        _self = GetComponent<RectTransform>();
+    }
+
     public void LowPerf(bool set)
     {
         if (set)
@@ -140,7 +146,7 @@ public class UIOption : UIBase
 
     public void Quit()
     {
-        var ui = UIManager.Instance.ShowUI<UIStorePopup>(UIController.Instance.UIRoot);
+        var ui = UIManager.Instance.ShowUI<UIStorePopup>("Lobby", _self);
         ui.SetUP("정말 종료하시겠습니까?", () => { Application.Quit(); });
     }
 }
