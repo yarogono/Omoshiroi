@@ -15,7 +15,7 @@ public class UIOption : UIBase
     private RectTransform _self;
     private void Awake()
     {
-        _self = GetComponent<RectTransform>();
+        _self = GetComponentInChildren<RectTransform>();
     }
 
     public void LowPerf(bool set)
@@ -146,7 +146,7 @@ public class UIOption : UIBase
 
     public void Quit()
     {
-        var ui = UIManager.Instance.ShowUI<UIStorePopup>("Lobby", _self);
+        var ui = UIManager.Instance.ShowUI<UIStorePopup>("Lobby/PopupConfirm", _self);
         ui.SetUP("정말 종료하시겠습니까?", () => { Application.Quit(); });
     }
 }
