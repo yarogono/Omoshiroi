@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : CustomSingleton<CameraMovement>
+public class CameraMovement : MonoBehaviour
 {
+    public static CameraMovement Instance { get; private set; }
     public float Offset;
     public Vector3 Rotate;
     [Range(0.5f, 20f)] public float Speed;
@@ -13,6 +14,11 @@ public class CameraMovement : CustomSingleton<CameraMovement>
 
     private Vector3 _targetPos;
     private Vector3 _offset;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void AttachToPlayer(Transform player)
     {
@@ -28,5 +34,10 @@ public class CameraMovement : CustomSingleton<CameraMovement>
     void Update()
     {
         transform.position = Vector3.SmoothDamp(transform.position, _target.position + _offset, ref _dampingVelocity, 1 / Speed);
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 }
