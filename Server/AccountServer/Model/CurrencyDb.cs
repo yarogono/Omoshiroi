@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AccountServer.Model
 {
+    [Table("Currency")]
     public class CurrencyDb
     {
         [Key]
@@ -12,6 +13,7 @@ namespace AccountServer.Model
 
         public int Diamond { get; set; }
 
+        [ForeignKey("playerId")]
         public PlayerDb PlayerId { get; set; }
     }
 }

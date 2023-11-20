@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AccountServer.Model.Item
 {
+    [Table("Potion_Item")]
     public class PotionItemDb
     {
         [Key]
@@ -10,6 +11,7 @@ namespace AccountServer.Model.Item
 
         public int TemplateId { get; set; }
 
+        [ForeignKey("inventoryId")]
         public InventoryDb InventoryId { get; set; }
     }
 }

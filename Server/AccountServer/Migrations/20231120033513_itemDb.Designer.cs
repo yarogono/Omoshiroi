@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccountServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231118034046_itemDb")]
+    [Migration("20231120033513_itemDb")]
     partial class itemDb
     {
         /// <inheritdoc />
@@ -34,7 +34,7 @@ namespace AccountServer.Migrations
                     b.Property<int>("Gold")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlayerId1")
+                    b.Property<int>("playerId")
                         .HasColumnType("int");
 
                     b.HasKey("CurrencyId");
@@ -42,7 +42,7 @@ namespace AccountServer.Migrations
                     b.HasIndex("CurrencyId")
                         .IsUnique();
 
-                    b.HasIndex("PlayerId1");
+                    b.HasIndex("playerId");
 
                     b.ToTable("Currency");
                 });
@@ -57,7 +57,7 @@ namespace AccountServer.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PlayerId1")
+                    b.Property<int>("playerId")
                         .HasColumnType("int");
 
                     b.HasKey("GuestId");
@@ -65,7 +65,7 @@ namespace AccountServer.Migrations
                     b.HasIndex("GuestId")
                         .IsUnique();
 
-                    b.HasIndex("PlayerId1");
+                    b.HasIndex("playerId");
 
                     b.ToTable("Guest");
                 });
@@ -76,7 +76,7 @@ namespace AccountServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("PlayerId1")
+                    b.Property<int>("playerId")
                         .HasColumnType("int");
 
                     b.HasKey("InventoryId");
@@ -84,7 +84,7 @@ namespace AccountServer.Migrations
                     b.HasIndex("InventoryId")
                         .IsUnique();
 
-                    b.HasIndex("PlayerId1");
+                    b.HasIndex("playerId");
 
                     b.ToTable("Inventory");
                 });
@@ -95,23 +95,23 @@ namespace AccountServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("InventoryId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<int>("TemplateId")
                         .HasColumnType("int");
 
-                    b.HasKey("MaterialItemId");
+                    b.Property<int>("inventoryId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("InventoryId1");
+                    b.HasKey("MaterialItemId");
 
                     b.HasIndex("MaterialItemId")
                         .IsUnique();
 
-                    b.ToTable("MaterialItem");
+                    b.HasIndex("inventoryId");
+
+                    b.ToTable("Material_Item");
                 });
 
             modelBuilder.Entity("AccountServer.Model.Item.PotionItemDb", b =>
@@ -120,20 +120,20 @@ namespace AccountServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("InventoryId1")
+                    b.Property<int>("TemplateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TemplateId")
+                    b.Property<int>("inventoryId")
                         .HasColumnType("int");
 
                     b.HasKey("PotionItemId");
 
-                    b.HasIndex("InventoryId1");
-
                     b.HasIndex("PotionItemId")
                         .IsUnique();
 
-                    b.ToTable("PotionItem");
+                    b.HasIndex("inventoryId");
+
+                    b.ToTable("Potion_Item");
                 });
 
             modelBuilder.Entity("AccountServer.Model.Item.RuneItemDb", b =>
@@ -145,17 +145,17 @@ namespace AccountServer.Migrations
                     b.Property<bool>("Equipped")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("InventoryId1")
+                    b.Property<int>("TemplateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TemplateId")
+                    b.Property<int>("inventoryId")
                         .HasColumnType("int");
 
                     b.HasKey("RuneItemId");
 
-                    b.HasIndex("InventoryId1");
+                    b.HasIndex("inventoryId");
 
-                    b.ToTable("RuneItem");
+                    b.ToTable("Rune_Item");
                 });
 
             modelBuilder.Entity("AccountServer.Model.Item.WeaponItemDb", b =>
@@ -167,20 +167,20 @@ namespace AccountServer.Migrations
                     b.Property<bool>("Equipped")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("InventoryId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<int>("TemplateId")
                         .HasColumnType("int");
 
+                    b.Property<int>("inventoryId")
+                        .HasColumnType("int");
+
                     b.HasKey("WeaponItemId");
 
-                    b.HasIndex("InventoryId1");
+                    b.HasIndex("inventoryId");
 
-                    b.ToTable("WeaponItem");
+                    b.ToTable("Weapon_Item");
                 });
 
             modelBuilder.Entity("AccountServer.Model.OauthDb", b =>
@@ -193,13 +193,12 @@ namespace AccountServer.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("OauthToken")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PlayerId1")
+                    b.Property<int?>("oatuhType")
                         .HasColumnType("int");
 
-                    b.Property<int>("oatuhType")
+                    b.Property<int>("playerId")
                         .HasColumnType("int");
 
                     b.HasKey("OauthId");
@@ -207,7 +206,7 @@ namespace AccountServer.Migrations
                     b.HasIndex("OauthId")
                         .IsUnique();
 
-                    b.HasIndex("PlayerId1");
+                    b.HasIndex("playerId");
 
                     b.ToTable("Oauth");
                 });
@@ -266,18 +265,18 @@ namespace AccountServer.Migrations
                     b.Property<float>("MoveSpeed")
                         .HasColumnType("float");
 
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("int");
-
                     b.Property<float>("RunMultiplier")
                         .HasColumnType("float");
 
-                    b.HasKey("PlayerStatId");
+                    b.Property<int>("playerId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("PlayerId");
+                    b.HasKey("PlayerStatId");
 
                     b.HasIndex("PlayerStatId")
                         .IsUnique();
+
+                    b.HasIndex("playerId");
 
                     b.ToTable("Player_Stat");
                 });
@@ -286,7 +285,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
                         .WithMany()
-                        .HasForeignKey("PlayerId1")
+                        .HasForeignKey("playerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -297,7 +296,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
                         .WithMany()
-                        .HasForeignKey("PlayerId1")
+                        .HasForeignKey("playerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -308,7 +307,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
                         .WithMany()
-                        .HasForeignKey("PlayerId1")
+                        .HasForeignKey("playerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -319,7 +318,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
                         .WithMany("MaterialItems")
-                        .HasForeignKey("InventoryId1")
+                        .HasForeignKey("inventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -330,7 +329,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
                         .WithMany("PotionItems")
-                        .HasForeignKey("InventoryId1")
+                        .HasForeignKey("inventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -341,7 +340,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
                         .WithMany("RuneItems")
-                        .HasForeignKey("InventoryId1")
+                        .HasForeignKey("inventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -352,7 +351,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
                         .WithMany("WeaponItems")
-                        .HasForeignKey("InventoryId1")
+                        .HasForeignKey("inventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -363,7 +362,7 @@ namespace AccountServer.Migrations
                 {
                     b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
                         .WithMany()
-                        .HasForeignKey("PlayerId1")
+                        .HasForeignKey("playerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -372,13 +371,13 @@ namespace AccountServer.Migrations
 
             modelBuilder.Entity("AccountServer.Model.PlayerStatDb", b =>
                 {
-                    b.HasOne("AccountServer.Model.PlayerDb", "playerId")
+                    b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
                         .WithMany()
-                        .HasForeignKey("PlayerId")
+                        .HasForeignKey("playerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("playerId");
+                    b.Navigation("PlayerId");
                 });
 
             modelBuilder.Entity("AccountServer.Model.InventoryDb", b =>

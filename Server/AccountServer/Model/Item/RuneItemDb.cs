@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AccountServer.Model.Item
 {
+    [Table("Rune_Item")]
     public class RuneItemDb
     {
         [Key]
@@ -12,6 +13,7 @@ namespace AccountServer.Model.Item
 
         public bool Equipped { get; set; }
 
+        [ForeignKey("inventoryId")]
         public InventoryDb InventoryId { get; set; }
     }
 }

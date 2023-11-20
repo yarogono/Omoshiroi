@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AccountServer.Model.Item
 {
+    [Table("Material_Item")]
     public class MaterialItemDb
     {
         [Key]
@@ -13,6 +14,7 @@ namespace AccountServer.Model.Item
 
         public int Quantity { get; set; }
 
+        [ForeignKey("inventoryId")]
         public InventoryDb InventoryId { get; set; }
     }
 }

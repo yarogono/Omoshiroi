@@ -29,7 +29,8 @@ namespace AccountServer.Model
 
         public float DodgeTime { get; set; }
 
-        public PlayerDb playerId { get; set; }
+        [ForeignKey("playerId")]
+        public PlayerDb PlayerId { get; set; }
 
         public PlayerStatDb() { }
 

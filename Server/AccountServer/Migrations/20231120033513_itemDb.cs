@@ -12,40 +12,23 @@ namespace AccountServer.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Player_Player_Stat_PlayerStatId",
-                table: "Player");
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySQL:Charset", "utf8mb4");
 
-            migrationBuilder.DropTable(
-                name: "Item");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Player_PlayerStatId",
-                table: "Player");
-
-            migrationBuilder.DropColumn(
-                name: "LoginType",
-                table: "Player");
-
-            migrationBuilder.DropColumn(
-                name: "OauthToken",
-                table: "Player");
-
-            migrationBuilder.DropColumn(
-                name: "PlayerStatId",
-                table: "Player");
-
-            migrationBuilder.RenameColumn(
-                name: "PlayerName",
-                table: "Player",
-                newName: "Nickname");
-
-            migrationBuilder.AddColumn<int>(
-                name: "PlayerId",
-                table: "Player_Stat",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.CreateTable(
+                name: "Player",
+                columns: table => new
+                {
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Nickname = table.Column<string>(type: "longtext", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Player", x => x.PlayerId);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "Currency",
@@ -55,14 +38,14 @@ namespace AccountServer.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Gold = table.Column<int>(type: "int", nullable: false),
                     Diamond = table.Column<int>(type: "int", nullable: false),
-                    PlayerId1 = table.Column<int>(type: "int", nullable: false)
+                    playerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Currency", x => x.CurrencyId);
                     table.ForeignKey(
-                        name: "FK_Currency_Player_PlayerId1",
-                        column: x => x.PlayerId1,
+                        name: "FK_Currency_Player_playerId",
+                        column: x => x.playerId,
                         principalTable: "Player",
                         principalColumn: "PlayerId",
                         onDelete: ReferentialAction.Cascade);
@@ -76,14 +59,14 @@ namespace AccountServer.Migrations
                     GuestId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     GuestUid = table.Column<string>(type: "longtext", nullable: false),
-                    PlayerId1 = table.Column<int>(type: "int", nullable: false)
+                    playerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Guest", x => x.GuestId);
                     table.ForeignKey(
-                        name: "FK_Guest_Player_PlayerId1",
-                        column: x => x.PlayerId1,
+                        name: "FK_Guest_Player_playerId",
+                        column: x => x.playerId,
                         principalTable: "Player",
                         principalColumn: "PlayerId",
                         onDelete: ReferentialAction.Cascade);
@@ -96,14 +79,14 @@ namespace AccountServer.Migrations
                 {
                     InventoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    PlayerId1 = table.Column<int>(type: "int", nullable: false)
+                    playerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Inventory", x => x.InventoryId);
                     table.ForeignKey(
-                        name: "FK_Inventory_Player_PlayerId1",
-                        column: x => x.PlayerId1,
+                        name: "FK_Inventory_Player_playerId",
+                        column: x => x.playerId,
                         principalTable: "Player",
                         principalColumn: "PlayerId",
                         onDelete: ReferentialAction.Cascade);
@@ -116,17 +99,17 @@ namespace AccountServer.Migrations
                 {
                     OauthId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    OauthToken = table.Column<string>(type: "longtext", nullable: false),
-                    oatuhType = table.Column<int>(type: "int", nullable: false),
+                    OauthToken = table.Column<string>(type: "longtext", nullable: true),
+                    oatuhType = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    PlayerId1 = table.Column<int>(type: "int", nullable: false)
+                    playerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Oauth", x => x.OauthId);
                     table.ForeignKey(
-                        name: "FK_Oauth_Player_PlayerId1",
-                        column: x => x.PlayerId1,
+                        name: "FK_Oauth_Player_playerId",
+                        column: x => x.playerId,
                         principalTable: "Player",
                         principalColumn: "PlayerId",
                         onDelete: ReferentialAction.Cascade);
@@ -134,21 +117,51 @@ namespace AccountServer.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "MaterialItem",
+                name: "Player_Stat",
+                columns: table => new
+                {
+                    PlayerStatId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Level = table.Column<int>(type: "int", nullable: false),
+                    MaxHp = table.Column<int>(type: "int", nullable: false),
+                    Hp = table.Column<int>(type: "int", nullable: false),
+                    Atk = table.Column<int>(type: "int", nullable: false),
+                    AtkSpeed = table.Column<float>(type: "float", nullable: false),
+                    CritRate = table.Column<int>(type: "int", nullable: false),
+                    CritDamage = table.Column<float>(type: "float", nullable: false),
+                    MoveSpeed = table.Column<float>(type: "float", nullable: false),
+                    RunMultiplier = table.Column<float>(type: "float", nullable: false),
+                    DodgeTime = table.Column<float>(type: "float", nullable: false),
+                    playerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Player_Stat", x => x.PlayerStatId);
+                    table.ForeignKey(
+                        name: "FK_Player_Stat_Player_playerId",
+                        column: x => x.playerId,
+                        principalTable: "Player",
+                        principalColumn: "PlayerId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Material_Item",
                 columns: table => new
                 {
                     MaterialItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     TemplateId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    InventoryId1 = table.Column<int>(type: "int", nullable: false)
+                    inventoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MaterialItem", x => x.MaterialItemId);
+                    table.PrimaryKey("PK_Material_Item", x => x.MaterialItemId);
                     table.ForeignKey(
-                        name: "FK_MaterialItem_Inventory_InventoryId1",
-                        column: x => x.InventoryId1,
+                        name: "FK_Material_Item_Inventory_inventoryId",
+                        column: x => x.inventoryId,
                         principalTable: "Inventory",
                         principalColumn: "InventoryId",
                         onDelete: ReferentialAction.Cascade);
@@ -156,20 +169,20 @@ namespace AccountServer.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "PotionItem",
+                name: "Potion_Item",
                 columns: table => new
                 {
                     PotionItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     TemplateId = table.Column<int>(type: "int", nullable: false),
-                    InventoryId1 = table.Column<int>(type: "int", nullable: false)
+                    inventoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PotionItem", x => x.PotionItemId);
+                    table.PrimaryKey("PK_Potion_Item", x => x.PotionItemId);
                     table.ForeignKey(
-                        name: "FK_PotionItem_Inventory_InventoryId1",
-                        column: x => x.InventoryId1,
+                        name: "FK_Potion_Item_Inventory_inventoryId",
+                        column: x => x.inventoryId,
                         principalTable: "Inventory",
                         principalColumn: "InventoryId",
                         onDelete: ReferentialAction.Cascade);
@@ -177,21 +190,21 @@ namespace AccountServer.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "RuneItem",
+                name: "Rune_Item",
                 columns: table => new
                 {
                     RuneItemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     TemplateId = table.Column<int>(type: "int", nullable: false),
                     Equipped = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    InventoryId1 = table.Column<int>(type: "int", nullable: false)
+                    inventoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RuneItem", x => x.RuneItemId);
+                    table.PrimaryKey("PK_Rune_Item", x => x.RuneItemId);
                     table.ForeignKey(
-                        name: "FK_RuneItem_Inventory_InventoryId1",
-                        column: x => x.InventoryId1,
+                        name: "FK_Rune_Item_Inventory_inventoryId",
+                        column: x => x.inventoryId,
                         principalTable: "Inventory",
                         principalColumn: "InventoryId",
                         onDelete: ReferentialAction.Cascade);
@@ -199,7 +212,7 @@ namespace AccountServer.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "WeaponItem",
+                name: "Weapon_Item",
                 columns: table => new
                 {
                     WeaponItemId = table.Column<int>(type: "int", nullable: false)
@@ -207,24 +220,19 @@ namespace AccountServer.Migrations
                     TemplateId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Equipped = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    InventoryId1 = table.Column<int>(type: "int", nullable: false)
+                    inventoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WeaponItem", x => x.WeaponItemId);
+                    table.PrimaryKey("PK_Weapon_Item", x => x.WeaponItemId);
                     table.ForeignKey(
-                        name: "FK_WeaponItem_Inventory_InventoryId1",
-                        column: x => x.InventoryId1,
+                        name: "FK_Weapon_Item_Inventory_inventoryId",
+                        column: x => x.inventoryId,
                         principalTable: "Inventory",
                         principalColumn: "InventoryId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Player_Stat_PlayerId",
-                table: "Player_Stat",
-                column: "PlayerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Currency_CurrencyId",
@@ -233,9 +241,9 @@ namespace AccountServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Currency_PlayerId1",
+                name: "IX_Currency_playerId",
                 table: "Currency",
-                column: "PlayerId1");
+                column: "playerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Guest_GuestId",
@@ -244,9 +252,9 @@ namespace AccountServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Guest_PlayerId1",
+                name: "IX_Guest_playerId",
                 table: "Guest",
-                column: "PlayerId1");
+                column: "playerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Inventory_InventoryId",
@@ -255,18 +263,18 @@ namespace AccountServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Inventory_PlayerId1",
+                name: "IX_Inventory_playerId",
                 table: "Inventory",
-                column: "PlayerId1");
+                column: "playerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MaterialItem_InventoryId1",
-                table: "MaterialItem",
-                column: "InventoryId1");
+                name: "IX_Material_Item_inventoryId",
+                table: "Material_Item",
+                column: "inventoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MaterialItem_MaterialItemId",
-                table: "MaterialItem",
+                name: "IX_Material_Item_MaterialItemId",
+                table: "Material_Item",
                 column: "MaterialItemId",
                 unique: true);
 
@@ -277,47 +285,52 @@ namespace AccountServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Oauth_PlayerId1",
+                name: "IX_Oauth_playerId",
                 table: "Oauth",
-                column: "PlayerId1");
+                column: "playerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PotionItem_InventoryId1",
-                table: "PotionItem",
-                column: "InventoryId1");
+                name: "IX_Player_PlayerId",
+                table: "Player",
+                column: "PlayerId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PotionItem_PotionItemId",
-                table: "PotionItem",
+                name: "IX_Player_Stat_playerId",
+                table: "Player_Stat",
+                column: "playerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Player_Stat_PlayerStatId",
+                table: "Player_Stat",
+                column: "PlayerStatId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Potion_Item_inventoryId",
+                table: "Potion_Item",
+                column: "inventoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Potion_Item_PotionItemId",
+                table: "Potion_Item",
                 column: "PotionItemId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_RuneItem_InventoryId1",
-                table: "RuneItem",
-                column: "InventoryId1");
+                name: "IX_Rune_Item_inventoryId",
+                table: "Rune_Item",
+                column: "inventoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WeaponItem_InventoryId1",
-                table: "WeaponItem",
-                column: "InventoryId1");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Player_Stat_Player_PlayerId",
-                table: "Player_Stat",
-                column: "PlayerId",
-                principalTable: "Player",
-                principalColumn: "PlayerId",
-                onDelete: ReferentialAction.Cascade);
+                name: "IX_Weapon_Item_inventoryId",
+                table: "Weapon_Item",
+                column: "inventoryId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Player_Stat_Player_PlayerId",
-                table: "Player_Stat");
-
             migrationBuilder.DropTable(
                 name: "Currency");
 
@@ -325,99 +338,28 @@ namespace AccountServer.Migrations
                 name: "Guest");
 
             migrationBuilder.DropTable(
-                name: "MaterialItem");
+                name: "Material_Item");
 
             migrationBuilder.DropTable(
                 name: "Oauth");
 
             migrationBuilder.DropTable(
-                name: "PotionItem");
+                name: "Player_Stat");
 
             migrationBuilder.DropTable(
-                name: "RuneItem");
+                name: "Potion_Item");
 
             migrationBuilder.DropTable(
-                name: "WeaponItem");
+                name: "Rune_Item");
+
+            migrationBuilder.DropTable(
+                name: "Weapon_Item");
 
             migrationBuilder.DropTable(
                 name: "Inventory");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Player_Stat_PlayerId",
-                table: "Player_Stat");
-
-            migrationBuilder.DropColumn(
-                name: "PlayerId",
-                table: "Player_Stat");
-
-            migrationBuilder.RenameColumn(
-                name: "Nickname",
-                table: "Player",
-                newName: "PlayerName");
-
-            migrationBuilder.AddColumn<int>(
-                name: "LoginType",
-                table: "Player",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<string>(
-                name: "OauthToken",
-                table: "Player",
-                type: "longtext",
-                nullable: false);
-
-            migrationBuilder.AddColumn<int>(
-                name: "PlayerStatId",
-                table: "Player",
-                type: "int",
-                nullable: true);
-
-            migrationBuilder.CreateTable(
-                name: "Item",
-                columns: table => new
-                {
-                    ItemId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    PlayerId = table.Column<int>(type: "int", nullable: true),
-                    ItemName = table.Column<string>(type: "longtext", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    TemplateId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Item", x => x.ItemId);
-                    table.ForeignKey(
-                        name: "FK_Item_Player_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Player",
-                        principalColumn: "PlayerId");
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Player_PlayerStatId",
-                table: "Player",
-                column: "PlayerStatId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_ItemId",
-                table: "Item",
-                column: "ItemId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_PlayerId",
-                table: "Item",
-                column: "PlayerId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Player_Player_Stat_PlayerStatId",
-                table: "Player",
-                column: "PlayerStatId",
-                principalTable: "Player_Stat",
-                principalColumn: "PlayerStatId");
+            migrationBuilder.DropTable(
+                name: "Player");
         }
     }
 }
