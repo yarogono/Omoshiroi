@@ -45,7 +45,7 @@ namespace Inventory
                 Debug.LogError("NullinventoryUI");
             }
 
-             PrepareUI();
+            PrepareUI();
 
             AddItemsFromServer(DataManager.Instance.items);
             UIController.Instance.BtnInventory.onClick.AddListener(() =>
