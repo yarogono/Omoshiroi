@@ -32,8 +32,9 @@ namespace Inventory
         private void Start()
         {
 
-            inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>();
-            UIController.Instance.InventoryUI = inventoryUI.gameObject;
+            inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>(UIController.Instance.UIRoot);
+            UIController.Instance.InventoryUI = inventoryUI.gameObject;          
+
             UIController.Instance.InventoryUI.SetActive(false);
             UIController.Instance.BtnCancel = inventoryUI.CancleBtn;
 
