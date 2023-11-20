@@ -65,6 +65,7 @@ public class NPCAIController : MonoBehaviour
     private eAIStateType aiState;
 
     private bool isRun = false;
+    private float moveSpeed;
 
     public List<Vector3> WanderDestinations { get { return wanderDestinations; } private set { wanderDestinations = value; } }
     public NavMeshAgent Agent { get { return agent; } private set { agent = value; } }
@@ -93,6 +94,7 @@ public class NPCAIController : MonoBehaviour
         csm = dataContainer.StateMachine;
         input = dataContainer.InputActions;
         stats = dataContainer.Stats;
+        moveSpeed = stats.MoveSpeed;
     }
 
     //private void Start()
@@ -213,10 +215,13 @@ public class NPCAIController : MonoBehaviour
     }
 
     /// <summary>
-    /// 수색 상태. 추후 검토할 것
+    /// 수색 상태 : 공격받았지만 아직 적대 대상을 확실하게 감지하지 못 했을 때(일정 범위 내에 적대 대상이 없는 경우), 
+    /// 또는 추적 상태에서 적대 대상과 거리가 멀어졌을 때 이 상태가 된다. 감지 범위가 크게 증가하며, 
+    /// 현재 위치 내에서 일정 범위를 배회한다. 이 상태에서 일정 시간 별다른 트리거가 없었다면 배회 상태로 진입한다.(base 의 걷기 상태를 유지한다) 
     /// </summary>
     private void SearchState()
     {
+
     }
 
     /// <summary>
@@ -274,7 +279,7 @@ public class NPCAIController : MonoBehaviour
     {
         Debug.Log("Target detected!!!");
         target = enemy;
-        stats.MoveSpeed *= stats.RunMultiplier;
+        agent.speed *= stats.RunMultiplier;
         aiState = eAIStateType.Chase;
     }
 
@@ -285,7 +290,7 @@ public class NPCAIController : MonoBehaviour
     {
         Debug.Log("Target Lost!!!");
         target = null;
-        stats.MoveSpeed /= stats.RunMultiplier;
+        agent.speed = moveSpeed;
         aiState = eAIStateType.Wander;
     }
 
@@ -298,6 +303,7 @@ public class NPCAIController : MonoBehaviour
         }
     } 
 
+    private void Do
 
     /// <summary>
     /// 현재 목적지에 매우 근접했다면 true, 아니면 false
