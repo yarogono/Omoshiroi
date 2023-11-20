@@ -46,6 +46,8 @@ public class NPCDataContainer : DataContainer
         npcAIController = GetComponent<NPCAIController>();
         InputActions = GetComponent<NPCInput>();
 
+
+        AnimationData.Initialize();
         stateMachine = new CombineStateMachine(this);
 
         // 추후에 서버로 AI를 옮기면 SyncModule에 대한 참조도 필요함.
@@ -68,7 +70,6 @@ public class NPCDataContainer : DataContainer
                 Equipments.Equip(item);
         }
 
-        AnimationData.Initialize();
         SpriteRotator.Register(this);
         Health.OnDead += () => { isDead = true; Instantiate(dropItem); Debug.Log("사망 상태. 더이상 상태를 갱신하지 않음."); };
 
