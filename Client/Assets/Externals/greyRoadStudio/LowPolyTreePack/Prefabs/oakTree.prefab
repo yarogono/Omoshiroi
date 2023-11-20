@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33989385991057262}
   - component: {fileID: 23890990353640460}
   - component: {fileID: 64004332394335928}
+  - component: {fileID: -1172142577242341660}
   m_Layer: 0
   m_Name: oakTree
   m_TagString: Untagged
@@ -107,3 +108,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ccafc2ea8bec52841ac2b9fd34238310, type: 3}
+--- !u!208 &-1172142577242341660
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377331622712542}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5, y: 1.5, z: 1.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.3, y: 1.5, z: 0.02}
+  m_TimeToStationary: 0.5

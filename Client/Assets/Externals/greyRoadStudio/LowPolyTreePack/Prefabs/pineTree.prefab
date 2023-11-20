@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33537357285841820}
   - component: {fileID: 23157088951203930}
   - component: {fileID: 64497631728594298}
+  - component: {fileID: 9156549662980037520}
   m_Layer: 0
   m_Name: pineTree
   m_TagString: Untagged
@@ -107,3 +108,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 67590bf36d0abac419beccf3fcb0e5f8, type: 3}
+--- !u!208 &9156549662980037520
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550140418629916}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.367, y: 4.0600004, z: 2.367}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.044000003, y: 4.0600004, z: -0.105000004}
+  m_TimeToStationary: 0.5
