@@ -35,7 +35,7 @@ public class CharacterDataContainer : DataContainer
 
     private void Start()
     {
-        CameraMovement.Instance.AttachToPlayer(transform);
+        CameraMovement.Instance?.AttachToPlayer(transform);
 
         // 플래이어 HP 화면 표시 연결
         Stats.OnHpChange += () => { UIController.Instance.HandlerHp(Stats.MaxHp, Stats.Hp); };
