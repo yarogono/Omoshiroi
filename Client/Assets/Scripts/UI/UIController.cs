@@ -22,7 +22,7 @@ public class UIController: MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
+    } // .
 
     private void Start()
     {
