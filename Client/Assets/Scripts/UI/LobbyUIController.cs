@@ -73,6 +73,14 @@ public class LobbyUIController : MonoBehaviour
             obj.SetActive(state);
         }
     }
+
+
+
+
+    public void LoadBTG()
+    {
+        LoadingScenController.LoadScene("BattleGroundScene");
+    }
 }
 
 
