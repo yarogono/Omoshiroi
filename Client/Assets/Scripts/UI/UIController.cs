@@ -9,6 +9,8 @@ public class UIController: CustomSingleton<UIController>
 
     LeaveGame leaveGame;
     public  Button BtnLeavGame;
+    public GameObject GameOver;
+
     public RectTransform UIRoot;
     public Button BtnInventory;
     public Button BtnCancel;
@@ -19,24 +21,30 @@ public class UIController: CustomSingleton<UIController>
 
     private void Start()
     {
-        
+        init();
 
         leaveGame = GetComponent<LeaveGame>();
 
         BtnLeavGame.onClick.AddListener(() =>
         {
-            if (leaveGame)
-            {
-                leaveGame.LeaveGameRoom();
-            }
-            else
-            {
-                Debug.LogError("Component null");
-            }
+
+
+            LoadingScenController.LoadScene("LobbyScene");
+            //if (leaveGame)
+            //{
+            //    leaveGame.LeaveGameRoom();
+            //}
+            //else
+            //{
+            //    Debug.LogError("Component null");
+            //}
         });
        
     }
-
+    void init()
+    {
+        GameOver.SetActive(false);
+    }
 
     public  void HandlerHp(float MaxHp ,float CurHp)
     {
