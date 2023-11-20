@@ -10,7 +10,7 @@ using UnityEngine;
 public class InventorySO : ScriptableObject
 {
 
-  
+
     [SerializeField]
     private List<InventoryItem> inventoryItems;
     BaseItem item;
@@ -30,11 +30,13 @@ public class InventorySO : ScriptableObject
         }
     }
 
-    public void SetInventoryItems(List<InventoryItem> items){
+    public void SetInventoryItems(List<InventoryItem> items)
+    {
         inventoryItems = items;
     }
 
-    public void InsertItem(int index, InventoryItem item){
+    public void InsertItem(int index, InventoryItem item)
+    {
         if (index >= 0 && index < inventoryItems.Count)
         {
             inventoryItems[index] = item;
@@ -50,7 +52,7 @@ public class InventorySO : ScriptableObject
 
                 while (quantity > 0 && IsInventoryFull() == false)
                 {
-                   quantity -= AddItemToFirstFreeSlot(item, 1);
+                    quantity -= AddItemToFirstFreeSlot(item, 1);
 
                 }
                 InformAboutChange();
@@ -61,16 +63,16 @@ public class InventorySO : ScriptableObject
 
         quantity = AddStackableItem(item, quantity);
         InformAboutChange();
-        return quantity;                
+        return quantity;
     }
 
-    private int AddItemToFirstFreeSlot( BaseItem item, int quantity)
+    private int AddItemToFirstFreeSlot(BaseItem item, int quantity)
 
     {
         InventoryItem newItem = new InventoryItem
         {
             item = item,
-            quantity = quantity,      
+            quantity = quantity,
         };
 
         for (int i = 0; i < inventoryItems.Count; i++)
@@ -95,12 +97,12 @@ public class InventorySO : ScriptableObject
             if (inventoryItems[i].item.ItemID == item.ItemID)
             {
                 int amountPossibleToTake =
-                       inventoryItems[i].item.MaxStack - inventoryItems[i].quantity;
+                       inventoryItems[i].item.ItemMaxStack - inventoryItems[i].quantity;
 
                 if (quantity > amountPossibleToTake)
                 {
                     inventoryItems[i] = inventoryItems[i]
-                        .ChangeQuantity(inventoryItems[i].item.MaxStack);
+                        .ChangeQuantity(inventoryItems[i].item.ItemMaxStack);
                     quantity -= amountPossibleToTake;
                 }
                 else
@@ -114,7 +116,7 @@ public class InventorySO : ScriptableObject
         }
         while (quantity > 0 && IsInventoryFull() == false)// 갇득 찼거나  수량이 0보다 작으면 
         {
-            int newQuantity = Mathf.Clamp(quantity, 0, item.MaxStack);
+            int newQuantity = Mathf.Clamp(quantity, 0, item.ItemMaxStack);
             quantity -= newQuantity;
             AddItemToFirstFreeSlot(item, newQuantity);
         }
@@ -146,18 +148,18 @@ public class InventorySO : ScriptableObject
             if (inventoryItems[i].IsEmpty)
             {
                 continue;
-            }             
+            }
             returnValue[i] = inventoryItems[i];
         }
         return returnValue;
     }
 
-  public InventoryItem GetItemAt(int itemIndex)
+    public InventoryItem GetItemAt(int itemIndex)
     {
         return inventoryItems[itemIndex];
     }
 
-   public void AddItem(InventoryItem item)
+    public void AddItem(InventoryItem item)
     {
         AddItem(item.item, item.quantity);
     }

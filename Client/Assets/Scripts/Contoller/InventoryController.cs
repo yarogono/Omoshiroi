@@ -34,12 +34,13 @@ namespace Inventory
 
             inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>(UIController.Instance.UIRoot);
             UIController.Instance.InventoryUI = inventoryUI.gameObject;          
+
             UIController.Instance.InventoryUI.SetActive(false);
             UIController.Instance.BtnCancel = inventoryUI.CancleBtn;
 
             PrepareUI();
 
-            AddItemsFromServer(SceneController.items);
+            AddItemsFromServer(DataManager.Instance.items);
             UIController.Instance.BtnInventory.onClick.AddListener(() =>
             {
                 if (inventoryUI.isActiveAndEnabled == false)
@@ -187,11 +188,11 @@ namespace Inventory
 
             if (item.ItemType == eItemType.Weapon)
             {
-                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.Description}", item.Description);
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, $"{item.name}\n{item.ItemDescription}", item.ItemDescription);
             }
             else
             {
-                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.Description);
+                inventoryUI.UpdateDescription(itemIndex, item.ItemIcon, item.name, item.ItemDescription);
             }
             //----------  액션패널
             IItemAction itemAction = inventoryItem.item as IItemAction;

@@ -58,9 +58,11 @@ public enum eStateType
 
 public enum eAIStateType
 {
+    Idle,
     Wait,
     Wander,
     Chase,
+    Attack,
     Search,
     Runaway
 }

@@ -28,10 +28,12 @@ public class CharacterSpriteRotator
         _weaponBase = _weapon.transform.position;
         // TODO
         // Get Information about direcction or update 
-        Vector3 f = Camera.main.transform.forward;
-        Vector3 r = Camera.main.transform.right;
+        //Vector3 f = Camera.main.transform.forward;
+        //Vector3 r = Camera.main.transform.right;
+        // What's value of monster front?
 
-        // What's value of  monster front?
+        container.InputActions.OnAimEvent += AimInput;
+        container.InputActions.OnMoveEvent += MoveInput;
 
     }
     private void MoveInput(Vector2 direction)
