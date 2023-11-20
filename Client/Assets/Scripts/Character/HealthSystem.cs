@@ -19,6 +19,7 @@ public class HealthSystem : MonoBehaviour
 
     private void Start()
     {
+        OnDead +=  UIController.Instance.UIDead;
         Stats = gameObject.GetComponent<DataContainer>().Stats;
         Sync = gameObject.GetComponent<PilotSync>();
     }
