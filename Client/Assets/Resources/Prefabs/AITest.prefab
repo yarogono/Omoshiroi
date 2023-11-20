@@ -1277,6 +1277,7 @@ MonoBehaviour:
   detectDistance: 5
   chaseDistance: 15
   attackDistance: 5
+  attackDelay: 1
 --- !u!114 &4615923822048474000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1534,7 +1535,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1affb2d50d0f2ed4cbdeb5f17c3530a7, type: 2}
+  - {fileID: 2100000, guid: 195fc62bd9233e342bd6cc34fbc641a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
