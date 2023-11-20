@@ -9,7 +9,7 @@ public class UIController: CustomSingleton<UIController>
 
     LeaveGame leaveGame;
     public  Button BtnLeavGame;
-    public Transform UIRoot;
+    public RectTransform UIRoot;
     public Button BtnInventory;
     public Button BtnCancel;
 
