@@ -304,9 +304,11 @@ public class PlayerInput : BaseInput, ThirdPersonController.ITestActions, ThirdP
         if (context.phase == InputActionPhase.Performed)
         {
             var point = context.ReadValue<Vector2>();
-            Vector2 center = new Vector2() { x = Display.main.renderingWidth / 2, y = Display.main.renderingHeight / 2};
+            Vector2 center = new Vector2() { x = Display.main.renderingWidth / 2, y = Display.main.renderingHeight / 2 };
             CallAimEvent(point - center);
         }
+        else if (context.phase == InputActionPhase.Canceled)
+            CallAimEvent(Vector2.zero);
     }
 
     public void OnFire(InputAction.CallbackContext context)
