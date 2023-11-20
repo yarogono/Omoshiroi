@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController: CustomSingleton<UIController>
+public class UIController: MonoBehaviour
 {
     public Slider HpBar;
 
@@ -15,7 +15,13 @@ public class UIController: CustomSingleton<UIController>
     public Button BtnInventory;
     public Button BtnCancel;
 
+
+    public UIController Instance { get; private set; }
+
+
     public GameObject InventoryUI;
+
+   
 
     private void Awake()
     {
