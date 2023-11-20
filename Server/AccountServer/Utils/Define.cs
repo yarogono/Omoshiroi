@@ -8,9 +8,8 @@
             Success,
         }
 
-        public enum LoginType
+        public enum OauthType
         {
-            Guest,
             Google,
         }
     }
