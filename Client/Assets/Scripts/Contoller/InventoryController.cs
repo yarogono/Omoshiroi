@@ -33,6 +33,7 @@ namespace Inventory
         {
 
             inventoryUI = UIManager.Instance.ShowUI<UIInventoryPage>(UIController.Instance.UIRoot);
+
             if (inventoryUI)
             {
             UIController.Instance.InventoryUI = inventoryUI.gameObject;          

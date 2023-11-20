@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIController: CustomSingleton<UIController>
+public class UIController: MonoBehaviour
 {
+    public static UIController Instance { get; private set; }
+
     public Slider HpBar;
 
     LeaveGame leaveGame;
@@ -17,7 +19,10 @@ public class UIController: CustomSingleton<UIController>
 
     public GameObject InventoryUI;
 
-
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -26,9 +31,8 @@ public class UIController: CustomSingleton<UIController>
         leaveGame = GetComponent<LeaveGame>();
 
         BtnLeavGame.onClick.AddListener(() =>
-        {
-            LoadingScenController.LoadScene("LobbyScene");
-  
+        {           
+            LoadingScenController.LoadScene("LobbyScene"); 
         });
        
     }
@@ -56,5 +60,8 @@ public class UIController: CustomSingleton<UIController>
 
         HpBar.value = CurHp / MaxHp;
     }
-   
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
 }
