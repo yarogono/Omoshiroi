@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : PlainSingleton<UIManager>
 {
-    private Dictionary<Type, GameObject> _prefabs;
+    private Dictionary<string, GameObject> _prefabs;
     private LinkedList<UIBase> OpenList;
     private LinkedList<UIBase> HideList;
 
@@ -36,7 +36,7 @@ public class UIManager : PlainSingleton<UIManager>
 
     public UIManager()
     {
-        _prefabs = new Dictionary<Type, GameObject>();
+        _prefabs = new Dictionary<string, GameObject>();
         OpenList = new LinkedList<UIBase>();
         HideList = new LinkedList<UIBase>();
         //LoadUIPrefabs();
@@ -59,7 +59,7 @@ public class UIManager : PlainSingleton<UIManager>
     /// <typeparam name="T">프리펩에 붙어있는 클래스</typeparam>
     /// <param name="root">부모 canvas/UI를 의미함</param>
     /// <returns>해당 프리펩이 없으면 null을 리턴함</returns>
-    public T ShowUI<T>(RectTransform root = null) where T : UIBase
+    public T ShowUI<T>(string prefabPath = null, RectTransform root = null) where T : UIBase
     {
         var open = GetHideUI<T>();
         if (open != null)
@@ -82,10 +82,15 @@ public class UIManager : PlainSingleton<UIManager>
             return open;
         }
 
-        if (!_prefabs.ContainsKey(typeof(T)))
-            LoadUIPrefab(typeof(T).Name);
+        if (!_prefabs.ContainsKey(nameof(T)))
+        {
+            if (prefabPath == null)
+                LoadUIPrefab(typeof(T).Name);
+            else
+                LoadUIPrefab(prefabPath);
+        }
 
-        var prefab = _prefabs[typeof(T)];
+        var prefab = _prefabs[nameof(T)];
         if (prefab != null)
         {
             GameObject obj;
@@ -287,25 +292,14 @@ public class UIManager : PlainSingleton<UIManager>
         return false;
     }
 
-    private void LoadAllUIPrefabs()
-    {
-        var objs = Resources.LoadAll<GameObject>(_prefabPath);
-        foreach (var obj in objs)
-        {
-            var type = obj.GetComponent<UIBase>().GetType();
-            _prefabs.Add(type, obj);
-            Debug.Log($"{type}({_prefabPath}/{obj.name}) is loaded.");
-        }
-    }
-
     private void LoadUIPrefab(string name)
     {
         var obj = Resources.Load<GameObject>(_prefabPath + name);
         if (obj != null)
         {
-            var type = obj.GetComponent<UIBase>().GetType();
-            _prefabs.Add(type, obj);
-            Debug.Log($"{type}({_prefabPath}/{obj.name}) is loaded.");
+            //var type = obj.GetComponent<UIBase>().GetType();
+            _prefabs.Add(obj.name, obj);
+            Debug.Log($"{obj.name}({_prefabPath}/{obj.name}) is loaded.");
         }
     }
 }
