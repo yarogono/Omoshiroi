@@ -1,4 +1,6 @@
-﻿public class PlayerLoginReq
+﻿using AccountServer.Model;
+
+public class PlayerLoginReq
 {
     public string PlayerName { get; set; }
 }

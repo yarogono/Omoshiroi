@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MouseFollower : MonoBehaviour
 {
@@ -24,12 +25,13 @@ public class MouseFollower : MonoBehaviour
 
     void Update()
     {
+        Vector2 mousePosition = Mouse.current.position.ReadValue(); // 새로운 Input System을 사용하여 마우스 위치 읽기
         Vector2 position;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             (RectTransform)canvas.transform,
-            Input.mousePosition,
+            mousePosition,
             canvas.worldCamera,
-            out position); //함수를 사용해 마우스 위치를 캔버스의 로컬 좌표계로 변환
+            out position);
         transform.position = canvas.transform.TransformPoint(position);
     }
 

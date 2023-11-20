@@ -16,9 +16,9 @@ MonoBehaviour:
   objectPrefab: {fileID: 0}
   itemID: 200001
   itemName: Potion
-  description: reagain 10Health
+  itemDescription: 
   itemType: 4
-  maxStack: 99
+  itemMaxStack: 99
   isStackable: 1
   modifiersData:
   - statModifier: {fileID: 11400000, guid: d74f311619209a94f88f5eb126308738, type: 2}

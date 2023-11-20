@@ -19,17 +19,77 @@ namespace AccountServer.Migrations
                 .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("AccountServer.DB.ItemDb", b =>
+            modelBuilder.Entity("AccountServer.Model.CurrencyDb", b =>
                 {
-                    b.Property<int>("ItemId")
+                    b.Property<int>("CurrencyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ItemName")
+                    b.Property<int>("Diamond")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Gold")
+                        .HasColumnType("int");
+
+                    b.Property<int>("playerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CurrencyId");
+
+                    b.HasIndex("CurrencyId")
+                        .IsUnique();
+
+                    b.HasIndex("playerId");
+
+                    b.ToTable("Currency");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.GuestDb", b =>
+                {
+                    b.Property<int>("GuestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("GuestUid")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("PlayerId")
+                    b.Property<int>("playerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GuestId");
+
+                    b.HasIndex("GuestId")
+                        .IsUnique();
+
+                    b.HasIndex("playerId");
+
+                    b.ToTable("Guest");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.InventoryDb", b =>
+                {
+                    b.Property<int>("InventoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("playerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InventoryId");
+
+                    b.HasIndex("InventoryId")
+                        .IsUnique();
+
+                    b.HasIndex("playerId");
+
+                    b.ToTable("Inventory");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.Item.MaterialItemDb", b =>
+                {
+                    b.Property<int>("MaterialItemId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -38,17 +98,117 @@ namespace AccountServer.Migrations
                     b.Property<int>("TemplateId")
                         .HasColumnType("int");
 
-                    b.HasKey("ItemId");
+                    b.Property<int>("inventoryId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ItemId")
+                    b.HasKey("MaterialItemId");
+
+                    b.HasIndex("MaterialItemId")
                         .IsUnique();
 
-                    b.HasIndex("PlayerId");
+                    b.HasIndex("inventoryId");
 
-                    b.ToTable("Item");
+                    b.ToTable("Material_Item");
                 });
 
-            modelBuilder.Entity("AccountServer.DB.PlayerDb", b =>
+            modelBuilder.Entity("AccountServer.Model.Item.PotionItemDb", b =>
+                {
+                    b.Property<int>("PotionItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("inventoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PotionItemId");
+
+                    b.HasIndex("PotionItemId")
+                        .IsUnique();
+
+                    b.HasIndex("inventoryId");
+
+                    b.ToTable("Potion_Item");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.Item.RuneItemDb", b =>
+                {
+                    b.Property<int>("RuneItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Equipped")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("inventoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RuneItemId");
+
+                    b.HasIndex("inventoryId");
+
+                    b.ToTable("Rune_Item");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.Item.WeaponItemDb", b =>
+                {
+                    b.Property<int>("WeaponItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Equipped")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("inventoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("WeaponItemId");
+
+                    b.HasIndex("inventoryId");
+
+                    b.ToTable("Weapon_Item");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.OauthDb", b =>
+                {
+                    b.Property<int>("OauthId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("OauthToken")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("oatuhType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("playerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OauthId");
+
+                    b.HasIndex("OauthId")
+                        .IsUnique();
+
+                    b.HasIndex("playerId");
+
+                    b.ToTable("Oauth");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.PlayerDb", b =>
                 {
                     b.Property<int>("PlayerId")
                         .ValueGeneratedOnAdd()
@@ -57,31 +217,19 @@ namespace AccountServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("LoginType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("OauthToken")
+                    b.Property<string>("Nickname")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<string>("PlayerName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("PlayerStatId")
-                        .HasColumnType("int");
 
                     b.HasKey("PlayerId");
 
                     b.HasIndex("PlayerId")
                         .IsUnique();
 
-                    b.HasIndex("PlayerStatId");
-
                     b.ToTable("Player");
                 });
 
-            modelBuilder.Entity("AccountServer.DB.PlayerStatDb", b =>
+            modelBuilder.Entity("AccountServer.Model.PlayerStatDb", b =>
                 {
                     b.Property<int>("PlayerStatId")
                         .ValueGeneratedOnAdd()
@@ -117,35 +265,127 @@ namespace AccountServer.Migrations
                     b.Property<float>("RunMultiplier")
                         .HasColumnType("float");
 
+                    b.Property<int>("playerId")
+                        .HasColumnType("int");
+
                     b.HasKey("PlayerStatId");
 
                     b.HasIndex("PlayerStatId")
                         .IsUnique();
 
+                    b.HasIndex("playerId");
+
                     b.ToTable("Player_Stat");
                 });
 
-            modelBuilder.Entity("AccountServer.DB.ItemDb", b =>
+            modelBuilder.Entity("AccountServer.Model.CurrencyDb", b =>
                 {
-                    b.HasOne("AccountServer.DB.PlayerDb", "Player")
-                        .WithMany("Items")
-                        .HasForeignKey("PlayerId");
-
-                    b.Navigation("Player");
-                });
-
-            modelBuilder.Entity("AccountServer.DB.PlayerDb", b =>
-                {
-                    b.HasOne("AccountServer.DB.PlayerStatDb", "PlayerStat")
+                    b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
                         .WithMany()
-                        .HasForeignKey("PlayerStatId");
+                        .HasForeignKey("playerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("PlayerStat");
+                    b.Navigation("PlayerId");
                 });
 
-            modelBuilder.Entity("AccountServer.DB.PlayerDb", b =>
+            modelBuilder.Entity("AccountServer.Model.GuestDb", b =>
                 {
-                    b.Navigation("Items");
+                    b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
+                        .WithMany()
+                        .HasForeignKey("playerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlayerId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.InventoryDb", b =>
+                {
+                    b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
+                        .WithMany()
+                        .HasForeignKey("playerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlayerId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.Item.MaterialItemDb", b =>
+                {
+                    b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
+                        .WithMany("MaterialItems")
+                        .HasForeignKey("inventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.Item.PotionItemDb", b =>
+                {
+                    b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
+                        .WithMany("PotionItems")
+                        .HasForeignKey("inventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.Item.RuneItemDb", b =>
+                {
+                    b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
+                        .WithMany("RuneItems")
+                        .HasForeignKey("inventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.Item.WeaponItemDb", b =>
+                {
+                    b.HasOne("AccountServer.Model.InventoryDb", "InventoryId")
+                        .WithMany("WeaponItems")
+                        .HasForeignKey("inventoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.OauthDb", b =>
+                {
+                    b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
+                        .WithMany()
+                        .HasForeignKey("playerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlayerId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.PlayerStatDb", b =>
+                {
+                    b.HasOne("AccountServer.Model.PlayerDb", "PlayerId")
+                        .WithMany()
+                        .HasForeignKey("playerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PlayerId");
+                });
+
+            modelBuilder.Entity("AccountServer.Model.InventoryDb", b =>
+                {
+                    b.Navigation("MaterialItems");
+
+                    b.Navigation("PotionItems");
+
+                    b.Navigation("RuneItems");
+
+                    b.Navigation("WeaponItems");
                 });
 #pragma warning restore 612, 618
         }
