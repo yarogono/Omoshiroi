@@ -16,7 +16,7 @@ public class UIController: MonoBehaviour
     public Button BtnCancel;
 
 
-    public UIController Instance { get; private set; }
+    public static UIController Instance { get; private set; }
 
 
     public GameObject InventoryUI;
@@ -75,5 +75,9 @@ public class UIController: MonoBehaviour
 
         HpBar.value = CurHp / MaxHp;
     }
-   
+    private void OnDestroy()
+    {
+        
+        Instance = null;
+    }
 }
