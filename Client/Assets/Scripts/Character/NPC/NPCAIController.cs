@@ -90,8 +90,6 @@ public class NPCAIController : MonoBehaviour
     public eStateType State { get { return state; } private set { state = value; } }
     public eAIStateType AIState { get { return aiState; } private set { aiState = value; } }
 
-    private eAIStateType aiStateTemp;
-
     private void Awake()
     {
         characterRadius = agent.radius * characterRadiusMultiplier;
@@ -113,26 +111,10 @@ public class NPCAIController : MonoBehaviour
         healthSystem.OnHealed += () => SetSearchState();
     }
 
-    //private void Update()
-    //{
-    //    if (IsArrived())
-    //    {
-    //        //목표 지점에 도달했다면 대기 상태로 진입하는 내용
-
-    //        int index = Random.Range(0, WanderDestinations.Count);
-    //        SetNextDestination(WanderDestinations[index]);
-    //    }
-    //}
-
     public void UpdateAIState()
     {
         if (aiState != eAIStateType.Chase) { isRun = false; }
         if (aiState != eAIStateType.Search) { collider.radius = normDetectRadius; }
-        if (aiState != aiStateTemp)
-        {
-            Debug.Log($"AIState change : {aiStateTemp} => {AIState}");
-            aiStateTemp = aiState;
-        }
 
         switch (aiState)
         {
@@ -296,7 +278,6 @@ public class NPCAIController : MonoBehaviour
     /// </summary>
     private void SetChaseState(GameObject enemy)
     {
-        Debug.Log("Target detected!!!");
         target = enemy;
         agent.speed = moveSpeed * stats.RunMultiplier;
         aiState = eAIStateType.Chase;
