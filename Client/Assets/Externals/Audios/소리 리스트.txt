@@ -1,14 +1,13 @@
 소리 리스트
 	효과음
-		https://jdwasabi.itch.io/8-bit-16-bit-sound-effects-pack
-		https://shapeforms.itch.io/shapeforms-audio-free-sfx
-		https://hitrison.itch.io/menu-sfx-pack
-		https://leohpaz.itch.io/minifantasy-forgotten-plains-sfx-pack
-
+		https://jdwasabi.itch.io/8-bit-16-bit-sound-effects-pack 저작권자 표시
+		https://shapeforms.itch.io/shapeforms-audio-free-sfx 없음
+		https://hitrison.itch.io/menu-sfx-pack 없음
+		https://leohpaz.itch.io/minifantasy-forgotten-plains-sfx-pack 없음
 	BGM
-		https://jdsherbert.itch.io/minigame-music-pack
-		https://sonatina.itch.io/infinity-crystal
-
+		https://jdsherbert.itch.io/minigame-music-pack 저작권자 표시
+		https://sonatina.itch.io/infinity-crystal 저작권자 표시
+기본적으로 재배포 및 음원 판매 금지라고 생각하는 것이 좋음.
 
 UI 음
 	MenuSFX\Abstract\abs-popdown-1
