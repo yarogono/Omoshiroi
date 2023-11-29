@@ -12,11 +12,11 @@
 
 |이름|담당 업무|깃허브 링크|
 |------|---|---|
-|배인호(팀장)|.|[링크](https://github.com/cutlake2000)|
-|송승훈|.|[링크](https://github.com/DoDokang318)|
-|채이환|.|[링크](https://github.com/Hwan007)|
-|조영오|.|[링크](https://github.com/jyo217)|
-|임전혁|.|[링크](https://github.com/yarogono)|
+|배인호(팀장)|UI및 클라이언트와 서버 통신 담당|[링크](https://github.com/cutlake2000)|
+|송승훈|인벤토리|[링크](https://github.com/DoDokang318)|
+|채이환|전투 및 캐릭터 물리|[링크](https://github.com/Hwan007)|
+|조영오|파밍박스|[링크](https://github.com/jyo217)|
+|임전혁|게임 서버, Rest API 서버|[링크](https://github.com/yarogono)|
 
 <br/>
 
