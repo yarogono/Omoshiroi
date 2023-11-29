@@ -23,7 +23,7 @@
 # 시연 영상
 ---
 
-[![Video Label](http://img.youtube.com/vi/0nAEEoJmCOQ/0.jpg)](https://youtu.be/0nAEEoJmCOQ)
+[![Video Label](http://img.youtube.com/vi/anLzbFqLt1k/0.jpg)](https://youtu.be/anLzbFqLt1k)
 
 (클릭하면 유튜브 영상 링크로 넘어갑니다.)
 
